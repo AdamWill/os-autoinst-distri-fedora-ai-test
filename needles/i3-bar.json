@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "xpos": 0,
+      "type": "match",
+      "width": 16,
+      "ypos": 751,
+      "height": 17
+    },
+    {
+      "height": 14,
+      "width": 15,
+      "ypos": 752,
+      "type": "match",
+      "xpos": 434
+    },
+    {
+      "type": "match",
+      "xpos": 486,
+      "height": 14,
+      "width": 18,
+      "ypos": 751
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "i3-bar"
+  ]
+}

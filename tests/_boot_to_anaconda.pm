@@ -5,6 +5,7 @@ use testapi;
 use utils;
 use tapnet;
 use anaconda;
+use i3;
 
 sub _handle_incomplete_hub {
     if (match_has_tag "anaconda_main_hub_keyboard_layout_incomplete") {
@@ -147,28 +148,31 @@ sub run {
                 # on lives, we have to explicitly launch anaconda
                 my $launched = 0;
                 my $count = 5;
-                while ($count > 0) {
-                    $count -= 1;
-                    assert_screen ["live_start_anaconda_icon", "apps_menu_button_active", "next_button"], 300;
-                    if (match_has_tag "next_button") {
-                        # we're looking at gnome-initial-setup - this
-                        # is what we expect on images that use anaconda
-                        # webui, though as of 2024-08 it's disabled due
-                        # to maintenance difficulty
-                        # completing g-i-s launches the installer
-                        gnome_initial_setup(live => 1);
-                        $launched = 1;
-                    }
-                    if (match_has_tag "apps_menu_button_active") {
-                        # give GNOME some time to be sure it's done starting up
-                        # and ready for input
-                        wait_still_screen 5;
-                        send_key "super";
-                        wait_still_screen 5;
-                    }
-                    else {
-                        # this means we saw the launcher, which is what we want
-                        last;
+                # i3 got no real desktop, so we need to launch liveinst via the launcher
+                if (get_var('DESKTOP') eq 'i3') {
+                    firstlaunch_setup(timeout => 300);
+                    x11_start_program("liveinst");
+                } else {
+                    while ($count > 0) {
+                        $count -= 1;
+                        assert_screen ["live_start_anaconda_icon", "apps_menu_button_active", "next_button"], 300;
+                        if (match_has_tag "next_button") {
+                            # we're on F39+ Workstation and looking at gnome-initial-setup
+                            # completing g-i-s launches the installer
+                            gnome_initial_setup(live => 1);
+                            $launched = 1;
+                        }
+                        if (match_has_tag "apps_menu_button_active") {
+                            # give GNOME some time to be sure it's done starting up
+                            # and ready for input
+                            wait_still_screen 5;
+                            send_key "super";
+                            wait_still_screen 5;
+                        }
+                        else {
+                            # this means we saw the launcher, which is what we want
+                            last;
+                        }
                     }
                 }
                 # if we hit the g-i-s flow we already launched

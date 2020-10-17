@@ -2,6 +2,7 @@ use base "installedtest";
 use strict;
 use testapi;
 use utils;
+use i3;
 
 sub _enter_password {
     my $password = shift;
@@ -100,6 +101,10 @@ sub run {
         my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
         assert_script_run "echo 'root:$root_password' | chpasswd";
         desktop_vt;
+    }
+
+    if (get_var("DESKTOP") eq 'i3') {
+        firstlaunch_setup();
     }
 
     # Move the mouse somewhere it won't highlight the match areas and

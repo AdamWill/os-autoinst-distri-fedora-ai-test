@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "xpos": 763,
+      "ypos": 601,
+      "width": 56,
+      "height": 21,
+      "type": "match",
+      "click_point": {
+        "xpos": 28,
+        "ypos": 10.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "printing_print"
+  ]
+}

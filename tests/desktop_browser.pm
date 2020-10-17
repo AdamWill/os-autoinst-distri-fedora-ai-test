@@ -32,10 +32,15 @@ sub run {
     $self->root_console(tty => 3);
     disable_firefox_studies;
     desktop_vt;
-    send_key 'super';
-    # wait out animations
-    wait_still_screen(stilltime => 4, similarity_level => 45);
-    assert_and_click 'browser_launcher';
+    if (get_var("DESKTOP") eq "i3") {
+        x11_start_program("firefox");
+    } 
+    else {
+        send_key 'super';
+        # wait out animations
+        wait_still_screen(stilltime=>4, similarity_level=>45);
+        assert_and_click 'browser_launcher';
+    }
     unless (check_screen 'browser', 45) {
         if (check_screen 'browser', 45) {
             record_soft_failure "Browser start up is very slow - probably https://bugzilla.redhat.com/show_bug.cgi?id=2312900";

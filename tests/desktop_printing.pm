@@ -2,6 +2,7 @@ use base "installedtest";
 use strict;
 use testapi;
 use utils;
+use i3;
 
 sub run {
     my $self = shift;
@@ -19,8 +20,13 @@ sub run {
 
     # If the test should be running with CUPS-PDF, we need to install it first.
     if ($usecups) {
+        my $pkgs = "cups-pdf";
+        # On I3, we also need to install the PDF reader.
+        if ($desktop eq "i3") {
+            $pkgs = $pkgs . " mupdf";
+        }
         # Install the Cups-PDF package to use the Cups-PDF printer
-        assert_script_run "dnf -y install cups-pdf", 180;
+        assert_script_run "dnf -y install $pkgs", 240;
     }
 
     # Here, we were doing a version logic. This is no longer needed, because
@@ -32,6 +38,21 @@ sub run {
     # Verification commands need serial console to be writable and readable for
     # normal users, let's make it writable then.
     script_run("chmod 666 /dev/${serialdev}");
+    # Check whether the cups-pdf printer is actually present on the system
+    # FIXME: If it is missing, add it manually by removing and installing
+    # cups-pdf again
+    my $cups_pdf_present = script_run('lpstat -t|grep -q -i cups-pdf');
+    if ($cups_pdf_present != 0) {
+        record_soft_failure 'Cups-PDF printer is not present on the system (rhbz#1984295)';
+        assert_script_run "dnf -y remove cups-pdf", 180;
+        assert_script_run "dnf -y install cups-pdf", 180;
+    }
+    # FIXME: log version of cups-pdf and check it for output location
+    # this is only necessary as long as the test may run on cups-pdf
+    # 3.0.1-11 or lower, as soon as that's not true we can cut it
+    my $cpdfver = script_output 'rpm -q cups-pdf --queryformat "%{VERSION}-%{RELEASE}\n"';
+    assert_script_run "dnf -y install rpmdevtools", 180;
+    my $cpdfvercmp = script_run "rpmdev-vercmp $cpdfver 3.0.1-11.5";
     # Leave the root terminal and switch back to desktop for the rest of the test.
     desktop_vt();
 
@@ -48,6 +69,11 @@ sub run {
         $maximize = "super-pgup";
         $term = "konsole";
     }
+    elsif ($desktop eq "i3") {
+        $editor = "mousepad";
+        $viewer = "mupdf";
+        $maximize = undef;
+    }
 
     # give the desktop a few seconds to settle, we seem to be getting
     # a lot of mis-types in KDE if we do not, as of 2024-02
@@ -58,18 +84,27 @@ sub run {
     }
     # Let's open the terminal. We will use it to start the applications
     # as well as to check for the name of the printed file.
-    menu_launch_type($term);
-    wait_still_screen(5);
+    unless ($desktop eq "i3") {
+        menu_launch_type($term);
+        wait_still_screen(5);
+    }
+    else {
+        launch_terminal;
+        # switch to tabbed mode
+        send_key(get_i3_modifier() . "-w");  
+    }
 
     # Open the text editor and maximize it.
     wait_screen_change { type_very_safely "$editor /home/test/testfile.txt &\n"; };
     wait_still_screen(stilltime => 2, similarity_level => 45);
-    wait_screen_change { send_key($maximize); };
-    wait_still_screen(stilltime => 2, similarity_level => 45);
+    unless ($desktop eq "i3") {
+        wait_screen_change { send_key($maximize); };
+        wait_still_screen(stilltime => 2, similarity_level => 45);
+    }
 
     # Print the file using one of the available methods
     send_key "ctrl-p";
-    wait_still_screen(stilltime => 3, similarity_level => 45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     # We will select the printing method
     # In case of KDE, we will need to select the printer first.
     if ($desktop eq "kde") {
@@ -95,7 +130,28 @@ sub run {
     }
     else {
         # Exit the application
-        send_key "alt-f4";
+        send_key "alt-f4" unless $desktop eq "i3";
+    }
+
+    # Open the pdf file and check the print
+    if ($desktop eq "i3") {
+        launch_terminal;
+    } else {
+        send_key "alt-f2";
+        wait_still_screen(stilltime=>5, similarity_level=>45);
+    }
+    # output location is different for cups-pdf 3.0.1-12 or later (we
+    # checked this above)
+    if ($cpdfvercmp eq "12") {
+        # older cups-pdf
+        type_safely "$viewer /home/$user/Desktop/testfile.pdf\n";
+    }
+    elsif ($editor eq "mousepad") {
+        # mousepad creates relatively weird pdf names, so we use a wildcard here
+        type_safely "$viewer /home/$user/" . 'Mousepad*job_1.pdf' . "\n";
+    }
+    else {
+        type_safely "$viewer /home/$user/Desktop/testfile-job_1.pdf\n";
     }
 
     # Get the name of the printed file. The path location depends
@@ -121,9 +177,9 @@ sub run {
     wait_still_screen(stilltime => 3, similarity_level => 45);
     # Resize the window, so that the size of the document fits the bigger space
     # and gets more readable.
-    send_key $maximize;
-    wait_still_screen(stilltime => 2, similarity_level => 45);
-    # in KDE, make sure we're at the start of the document
+    send_key $maximize unless !defined($maximize);
+    wait_still_screen(stilltime=>2, similarity_level=>45);
+    # make sure we're at the start of the document
     send_key "ctrl-home" if ($desktop eq "kde");
     # Check the printed pdf.
     assert_screen "printing_check_sentence";

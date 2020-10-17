@@ -3,6 +3,7 @@ use strict;
 use testapi;
 use utils;
 use packagetest;
+use i3;
 
 # This test sort of covers QA:Testcase_desktop_update_notification
 # and QA:Testcase_desktop_error_checks . If it fails, probably *one*
@@ -27,6 +28,7 @@ sub run {
     $self->root_console(tty => 1);
     # ensure we actually have some package updates available
     prepare_test_packages;
+    my $user = get_var('USER_LOGIN', 'test');
     if ($desktop eq 'gnome') {
         # On GNOME, move the clock forward if needed, because it won't
         # check for updates before 6am(!)
@@ -47,7 +49,7 @@ sub run {
             my $longago = $now - 14 * 24 * 60 * 60;
             # have to log in as the user to do this
             script_run 'exit', 0;
-            console_login(user => get_var('USER_LOGIN', 'test'), password => get_var('USER_PASSWORD', 'weakpassword'));
+            console_login(user=>$user, password=>get_var('USER_PASSWORD', 'weakpassword'));
             script_run "gsettings set org.gnome.software check-timestamp ${yyday}", 0;
             script_run "gsettings set org.gnome.software update-notification-timestamp ${longago}", 0;
             script_run "gsettings set org.gnome.software online-updates-timestamp ${longago}", 0;
@@ -57,6 +59,14 @@ sub run {
             script_run 'exit', 0;
             console_login(user => 'root', password => get_var('ROOT_PASSWORD', 'weakpassword'));
         }
+    } elsif ($desktop eq 'i3') {
+        assert_script_run('dnf install -y libnotify');
+        my $target_user = get_var("USER_LOGIN");
+        if (!defined(get_var("BOOTFROM"))) {
+            $target_user = "liveuser";
+        }
+        assert_script_run("usermod -a -G dialout $target_user");
+        create_user_i3_config(login => $target_user);
     }
     if ($desktop eq 'kde' && get_var("BOOTFROM")) {
         # need to login as user for this
@@ -120,6 +130,21 @@ sub run {
         if (check_screen 'akonadi_migration_notification', 5) {
             click_lastmatch;
         }
+    }
+    if ($desktop eq 'i3') {
+        # we launch a terminal so that the top of the screen is filled with
+        # something that we know and can check that it is not covered by a
+        # notification popup from dunst
+        send_key(get_i3_modifier() . '-ret');
+        assert_screen("apps_run_terminal");
+        assert_script_run('notify-send -t 5000 "foo"');
+        assert_screen("i3_dunst_foo_notification", timeout => 5);
+
+        sleep 6;
+        assert_screen("i3_dunst_no_notification");
+
+        # we quit at this point as the i3 spin has no desktop update notifier
+        return;
     }
     if (get_var("BOOTFROM")) {
         # we should see an update notification and no others

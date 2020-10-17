@@ -4,6 +4,7 @@ use strict;
 
 use base 'Exporter';
 use Exporter;
+use i3;
 
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
@@ -1082,6 +1083,7 @@ sub check_desktop {
     # close it if it's open.
     my %args = (
         timeout => 30,
+        no_firstlaunch_check => 0,
         @_
     );
     my $count = 5;
@@ -1108,11 +1110,35 @@ sub check_desktop {
             last;
         }
     }
+
+    if (get_var("DESKTOP") eq 'i3') {
+        my $version = get_var('VERSION');
+
+        # i3 launches pretty quickly, but sometimes we have to wait for the
+        # whole VM to launch
+        assert_screen("i3-bar", $args{timeout});
+        if ($version ne "Rawhide") {
+            assert_screen("${version}_background");
+        }
+
+        unless ($args{no_firstlaunch_check}) {
+            die "firstlaunch setup is present" if defined(check_screen('i3_firstlaunch_wizard'));
+        }
+    } else {
+        assert_screen "apps_menu_button", $args{timeout};
+        # GNOME 40 starts on the overview by default; for consistency with
+        # older GNOME and KDE, let's just close it
+        if (match_has_tag "apps_menu_button_active") {
+            wait_still_screen 3;
+            send_key "alt-f1";
+            assert_screen "apps_menu_button_inactive";
+        }
+    }
+
     if ($activematched) {
         # make sure we got to inactive after active
         die "never reached apps_menu_button_inactive!" unless (match_has_tag "apps_menu_button_inactive");
     }
-}
 
 sub quit_firefox {
     # Quit Firefox, handling the 'close multiple tabs' warning screen if
@@ -1376,9 +1402,13 @@ sub menu_launch_type {
         diag("Moving the mouse away from the launcher.");
         mouse_set(1, 1);
     }
-    wait_screen_change { send_key 'super'; };
-    # srsly KDE y u so slo
-    wait_still_screen 3;
+    if (get_var("DESKTOP") eq "i3") {
+        send_key(get_var("I3_MODIFIER", 'alt') . "-d");
+    } else {
+        wait_screen_change { send_key 'super'; };
+        # srsly KDE y u so slo
+        wait_still_screen 3;
+    }
     type_very_safely $app;
     # Wait for KDE to place focus correctly.
     wait_still_screen 2;

@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 422,
+      "ypos": 27,
+      "width": 182,
+      "height": 19,
+      "type": "match"
+    },
+    {
+      "xpos": 684,
+      "ypos": 2,
+      "width": 129,
+      "height": 12,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mousepad_no_document_open"
+  ]
+}

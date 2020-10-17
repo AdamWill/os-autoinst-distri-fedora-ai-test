@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "width": 679,
+      "height": 16,
+      "ypos": 0,
+      "type": "match",
+      "xpos": 0
+    },
+    {
+      "ypos": 535,
+      "height": 128,
+      "width": 373,
+      "type": "match",
+      "xpos": 328
+    },
+    {
+      "xpos": 728,
+      "ypos": 7,
+      "width": 132,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "i3_windows_split"
+  ]
+}

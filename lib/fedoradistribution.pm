@@ -4,6 +4,7 @@ use strict;
 
 use base 'distribution';
 use Cwd;
+use i3;
 
 # Fedora distribution class
 
@@ -63,7 +64,7 @@ sub init() {
 # If this should change in the future, we would need to enhance this routine.
 sub x11_start_program {
     my ($self, $program, $timeout, $options) = @_;
-    send_key "alt-f2";
+    send_key (get_var("DESKTOP") eq "i3" ? get_i3_modifier() . "-d" : "alt-f2");
     assert_screen "desktop_runner";
     type_string $program, 20;
     sleep 5;    # because of KDE dialog - SUSE guys are doing the same!
@@ -180,6 +181,20 @@ sub assert_script_sudo {
     # Validate that the command exited with a correct exit code.
     validate_script_output('echo $?', sub { $_ == 0 });
     return;
+}
+
+sub become_root {
+    my ($self) = @_;
+
+    my $rootpwd = get_var("ROOT_PASSWORD", "weakpassword");
+
+    if (check_screen("apps_run_terminal") || is_serial_terminal()) {
+        type_string("su -\n");
+        sleep(2);
+        type_string("$rootpwd\n");
+    } else {
+        die "No terminal to become root is present";
+    }
 }
 
 1;
