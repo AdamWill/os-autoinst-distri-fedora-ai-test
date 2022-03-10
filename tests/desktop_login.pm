@@ -349,6 +349,12 @@ sub run {
     }
     # Power off the machine
     power_off();
+    if (get_var("ADVISORY_OR_TASK")) {
+        # power back on for _advisory_post
+        sleep 5;
+        power("reset");
+        boot_to_login_screen(timeout => 180);
+    }
 }
 
 sub test_flags {
