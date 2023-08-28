@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 125,
+      "height": 32,
+      "ypos": 352,
+      "xpos": 449,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "navigation_navibar_clocks"
+  ]
+}

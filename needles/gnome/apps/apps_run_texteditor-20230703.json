@@ -10,6 +10,7 @@
   ],
   "properties": [],
   "tags": [
-    "apps_run_texteditor"
+    "apps_run_texteditor",
+    "apps_run_editor"
   ]
 }

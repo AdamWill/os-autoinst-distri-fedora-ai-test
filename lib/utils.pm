@@ -1709,4 +1709,23 @@ sub set_update_notification_timestamp {
     type_very_safely("gsettings set org.gnome.software update-notification-timestamp $ep_time\n");
 }
 
+# This routine takes a list of applications. It will then use the terminal
+# to start all these applications in the background and then it will exit the
+# terminal. This is useful when we want to start multiple applications quickly.
+sub start_applications {
+    my @applications = @_;
+    # Open the terminal
+    menu_launch_type("terminal");
+    wait_still_screen(2);
+    # Iterate over the application list
+    # and start each application from it.
+    foreach (@applications) {
+        assert_script_run("$_ &");
+        # Take some time for things to settle.
+        wait_still_screen(1);
+    }
+    # Exit the terminal.
+    enter_cmd("exit");
+}
+
 1;

@@ -218,7 +218,10 @@ testtags.extend(f"anaconda_help_{fsys}" for fsys in ('install_destination',
 'installation_progress', 'keyboard_layout', 'language_support', 'network_host_name',
 'root_password', 'select_packages', 'installation_source', 'time_date', 'user_creation',
 'language_selection', 'language', 'summary_link'))
-
+# for Gnome navigation test
+for app in ("calculator", "clocks", "files", "terminal", "editor"):
+    testtags.append(f"navigation_navibar_{app}")
+testtags.append("navigation_terminal_fullscreen")
 testtags.extend(f"anaconda_main_hub_{fsys}" for fsys in ('language_support', 'selec_packages',
 'time_date', 'create_user','keyboard_layout'))
 
