@@ -122,7 +122,16 @@ sub load_upgrade_tests() {
             autotest::loadtest "tests/${pu}.pm";
         }
     }
-    autotest::loadtest "tests/upgrade_run.pm";
+    # If we want the upgrade run with GUI tools, we need
+    # to load a GUI set of tests
+    if (get_var("GUI_UPGRADE")) {
+        autotest::loadtest("tests/graphical_upgrade_prerequisites.pm");
+        autotest::loadtest("tests/graphical_upgrade_run.pm");
+    }
+    # otherwise go with the CLI variant
+    else {
+        autotest::loadtest "tests/upgrade_run.pm";
+    }
     # handle additional postinstall tests
     if (get_var("POSTINSTALL")) {
         set_var('POSTINSTALL', "upgrade_postinstall " . get_var("POSTINSTALL"));

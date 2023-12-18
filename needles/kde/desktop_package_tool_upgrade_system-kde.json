@@ -1,0 +1,15 @@
+{
+    "area": [
+        {
+            "height": 20,
+            "type": "match",
+            "width": 59,
+            "xpos": 785,
+            "ypos": 90
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "desktop_package_tool_upgrade_system"
+    ]
+}

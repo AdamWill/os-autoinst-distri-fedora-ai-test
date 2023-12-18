@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 438,
+      "ypos": 277,
+      "width": 143,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_package_tool_restart_upgrade"
+  ]
+}
