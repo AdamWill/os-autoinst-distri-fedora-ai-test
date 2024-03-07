@@ -62,6 +62,17 @@ sub get_host_dns {
     # FIXME this is gonna break when we have IPv6 DNS servers on the
     # worker hosts
     my @forwards = split(' ', $result);
+
+    # Alternatively, for hosts that aren't running systemd, read /etc/resolv.conf
+    if (!@forwards && open(my $fh, '<', "/etc/resolv.conf")) {
+        while (<$fh>) {
+            next if /:/;    # ignore ipv6 addresses
+            if ($_ =~ m/^nameserver +(.+)/) {
+                push @forwards, $1;
+            }
+        }
+        close($fh);
+    }
     return @forwards;
 }
 
