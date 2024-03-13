@@ -633,12 +633,20 @@ sub setup_repos {
 
 sub _repo_setup_updates {
     # Appropriate repo setup steps for testing a Bodhi update
+    my $tag = get_var("TAG");
     # Check if we already ran, bail if so
-    return unless script_run "test -f /mnt/updatepkgs.txt";
+    if ($tag) {
+        # for TAG case, check for the repo file
+        return unless script_run "test -f /etc/yum.repos.d/openqa-testtag.repo";
+    }
+    else {
+        # otherwise, run unless both the update repo and the update
+        # package list are present already
+        return unless (script_run "test -d /mnt/update_repo/repodata && test -f /mnt/updatepkgs.txt");
+    }
     my $version = get_var("VERSION");
     my $currrel = get_var("CURRREL", "0");
     my $arch = get_var("ARCH");
-    my $tag = get_var("TAG");
     # this can be used for debugging repo config if something is wrong
     # unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
     #     upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
