@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 761,
+      "width": 18,
+      "ypos": 730,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_update_notification_systray"
+  ]
+}
