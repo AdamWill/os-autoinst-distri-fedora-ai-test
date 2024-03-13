@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "ypos": 592,
+      "type": "match",
+      "height": 14,
+      "xpos": 352,
+      "width": 62
+    },
+    {
+      "xpos": 353,
+      "width": 65,
+      "height": 12,
+      "type": "match",
+      "ypos": 626
+    },
+    {
+      "ypos": 658,
+      "height": 11,
+      "type": "match",
+      "xpos": 25,
+      "width": 65
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "console_initial_setup_done"
+  ]
+}
