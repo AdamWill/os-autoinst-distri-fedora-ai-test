@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 808,
+      "width": 159,
+      "type": "match",
+      "height": 17,
+      "ypos": 34
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "prerelease_note"
+  ]
+}
