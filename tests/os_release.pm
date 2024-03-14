@@ -50,6 +50,9 @@ sub run {
     my ($cannedver, $cannednum) = (split /-/, $isovar)[-2, -1];
     # Get rid of the ".iso" part of the tag.
     $cannednum =~ s/\.iso//g;
+    # also get rid of the arch, which osbuild puts in here
+    my $arch = get_var("ARCH");
+    $cannednum =~ s/\.$arch//g;
     # Now, we merge the fields into one expression to create the correct canned tag
     # that will contain both the version number and the build number.
     my $cannedtag = "$cannedver.$cannednum";
