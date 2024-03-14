@@ -33,6 +33,7 @@ sub run {
     type_string "$sshpub";
     send_key "tab";
     send_key "ret";
+    wait_still_screen 3;
     # claim the device
     assert_and_click "zezere_claim_unowned";
     assert_and_click "zezere_claim_button";
