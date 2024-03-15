@@ -160,10 +160,17 @@ sub run {
         # https://bugzilla.redhat.com/show_bug.cgi?id=1661288 results
         # in boot messages going to serial console on aarch64, we need
         # them on tty0. We also need 'quiet' so we don't get kernel
-        # messages, which screw up some needles
-        assert_script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" ' . $mount . '/etc/default/grub';
-        # regenerate the bootloader config
-        assert_script_run "chroot $mount grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
+        # messages, which screw up some needles. if /etc/default/grub
+        # is not there, we're probably using bootupd; let's just edit
+        # the BLS entries directly in that case
+        if (script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" ' . $mount . '/etc/default/grub') {
+            assert_script_run 'sed -i -e "s,\(options .*\),\1 console=tty0 quiet,g" ' . $mount . '/boot/loader/entries/*.conf';
+        }
+        else {
+            # regenerate the bootloader config, only necessary if we
+            # edited /etc/default/grub
+            assert_script_run "chroot $mount grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
+        }
     }
     if (grep { $_ eq 'abrt' } @actions) {
         # Chroot in the newly installed system and switch on ABRT systemwide
