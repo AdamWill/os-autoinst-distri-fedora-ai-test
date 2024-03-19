@@ -1,6 +1,6 @@
 {
     "Machines": {
-        "64bit": {
+        "bios": {
             "backend": "qemu",
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
@@ -52,7 +52,7 @@
                 "WORKER_CLASS": "qemu_ppc64le"
             }
         },
-        "uefi": {
+        "64bit": {
             "backend": "qemu",
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
@@ -63,11 +63,14 @@
                 "QEMU_VIDEO_DEVICE": "virtio-vga",
                 "XRES": "1024",
                 "YRES": "768",
+                "QEMUMACHINE": "q35,smm=on",
+                "QEMU_APPEND": "global driver=cfi.pflash01,property=secure,value=on",
                 "QEMU_MAX_MIGRATION_TIME": "480",
                 "QEMU_VIRTIO_RNG": "1",
                 "UEFI": "1",
-                "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.fd",
-                "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.fd",
+                "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.secboot.fd",
+                "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.secboot.fd",
+                "UEFI_SECURE": "1",
                 "WORKER_CLASS": "qemu_x86_64"
             }
         }
@@ -360,7 +363,7 @@
             "flavor": "Workstation-upgrade",
             "settings": {
                 "DESKTOP": "gnome",
-                "DEPLOY_UPLOAD_TEST": "upgrade_desktop_64bit" ,
+                "DEPLOY_UPLOAD_TEST": "upgrade_desktop" ,
                 "HDDSIZEGB": "20",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "COMPOSE"
@@ -383,7 +386,7 @@
             "distri": "fedora",
             "flavor": "Workstation-upgrade",
             "settings": {
-                "DEPLOY_UPLOAD_TEST": "upgrade_desktop_64bit",
+                "DEPLOY_UPLOAD_TEST": "upgrade_desktop",
                 "DESKTOP": "gnome",
                 "TEST_TARGET": "COMPOSE"
             },
@@ -445,12 +448,12 @@
         }
     },
     "Profiles": {
-        "fedora-BaseOS-boot-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-BaseOS-boot-iso-x86_64-*-64bit": {
+            "machine": "64bit",
             "product": "fedora-BaseOS-boot-iso-x86_64-*"
         },
-        "fedora-BaseOS-dvd-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-BaseOS-dvd-iso-x86_64-*-64bit": {
+            "machine": "64bit",
             "product": "fedora-BaseOS-dvd-iso-x86_64-*"
         },
         "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": {
@@ -465,12 +468,16 @@
             "machine": "64bit",
             "product": "fedora-Cloud_Base-qcow2-qcow2-x86_64-*"
         },
-        "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-Cloud_Base-qcow2-qcow2-x86_64-*"
         },
         "fedora-CoreOS-colive-iso-x86_64-*-64bit": {
             "machine": "64bit",
+            "product": "fedora-CoreOS-colive-iso-x86_64-*"
+        },
+        "fedora-CoreOS-colive-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-CoreOS-colive-iso-x86_64-*"
         },
         "fedora-Everything-boot-iso-ppc64le-*-ppc64le": {
@@ -481,24 +488,24 @@
             "machine": "64bit",
             "product": "fedora-Everything-boot-iso-x86_64-*"
         },
-        "fedora-Everything-boot-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-Everything-boot-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-Everything-boot-iso-x86_64-*"
         },
         "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "fedora-IoT-dvd_ostree-iso-aarch64-*"
         },
-        "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": {
+            "machine": "64bit",
             "product": "fedora-IoT-dvd_ostree-iso-x86_64-*"
         },
         "fedora-KDE-live-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-KDE-live-iso-x86_64-*"
         },
-        "fedora-KDE-live-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-KDE-live-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-KDE-live-iso-x86_64-*"
         },
         "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": {
@@ -517,8 +524,8 @@
             "machine": "64bit",
             "product": "fedora-Server-boot-iso-x86_64-*"
         },
-        "fedora-Server-boot-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-Server-boot-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-Server-boot-iso-x86_64-*"
         },
         "fedora-Server-dvd-iso-aarch64-*-aarch64": {
@@ -533,8 +540,8 @@
             "machine": "64bit",
             "product": "fedora-Server-dvd-iso-x86_64-*"
         },
-        "fedora-Server-dvd-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-Server-dvd-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-Server-dvd-iso-x86_64-*"
         },
         "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": {
@@ -549,8 +556,8 @@
             "machine": "64bit",
             "product": "fedora-Silverblue-dvd_ostree-iso-x86_64-*"
         },
-        "fedora-Silverblue-dvd_ostree-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-Silverblue-dvd_ostree-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-Silverblue-dvd_ostree-iso-x86_64-*"
         },
         "fedora-Workstation-live-iso-ppc64le-*-ppc64le": {
@@ -561,17 +568,17 @@
             "machine": "64bit",
             "product": "fedora-Workstation-live-iso-x86_64-*"
         },
+        "fedora-Workstation-live-iso-x86_64-*-bios": {
+            "machine": "bios",
+            "product": "fedora-Workstation-live-iso-x86_64-*"
+        },
+        "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Workstation-live_osbuild-iso-x86_64-*"
+        },
         "fedora-Workstation-upgrade-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-Workstation-upgrade-x86_64-*"
-        },
-        "fedora-Workstation-live-iso-x86_64-*-uefi": {
-            "machine": "uefi",
-            "product": "fedora-Workstation-live-iso-x86_64-*"
-        },
-        "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": {
-            "machine": "uefi",
-            "product": "fedora-Workstation-live_osbuild-iso-x86_64-*"
         },
         "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": {
             "machine": "aarch64",
@@ -593,8 +600,8 @@
             "machine": "64bit",
             "product": "fedora-universal-x86_64-*"
         },
-        "fedora-universal-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-universal-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-universal-x86_64-*"
         },
         "fedora-seasonal-aarch64-*-aarch64": {
@@ -608,10 +615,6 @@
         "fedora-seasonal-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-seasonal-x86_64-*"
-        },
-        "fedora-seasonal-x86_64-*-uefi": {
-            "machine": "uefi",
-            "product": "fedora-seasonal-x86_64-*"
         }
     },
     "TestSuites": {
@@ -621,7 +624,7 @@
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -632,14 +635,14 @@
         },
         "base_reboot_unmount": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-bios": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": 20,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 22,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
@@ -650,7 +653,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40
@@ -666,13 +669,13 @@
         },
         "base_system_logging": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 22,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
@@ -683,7 +686,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
@@ -699,10 +702,10 @@
         },
         "base_update_cli": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 22,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
@@ -711,7 +714,7 @@
                 "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 22,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
@@ -727,10 +730,10 @@
         },
         "base_package_install_remove": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
@@ -739,7 +742,7 @@
                 "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
@@ -755,14 +758,14 @@
         },
         "base_services_start": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-bios": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
@@ -773,7 +776,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
@@ -789,13 +792,13 @@
         },
         "base_selinux": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
@@ -806,7 +809,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
@@ -822,13 +825,13 @@
         },
         "base_service_manipulation": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
@@ -839,7 +842,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
@@ -857,7 +860,7 @@
             "profiles": {
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 30,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 30,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-uefi": 30
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 30
             },
             "settings": {
                 "POSTINSTALL": "autocloud"
@@ -899,7 +902,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
@@ -915,7 +918,7 @@
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 30,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30
             },
@@ -929,7 +932,7 @@
         "desktop_fprint": {
             "profiles": {
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 50,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 50
             },
@@ -947,7 +950,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
@@ -964,7 +967,7 @@
                 "fedora-KDE-live-iso-x86_64-*-64bit": 32,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70
             },
             "settings": {
                 "ENTRYPOINT": "desktop_notifications"
@@ -976,7 +979,7 @@
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -990,7 +993,7 @@
                 "fedora-KDE-live-iso-x86_64-*-64bit": 20,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
@@ -1008,7 +1011,7 @@
                 "fedora-KDE-live-iso-x86_64-*-64bit": 20,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
@@ -1027,7 +1030,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
@@ -1337,7 +1340,7 @@
                 "fedora-KDE-live-iso-x86_64-*-64bit": 32,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 70,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 32
@@ -1428,8 +1431,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_btrfs",
@@ -1441,8 +1444,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_lvmthin",
@@ -1450,26 +1453,26 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_blivet_btrfs_preserve_home": {
+        "install_blivet_btrfs_preserve_home_bios": {
             "profiles": {
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_btrfs_preserve_home",
-                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_desktop_5_%ARCH%.qcow2",
                 "POSTINSTALL": "btrfs_preserve_home_check_content",
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_blivet_btrfs_preserve_home_uefi": {
+        "install_blivet_btrfs_preserve_home": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_btrfs_preserve_home",
-                "HDD_1": "disk_f%CURRREL%_minimal-uefi_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_minimal_4_%ARCH%.qcow2",
                 "POSTINSTALL": "btrfs_preserve_home_check_content",
                 "ROOT_PASSWORD": "weakpassword"
             }
@@ -1478,8 +1481,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_lvm_ext4",
@@ -1491,8 +1494,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_standard_partition_ext4",
@@ -1503,8 +1506,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 50,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 50,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 50,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 51
+                "fedora-Server-dvd-iso-x86_64-*-bios": 50,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 51
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_with_swap",
@@ -1516,8 +1519,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "NUMDISKS": "2",
@@ -1530,8 +1533,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_xfs",
@@ -1543,8 +1546,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_btrfs",
@@ -1561,17 +1564,16 @@
                 "PARTITIONING": "custom_btrfs_preserve_home",
                 "ROOT_PASSWORD": "weakpassword",
                 "POSTINSTALL": "btrfs_preserve_home_check_content",
-                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.qcow2"
+                "HDD_1": "disk_f%CURRREL%_desktop_5_%ARCH%.qcow2"
             }
         },
-        "install_btrfs_preserve_home_uefi": {
+        "install_btrfs_preserve_home_bios": {
             "profiles": {
-                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 41
             },
             "settings": {
                 "PARTITIONING": "custom_btrfs_preserve_home",
-                "HDD_1": "disk_f%CURRREL%_minimal-uefi_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_minimal-bios_4_%ARCH%.qcow2",
                 "POSTINSTALL": "btrfs_preserve_home_check_content",
                 "ROOT_PASSWORD": "weakpassword"
             }
@@ -1598,18 +1600,19 @@
         },
         "install_default": {
             "profiles": {
-                "fedora-BaseOS-boot-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-boot-iso-x86_64-*-64bit": 50,
+                "fedora-CoreOS-colive-iso-x86_64-*-bios": 21,
                 "fedora-Everything-boot-iso-ppc64le-*-ppc64le": 62,
-                "fedora-Everything-boot-iso-x86_64-*-64bit": 10,
-                "fedora-Everything-boot-iso-x86_64-*-uefi": 11,
-                "fedora-KDE-live-iso-x86_64-*-uefi": 16,
+                "fedora-Everything-boot-iso-x86_64-*-bios": 10,
+                "fedora-Everything-boot-iso-x86_64-*-64bit": 11,
+                "fedora-KDE-live-iso-x86_64-*-bios": 16,
                 "fedora-Server-boot-iso-aarch64-*-aarch64": 10,
                 "fedora-Server-boot-iso-ppc64le-*-ppc64le": 10,
-                "fedora-Server-boot-iso-x86_64-*-64bit": 10,
-                "fedora-Server-boot-iso-x86_64-*-uefi": 11,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 11,
-                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-uefi": 51,
-                "fedora-Workstation-live-iso-x86_64-*-uefi": 11
+                "fedora-Server-boot-iso-x86_64-*-bios": 10,
+                "fedora-Server-boot-iso-x86_64-*-64bit": 11,
+                "fedora-Server-dvd-iso-x86_64-*-bios": 11,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-bios": 51,
+                "fedora-Workstation-live-iso-x86_64-*-bios": 11
             },
             "settings": {
                 "PACKAGE_SET": "default",
@@ -1618,10 +1621,10 @@
         },
         "install_default_upload": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-uefi": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 15,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
@@ -1630,7 +1633,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 10,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 60
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60
             },
             "settings": {
                 "PACKAGE_SET": "default",
@@ -1642,8 +1645,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 31
+                "fedora-Server-dvd-iso-x86_64-*-bios": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 31
             },
             "settings": {
                 "HDD_1": "disk_full_%PART_TABLE_TYPE%.img",
@@ -1653,8 +1656,8 @@
         },
         "install_delete_pata": {
             "profiles": {
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 21
+                "fedora-Server-dvd-iso-x86_64-*-bios": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 21
             },
             "settings": {
                 "HDDMODEL": "ide-hd",
@@ -1777,8 +1780,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_lvmthin",
@@ -1789,8 +1792,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "HDDSIZEGB": "17",
@@ -1803,8 +1806,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 31
+                "fedora-Server-dvd-iso-x86_64-*-bios": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 31
             },
             "settings": {
                 "PARTITIONING": "custom_standard_partition_ext4",
@@ -1825,8 +1828,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 21
+                "fedora-Server-dvd-iso-x86_64-*-bios": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 21
             },
             "settings": {
                 "HDD_2": "disk_full_mbr.img",
@@ -1839,8 +1842,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 31
+                "fedora-Server-dvd-iso-x86_64-*-bios": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 31
             },
             "settings": {
                 "NUMDISKS": "2",
@@ -1852,8 +1855,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 50,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 50,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 50,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 51
+                "fedora-Server-dvd-iso-x86_64-*-bios": 50,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 51
             },
             "settings": {
                 "PARTITIONING": "custom_with_swap",
@@ -1896,8 +1899,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 31
+                "fedora-Server-dvd-iso-x86_64-*-bios": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 31
             },
             "settings": {
                 "+ISO": "",
@@ -1991,8 +1994,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 31,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 31,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 31,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 32
+                "fedora-Server-dvd-iso-x86_64-*-bios": 31,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 32
             },
             "settings": {
                 "BOOTFROM": "d",
@@ -2003,8 +2006,8 @@
         },
         "install_sata": {
             "profiles": {
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 21
+                "fedora-Server-dvd-iso-x86_64-*-bios": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 21
             },
             "settings": {
                 "ATACONTROLLER": "ich9-ahci",
@@ -2066,8 +2069,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 31
+                "fedora-Server-dvd-iso-x86_64-*-bios": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 31
             },
             "settings": {
                 "ENCRYPT_PASSWORD": "weakpassword",
@@ -2078,8 +2081,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 31
+                "fedora-Server-dvd-iso-x86_64-*-bios": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 31
             },
             "settings": {
                 "HDD_1": "disk_freespace_%PART_TABLE_TYPE%.img",
@@ -2091,8 +2094,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 31
+                "fedora-Server-dvd-iso-x86_64-*-bios": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 31
             },
             "settings": {
                 "NUMDISKS": "2",
@@ -2159,7 +2162,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_desktop_5_%ARCH%.qcow2",
                 "INSTALL": "1",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "install_vnc_server",
@@ -2190,7 +2193,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_desktop_5_%ARCH%.qcow2",
                 "INSTALL": "1",
                 "NICTYPE": "tap",
                 "PREINSTALL": "_vncconnect_client_setup_pre _graphical_wait_login _vncconnect_client_setup",
@@ -2217,8 +2220,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+                "fedora-Server-dvd-iso-x86_64-*-bios": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
             },
             "settings": {
                 "PARTITIONING": "custom_xfs",
@@ -2228,7 +2231,7 @@
         "iot_clevis": {
             "profiles": {
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 20
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "ENCRYPT_PASSWORD": "weakpassword",
@@ -2241,7 +2244,7 @@
         "iot_greenboot": {
             "profiles": {
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 20
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2254,7 +2257,7 @@
         "iot_zezere_ignition": {
                 "profiles": {
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 40
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2273,12 +2276,12 @@
         "iot_zezere_server": {
             "profiles": {
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 40
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "CANNED": "",
-                "HDD_1": "disk_f%CURRREL%_minimal-uefi_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_minimal_4_%ARCH%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
                 "POSTINSTALL": "_iot_zezere_server _setup_browser _iot_zezere_remote",
@@ -2299,7 +2302,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_support_6_%ARCH%.qcow2",
                 "POSTINSTALL": "mediakit_fileconflicts",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "false"
@@ -2313,7 +2316,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_support_6_%ARCH%.qcow2",
                 "POSTINSTALL": "mediakit_repoclosure",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "false"
@@ -2321,8 +2324,8 @@
         },
         "memory_check": {
             "profiles": {
-                "fedora-Everything-boot-iso-x86_64-*-64bit": 30,
-                "fedora-Everything-boot-iso-x86_64-*-uefi": 31
+                "fedora-Everything-boot-iso-x86_64-*-bios": 30,
+                "fedora-Everything-boot-iso-x86_64-*-64bit": 31
             },
             "settings": {
                 "HDDSIZEGB": "14",
@@ -2336,7 +2339,7 @@
             "profiles": {
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 40
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2354,7 +2357,7 @@
             "profiles": {
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 40
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2459,7 +2462,7 @@
             "profiles": {
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
@@ -2470,7 +2473,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 60,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
@@ -2487,7 +2490,7 @@
             "profiles": {
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50
             },
@@ -2503,7 +2506,7 @@
                 "profiles": {
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50
             },
@@ -2511,6 +2514,25 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "rpmostree_rebase",
+                "ROOT_PASSWORD": "weakpassword",
+                "+START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "USER_LOGIN": "false"
+            }
+        },
+        "secure_boot_fallback": {
+            "profiles": {
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 30,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "_secure_boot_fallback",
                 "ROOT_PASSWORD": "weakpassword",
                 "+START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
@@ -2819,7 +2841,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_support_6_%ARCH%.qcow2",
                 "NICTYPE": "tap",
                 "NUMDISKS": "2",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -2839,7 +2861,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_support_6_%ARCH%.qcow2",
                 "NICTYPE": "tap",
                 "NUMDISKS": "2",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -2857,7 +2879,7 @@
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 60,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 40
@@ -2873,7 +2895,7 @@
             "profiles": {
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 50,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-uefi": 60,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 52
@@ -2885,7 +2907,7 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
-        "upgrade_2_desktop_64bit": {
+        "upgrade_2_desktop": {
             "profiles": {
                 "fedora-universal-x86_64-*-64bit": 40,
                 "fedora-universal-aarch64-*-aarch64": 40
@@ -2893,7 +2915,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "HDD_1": "disk_f%UP2REL%_desktop_4_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP2REL%_desktop_5_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -2901,7 +2923,7 @@
                 "USER_PASSWORD": "weakpassword"
             }
         },
-        "upgrade_2_desktop_encrypted_64bit": {
+        "upgrade_2_desktop_encrypted": {
             "profiles": {
                 "fedora-universal-x86_64-*-64bit": 40,
                 "fedora-universal-aarch64-*-aarch64": 40
@@ -2910,7 +2932,7 @@
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDD_1": "disk_f%UP2REL%_desktopencrypt_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP2REL%_desktopencrypt_2_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -2918,14 +2940,14 @@
                 "USER_PASSWORD": "weakpassword"
             }
         },
-        "upgrade_2_kde_64bit": {
+        "upgrade_2_kde": {
             "profiles": {
                 "fedora-universal-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "kde",
-                "HDD_1": "disk_f%UP2REL%_kde_4_x86_64.qcow2",
+                "HDD_1": "disk_f%UP2REL%_kde_5_x86_64.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -2933,7 +2955,7 @@
                 "USER_PASSWORD": "weakpassword"
             }
         },
-        "upgrade_2_minimal_64bit": {
+        "upgrade_2_minimal": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 40,
                 "fedora-universal-ppc64le-*-ppc64le": 40,
@@ -2941,20 +2963,20 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%UP2REL%_minimal_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP2REL%_minimal_4_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
                 "USER_LOGIN": "false"
             }
         },
-        "upgrade_2_minimal_uefi": {
+        "upgrade_2_minimal_bios": {
             "profiles": {
-                "fedora-universal-x86_64-*-uefi": 40
+                "fedora-universal-x86_64-*-bios": 40
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%UP2REL%_minimal-uefi_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP2REL%_minimal-bios_4_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -2967,7 +2989,7 @@
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP2REL%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%UP2REL%_server_4_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "upgrade_2_server_domain_controller",
@@ -2981,7 +3003,7 @@
                 "WORKER_CLASS": "tap"
             }
         },
-        "upgrade_2_server_64bit": {
+        "upgrade_2_server": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 40,
                 "fedora-universal-ppc64le-*-ppc64le": 40,
@@ -2989,7 +3011,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%UP2REL%_server_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP2REL%_server_4_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -3003,7 +3025,7 @@
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP2REL%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%UP2REL%_server_4_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -3017,7 +3039,7 @@
                 "WORKER_CLASS": "tap"
             }
         },
-        "upgrade_desktop_64bit": {
+        "upgrade_desktop": {
             "profiles": {
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 30,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40
@@ -3025,7 +3047,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "HDD_1": "disk_f%UP1REL%_desktop_4_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP1REL%_desktop_5_%ARCH%.qcow2",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
@@ -3044,7 +3066,7 @@
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDD_1": "disk_f%UP1REL%_desktopencrypt_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP1REL%_desktopencrypt_2_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -3052,12 +3074,12 @@
                 "USER_PASSWORD": "weakpassword"
             }
         },
-        "upgrade_kde_64bit": {
+        "upgrade_kde": {
             "profiles": {
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP1REL%_kde_4_x86_64.qcow2",
+                "+HDD_1": "disk_f%UP1REL%_kde_5_x86_64.qcow2",
                 "BOOTFROM": "c",
                 "DESKTOP": "kde",
                 "ROOT_PASSWORD": "weakpassword",
@@ -3067,7 +3089,7 @@
                 "USER_PASSWORD": "weakpassword"
             }
         },
-        "upgrade_minimal_64bit": {
+        "upgrade_minimal": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-universal-ppc64le-*-ppc64le": 30,
@@ -3075,20 +3097,20 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%UP1REL%_minimal_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP1REL%_minimal_4_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
                 "USER_LOGIN": "false"
             }
         },
-        "upgrade_minimal_uefi": {
+        "upgrade_minimal_bios": {
             "profiles": {
-                "fedora-universal-x86_64-*-uefi": 30
+                "fedora-universal-x86_64-*-bios": 30
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%UP1REL%_minimal-uefi_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP1REL%_minimal-bios_4_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -3102,7 +3124,7 @@
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP1REL%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%UP1REL%_server_4_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "MAX_JOB_TIME": "10800",
                 "NICTYPE": "tap",
@@ -3117,7 +3139,7 @@
                 "WORKER_CLASS": "tap2"
             }
         },
-        "upgrade_server_64bit": {
+        "upgrade_server": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-universal-ppc64le-*-ppc64le": 30,
@@ -3125,7 +3147,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%UP1REL%_server_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP1REL%_server_4_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -3140,7 +3162,7 @@
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP1REL%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%UP1REL%_server_4_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "MAX_JOB_TIME": "10800",
                 "NICTYPE": "tap",

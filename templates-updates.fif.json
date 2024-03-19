@@ -5,7 +5,7 @@
             "distri": "fedora",
             "flavor": "updates-container",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -16,7 +16,7 @@
             "distri": "fedora",
             "flavor": "updates-container",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -27,7 +27,7 @@
             "distri": "fedora",
             "flavor": "updates-container",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -48,7 +48,7 @@
             "distri": "fedora",
             "flavor": "updates-kde",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_kde_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_kde_5_%ARCH%.qcow2",
                 "DESKTOP": "kde",
                 "NUMDISKS": "2",
                 "RETRY": "1"
@@ -60,7 +60,7 @@
             "distri": "fedora",
             "flavor": "updates-server",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -71,7 +71,7 @@
             "distri": "fedora",
             "flavor": "updates-server",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -82,7 +82,7 @@
             "distri": "fedora",
             "flavor": "updates-server-upgrade",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -113,7 +113,7 @@
             "distri": "fedora",
             "flavor": "updates-server",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_3_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -182,7 +182,7 @@
             "flavor": "updates-workstation",
             "settings": {
                 "DESKTOP": "gnome",
-                "+HDD_1": "disk_f%VERSION%_desktop_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_desktop_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -206,8 +206,8 @@
             "machine": "64bit",
             "product": "fedora-updates-everything-boot-iso-x86_64-*"
         },
-        "fedora-updates-everything-boot-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-updates-everything-boot-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-updates-everything-boot-iso-x86_64-*"
         },
         "fedora-updates-kde-x86_64-*-64bit": {
@@ -238,24 +238,24 @@
             "machine": "64bit",
             "product": "fedora-updates-kde-live-iso-x86_64-*"
         },
-        "fedora-updates-kde-live-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-updates-kde-live-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-updates-kde-live-iso-x86_64-*"
         },
         "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*"
         },
-        "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*"
         },
         "fedora-updates-workstation-live-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-updates-workstation-live-iso-x86_64-*"
         },
-        "fedora-updates-workstation-live-iso-x86_64-*-uefi": {
-            "machine": "uefi",
+        "fedora-updates-workstation-live-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-updates-workstation-live-iso-x86_64-*"
         },
         "fedora-updates-workstation-upgrade-x86_64-*-64bit": {
@@ -367,10 +367,10 @@
         },
         "install_default_update_live": {
             "profiles": {
+                "fedora-updates-kde-live-iso-x86_64-*-bios": 5,
                 "fedora-updates-kde-live-iso-x86_64-*-64bit": 5,
-                "fedora-updates-kde-live-iso-x86_64-*-uefi": 5,
-                "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-live-iso-x86_64-*-uefi": 5
+                "fedora-updates-workstation-live-iso-x86_64-*-bios": 5,
+                "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
             },
             "settings": {
                 "+START_AFTER_TEST": "live_build@%ARCH_BASE_MACHINE%",
@@ -381,8 +381,8 @@
         },
         "install_default_update_netinst": {
             "profiles": {
-                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5,
-                "fedora-updates-everything-boot-iso-x86_64-*-uefi": 5
+                "fedora-updates-everything-boot-iso-x86_64-*-bios": 5,
+                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
             },
             "settings": {
                 "+START_AFTER_TEST": "installer_build@%ARCH_BASE_MACHINE%",
@@ -410,7 +410,7 @@
         },
         "install_default_ostree": {
             "profiles": {
-                "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*-uefi": 5
+                "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*-bios": 5
             },
             "settings": {
                 "INSTALL": "1",
@@ -425,7 +425,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%VERSION%_minimal_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%VERSION%_minimal_4_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "POSTINSTALL": "_installer_build",
                 "ROOT_PASSWORD": "weakpassword",
@@ -442,7 +442,7 @@
                 "+LIVE": "",
                 "BOOTFROM": "c",
                 "GRUB_POSTINSTALL": "selinux=0",
-                "HDD_1": "disk_f%VERSION%_minimal_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%VERSION%_minimal_4_%ARCH%.qcow2",
                 "HDDSIZEGB_3": "25",
                 "MAX_JOB_TIME": "10800",
                 "+NUMDISKS": "3",
@@ -459,7 +459,7 @@
                 "+DESKTOP": "",
                 "+CANNED": "",
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%VERSION%_minimal_3_%ARCH%.qcow2",
+                "HDD_1": "disk_f%VERSION%_minimal_4_%ARCH%.qcow2",
                 "HDDSIZEGB_3": "30",
                 "MAX_JOB_TIME": "12600",
                 "+NUMDISKS": "3",

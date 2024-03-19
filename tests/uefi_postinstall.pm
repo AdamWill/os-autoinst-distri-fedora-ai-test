@@ -13,6 +13,10 @@ sub run {
     console_loadkeys_us;
     # this test shows if the system is booted with efi
     assert_script_run '[ -d /sys/firmware/efi/ ]';
+    # if Secure Boot should be enabled, check it is; if it isn't,
+    # that *probably* indicates a test system issue not a distro bug,
+    # but we want to know either way
+    validate_script_output('mokutil --sb-state', sub { m/SecureBoot enabled/ }) if (get_var("UEFI_SECURE"));
 }
 
 sub test_flags {

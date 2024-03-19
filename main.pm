@@ -310,10 +310,6 @@ sub load_postinstall_tests() {
     }
     autotest::loadtest $storagepost if ($storagepost);
 
-    if (get_var("UEFI") && !get_var("NO_UEFI_POST") && !get_var("START_AFTER_TEST")) {
-        autotest::loadtest "tests/uefi_postinstall.pm";
-    }
-
     # console avc / crash check
     # it makes no sense to run this after logging in on most post-
     # install tests (hence ! BOOTFROM) and we do not want it
@@ -360,6 +356,10 @@ sub load_postinstall_tests() {
         unless (get_var("TEST") eq "support_server" && get_var("VERSION") ne get_var("CURRREL")) {
             autotest::loadtest "tests/_advisory_post.pm";
         }
+    }
+
+    if (get_var("UEFI") && !get_var("NO_UEFI_POST") && !get_var("START_AFTER_TEST")) {
+        autotest::loadtest "tests/uefi_postinstall.pm";
     }
 
     # we should shut down before uploading disk images
