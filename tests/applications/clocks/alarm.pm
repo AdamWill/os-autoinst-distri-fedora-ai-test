@@ -35,10 +35,11 @@ sub run {
     # assume it starts at 'inactive' once we are no longer testing
     # < 46.0 anywhere
     assert_screen(["clocks_alarm_active", "clocks_alarm_inactive"]);
+    my $wasactive = match_has_tag("clocks_alarm_active");
     # Now toggle the switch to change its state
     assert_and_click("gnome_button_toggle");
     # whichever state it was in, check it's now in the other
-    if (match_has_tag("clocks_alarm_active")) {
+    if ($wasactive) {
         assert_screen("clocks_alarm_inactive");
     }
     else {
