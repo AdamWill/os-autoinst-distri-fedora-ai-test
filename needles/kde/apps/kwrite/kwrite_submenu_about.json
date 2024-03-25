@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 403,
+      "ypos": 242,
+      "width": 86,
+      "height": 19,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_submenu_about"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 771,
+      "ypos": 256,
+      "width": 69,
+      "height": 16,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_settings_markdown"
+  ]
+}

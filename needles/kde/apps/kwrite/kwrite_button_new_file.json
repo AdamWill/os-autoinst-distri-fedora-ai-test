@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 212,
+      "ypos": 393,
+      "width": 60,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_button_new_file"
+  ]
+}

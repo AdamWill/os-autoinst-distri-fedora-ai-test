@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 385,
+      "ypos": 170,
+      "width": 167,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_help_shown"
+  ]
+}

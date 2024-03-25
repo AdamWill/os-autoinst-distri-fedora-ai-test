@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 4,
+      "height": 20,
+      "xpos": 459,
+      "width": 108
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_file_saved"
+  ]
+}

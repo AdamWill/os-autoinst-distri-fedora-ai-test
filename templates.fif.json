@@ -2404,7 +2404,17 @@
                 "WORKER_CLASS": "tap"
             }
         },
-
+        "kwrite": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 42
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/kwrite",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
         "mediakit_fileconflicts": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,

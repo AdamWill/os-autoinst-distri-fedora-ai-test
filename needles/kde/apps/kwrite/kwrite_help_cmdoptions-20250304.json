@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 383,
+      "ypos": 269,
+      "width": 270,
+      "height": 22,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_help_cmdoptions"
+  ]
+}

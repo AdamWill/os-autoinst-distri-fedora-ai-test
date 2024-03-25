@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 80,
+      "ypos": 194,
+      "width": 64,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_found_text"
+  ]
+}

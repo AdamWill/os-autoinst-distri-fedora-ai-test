@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 806,
+      "ypos": 94,
+      "width": 15,
+      "height": 21,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kde_window_maximize"
+  ]
+}
