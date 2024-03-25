@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 333,
+      "width": 20,
+      "ypos": 43,
+      "type": "match",
+      "height": 22
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_processes_button"
+  ]
+}
