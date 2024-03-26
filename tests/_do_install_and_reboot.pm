@@ -125,6 +125,9 @@ sub run {
             push(@actions, 'noplymouth');
         }
     }
+    if (get_var("CANNED") && get_var("UEFI")) {
+        push(@actions, 'checkefibootmgr') if (get_var("UEFI"));
+    }
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
     # for no-webUI lives is unreliable (webUI lives reboot on "Quit"
     # just like non-lives). And if we're already doing something
@@ -133,9 +136,6 @@ sub run {
     # check whether install is affected by
     # https://bugzilla.redhat.com/show_bug.cgi?id=2268505 ,
     # soft fail and work around it if so
-    if (get_var("CANNED") && get_var("UEFI")) {
-        push(@actions, 'checkefibootmgr') if (get_var("UEFI"));
-    }
     # our approach for taking all these actions doesn't work on VNC
     # installs, fortunately we don't need any of them in that case
     # yet, so for now let's just flush the list here if we're VNC
