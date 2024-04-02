@@ -448,12 +448,12 @@
         }
     },
     "Profiles": {
-        "fedora-BaseOS-boot-iso-x86_64-*-64bit": {
-            "machine": "64bit",
+        "fedora-BaseOS-boot-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-BaseOS-boot-iso-x86_64-*"
         },
-        "fedora-BaseOS-dvd-iso-x86_64-*-64bit": {
-            "machine": "64bit",
+        "fedora-BaseOS-dvd-iso-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-BaseOS-dvd-iso-x86_64-*"
         },
         "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": {
@@ -635,7 +635,7 @@
         },
         "base_reboot_unmount": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-bios": 20,
@@ -669,7 +669,7 @@
         },
         "base_system_logging": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
@@ -702,7 +702,7 @@
         },
         "base_update_cli": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
@@ -730,7 +730,7 @@
         },
         "base_package_install_remove": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
@@ -758,7 +758,7 @@
         },
         "base_services_start": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-bios": 40,
@@ -792,7 +792,7 @@
         },
         "base_selinux": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
@@ -825,7 +825,7 @@
         },
         "base_service_manipulation": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
@@ -1600,7 +1600,7 @@
         },
         "install_default": {
             "profiles": {
-                "fedora-BaseOS-boot-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-boot-iso-x86_64-*-bios": 50,
                 "fedora-CoreOS-colive-iso-x86_64-*-bios": 21,
                 "fedora-Everything-boot-iso-ppc64le-*-ppc64le": 62,
                 "fedora-Everything-boot-iso-x86_64-*-bios": 10,
@@ -1621,7 +1621,7 @@
         },
         "install_default_upload": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
@@ -2521,7 +2521,7 @@
         },
         "secure_boot_fallback": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 30,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 30,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
