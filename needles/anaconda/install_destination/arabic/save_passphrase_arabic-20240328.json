@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 520,
+      "height": 18,
+      "type": "match",
+      "xpos": 235,
+      "width": 104
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_install_destination_save_passphrase",
+    "LANGUAGE-arabic"
+  ]
+}
