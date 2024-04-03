@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 262,
+      "ypos": 226,
+      "width": 65,
+      "height": 16,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "okular_file_select_pdf"
+  ]
+}

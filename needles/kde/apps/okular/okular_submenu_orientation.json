@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 97,
+      "ypos": 321,
+      "width": 73,
+      "height": 21,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "okular_submenu_orientation"
+  ]
+}

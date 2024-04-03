@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 125,
+      "ypos": 74,
+      "width": 76,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "okular_change_zoom"
+  ]
+}
