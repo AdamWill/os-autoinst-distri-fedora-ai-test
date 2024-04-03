@@ -2521,7 +2521,6 @@
         },
         "secure_boot_fallback": {
             "profiles": {
-                "fedora-BaseOS-dvd-iso-x86_64-*-bios": 50,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 30,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 30,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
