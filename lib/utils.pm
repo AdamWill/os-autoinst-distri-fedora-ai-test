@@ -1356,12 +1356,12 @@ sub menu_launch_type {
         diag("Moving the mouse away from the launcher.");
         mouse_set(1, 1);
     }
-    send_key 'super';
+    wait_screen_change { send_key 'super'; };
     # srsly KDE y u so slo
     wait_still_screen 3;
     type_very_safely $app;
     # Wait for KDE to place focus correctly.
-    sleep 2;
+    wait_still_screen 2;
     send_key 'ret';
 }
 
