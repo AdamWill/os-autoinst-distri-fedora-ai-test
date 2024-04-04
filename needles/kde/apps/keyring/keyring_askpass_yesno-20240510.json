@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 265,
+      "width": 118,
+      "height": 19,
+      "type": "match",
+      "xpos": 380
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "keyring_askpass_yesno"
+  ]
+}
