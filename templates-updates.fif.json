@@ -130,7 +130,7 @@
                 "HDDSIZEGB": "15",
                 "NUMDISKS": "2",
                 "PACKAGE_SET": "default",
-                "RETRY": "1",
+                "RETRY": "2",
                 "SUBVARIANT": "Silverblue"
             },
             "version": "*"
