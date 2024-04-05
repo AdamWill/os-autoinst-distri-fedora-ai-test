@@ -1363,6 +1363,7 @@ sub menu_launch_type {
     # Wait for KDE to place focus correctly.
     wait_still_screen 2;
     send_key 'ret';
+    wait_still_screen 3;
 }
 
 sub tell_source {
