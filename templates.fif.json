@@ -1456,12 +1456,11 @@
         },
         "install_blivet_btrfs_preserve_home_bios": {
             "profiles": {
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+                "fedora-Server-dvd-iso-x86_64-*-bios": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_btrfs_preserve_home",
-                "HDD_1": "disk_f%CURRREL%_desktop_5_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_minimal-bios_4_%ARCH%.qcow2",
                 "POSTINSTALL": "btrfs_preserve_home_check_content",
                 "ROOT_PASSWORD": "weakpassword"
             }
@@ -1469,11 +1468,11 @@
         "install_blivet_btrfs_preserve_home": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 41
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_btrfs_preserve_home",
-                "HDD_1": "disk_f%CURRREL%_minimal_4_%ARCH%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_desktop_5_%ARCH%.qcow2",
                 "POSTINSTALL": "btrfs_preserve_home_check_content",
                 "ROOT_PASSWORD": "weakpassword"
             }
