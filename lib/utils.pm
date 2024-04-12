@@ -1483,14 +1483,20 @@ sub check_prerelease {
     # really a big deal either way whether a nightly live image has
     # the tags or not. So we don't.
 
-    # For all prerelease requiring ISOs, assert that prerelease is there.
-    if ($prerelease == 1) {
-        assert_screen "prerelease_note";
-    }
-    elsif ($prerelease == 0) {
-        # If the prerelease note is shown, where it should not be, die!
-        if (check_screen "prerelease_note") {
-            die "The PRERELEASE tag is shown, but it should NOT be.";
+    my $gotpr = 0;
+    # sigh, perl and booleans...
+    $gotpr = 1 if (check_screen "prerelease_note", 15);
+    my $msg = $prerelease ? "Pre-release warning not shown!" : "Pre-release warning shown when it should not be!";
+    unless ($prerelease == $gotpr) {
+        # FIXME we haven't got pre-release handling right with osbuild yet
+        # https://pagure.io/fedora-iot/issue/57
+        # https://github.com/osbuild/images/issues/515
+        my $flavor = get_var('FLAVOR');
+        if ($flavor =~ m/IoT|osbuild/) {
+            record_soft_failure $msg;
+        }
+        else {
+            die $msg;
         }
     }
 }
