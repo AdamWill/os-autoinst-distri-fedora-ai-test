@@ -29,7 +29,7 @@ sub run {
     assert_screen("tour_leftright");
     send_key("right");
 
-    assert_screen("tour_niceday");
+    assert_screen("tour_done");
 }
 
 sub test_flags {
