@@ -92,8 +92,11 @@ sub run {
         # root user now, for subsequent tests to work
         select_console "tty3-console";
         console_login(user => get_var("USER_LOGIN", "test"), password => get_var("USER_PASSWORD", "weakpassword"));
+        wait_still_screen 3;
         type_string "sudo su\n";
+        wait_still screen 3;
         type_string "$password\n";
+        wait_still_screen 3;
         my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
         assert_script_run "echo 'root:$root_password' | chpasswd";
         desktop_vt;
