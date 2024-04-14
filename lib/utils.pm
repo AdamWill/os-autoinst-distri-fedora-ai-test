@@ -1476,6 +1476,8 @@ sub check_prerelease {
     $prerelease = 1 if ($build =~ /\.n\.\d+/ && !get_var("LIVE"));
     # if it's a respin compose we *MUST NOT* see tags
     $prerelease = 0 if ($build =~ /Respin/);
+    # bail if we've decided we don't care
+    return if ($prerelease > 1);
     # we *could* go to a console and parse fedora-release-common
     # to decide if a nightly live image should have tags or not, but
     # it seems absurd as we're almost reinventing the code that
