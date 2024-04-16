@@ -7,17 +7,19 @@ use utils;
 
 sub run {
     my $self = shift;
+    my $password = get_var('ROOT_PASSWORD', 'weakpassword');
 
     # Start the application
     menu_launch_type 'firewall';
-    sleep 5;
     # Firewall requires password to be entered and confirmed to start.
     # View password
     assert_screen "auth_required", timeout => 60;
-    my $password = get_var('ROOT_PASSWORD', 'weakpassword');
-    type_very_safely $password;
+    wait_still_screen 3;
+    # FIXME when https://github.com/firewalld/firewalld/issues/1328
+    # is fixed, switch (back) to type_very_safely here
+    type_safely $password;
     send_key 'ret';
-    sleep 5;
+    wait_still_screen 3;
 
     # Check that it is started
     assert_screen 'firewall_runs';
