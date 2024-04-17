@@ -8,7 +8,10 @@ sub run {
     my $self = shift;
     $self->root_console(tty => 3);
     # on non-canned flavors, we need to install toolbox
-    assert_script_run "dnf -y install toolbox", 360 unless (get_var("CANNED"));
+    # FIXME composefs seems to be a hard dep since containers-common-0.58.0-10.fc41
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2275820
+    # drop it if that gets fixed
+    assert_script_run "dnf -y install toolbox composefs", 360 unless (get_var("CANNED"));
     # check toolbox is installed
     assert_script_run "rpm -q toolbox";
     # check to see if you can create a new toolbox container (this
