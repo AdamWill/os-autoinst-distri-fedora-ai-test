@@ -335,6 +335,21 @@
                 "fedora-updates-workstation-x86_64-*-64bit": 5
             }
         },
+        "container_build_kiwi": {
+            "profiles": {
+                "fedora-updates-container-x86_64-*-64bit": 5
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%VERSION%_minimal_4_%ARCH%.qcow2",
+                "HDDSIZEGB_3": "25",
+                "MAX_JOB_TIME": "10800",
+                "+NUMDISKS": "3",
+                "POSTINSTALL": "_container_build_kiwi",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
+        },
         "desktop_background": {
             "profiles": {
                 "fedora-updates-kde-x86_64-*-64bit": 5,

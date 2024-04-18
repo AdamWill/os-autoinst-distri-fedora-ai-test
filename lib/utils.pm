@@ -1230,6 +1230,7 @@ sub advisory_check_nonmatching_packages {
     # older version from the frozen release repo
     my %args = (
         fatal => 1,
+        wrapper => "",
         @_
     );
     # can't do anything useful when testing a side tag
@@ -1241,6 +1242,9 @@ sub advisory_check_nonmatching_packages {
     # unnecessarily in post_fail_hook
     return if (get_var("_ACNMP_DONE"));
     script_run 'touch /tmp/installedupdatepkgs.txt';
+    my $rpmcmd = "rpm";
+    my $wrapper = $args{wrapper};
+    $rpmcmd = "$wrapper rpm" if ($wrapper);
     # this creates /tmp/installedupdatepkgs.txt as a sorted list of installed
     # packages with the same name as packages from the update, in the same form
     # as /mnt/updatepkgs.txt. The '--last | head -1' tries to handle the
@@ -1254,7 +1258,7 @@ sub advisory_check_nonmatching_packages {
     # (we need four to reach bash, and half of them get eaten by perl or
     # something along the way). Yes, it only works with *single* quotes. Yes,
     # I hate escaping
-    script_run 'for pkg in $(cat /mnt/updatepkgnames.txt); do rpm -q $pkg && rpm -q $pkg --last | head -1 | cut -d" " -f1 | sed -e \'s,\^,\\\\\\\\^,g\' | xargs rpm -q --qf "%{SOURCERPM} %{NAME} %{EPOCHNUM} %{VERSION} %{RELEASE}\n" >> /tmp/installedupdatepkgs.txt; done', timeout => 180;
+    script_run 'for pkg in $(cat /mnt/updatepkgnames.txt); do ' . $rpmcmd . ' -q $pkg && ' . $rpmcmd . ' -q $pkg --last | head -1 | cut -d" " -f1 | sed -e \'s,\^,\\\\\\\\^,g\' | xargs ' . $rpmcmd . ' -q --qf "%{SOURCERPM} %{NAME} %{EPOCHNUM} %{VERSION} %{RELEASE}\n" >> /tmp/installedupdatepkgs.txt; done', timeout => 180;
     script_run 'sort -u -o /tmp/installedupdatepkgs.txt /tmp/installedupdatepkgs.txt';
     # for debugging, may as well always upload these, can't hurt anything
     upload_logs "/tmp/installedupdatepkgs.txt", failok => 1;
@@ -1274,7 +1278,7 @@ sub advisory_check_nonmatching_packages {
         my $message = "Package(s) from update not installed when it should have been! See script output";
         $message = "Script failed unexpectedly!" if ($ret == 1);
         if ($args{fatal}) {
-            set_var("_ACNMP_DONE", "1");
+            set_var("_ACNMP_DONE", "1") unless $wrapper;
             die $message;
         }
         else {
