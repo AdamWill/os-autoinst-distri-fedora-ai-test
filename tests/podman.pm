@@ -16,10 +16,7 @@ sub run {
     my $relnum = get_release_number;
     unless (get_var("CANNED")) {
         # run the upstream integration tests
-        # FIXME composefs seems to be a hard dep since containers-common-0.58.0-10.fc41
-        # https://bugzilla.redhat.com/show_bug.cgi?id=2275820
-        # drop it if that gets fixed
-        assert_script_run "dnf -y install podman podman-tests bats composefs", 300;
+        assert_script_run "dnf -y install podman podman-tests bats", 300;
         assert_script_run "bats --filter-tags distro-integration /usr/share/podman/test/system", 600;
     }
     # check to see if you can pull an image from the registry
