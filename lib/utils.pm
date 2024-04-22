@@ -496,7 +496,8 @@ sub disable_updates_repos {
         both => 0,
         @_
     );
-    # FIXME as of 2023-06-20 dnf5 doesn't have config-manager plugin yet :(
+    # we used to do this with config-manager, but the syntax differs
+    # on dnf 4 vs. dnf 5 and really sed is just as easy
     assert_script_run 'sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-updates-testing.repo';
     assert_script_run 'sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-updates.repo' if ($args{both});
     unless (script_run 'test -f /etc/yum.repos.d/fedora-updates-testing-modular.repo') {
