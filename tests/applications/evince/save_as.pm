@@ -19,13 +19,6 @@ sub run {
     type_very_safely("alternative");
 
     # Click on the Save button
-    if (get_var("CANNED")) {
-        # FIXME: as of 2023-03-30 on the flatpak version of evince, the save as
-        # default target dir is wrong:
-        # https://bugzilla.redhat.com/show_bug.cgi?id=2183356
-        # so we need to click into Documents first
-        assert_and_click("evince_documents", button => "left", timeout => 30);
-    }
     assert_and_click("gnome_button_save_blue", button => "left", timeout => 30);
 
     # Now the document is saved under a different name. We will switch to the
