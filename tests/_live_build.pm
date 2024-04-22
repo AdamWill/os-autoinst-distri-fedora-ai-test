@@ -79,11 +79,6 @@ sub run {
     }
     # now flatten the kickstart
     assert_script_run "ksflatten -c fedora-live-${lcsubv}.ks -o openqa.ks";
-    # FIXME: we need to patch out anaconda-webui on the fly to test
-    # the g-i-s update that drops webui support, as we can't merge the
-    # kickstart change till that update is stable. remove when this
-    # little catch-22 is resolved
-    assert_script_run "sed -i -e '/anaconda-webui/d' openqa.ks" if ($advortask eq "FEDORA-2024-8b66f08f0b");
     # upload the kickstart so we can check it
     upload_logs "openqa.ks";
     # now install the tools into the mock
