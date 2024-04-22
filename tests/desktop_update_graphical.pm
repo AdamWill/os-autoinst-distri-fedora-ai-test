@@ -15,7 +15,6 @@ sub run {
     # gnome-software will complain about things being unsigned even
     # though the repo has gpgcheck=0
     if (get_var("ADVISORY_OR_TASK") && get_var("VERSION") eq get_var("RAWREL")) {
-        # FIXME as of 2023-06-20 dnf5 doesn't have config-manager plugin yet :(
         assert_script_run 'sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/koji-rawhide.repo';
     }
     prepare_test_packages;
