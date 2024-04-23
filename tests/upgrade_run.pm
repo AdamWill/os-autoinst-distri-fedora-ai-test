@@ -15,7 +15,7 @@ sub run {
     repo_setup();
     my $params = "-y --releasever=${relnum}";
     if ($relnum > 38) {
-        # FIXME https://bugzilla.redhat.com/show_bug.cgi?id=2230720
+        # FIXME can probably be removed when F38 goes EOL
         $params .= " --nogpgcheck --disablerepo=*modular*";
     }
 
