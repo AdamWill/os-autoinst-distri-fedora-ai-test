@@ -131,21 +131,6 @@ sub run {
         boot_to_login_screen;
     }
     elsif ($desktop eq 'kde') {
-        # KDE does offline updates now, we have to trigger the reboot
-        # FIXME: also sometimes the update apply button just doesn't
-        # work, so keep clicking till it does:
-        # https://bugzilla.redhat.com/show_bug.cgi?id=1943943
-        for my $n (1 .. 10) {
-            sleep 2;
-            assert_screen ['kde_offline_update_reboot', 'desktop_package_tool_update_apply'];
-            # break out if we reached the reboot button
-            last if (match_has_tag 'kde_offline_update_reboot');
-            # otherwise, try refresh and apply or reboot
-            assert_and_click 'desktop_package_tool_update_refresh';
-            assert_screen ['kde_offline_update_reboot', 'desktop_package_tool_update_apply'];
-            last if (match_has_tag 'kde_offline_update_reboot');
-            click_lastmatch;
-        }
         assert_and_click 'kde_offline_update_reboot';
         boot_to_login_screen;
     }
