@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 21,
+      "type": "match",
+      "ypos": 670,
+      "xpos": 473,
+      "width": 79
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "start_setup",
+    "LANGUAGE-english"
+  ]
+}

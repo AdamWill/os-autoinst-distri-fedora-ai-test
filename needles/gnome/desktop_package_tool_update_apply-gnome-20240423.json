@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 115,
+      "xpos": 660,
+      "type": "match",
+      "height": 17,
+      "ypos": 111
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "desktop_package_tool_update_apply"
+  ]
+}
