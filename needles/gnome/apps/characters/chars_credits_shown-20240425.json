@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 358,
+      "width": 72,
+      "type": "match",
+      "height": 21,
+      "ypos": 229
+    },
+    {
+      "ypos": 397,
+      "height": 20,
+      "type": "match",
+      "xpos": 357,
+      "width": 65
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "chars_credits_shown"
+  ]
+}

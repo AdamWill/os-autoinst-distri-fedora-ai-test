@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 22,
+      "ypos": 539,
+      "xpos": 336,
+      "width": 73
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_context_properties"
+  ]
+}

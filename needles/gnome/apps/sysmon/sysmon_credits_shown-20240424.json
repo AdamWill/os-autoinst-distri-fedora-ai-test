@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 152,
+      "type": "match",
+      "height": 74,
+      "xpos": 342,
+      "width": 140
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_credits_shown"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 41,
+      "type": "match",
+      "height": 28,
+      "xpos": 543,
+      "width": 63
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "weather_button_daily"
+  ]
+}

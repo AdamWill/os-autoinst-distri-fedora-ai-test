@@ -1,0 +1,28 @@
+{
+  "area": [
+    {
+      "width": 49,
+      "click_point": "center",
+      "ypos": 505,
+      "xpos": 488,
+      "height": 22,
+      "type": "match"
+    },
+    {
+      "ypos": 201,
+      "type": "match",
+      "height": 17,
+      "width": 117,
+      "xpos": 453
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "\"add input source\" is not translated"
+    }
+  ],
+  "tags": [
+    "desktop_input_source_japanese"
+  ]
+}

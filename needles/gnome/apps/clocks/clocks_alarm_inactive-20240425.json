@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 115,
+      "type": "match",
+      "height": 18,
+      "width": 509,
+      "xpos": 235
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "clocks_alarm_inactive"
+  ]
+}

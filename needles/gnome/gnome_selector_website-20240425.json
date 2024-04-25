@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 60,
+      "xpos": 355,
+      "type": "match",
+      "height": 21,
+      "ypos": 437
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_selector_website"
+  ]
+}

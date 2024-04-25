@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 42,
+      "ypos": 249,
+      "xpos": 334,
+      "width": 99
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_city_button_reykjavik"
+  ]
+}

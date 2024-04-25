@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "height": 26,
+      "type": "match",
+      "ypos": 42,
+      "width": 100,
+      "xpos": 327
+    },
+    {
+      "ypos": 84,
+      "type": "match",
+      "height": 19,
+      "xpos": 2,
+      "width": 83
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_processes_shown"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "ypos": 61,
+      "type": "match",
+      "height": 23,
+      "xpos": 461,
+      "width": 97
+    },
+    {
+      "width": 51,
+      "xpos": 589,
+      "type": "match",
+      "height": 25,
+      "ypos": 58
+    },
+    {
+      "type": "match",
+      "height": 28,
+      "ypos": 57,
+      "xpos": 328,
+      "width": 94
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_preferences_shown"
+  ]
+}

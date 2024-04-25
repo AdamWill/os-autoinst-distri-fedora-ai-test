@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "height": 29,
+      "type": "match",
+      "ypos": 664,
+      "width": 96,
+      "xpos": 379
+    },
+    {
+      "xpos": 495,
+      "ypos": 528,
+      "width": 46,
+      "height": 68,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_info_pune"
+  ]
+}

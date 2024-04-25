@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 19,
+      "width": 107,
+      "ypos": 205,
+      "type": "match",
+      "height": 24
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_open_location_documents"
+  ]
+}

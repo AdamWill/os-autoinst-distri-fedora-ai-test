@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 172,
+      "width": 113,
+      "type": "match",
+      "height": 19,
+      "ypos": 133
+    },
+    {
+      "height": 20,
+      "type": "match",
+      "ypos": 132,
+      "xpos": 541,
+      "width": 65
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "loupe_shortcuts_shown"
+  ]
+}

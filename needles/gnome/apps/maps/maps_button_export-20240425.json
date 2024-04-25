@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 233,
+      "type": "match",
+      "height": 21,
+      "width": 54,
+      "xpos": 620
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_button_export"
+  ]
+}

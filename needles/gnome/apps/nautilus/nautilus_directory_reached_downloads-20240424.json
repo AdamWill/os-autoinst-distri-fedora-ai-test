@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 46,
+      "type": "match",
+      "height": 21,
+      "xpos": 320,
+      "width": 176
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_directory_reached_downloads"
+  ]
+}

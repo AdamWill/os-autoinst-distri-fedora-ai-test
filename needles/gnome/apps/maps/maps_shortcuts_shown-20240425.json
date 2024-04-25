@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "height": 18,
+      "type": "match",
+      "ypos": 207,
+      "width": 70,
+      "xpos": 479
+    },
+    {
+      "xpos": 122,
+      "width": 57,
+      "ypos": 257,
+      "height": 19,
+      "type": "match"
+    },
+    {
+      "width": 74,
+      "xpos": 496,
+      "ypos": 257,
+      "type": "match",
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_shortcuts_shown"
+  ]
+}

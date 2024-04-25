@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 324,
+      "height": 16,
+      "type": "match",
+      "width": 68,
+      "xpos": 258
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "evince_file_select_pdf"
+  ]
+}
