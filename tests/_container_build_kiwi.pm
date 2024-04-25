@@ -6,6 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     my $version = get_var("VERSION");
+    my $advortask = get_var("ADVISORY_OR_TASK");
     # we didn't use kiwi before F40, and I don't really want to write
     # an imgfac test for a release that will be dead in 6 months
     # FIXME drop when F39 is EOL
@@ -76,6 +77,14 @@ sub run {
     # to mirrorlist
     assert_script_run 'sed -i -e "s,/usr/share/distribution-gpg-keys/fedora,/etc/pki/rpm-gpg,g" ' . $repoxml;
     repos_mirrorlist $repoxml;
+    # configure dnf5 if we're testing the dnf5-as-dnf update
+    # https://pagure.io/fedora-kiwi-descriptions/pull-request/46 is
+    # the corresponding PR, drop this once the update is pushed
+    if ($advortask eq "FEDORA-2024-8a41ea93a2") {
+        assert_script_run 'sed -i -e "s,dnf,dnf5,g" config.xml';
+        assert_script_run 'sed -i -e "s,dnf-yum,yum,g" teams/cloud/container.xml';
+        assert_script_run 'sed -i -e "s,dnf-yum,yum,g" teams/cloud/vagrant.xml';
+    }
     # now add the side repo or tag repo to the appropriate repo XML
     assert_script_run 'printf "$(head -n -1 ' . $repoxml . ')\n	<repository type=\"rpm-md\" alias=\"advisory\" sourcetype=\"baseurl\">\n		<source path=\"file:///mnt/update_repo\"/>\n	</repository>\n</image>\n" > ' . $repoxml unless ($tag);
     assert_script_run 'printf "$(head -n -1 ' . $repoxml . ')\n	<repository type=\"rpm-md\" alias=\"openqa-testtag\" sourcetype=\"baseurl\">\n		<source path=\"https://kojipkgs.fedoraproject.org/repos/' . "${tag}/latest/${arch}" . '\"/>\n	</repository>\n</image>\n" > ' . $repoxml if ($tag);
