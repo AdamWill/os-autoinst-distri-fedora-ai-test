@@ -248,7 +248,6 @@ sub _load_early_postinstall_tests {
     # Appropriate login method for install type
     if (get_var("DESKTOP")) {
         _load_instance("tests/_graphical_wait_login", $instance);
-        _load_instance("tests/_snapshot_only") if (get_var("LOGIN_SNAPSHOT"));
     }
     # Test non-US input at this point, on language tests
     if (get_var("SWITCHED_LAYOUT") || get_var("INPUT_METHOD")) {
@@ -264,7 +263,6 @@ sub _load_early_postinstall_tests {
     # the installation is interrupted on purpose.
     unless (get_var("DESKTOP") || get_var("CRASH_REPORT")) {
         _load_instance("tests/_console_wait_login", $instance);
-        _load_instance("tests/_snapshot_only") if (get_var("LOGIN_SNAPSHOT"));
     }
 }
 

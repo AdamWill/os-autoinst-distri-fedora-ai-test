@@ -5,6 +5,8 @@ use utils;
 
 sub run {
     my $self = shift;
+    # for update testing, ensure the update repos are set up
+    repo_setup if (get_var("ADVISORY_OR_TASK"));
 }
 
 sub test_flags {

@@ -2594,7 +2594,7 @@
                 "+START_AFTER_TEST": "server_cockpit_default",
                 "BOOTFROM": "c",
                 "LOGIN_SNAPSHOT": "1",
-                "POSTINSTALL": "server_cockpit_updates server_cockpit_autoupdate",
+                "POSTINSTALL": "_cockpit_setup server_cockpit_updates server_cockpit_autoupdate",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "false"
             }
