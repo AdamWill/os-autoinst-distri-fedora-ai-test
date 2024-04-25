@@ -1244,8 +1244,10 @@ sub advisory_check_nonmatching_packages {
     return if (get_var("_ACNMP_DONE"));
     script_run 'touch /tmp/installedupdatepkgs.txt';
     my $rpmcmd = "rpm";
+    my $timeout = 180;
     my $wrapper = $args{wrapper};
     $rpmcmd = "$wrapper rpm" if ($wrapper);
+    $timeout = 360 if ($wrapper);
     # this creates /tmp/installedupdatepkgs.txt as a sorted list of installed
     # packages with the same name as packages from the update, in the same form
     # as /mnt/updatepkgs.txt. The '--last | head -1' tries to handle the
@@ -1259,7 +1261,7 @@ sub advisory_check_nonmatching_packages {
     # (we need four to reach bash, and half of them get eaten by perl or
     # something along the way). Yes, it only works with *single* quotes. Yes,
     # I hate escaping
-    script_run 'for pkg in $(cat /mnt/updatepkgnames.txt); do ' . $rpmcmd . ' -q $pkg && ' . $rpmcmd . ' -q $pkg --last | head -1 | cut -d" " -f1 | sed -e \'s,\^,\\\\\\\\^,g\' | xargs ' . $rpmcmd . ' -q --qf "%{SOURCERPM} %{NAME} %{EPOCHNUM} %{VERSION} %{RELEASE}\n" >> /tmp/installedupdatepkgs.txt; done', timeout => 180;
+    script_run 'for pkg in $(cat /mnt/updatepkgnames.txt); do ' . $rpmcmd . ' -q $pkg && ' . $rpmcmd . ' -q $pkg --last | head -1 | cut -d" " -f1 | sed -e \'s,\^,\\\\\\\\^,g\' | xargs ' . $rpmcmd . ' -q --qf "%{SOURCERPM} %{NAME} %{EPOCHNUM} %{VERSION} %{RELEASE}\n" >> /tmp/installedupdatepkgs.txt; done', timeout => $timeout;
     script_run 'sort -u -o /tmp/installedupdatepkgs.txt /tmp/installedupdatepkgs.txt';
     # for debugging, may as well always upload these, can't hurt anything
     upload_logs "/tmp/installedupdatepkgs.txt", failok => 1;
