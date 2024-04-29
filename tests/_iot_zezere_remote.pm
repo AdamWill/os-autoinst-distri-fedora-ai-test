@@ -17,7 +17,7 @@ sub run {
     sleep 2;
     # confirm empty passphrase
     send_key "ret";
-    my $sshpub = script_output "cat /root/.ssh/id_rsa.pub";
+    my $sshpub = script_output "cat /root/.ssh/id_ed25519.pub";
     # launch Firefox
     type_string "startx /usr/bin/firefox -width 1024 -height 768 http://172.16.2.118\n";
     # log in as admin
