@@ -570,13 +570,24 @@ sub setup_repos {
     );
     my $arch = get_var("ARCH");
     my $tag = get_var("TAG");
-    # write the tag repo config if appropriate
-    assert_script_run 'printf "[openqa-testtag]\nname=openqa-testtag\nbaseurl=https://kojipkgs.fedoraproject.org/repos/' . "$tag/latest/$arch" . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/openqa-testtag.repo' if ($tag && !$args{waonly});
+    my $copr = get_var("COPR");
+    if (($tag || $copr) && !$args{waonly}) {
+        # write a side tag or COPR repo config, enabled or disabled
+        # according to the 'configs' arg
+        assert_script_run 'printf "[openqa-testtag]\nname=openqa-testtag\nbaseurl=' . get_var("UPDATE_OR_TAG_REPO") . '/\ncost=2000\nenabled=' . $args{configs} . '\ngpgcheck=0\npriority=1\n" > /etc/yum.repos.d/openqa-testtag.repo';
+        # write out the info files
+        assert_script_run 'dnf --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}" | sort -u > /mnt/updatepkgs.txt';
+        # the | xargs here is a wacky trick that converts newlines to
+        # spaces - unlike rpm, dnf always puts every package on a new
+        # line, which we don't want here
+        # https://unix.stackexchange.com/a/110759
+        assert_script_run 'dnf --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{NAME} " | xargs > /mnt/updatepkgnames.txt';
+    }
     my @was = get_workarounds($args{version});
     # bail if there are no workarounds:
     # * if we're in workarounds-only mode
-    # * if we're testing a side tag (so no packages to dl)
-    if ($args{waonly} || $tag) {
+    # * if we're testing a side tag or COPR (so no packages to dl)
+    if ($args{waonly} || $tag || $copr) {
         return unless (@was);
     }
     # if we got this far, we're definitely downloading *something*
@@ -619,14 +630,14 @@ sub setup_repos {
         die "Neither ADVISORY_NVRS nor KOJITASK set! Don't know what to do" unless ($args{waonly});
     }
     my $cmd = "/usr/local/bin/setup_repos.py";
-    # don't download updates if we're in workarounds-only mode or testing a tag
-    $cmd .= " -u $udstring" unless ($args{waonly} || $tag);
+    # don't download updates if we're in workarounds-only mode or testing a tag or COPR
+    $cmd .= " -u $udstring" unless ($args{waonly} || $tag || $copr);
     $cmd .= " -w $wastring" if (@was);
     # write repo config files if asked
     $cmd .= " -c" if ($args{configs});
     $cmd .= " $arch";
     assert_script_run $cmd, $timeout;
-    unless ($args{waonly} || $tag) {
+    unless ($args{waonly} || $tag || $copr) {
         upload_logs "/mnt/updatepkgnames.txt";
         upload_logs "/mnt/updatepkgs.txt";
     }
@@ -635,8 +646,9 @@ sub setup_repos {
 sub _repo_setup_updates {
     # Appropriate repo setup steps for testing a Bodhi update
     my $tag = get_var("TAG");
+    my $copr = get_var("COPR");
     # Check if we already ran, bail if so
-    if ($tag) {
+    if ($tag || $copr) {
         # for TAG case, check for the repo file
         return unless script_run "test -f /etc/yum.repos.d/openqa-testtag.repo";
     }
@@ -670,8 +682,8 @@ sub _repo_setup_updates {
     select_console("virtio-console");
     console_login();
     # prepare the directory the packages will be downloaded to, unless we're
-    # testing a side tag
-    _prepare_update_mount() unless ($tag);
+    # testing a side tag or COPR
+    _prepare_update_mount() unless ($tag || $copr);
 
     # on CANNED, we need to enter the toolbox at this point
     if (get_var("CANNED")) {
@@ -829,7 +841,6 @@ sub gnome_initial_setup {
         @_
     );
     my $relnum = get_release_number;
-    my $advortask = get_var("ADVISORY_OR_TASK");
 
     # note: when 'language' is "skipped", it's turned into a 'welcome'
     # page, which has a "Start Setup" button, not a "Next" button
@@ -1203,8 +1214,6 @@ sub quit_with_shortcut {
 # are currently installed. This is here so we can do it both in
 # _advisory_post and post_fail_hook.
 sub advisory_get_installed_packages {
-    # can't do anything useful when testing a side tag
-    return if (get_var("TAG"));
     # bail out if the file doesn't exist: this is in case we get
     # here in the post-fail hook but we failed before creating it
     return if script_run "test -f /mnt/updatepkgs.txt";
@@ -1234,8 +1243,6 @@ sub advisory_check_nonmatching_packages {
         wrapper => "",
         @_
     );
-    # can't do anything useful when testing a side tag
-    return if (get_var("TAG"));
     # bail out if the file doesn't exist: this is in case we get
     # here in the post-fail hook but we failed before creating it
     return if script_run "test -f /mnt/updatepkgnames.txt";
@@ -1245,9 +1252,13 @@ sub advisory_check_nonmatching_packages {
     script_run 'touch /tmp/installedupdatepkgs.txt';
     my $rpmcmd = "rpm";
     my $timeout = 180;
+    # longer if we have a lot of packages
+    my $pkgs = script_output "wc -l /mnt/updatepkgs.txt";
+    $timeout *= 2 if ($pkgs > 100);
+    $timeout *= 2 if ($pkgs > 400);
     my $wrapper = $args{wrapper};
     $rpmcmd = "$wrapper rpm" if ($wrapper);
-    $timeout = 360 if ($wrapper);
+    $timeout *= 2 if ($wrapper);
     # this creates /tmp/installedupdatepkgs.txt as a sorted list of installed
     # packages with the same name as packages from the update, in the same form
     # as /mnt/updatepkgs.txt. The '--last | head -1' tries to handle the

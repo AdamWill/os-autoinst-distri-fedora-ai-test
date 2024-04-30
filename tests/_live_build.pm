@@ -28,6 +28,7 @@ sub run {
     my $subv = get_var("SUBVARIANT");
     my $lcsubv = lc($subv);
     my $tag = get_var("TAG");
+    my $copr = get_var("COPR");
     my $workarounds = get_workarounds;
     if (get_var("NUMDISKS") > 2) {
         # put /var/lib/mock on the third disk, so we don't run out of
@@ -45,13 +46,13 @@ sub run {
     assert_script_run "echo \"include('/etc/mock/fedora-${mockver}-${arch}.cfg')\" > /etc/mock/openqa.cfg";
     # make the side and workarounds repos and the serial device available inside the mock root
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_enable\'] = True" >> /etc/mock/openqa.cfg';
-    assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/mnt/update_repo\', \'/mnt/update_repo\'))" >> /etc/mock/openqa.cfg' unless ($tag);
+    assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/mnt/update_repo\', \'/mnt/update_repo\'))" >> /etc/mock/openqa.cfg' unless ($tag || $copr);
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/mnt/workarounds_repo\', \'/mnt/workarounds_repo\'))" >> /etc/mock/openqa.cfg' if ($workarounds);
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/dev/' . $serialdev . '\', \'/dev/' . $serialdev . '\'))" >> /etc/mock/openqa.cfg';
     my $repos = 'config_opts[\'dnf.conf\'] += \"\"\"\n';
-    # add the update repo or tag repo to the config
-    $repos .= '[advisory]\nname=Advisory repo\nbaseurl=file:///mnt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n' unless ($tag);
-    $repos .= '[openqa-testtag]\nname=Tag test repo\nbaseurl=https://kojipkgs.fedoraproject.org/repos/' . "${tag}/latest/${arch}" . '\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n' if ($tag);
+    # add the update, tag or COPR repo to the config
+    $repos .= '[advisory]\nname=Advisory repo\nbaseurl=file:///mnt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n' unless ($tag || $copr);
+    $repos .= '[openqa-testtag]\nname=Tag test repo\nbaseurl=' . get_var("UPDATE_OR_TAG_REPO") . '/\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\npriority=1\n' if ($tag || $copr);
     # and the workaround repo
     $repos .= '\n[workarounds]\nname=Workarounds repo\nbaseurl=file:///mnt/workarounds_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n' if ($workarounds);
     # also the buildroot repo, for Rawhide
@@ -68,9 +69,9 @@ sub run {
     assert_script_run 'git clone https://pagure.io/fedora-kickstarts.git';
     assert_script_run 'cd fedora-kickstarts';
     assert_script_run "git checkout ${branch}";
-    # now add the side repo or tag repo to the appropriate repo ks
-    assert_script_run 'echo "repo --name=advisory --baseurl=file:///mnt/update_repo" >> ' . $repoks unless ($tag);
-    assert_script_run 'echo "repo --name=openqa-testtag --baseurl=https://kojipkgs.fedoraproject.org/repos/' . "${tag}/latest/${arch}" . '" >> ' . $repoks if ($tag);
+    # now add the side, tag or COPR repo to the appropriate repo ks
+    assert_script_run 'echo "repo --name=advisory --baseurl=file:///mnt/update_repo" >> ' . $repoks unless ($tag || $copr);
+    assert_script_run 'echo "repo --name=openqa-testtag --baseurl=' . get_var("UPDATE_OR_TAG_REPO") . '" >> ' . $repoks if ($tag || $copr);
     # and the workarounds repo
     assert_script_run 'echo "repo --name=workarounds --baseurl=file:///mnt/workarounds_repo" >> ' . $repoks if ($workarounds);
     # and the buildroot repo, for Rawhide

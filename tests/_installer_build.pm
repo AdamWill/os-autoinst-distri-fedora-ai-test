@@ -27,8 +27,8 @@ sub run {
     }
     $cmd .= " --repo=/etc/yum.repos.d/workarounds.repo" if (get_workarounds);
     $cmd .= " --repo=/etc/yum.repos.d/koji-rawhide.repo" if ($version eq $rawrel);
-    $cmd .= " --repo=/etc/yum.repos.d/advisory.repo" unless (get_var("TAG"));
-    $cmd .= " --repo=/etc/yum.repos.d/openqa-testtag.repo" if (get_var("TAG"));
+    $cmd .= " --repo=/etc/yum.repos.d/advisory.repo" unless (get_var("TAG") || get_var("COPR"));
+    $cmd .= " --repo=/etc/yum.repos.d/openqa-testtag.repo" if (get_var("TAG") || get_var("COPR"));
     $cmd .= " ./results";
     assert_script_run $cmd, 2400;
     # good to have the log around for checks

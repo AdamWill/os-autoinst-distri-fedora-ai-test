@@ -133,9 +133,11 @@ sub run {
     assert_script_run "mkdir -p /export";
     # get the kickstart
     assert_script_run "curl -o /export/root-user-crypted-net.ks https://fedorapeople.org/groups/qa/kickstarts/root-user-crypted-net.ks";
-    # for update tests, set up the update repository and export it
-    if (get_var("ADVISORY_OR_TASK") && !get_var("TAG")) {
-        assert_script_run "echo '/mnt/update_repo 172.16.2.0/24(ro)' >> /etc/exports";
+    # for update tests, set up the update repository and export it,
+    # if we have one (for tag and copr tests we don't really need to
+    # be here at all so we'll just sit here being useless)
+    if (get_var("ADVISORY_OR_TASK")) {
+        assert_script_run "echo '/mnt/update_repo 172.16.2.0/24(ro)' >> /etc/exports" if (!get_var("TAG") && !get_var("COPR"));
     }
     # for compose tests, we do all this stuff
     else {
