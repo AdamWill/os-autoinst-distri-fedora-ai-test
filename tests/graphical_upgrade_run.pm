@@ -41,6 +41,15 @@ sub run {
     }
     # Let's check, that the desktop is shown.
     check_desktop();
+    # On KDE, try and avoid double-typing issues, same way we do
+    # for apps_startstop test
+    if ($desktop eq "kde") {
+        wait_screen_change { send_key 'super'; };
+        wait_still_screen 3;
+        send_key "k";
+        wait_still_screen 5;
+        send_key "esc";
+    }
 
     # Start the package manager application depending
     # on which DE we are on.
