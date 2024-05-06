@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 16,
+      "ypos": 409,
+      "width": 134,
+      "xpos": 806
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "loupe_menu_about"
+  ]
+}
