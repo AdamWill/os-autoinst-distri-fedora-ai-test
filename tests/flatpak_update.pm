@@ -19,7 +19,7 @@ sub run {
     assert_script_run("flatpak remote-add --if-not-exists flatpaktest https://lruzicka.fedorapeople.org/flatpaktest/flatpaktest.flatpakrepo", timeout => 120);
 
     # Install the Dummy application.
-    assert_script_run("flatpak install -y org.flatpak.Dummy", timeout => 600);
+    assert_script_run("http_proxy=http://flatpak-cache01.iad2.fedoraproject.org:3128 flatpak install -y org.flatpak.Dummy", timeout => 600);
     # Check that the application has been installed
     assert_script_run("flatpak list | grep org.flatpak.Dummy");
 
