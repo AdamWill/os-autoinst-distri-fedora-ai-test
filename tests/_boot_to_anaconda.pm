@@ -26,6 +26,7 @@ sub _handle_incomplete_hub {
 
 sub run {
     my $self = shift;
+    my $arch = get_var("ARCH");
     if (get_var("IS_PXE")) {
         # PXE tests have DELAYED_START set, so VM is not running yet,
         # because if we boot immediately PXE will time out waiting for
@@ -53,12 +54,21 @@ sub run {
     if ($repourl) {
         $params .= "inst.addrepo=addrepo,$repourl ";
     }
+    # for update tests
+    if (get_var("ADVISORY_OR_TASK")) {
+        # add workaround repo if there is one
+        $params .= "inst.addrepo=workarounds,nfs://172.16.2.110:/mnt/workarounds_repo " if (get_workarounds);
+        # add tag repo if we're on rawhide
+        if (get_var("VERSION") eq get_var("RAWREL")) {
+            $params .= "inst.addrepo=koji-rawhide,https://kojipkgs.fedoraproject.org/repos/rawhide/latest/${arch} ";
+        }
+    }
     if (get_var("ANACONDA_TEXT")) {
         $params .= "inst.text ";
         # we need this on aarch64 till #1594402 is resolved,
         # and we also can utilize this if we want to run this
         # over the serial console.
-        $params .= "console=tty0 " if (get_var("ARCH") eq "aarch64");
+        $params .= "console=tty0 " if ($arch eq "aarch64");
         # when the text installation should run over the serial console,
         # we have to add some more parametres to grub. Although, the written
         # test case recommends using ttyS0, OpenQA only uses that console for
