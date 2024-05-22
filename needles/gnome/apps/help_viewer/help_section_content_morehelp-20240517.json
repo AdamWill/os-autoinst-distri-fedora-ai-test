@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 454,
+      "width": 106,
+      "type": "match",
+      "ypos": 34,
+      "height": 41
+    },
+    {
+      "height": 24,
+      "ypos": 188,
+      "type": "match",
+      "width": 132,
+      "xpos": 8
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_section_content_morehelp"
+  ]
+}
