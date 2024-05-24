@@ -258,8 +258,8 @@
             "machine": "bios",
             "product": "fedora-updates-workstation-live-iso-x86_64-*"
         },
-        "fedora-updates-workstation-upgrade-x86_64-*-64bit": {
-            "machine": "64bit",
+        "fedora-updates-workstation-upgrade-x86_64-*-bios": {
+            "machine": "bios",
             "product": "fedora-updates-workstation-upgrade-x86_64-*"
         },
         "fedora-updates-workstation-x86_64-*-64bit": {
