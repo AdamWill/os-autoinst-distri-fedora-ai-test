@@ -258,8 +258,8 @@
             "machine": "bios",
             "product": "fedora-updates-workstation-live-iso-x86_64-*"
         },
-        "fedora-updates-workstation-upgrade-x86_64-*-bios": {
-            "machine": "bios",
+        "fedora-updates-workstation-upgrade-x86_64-*-64bit": {
+            "machine": "64bit",
             "product": "fedora-updates-workstation-upgrade-x86_64-*"
         },
         "fedora-updates-workstation-x86_64-*-64bit": {
@@ -627,7 +627,7 @@
         },
         "upgrade_desktop_encrypted_64bit": {
             "profiles": {
-                "fedora-updates-workstation-upgrade-x86_64-*-bios": 5
+                "fedora-updates-workstation-upgrade-x86_64-*-64bit": 5
             }
         },
         "upgrade_realmd_client": {
