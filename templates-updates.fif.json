@@ -627,7 +627,7 @@
         },
         "upgrade_desktop_encrypted_64bit": {
             "profiles": {
-                "fedora-updates-workstation-upgrade-x86_64-*-64bit": 5
+                "fedora-updates-workstation-upgrade-x86_64-*-bios": 5
             }
         },
         "upgrade_realmd_client": {
