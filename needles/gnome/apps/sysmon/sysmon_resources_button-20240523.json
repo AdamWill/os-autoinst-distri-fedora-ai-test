@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 19,
+      "ypos": 45,
+      "type": "match",
+      "xpos": 465,
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_resources_button"
+  ]
+}
