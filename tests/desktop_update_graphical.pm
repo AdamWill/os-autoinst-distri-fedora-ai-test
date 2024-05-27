@@ -51,11 +51,13 @@ sub run {
         # especially with GNOME 46 - part of
         # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2442
         click_lastmatch;
+        wait_still_screen 2;
         my $count = 20;
         while (check_screen 'gnome_software_ignore', 3) {
             die "couldn't get rid of ignore screen!" if ($count == 0);
             $count -= 1;
             click_lastmatch;
+            wait_still_screen 2;
         }
     }
     # go to the 'update' interface. We may be waiting some time at a
