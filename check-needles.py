@@ -61,6 +61,9 @@ for testpath in testpaths:
     with open(testpath, "r") as testfh:
         testlines = testfh.readlines()
     for line in testlines:
+        # ignore comments
+        if line.strip().startswith("#"):
+            continue
         matchfuncs = (
             "assert_screen",
             "assert_and_click",
