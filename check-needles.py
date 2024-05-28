@@ -84,13 +84,16 @@ for testpath in testpaths:
                 start = line.find(matchfunc)
             # fortunately `find` returns -1 for 'no match'
             if start > -1:
-                for match in DOUBLEQUOTERE.finditer(line[start:]):
-                    testtags.append(match[1])
-                for match in SINGLEQUOTERE.finditer(line[start:]):
-                    testtags.append(match[1])
+                matcharea = line[start:]
                 if matchfunc == "send_key_until_needlematch":
-                    # strip last match because it'll be the key to hit
-                    testtags.pop()
+                    # this needs some special handling - we need
+                    # to leave out the key to press, which should
+                    # come after the first comma
+                    matcharea = matcharea.split(",")[0]
+                for match in DOUBLEQUOTERE.finditer(matcharea):
+                    testtags.append(match[1])
+                for match in SINGLEQUOTERE.finditer(matcharea):
+                    testtags.append(match[1])
 
 # filter the list a bit for matches that aren't tags. Almost all our
 # tags have a - or an _ in them, except a small number of weirdos;
