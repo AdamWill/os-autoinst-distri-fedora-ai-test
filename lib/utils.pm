@@ -1604,6 +1604,10 @@ sub register_application {
 sub solidify_wallpaper {
     my $desktop = get_var("DESKTOP");
     if ($desktop eq "kde") {
+        # FIXME: since Plasma 6.0.90, we have to click on the desktop
+        # once to make this work
+        # https://bugs.kde.org/show_bug.cgi?id=487715
+        mouse_click;
         # Run the Desktop settings
         hold_key 'alt';
         send_key 'd';
