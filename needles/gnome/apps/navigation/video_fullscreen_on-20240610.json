@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 471,
+      "type": "match",
+      "ypos": 5,
+      "width": 85,
+      "height": 21
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "video_fullscreen_on"
+  ]
+}

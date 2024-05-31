@@ -6,25 +6,12 @@ use utils;
 # This will test that user can switch between two applications
 # using the navigation combo Alt-tab.
 
-sub start_maxed {
-    my $app = shift;
-    menu_launch_type($app);
-    assert_screen ["apps_run_$app", "grant_access"];
-    # give access rights if asked
-    if (match_has_tag "grant_access") {
-        click_lastmatch;
-        assert_screen "apps_run_$app";
-    }
-    wait_still_screen(3);
-    wait_screen_change { send_key("super-up"); };
-    wait_still_screen(2);
-}
-
 sub switch_to_app {
     # This will use Alt-tab to switch to the desired application.
     # Use the name of the application and the direction in which
     # the search should be performed, either forward or backward.
     my ($application, $dir, $fullscreen) = @_;
+    $application =~ s/ /_/g;
     # If we want to search backwards, we will hold the shift key.
     if ($dir eq "backward") {
         hold_key("shift");
@@ -33,7 +20,7 @@ sub switch_to_app {
     # key combo.
     hold_key("alt");
     # We will send tab, until we have arrived at the correct icon
-    send_key_until_needlematch("navigation_navibar_$application", "tab", 10);
+    send_key_until_needlematch("navigation_navibar_$application", "tab", 10, 2);
     # We will release the alt key.
     release_key("alt");
     #
@@ -62,6 +49,10 @@ sub run {
     my $self = shift;
 
     ### Switch between two applications
+    menu_launch_type("files");
+    assert_screen("apps_run_files");
+    menu_launch_type("text editor");
+    assert_screen('apps_run_texteditor');
     # From the setup script, we should be seeing the editor
     # window.
     # Switch to the other application.
@@ -70,14 +61,28 @@ sub run {
 
     # Switch back
     send_key("alt-tab");
-    assert_screen("apps_run_editor");
+    assert_screen("apps_run_texteditor");
+
+    # Switch by clicking on the certain application.
+    assert_and_click("files_inactive");
+    assert_screen("apps_run_files");
+    assert_and_click("editor_inactive");
+    assert_screen("apps_run_texteditor");
 
     ### Switch between more applications
 
     # Start more applications.
-    start_maxed("clocks");
-    start_maxed("calculator");
-    start_maxed("terminal");
+    menu_launch_type("clocks", "maximize");
+    # Sometime, Clocks start with an access request,
+    # deny it.
+    if (check_screen('grant_access')) {
+        send_key('ret');
+    }
+    assert_screen('apps_run_clocks');
+    menu_launch_type("calculator", "maximize");
+    assert_screen('apps_run_calculator');
+    menu_launch_type("terminal", "maximize");
+    assert_screen('apps_run_terminal');
 
     ## Going forwards
     # Switch to Calculator using alt-tab
@@ -94,21 +99,22 @@ sub run {
     ### Switch to and from a full screen application
     # We will make Terminal to full screen
     send_key("f11");
+    wait_still_screen(3);
 
     # Switch to Editor
-    switch_to_app("editor", "forward");
+    switch_to_app("texteditor", "forward");
 
     # Switch to Terminal (fullscreen)
     switch_to_app("terminal", "backward", 1);
 
     # Switch to Editor
-    switch_to_app("editor", "forward");
+    switch_to_app("texteditor", "forward");
 
     ### Switch between minimised apps.
     # Minimise Editor
     send_key("super-h");
     # Check that the application has minimised.
-    check_hidden("editor");
+    check_hidden("texteditor");
 
     # Switch to Clocks
     switch_to_app("clocks", "forward");
@@ -118,7 +124,7 @@ sub run {
     check_hidden("clocks");
 
     # Switch to Editor
-    switch_to_app("editor", "forward");
+    switch_to_app("texteditor", "forward");
 
     # Switch to Clocks
     switch_to_app("clocks", "forward");

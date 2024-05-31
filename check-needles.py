@@ -227,11 +227,13 @@ testtags.extend(f"anaconda_help_{fsys}" for fsys in ('install_destination',
 'root_password', 'select_packages', 'installation_source', 'time_date', 'user_creation',
 'language_selection', 'language', 'summary_link'))
 # for Gnome navigation test
-for app in ("calculator", "clocks", "files", "terminal", "editor"):
+for app in ("calculator", "clocks", "files", "terminal", "texteditor"):
     testtags.append(f"navigation_navibar_{app}")
 testtags.append("navigation_terminal_fullscreen")
 testtags.extend(f"anaconda_main_hub_{fsys}" for fsys in ('language_support', 'selec_packages',
 'time_date', 'create_user','keyboard_layout'))
+for selection in ("hide", "maximize", "restore"):
+    testtags.append(f"calculator_context_{selection}")
 
 # retcode tracker
 ret = 0

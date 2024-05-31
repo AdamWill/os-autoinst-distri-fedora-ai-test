@@ -27,17 +27,21 @@ sub run {
     # Let us wait here for a couple of seconds to give the VM time to settle.
     # Starting right over might result in erroneous behavior.
     sleep(5);
+    menu_launch_type("files", "maximize");
+    assert_screen('apps_run_files');
+    menu_launch_type("text editor", "maximize");
+    assert_screen('apps_run_texteditor');
 
     # The focused application should be the Editor, so let's check it is
     # visible on the beginning screen. Then switch to another workplace.
     # This one should be empty, therefore checking for the Editor should fail.
     # The opposite will be true, when we switch back
-    assert_screen("apps_run_editor");
+    assert_screen("apps_run_texteditor");
     switch_to_workspace("right");
-    die("The workspaces were not switched!") if (check_screen("apps_run_editor"));
+    die("The workspaces were not switched!") if (check_screen("apps_run_texteditor"));
 
     switch_to_workspace("left");
-    die("The workspaces were not switched") unless (check_screen("apps_run_editor"));
+    die("The workspaces were not switched") unless (check_screen("apps_run_texteditor"));
 
     # Now, we will move the focused application (Editor) to the second workspace.
     # The application will be still visible there. When we switch back, the application
@@ -45,7 +49,7 @@ sub run {
     # we check that it is there. We will also enter the Activitities mode and will check
     # that currently three workspaces can be used (top bar of the screen).
     move_to_workspace("right");
-    die("The application was not moved!") unless (check_screen("apps_run_editor"));
+    die("The application was not moved!") unless (check_screen("apps_run_texteditor"));
     switch_to_workspace("left");
     die("The workspaces were not switched") unless (check_screen("apps_run_files"));
     send_key("super");

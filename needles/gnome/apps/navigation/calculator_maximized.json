@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 929,
+      "ypos": 5,
+      "width": 89,
+      "height": 64,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calculator_maximized"
+  ]
+}

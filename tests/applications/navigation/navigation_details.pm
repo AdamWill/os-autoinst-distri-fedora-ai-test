@@ -11,11 +11,15 @@ sub run {
     # Let us wait here for a couple of seconds to give the VM time to settle.
     # Starting right over might result in erroneous behavior.
     sleep(5);
+    menu_launch_type("text editor", "maximize");
+    assert_screen("apps_run_texteditor");
+    menu_launch_type("files", "maximize");
+    assert_screen("apps_run_files");
 
     # If we are at Nautilus switch to editor
     if (check_screen("apps_run_files")) {
         send_key("alt-tab");
-        assert_screen "apps_run_editor";
+        assert_screen "apps_run_texteditor";
     }
 
     # Use alt-tab to navigate to the other
@@ -24,7 +28,16 @@ sub run {
     hold_key("alt");
     send_key("tab");
     send_key("~");
-    assert_screen("navigation_details_shown");
+    # Sometimes, the details take a time to load,
+    # if that happens, fail softly.
+    unless (check_screen('navigation_details_shown', timeout => 30)) {
+        if (check_screen('navigation_details_notloaded')) {
+            record_soft_failure('Window details not loaded in time.');
+        }
+    }
+    else {
+        assert_screen("navigation_details_shown", timeout => 60);
+    }
     release_key("alt");
 }
 

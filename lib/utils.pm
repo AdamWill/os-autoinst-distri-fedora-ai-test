@@ -1362,10 +1362,11 @@ sub menu_launch_type {
     # Launch an application in a graphical environment, by opening a
     # launcher, typing the specified string and hitting enter. Pass
     # the string to be typed to launch whatever it is you want.
-    my $app = shift;
+    my ($app, $maximize) = @_;
+    my $desktop = get_var("DESKTOP");
     my $key = 'super';
-    $key = 'alt-d' if (get_var("DESKTOP") eq "i3");
-    if (get_var("DESKTOP") eq "kde") {
+    $key = 'alt-d' if ($desktop eq "i3");
+    if ($desktop eq "kde") {
         # To overcome BZ2097208, let's move the mouse out of the way
         # and give the launcher some time to take the correct focus.
         diag("Moving the mouse away from the launcher.");
@@ -1379,6 +1380,21 @@ sub menu_launch_type {
     wait_still_screen 2;
     send_key 'ret';
     wait_still_screen 3;
+    diag("Launcher: The application $app should have been launched.");
+    # If we should maximize the application
+    if ($maximize) {
+        if ($desktop eq "kde") {
+            send_key('super-pgup');
+        }
+        elsif ($desktop eq 'gnome') {
+            send_key('super-up');
+        }
+        else {
+            diag('Maximizing in this desktop is not supported at the moment!');
+        }
+        wait_still_screen 3;
+        diag("Maximizer: The application should have been maximized.");
+    }
 }
 
 sub tell_source {

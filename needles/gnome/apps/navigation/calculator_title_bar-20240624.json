@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 49,
+      "ypos": 124,
+      "type": "match",
+      "height": 17,
+      "xpos": 280
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calculator_title_bar"
+  ]
+}

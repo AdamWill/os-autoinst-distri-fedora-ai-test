@@ -1,15 +1,15 @@
 {
   "area": [
     {
-      "ypos": 1,
+      "ypos": 27,
       "type": "match",
-      "xpos": 6,
-      "height": 67,
+      "xpos": 470,
+      "height": 272,
       "width": 82
     }
   ],
   "properties": [],
   "tags": [
-    "navigation_editor_fullscreen"
+    "calculator_tiled_left"
   ]
 }
