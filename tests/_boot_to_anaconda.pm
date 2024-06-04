@@ -176,7 +176,7 @@ sub run {
                     while ($tries) {
                         $tries -= 1;
                         assert_and_click("live_start_anaconda_icon", dclick => $dclick);
-                        last unless (check_screen "anaconda_select_install_lang", 180);
+                        last if (check_screen "anaconda_select_install_lang", 180);
                         die "Launching installer failed after 5 tries!" unless ($tries);
                     }
                 }
