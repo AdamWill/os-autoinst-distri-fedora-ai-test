@@ -170,11 +170,14 @@ sub run {
                     my $relnum = get_release_number;
                     my $dclick = 0;
                     $dclick = 1 if (get_var("DESKTOP") eq "kde");
-                    assert_and_click("live_start_anaconda_icon", dclick => $dclick);
-                    unless (check_screen "anaconda_select_install_lang", 180) {
-                        # click it again - on KDE since 2019-10 or so it seems
-                        # like the first attempt sometimes just doesn't work
-                        assert_and_click("live_start_anaconda_icon", dclick => $dclick, timeout => 300);
+                    # FIXME launching the installer sometimes fails on KDE
+                    # https://bugzilla.redhat.com/show_bug.cgi?id=2280840
+                    my $tries = 5;
+                    while ($tries) {
+                        $tries -= 1;
+                        assert_and_click("live_start_anaconda_icon", dclick => $dclick);
+                        last unless (check_screen "anaconda_select_install_lang", 180);
+                        die "Launching installer failed after 5 tries!" unless ($tries);
                     }
                 }
             }
