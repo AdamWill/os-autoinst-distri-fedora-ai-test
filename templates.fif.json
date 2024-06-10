@@ -1400,7 +1400,7 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-bios": 40
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -1433,7 +1433,7 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-bios": 40
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -1603,7 +1603,7 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-bios": 40
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -1690,7 +1690,7 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-bios": 40
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -2128,7 +2128,7 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-bios": 40
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
