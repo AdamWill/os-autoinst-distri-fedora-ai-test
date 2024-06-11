@@ -627,7 +627,7 @@ sub setup_repos {
         $udstring =~ s/_/,/;
     }
     else {
-        die "Neither ADVISORY_NVRS nor KOJITASK set! Don't know what to do" unless ($args{waonly});
+        die "Neither ADVISORY_NVRS nor KOJITASK set! Don't know what to do" unless (@was && ($args{waonly} || $tag || $copr));
     }
     my $cmd = "/usr/local/bin/setup_repos.py";
     # don't download updates if we're in workarounds-only mode or testing a tag or COPR
