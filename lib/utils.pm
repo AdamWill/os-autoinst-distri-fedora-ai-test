@@ -576,12 +576,12 @@ sub setup_repos {
         # according to the 'configs' arg
         assert_script_run 'printf "[openqa-testtag]\nname=openqa-testtag\nbaseurl=' . get_var("UPDATE_OR_TAG_REPO") . '/\ncost=2000\nenabled=' . $args{configs} . '\ngpgcheck=0\npriority=1\n" > /etc/yum.repos.d/openqa-testtag.repo';
         # write out the info files
-        assert_script_run 'dnf --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}" | sort -u > /mnt/updatepkgs.txt';
+        assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}\n" | sort -u | grep . > /mnt/updatepkgs.txt';
         # the | xargs here is a wacky trick that converts newlines to
-        # spaces - unlike rpm, dnf always puts every package on a new
+        # spaces - unlike rpm, dnf < 5 always puts every package on a new
         # line, which we don't want here
         # https://unix.stackexchange.com/a/110759
-        assert_script_run 'dnf --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{NAME} " | xargs > /mnt/updatepkgnames.txt';
+        assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{NAME} " | xargs > /mnt/updatepkgnames.txt';
     }
     my @was = get_workarounds($args{version});
     # bail if there are no workarounds:
