@@ -117,6 +117,11 @@ sub run {
             # for apply (only)
             wait_screen_change { click_lastmatch; };
             $n -= 1 if ($n > 1);
+            if (get_var("TAG") || get_var("COPR")) {
+                # we might get a 'download unsigned software' prompt
+                # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2246
+                click_lastmatch if (check_screen "desktop_package_tool_update_download_unsigned", 30);
+            }
             $tags = ['desktop_package_tool_update_apply'];
             next;
         }
@@ -133,6 +138,11 @@ sub run {
         # handle reboot confirm screen which pops up when user is
         # logged in (but don't fail if it doesn't as we're not testing
         # that)
+        if (get_var("TAG") || get_var("COPR")) {
+            # we might get a 'download unsigned software' prompt
+            # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2246
+            click_lastmatch if (check_screen "desktop_package_tool_update_download_unsigned", 5);
+        }
         if (check_screen 'gnome_reboot_confirm', 15) {
             send_key 'tab';
             send_key 'ret';

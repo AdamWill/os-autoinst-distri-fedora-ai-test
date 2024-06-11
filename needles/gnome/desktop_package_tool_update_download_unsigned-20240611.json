@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 469,
+      "ypos": 247,
+      "width": 89,
+      "height": 22,
+      "type": "match"
+    },
+    {
+      "xpos": 580,
+      "ypos": 550,
+      "width": 71,
+      "height": 19,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_package_tool_update_download_unsigned"
+  ]
+}
