@@ -23,13 +23,8 @@ sub run {
 
     # run the updater
     if ($desktop eq 'kde') {
-        # try and avoid double-typing issues, same way we do
-        # for apps_startstop test
-        wait_screen_change { send_key 'super'; };
-        wait_still_screen 3;
-        send_key "k";
-        wait_still_screen 5;
-        send_key "esc";
+        # try and avoid double-typing issues
+        kde_doublek_workaround;
         menu_launch_type('discover');
         # Wait for it to run and maximize it to make sure we see the
         # Updates entry

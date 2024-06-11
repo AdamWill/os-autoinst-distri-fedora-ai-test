@@ -34,6 +34,8 @@ sub connect_localhost {
         assert_screen("apps_run_terminal");
     }
     else {
+        # try and avoid double-typing issues
+        kde_doublek_workaround;
         menu_launch_type("konsole");
         assert_screen("konsole_runs");
         export_kde_vars();

@@ -9,14 +9,7 @@ use utils;
 sub run {
     my $self = shift;
     solidify_wallpaper;
-    # to try and avoid problems with kde grinding a lot on first
-    # attempt to do a menu_launch_type, let's do a throwaway one
-    # here before we snapshot
-    wait_screen_change { send_key 'super'; };
-    wait_still_screen 3;
-    send_key "k";
-    wait_still_screen 5;
-    send_key "esc";
+    kde_doublek_workaround;
 }
 
 sub test_flags {

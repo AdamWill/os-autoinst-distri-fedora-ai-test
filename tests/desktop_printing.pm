@@ -52,6 +52,10 @@ sub run {
     # give the desktop a few seconds to settle, we seem to be getting
     # a lot of mis-types in KDE if we do not, as of 2024-02
     wait_still_screen(3);
+    # On KDE, try and avoid double-typing issues
+    if ($desktop eq "kde") {
+        kde_doublek_workaround;
+    }
     # Let's open the terminal. We will use it to start the applications
     # as well as to check for the name of the printed file.
     menu_launch_type($term);
