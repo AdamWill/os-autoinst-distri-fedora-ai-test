@@ -1257,6 +1257,7 @@ sub advisory_check_nonmatching_packages {
     $timeout *= 2 if ($pkgs > 100);
     $timeout *= 2 if ($pkgs > 400);
     $timeout *= 2 if ($pkgs > 1600);
+    $timeout *= 2 if ($pkgs > 4800);
     my $wrapper = $args{wrapper};
     $rpmcmd = "$wrapper rpm" if ($wrapper);
     $timeout *= 2 if ($wrapper);
