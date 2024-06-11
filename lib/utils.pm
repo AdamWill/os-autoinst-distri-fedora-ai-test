@@ -576,7 +576,11 @@ sub setup_repos {
         # according to the 'configs' arg
         assert_script_run 'printf "[openqa-testtag]\nname=openqa-testtag\nbaseurl=' . get_var("UPDATE_OR_TAG_REPO") . '/\ncost=2000\nenabled=' . $args{configs} . '\ngpgcheck=0\npriority=1\n" > /etc/yum.repos.d/openqa-testtag.repo';
         # write out the info files
-        assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}\n" | sort -u | grep . > /mnt/updatepkgs.txt';
+        # -q avoids most progress spew into the output. grep -v testtag
+        # avoids some more. grep . filters empty lines, which we get
+        # with dnf < 5 since this queryformat template ends with \n for
+        # dnf >= 5
+        assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}\n" | sort -u | grep -v testtag | grep . > /mnt/updatepkgs.txt';
         # the | xargs here is a wacky trick that converts newlines to
         # spaces - unlike rpm, dnf < 5 always puts every package on a new
         # line, which we don't want here
