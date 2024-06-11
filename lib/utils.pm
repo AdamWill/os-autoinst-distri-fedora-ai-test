@@ -1256,6 +1256,7 @@ sub advisory_check_nonmatching_packages {
     my $pkgs = script_output "wc -l /mnt/updatepkgs.txt";
     $timeout *= 2 if ($pkgs > 100);
     $timeout *= 2 if ($pkgs > 400);
+    $timeout *= 2 if ($pkgs > 1600);
     my $wrapper = $args{wrapper};
     $rpmcmd = "$wrapper rpm" if ($wrapper);
     $timeout *= 2 if ($wrapper);
