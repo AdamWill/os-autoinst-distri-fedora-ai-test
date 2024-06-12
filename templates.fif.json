@@ -626,6 +626,8 @@
         "apps_startstop": {
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 40,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
