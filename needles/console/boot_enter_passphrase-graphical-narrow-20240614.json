@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 382,
+      "ypos": 287,
+      "width": 19,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "boot_enter_passphrase"
+  ]
+}
