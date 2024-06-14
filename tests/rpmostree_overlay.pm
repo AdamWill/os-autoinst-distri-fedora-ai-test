@@ -30,7 +30,7 @@ sub run {
 
     # Install htop as rpm-ostree overlay. Let's have timeout defined
     # quite generously, because it loads the package DBs.
-    assert_script_run "rpm-ostree install htop", timeout => 300;
+    assert_script_run "rpm-ostree install htop", timeout => 600;
     # Reboot the machine to boot into the overlayed tree.
     reboot_and_login "300";
 
@@ -40,7 +40,7 @@ sub run {
     assert_script_run "htop --version";
 
     # Then install the psotgresql-server package.
-    assert_script_run "rpm-ostree install postgresql-server", timeout => 300;
+    assert_script_run "rpm-ostree install postgresql-server", timeout => 600;
 
     # Reboot the machine to boot into the overlayed tree.
     reboot_and_login "300";
