@@ -7,6 +7,8 @@ sub run {
     my $self = shift;
     my $relnum = get_release_number;
     check_desktop;
+    # try and avoid double-typing issues
+    kde_doublek_workaround;
     menu_launch_type('terminal');
     assert_screen "apps_run_terminal";
     wait_still_screen(stilltime => 5, similarity_level => 42);
