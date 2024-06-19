@@ -11,7 +11,11 @@ sub run {
     # don't have any requirement for what background Rawhide uses.
     my $version = get_var('VERSION');
     my $rawrel = get_var('RAWREL');
-    assert_screen "${version}_background" if ($version ne "Rawhide" && $version ne $rawrel);
+    return unless ($version ne "Rawhide" && $version ne $rawrel);
+    # KDE shows a different version of the welcome center on major upgrades,
+    # which breaks this test
+    click_lastmatch if (get_var("DESKTOP") eq "kde" && get_var("ADVISORY_OR_TASK") && check_screen "kde_ok", 5);
+    assert_screen "${version}_background";
 }
 
 sub test_flags {
