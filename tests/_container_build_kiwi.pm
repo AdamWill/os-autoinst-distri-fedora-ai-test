@@ -119,7 +119,7 @@ sub run {
     my $imgspec = "localhost/fedora:${mockver}";
     validate_script_output "podman run ${imgspec} echo Hello-World", sub { m/Hello-World/ };
     # do advisory_check_nonmatching_packages inside the container
-    advisory_check_nonmatching_packages(wrapper => "podman run ${imgspec}");
+    advisory_check_nonmatching_packages(wrapper => "podman run --rm ${imgspec}");
     # wipe the temp file so it doesn't interfere with the same check
     # on the host
     assert_script_run "rm -f /tmp/installedupdatepkgs.txt";
