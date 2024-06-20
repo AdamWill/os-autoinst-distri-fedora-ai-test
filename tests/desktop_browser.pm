@@ -34,11 +34,11 @@ sub run {
     desktop_vt;
     if (get_var("DESKTOP") eq "i3") {
         x11_start_program("firefox");
-    } 
+    }
     else {
         send_key 'super';
         # wait out animations
-        wait_still_screen(stilltime=>4, similarity_level=>45);
+        wait_still_screen(stilltime => 4, similarity_level => 45);
         assert_and_click 'browser_launcher';
     }
     unless (check_screen 'browser', 45) {

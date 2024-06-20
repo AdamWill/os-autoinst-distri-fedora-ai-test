@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 762,
+      "ypos": 4,
+      "width": 51,
+      "height": 12,
+      "type": "match"
+    },
+    {
+      "xpos": 870,
+      "ypos": 23,
+      "width": 67,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_mousepad"
+  ]
+}

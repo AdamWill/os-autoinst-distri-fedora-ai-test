@@ -814,11 +814,22 @@ sub console_initial_setup {
 sub handle_welcome_screen {
     # handle the 'welcome' screen on GNOME and KDE since F38. shared
     # in a few places
-    if (check_screen "getting_started", 45) {
+    my %args = @_;
+    my $timeout = $args{timeout} || 45;
+    if (check_screen "getting_started", $timeout) {
         if (get_var("DESKTOP") eq "kde") {
             # just closing it seems to result in it running again on
             # next boot, so let's click Skip
             click_lastmatch;
+        }
+        elsif (get_var("DESKTOP") eq "i3") {
+            # Press enter to start config, then move one line down
+            # and press enter once more to confirm.
+            send_key("ret");
+            sleep(1);
+            send_key("down");
+            sleep(1);
+            send_key("ret");
         }
         else {
             send_key "alt-f4";
@@ -1083,7 +1094,6 @@ sub check_desktop {
     # close it if it's open.
     my %args = (
         timeout => 30,
-        no_firstlaunch_check => 0,
         @_
     );
     my $count = 5;
@@ -1111,34 +1121,11 @@ sub check_desktop {
         }
     }
 
-    if (get_var("DESKTOP") eq 'i3') {
-        my $version = get_var('VERSION');
-
-        # i3 launches pretty quickly, but sometimes we have to wait for the
-        # whole VM to launch
-        assert_screen("i3-bar", $args{timeout});
-        if ($version ne "Rawhide") {
-            assert_screen("${version}_background");
-        }
-
-        unless ($args{no_firstlaunch_check}) {
-            die "firstlaunch setup is present" if defined(check_screen('i3_firstlaunch_wizard'));
-        }
-    } else {
-        assert_screen "apps_menu_button", $args{timeout};
-        # GNOME 40 starts on the overview by default; for consistency with
-        # older GNOME and KDE, let's just close it
-        if (match_has_tag "apps_menu_button_active") {
-            wait_still_screen 3;
-            send_key "alt-f1";
-            assert_screen "apps_menu_button_inactive";
-        }
-    }
-
     if ($activematched) {
         # make sure we got to inactive after active
         die "never reached apps_menu_button_inactive!" unless (match_has_tag "apps_menu_button_inactive");
     }
+}
 
 sub quit_firefox {
     # Quit Firefox, handling the 'close multiple tabs' warning screen if
@@ -1398,22 +1385,23 @@ sub menu_launch_type {
     my $app = shift;
     # To overcome BZ2097208, let's move the mouse out of the way
     # and give the launcher some time to take the correct focus.
-    if (get_var("DESKTOP") eq "kde") {
-        diag("Moving the mouse away from the launcher.");
-        mouse_set(1, 1);
-    }
     if (get_var("DESKTOP") eq "i3") {
-        send_key(get_var("I3_MODIFIER", 'alt') . "-d");
-    } else {
+        send_key("alt-d");
+    }
+    else {
+        if (get_var("DESKTOP") eq "kde") {
+            diag("Moving the mouse away from the launcher.");
+            mouse_set(1, 1);
+        }
         wait_screen_change { send_key 'super'; };
         # srsly KDE y u so slo
         wait_still_screen 3;
+        type_very_safely $app;
+        # Wait for KDE to place focus correctly.
+        wait_still_screen 2;
+        send_key 'ret';
+        wait_still_screen 3;
     }
-    type_very_safely $app;
-    # Wait for KDE to place focus correctly.
-    wait_still_screen 2;
-    send_key 'ret';
-    wait_still_screen 3;
 }
 
 sub tell_source {
@@ -1669,7 +1657,7 @@ sub solidify_wallpaper {
     }
     elsif ($desktop eq "gnome") {
         # Start the terminal to set up backgrounds.
-        menu_launch_type "terminal";
+        menu_launch_type("terminal");
         # wait to be sure it's fully open
         wait_still_screen(stilltime => 5, similarity_level => 38);
         # When the application opens, run command in it to set the background to black

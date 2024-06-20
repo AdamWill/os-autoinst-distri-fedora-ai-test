@@ -6,12 +6,6 @@ use i3;
 
 our $desktop = get_var("DESKTOP");
 our $syspwd = get_var("USER_PASSWORD") || "weakpassword";
-our $term = "terminal";
-if ($desktop eq "kde") {
-    $term = "konsole";
-} elsif ($desktop eq "i3") {
-    $term = "i3-sensible-terminal";
-}
 
 sub type_password {
     # Safe typing prolongs the operation terribly.
@@ -42,19 +36,13 @@ sub adduser {
         assert_script_run "chage --lastday 0 $login";
     }
     assert_script_run "grep $login /etc/passwd";
-    # Disable Gnome initial setup on accounts when testing
-    # inside Gnome.
-    if ($desktop eq "gnome") {
-        assert_script_run "mkdir /home/$login/.config";
-        # gnome-initial-setup-done is obsolete from F34 onwards, can be removed after F33 EOL
-        assert_script_run "echo 'yes' >> /home/$login/.config/gnome-initial-setup-done";
-    } 
-    elsif ($desktop eq "i3") {
-        create_user_i3_config(login => $login);
-    }
-
-    if ($desktop eq "gnome") {
-        assert_script_run "chown -R $login.$login /home/$login/.config";
+    # Create Config file for $login.
+    if ($desktop eq "i3") {
+        assert_script_run("mkdir -p /home/$login/.config/i3/");
+        # ensure that no alias of cp prevents an existing config from being overwritten
+        assert_script_run("/usr/bin/cp -f /etc/i3/config /home/$login/.config/i3/config");
+        assert_script_run("sed -i '/i3-config-wizard/d' /home/$login/.config/i3/config");
+        assert_script_run "chown -R $login:$login /home/$login/.config";
         assert_script_run "restorecon -vr /home/$login/.config";
     }
 }
@@ -62,7 +50,8 @@ sub adduser {
 sub lock_screen {
     if ($desktop eq "i3") {
         x11_start_program("i3lock");
-    } else {
+    }
+    else {
         # Click on buttons to lock the screen.
         assert_and_click "system_menu_button";
         if ($desktop eq "kde") {
@@ -82,18 +71,16 @@ sub login_user {
     my $user = $args{user};
     my $password = $args{password};
     my $method = $args{method};
-    if (!check_screen "login_$user" || ($desktop eq 'i3')) {
+    if (($method ne 'unlock' && !check_screen "login_$user") || $desktop eq "i3") {
         # Sometimes, especially in SDDM, we do not get the user list
-        # but rather a "screensaver" screen for the DM. If this is the
-        # case, hit Escape to bring back the user list.
-        # We do want to skip this with lightdm though, as we would then deselect
-        # the password entry field
-        send_key "esc";
+        # but rather a "screensaver" screen for the DM.
+        # We send the Esc key to come back to the login screen.
+        send_key('esc');
         wait_still_screen(stilltime => 5, similarity_level => 45);
     }
     if ($method ne "unlock") {
         # on lightdm we have to open the drop down menu to get to the user selection
-        if (check_screen('lightdm_login_screen')) {
+        if ($desktop eq "i3") {
             assert_and_click('lightdm_user_selection');
         }
         # When we do not just want to unlock the screen, we need to select a user.
@@ -111,20 +98,20 @@ sub login_user {
         # of password typing.
         type_very_safely "$password\n";
     }
-    if ($desktop eq "kde") {
-        click_lastmatch if (check_screen "getting_started");
-    }
-    if (get_var('DESKTOP') ne 'i3') {
-        type_very_safely "$password\n";
-    } 
-    else {
+    if (get_var('DESKTOP') eq 'i3') {
         # use essentially type_very_safely, but without wait_screen_change being
         # set, because the i3lock screen does not change enough when typing a
         # character and that just causes huge delays to unlock the screen
         type_string("$password\n", max_interval => 1);
     }
+    else {
+        type_very_safely "$password\n";
+    }
     check_desktop(timeout => 60) if ($args{checklogin});
     wait_still_screen(stilltime => 5, similarity_level => 45);
+    if ($desktop eq "kde") {
+        click_lastmatch if (check_screen "getting_started");
+    }
 }
 
 sub check_user_logged_in {
@@ -136,15 +123,15 @@ sub check_user_logged_in {
     # Reading the login name from the terminal prompt seems to be
     # the most reliable thing to do.
     if ($desktop eq "gnome") {
-        menu_launch_type $term;
+        menu_launch_type("terminal");
         wait_still_screen 2;
         $exitkey = "alt-f4";
-    } elsif ($desktop eq "i3") {
-        my $mod = get_i3_modifier();
-        send_key("$mod-ret");
+    }
+    elsif ($desktop eq "i3") {
+        send_key("alt-ret");
         assert_screen("apps_run_terminal");
         assert_script_run('[ $(whoami) = "' . "$user\" ]");
-        wait_screen_change { send_key("$mod-shift-q"); };
+        wait_screen_change { send_key("alt-shift-q"); };
         return;
     }
     # With KDE, the user is shown in the main menu, so let us just
@@ -160,8 +147,7 @@ sub check_user_logged_in {
 
 sub logout_user {
     if ($desktop eq "i3") {
-        my $mod = get_i3_modifier();
-        send_key("$mod-shift-e");
+        send_key("alt-shift-e");
         assert_and_click("i3-logout-bar");
         assert_screen("graphical_login_input");
     } else {
@@ -195,38 +181,27 @@ sub switch_user {
     }
 }
 
-sub reboot_system_i3 {
-    # we are still in i3 if the bar is visible
-    if (check_screen('i3-bar')) {
-        logout_user();
-    }
-    assert_and_click('lightdm_power_menu');
-    assert_and_click('lightdm_power_menu-reboot');
-    assert_and_click('lightdm_power_menu-reboot-confirm');
-    boot_to_login_screen();
-}
-
 sub reboot_system {
     if ($desktop eq 'i3') {
-        reboot_system_i3();
-        return;
+        # we are still in i3 if the bar is visible
+        if (check_screen('i3-bar')) {
+            logout_user();
+        }
+        assert_and_click('lightdm_power_menu');
+        assert_and_click('lightdm_power_menu-reboot');
+        assert_and_click('lightdm_power_menu-reboot-confirm');
     }
 
     # Reboots the system and handles everything until the next GDM screen.
-    if (check_screen "system_menu_button") {
+    else {
         # In a logged in desktop, we access power options through system menu
         assert_and_click "system_menu_button";
-        # In KDE since F34, reboot entry is right here, otherwise we need to
+        # In KDE reboot entry is right here, on GNOME we need to
         # enter some kind of power option submenu
         assert_screen ["power_entry", "reboot_entry"];
         click_lastmatch;
         assert_and_click "reboot_entry" if (match_has_tag("power_entry"));
         assert_and_click "restart_confirm";
-    }
-    # When we are outside KDE (not logged in), the only way to reboot is to click
-    # the reboot icon.
-    else {
-        assert_and_click "reboot_icon";
     }
     boot_to_login_screen();
 }
@@ -320,18 +295,12 @@ sub run {
     reboot_system();
 
     # Try to log in with either account, intentionally entering the wrong password.
-    login_user(user=>"jack", password=>"wrongpassword", checklogin=>0);
+    login_user(user => "jack", password => "wrongpassword", checklogin => 0);
     my $relnum = get_release_number;
-    if (($desktop eq "gnome" && $relnum < 34) || $desktop eq 'i3') {
-        # In GDM before F34 or lightdm (used by i3), a message is shown about an
-        # unsuccessful login and it can be asserted, so let's do it. In SDDM and
-        # GDM F34+, there is also a message, but it is only displayed for a
-        # short moment and the assertion fails here, so we will skip the
-        # assertion.  Not being able to login in with a wrong password is enough
-        # here.
+    if ($desktop eq 'i3') {
+        # In LightDM (used by i3), a message is shown about an
+        # unsuccessful login and it can be asserted, so let's do it.
         assert_screen "login_wrong_password";
-        # don't send escape in lightdm, it does nothing there
-        send_key 'esc' unless $desktop eq 'i3';
     }
     send_key 'esc' unless (check_screen "login_jim");
 

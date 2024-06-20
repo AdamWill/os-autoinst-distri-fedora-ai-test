@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 659,
+      "ypos": 428,
+      "width": 65,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "lightdm_power_menu-shutdown-confirm"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 720,
+      "type": "match",
+      "ypos": 58,
+      "width": 74,
+      "height": 35
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "i3_dunst_foo_notification"
+  ]
+}

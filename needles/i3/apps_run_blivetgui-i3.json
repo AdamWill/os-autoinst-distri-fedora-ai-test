@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 555,
+      "ypos": 24,
+      "width": 38,
+      "height": 17,
+      "type": "match"
+    },
+    {
+      "xpos": 513,
+      "ypos": 3,
+      "width": 64,
+      "height": 13,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_blivetgui"
+  ]
+}

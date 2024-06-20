@@ -24,6 +24,8 @@
   ],
   "properties": [],
   "tags": [
-    "i3-bar"
+    "i3-bar",
+    "apps_menu_button",
+    "apps_menu_button_inactive"
   ]
 }

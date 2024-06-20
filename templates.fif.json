@@ -527,7 +527,7 @@
             "machine": "bios",
             "product": "fedora-KDE-live-iso-x86_64-*"
         },
-        "fedora-i3-live-x86_64-*-uefi": {
+        "fedora-i3-live-x86_64-*-bios": {
             "machine": "uefi",
             "product": "fedora-i3-live-x86_64*"
         },
@@ -654,8 +654,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
                 "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-i3-live-x86_64-*-64bit": 40
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -688,7 +687,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
-                "fedora-i3-live-x86_64-*-64bit": 20
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -722,7 +721,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22,
-                "fedora-i3-live-x86_64-*-64bit": 20
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -751,7 +750,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22,
-                "fedora-i3-live-x86_64-*-64bit": 20
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -780,7 +779,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42,
-                "fedora-i3-live-x86_64-*-64bit": 40
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -814,8 +813,8 @@
                 "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
-                "fedora-Workstation-raw_xz-raw.xz-aarch65-*-aarch64": 42,
-                "fedora-i3-live-x86_64-*-64bit": 40
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42,
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -849,7 +848,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42,
-                "fedora-i3-live-x86_64-*-64bit": 40
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -883,7 +882,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42,
-                "fedora-i3-live-x86_64-*-64bit": 40
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -944,7 +943,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22,
-                "fedora-i3-live-x86_64-*-64bit": 50
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -960,7 +959,7 @@
                 "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
-                "fedora-i3-live-x86_64-*-64bit": 30
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -994,7 +993,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22,
-                "fedora-i3-live-x86_64-*-64bit": 20
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1009,7 +1008,7 @@
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
                 "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
-                "fedora-i3-live-x86_64-*-64bit": 30
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "ENTRYPOINT": "desktop_notifications"
@@ -1023,7 +1022,7 @@
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
                 "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 70,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-i3-live-x86_64-*-64bit": 30
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1059,7 +1058,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22,
-                "fedora-i3-live-x86_64-*-64bit": 20
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1079,7 +1078,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22,
-                "fedora-i3-live-x86_64-*-64bit": 30
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1432,7 +1431,7 @@
         },
         "i3_tilling": {
             "profiles": {
-                "fedora-i3-live-x86_64-*-64bit": 30
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1701,11 +1700,7 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-bios": 51,
                 "fedora-Workstation-live-iso-x86_64-*-bios": 11,
                 "fedora-Server-boot-iso-x86_64-*-64bit": 10,
-                "fedora-Server-boot-iso-x86_64-*-uefi": 11,
-                "fedora-Server-dvd-iso-x86_64-*-uefi": 11,
-                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-uefi": 51,
-                "fedora-Workstation-live-iso-x86_64-*-uefi": 11,
-                "fedora-i3-live-x86_64-*-64bit": 10
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "PACKAGE_SET": "default",
@@ -1727,7 +1722,7 @@
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 10,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
                 "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60,
-                "fedora-i3-live-x86_64-*-64bit": 20
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "PACKAGE_SET": "default",
@@ -2571,7 +2566,7 @@
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-Workstation-upgrade-aarch64-*-aarch64": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42,
-                "fedora-i3-live-x86_64-*-64bit": 50
+                "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",

@@ -1,0 +1,26 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 180,
+      "height": 17,
+      "ypos": 7,
+      "xpos": 4
+    },
+    {
+      "click_point": {
+        "ypos": 7.5,
+        "xpos": 36.5
+      },
+      "type": "match",
+      "ypos": 9,
+      "width": 73,
+      "xpos": 891,
+      "height": 15
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "i3-logout-bar"
+  ]
+}

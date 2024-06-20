@@ -1,0 +1,31 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 16,
+      "height": 17,
+      "ypos": 748,
+      "xpos": 2
+    },
+    {
+      "height": 14,
+      "ypos": 751,
+      "xpos": 408,
+      "type": "match",
+      "width": 15
+    },
+    {
+      "height": 14,
+      "xpos": 460,
+      "ypos": 750,
+      "width": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "i3-bar",
+    "apps_menu_button",
+    "apps_menu_button_inactive"
+  ]
+}

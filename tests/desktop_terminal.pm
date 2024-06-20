@@ -6,10 +6,16 @@ use utils;
 sub run {
     my $self = shift;
     my $relnum = get_release_number;
+    my $desktop = get_var("DESKTOP", "gnome");
     check_desktop;
     # try and avoid double-typing issues
-    kde_doublek_workaround(key => 't') if (get_var("DESKTOP") eq "kde");
-    menu_launch_type('terminal');
+    kde_doublek_workaround(key => 't') if ($desktop eq "kde");
+    if ($desktop eq "i3") {
+        send_key("alt-ret");
+    }
+    else {
+        menu_launch_type('terminal');
+    }
     assert_screen "apps_run_terminal";
     wait_still_screen(stilltime => 5, similarity_level => 42);
     # need to be root

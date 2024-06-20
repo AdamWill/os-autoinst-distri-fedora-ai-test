@@ -6,41 +6,44 @@ use i3;
 
 
 sub run {
-    my $desktop = get_var("DESKTOP");
-    my $mod = get_i3_modifier();
-    die "This test is only for the i3 desktop" unless $desktop eq "i3";
+    my $password = get_var('USER_PASSWORD', 'weakpassword');
 
     # launch a terminal first
-    send_key("$mod-ret");
+    send_key("alt-ret");
     assert_screen("apps_run_terminal");
 
-    # start pavucontrol, mousepad and check that they are split on the screen
-    x11_start_program("pavucontrol");
+    # start blivet_gui, mousepad and check that they are split on the screen
+    x11_start_program("blivet-gui");
+    wait_still_screen(2);
+    type_very_safely("$password\n");
+    assert_screen('apps_run_blivetgui');
     x11_start_program("mousepad");
+    assert_screen('apps_run_mousepad');
     assert_screen("i3_windows_split");
 
     # switch to tabbed layout
-    send_key("$mod-w");
+    send_key("alt-w");
     assert_screen("i3_windows_tabbed");
-    send_key_until_needlematch("apps_run_terminal", "$mod-j");
+    send_key_until_needlematch("apps_run_terminal", "alt-j");
+    wait_still_screen(2);
 
-    send_key("$mod-;");
-    assert_screen("audio_mixer");
+    send_key("alt-;");
+    assert_screen("blivet_gui_application");
 
-    send_key("$mod-;");
+    send_key("alt-;");
     assert_screen("mousepad_no_document_open");
 
     # switch to stacked layout
-    send_key("$mod-s");
+    send_key("alt-s");
     assert_screen("i3_windows_stacked");
 
-    send_key_until_needlematch("apps_run_terminal", "$mod-k");
+    send_key_until_needlematch("apps_run_terminal", "alt-k");
 
-    send_key("$mod-l");
+    send_key("alt-l");
     assert_screen("mousepad_no_document_open");
 
-    send_key("$mod-l");
-    assert_screen("audio_mixer");
+    send_key("alt-l");
+    assert_screen("blivet_gui_application");
 }
 
 1;

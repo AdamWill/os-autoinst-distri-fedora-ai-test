@@ -5,7 +5,6 @@ use testapi;
 use utils;
 use tapnet;
 use anaconda;
-use i3;
 
 sub _handle_incomplete_hub {
     if (match_has_tag "anaconda_main_hub_keyboard_layout_incomplete") {
@@ -150,9 +149,15 @@ sub run {
                 my $count = 5;
                 # i3 got no real desktop, so we need to launch liveinst via the launcher
                 if (get_var('DESKTOP') eq 'i3') {
-                    firstlaunch_setup(timeout => 300);
+                    if (check_screen("getting_started", timeout => 300)) {
+                        send_key("esc");
+                    }
                     x11_start_program("liveinst");
-                } else {
+                    # We have launched Anaconda, so we set $launched to skip
+                    # starting it again later in the general part of the code.
+                    $launched = 1;
+                }
+                else {
                     while ($count > 0) {
                         $count -= 1;
                         assert_screen ["live_start_anaconda_icon", "apps_menu_button_active", "next_button"], 300;

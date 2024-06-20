@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 21,
+      "ypos": 666,
+      "xpos": 634,
+      "width": 19
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "leave_button"
+  ]
+}

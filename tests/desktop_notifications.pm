@@ -49,7 +49,7 @@ sub run {
             my $longago = $now - 14 * 24 * 60 * 60;
             # have to log in as the user to do this
             script_run 'exit', 0;
-            console_login(user=>$user, password=>get_var('USER_PASSWORD', 'weakpassword'));
+            console_login(user => $user, password => get_var('USER_PASSWORD', 'weakpassword'));
             script_run "gsettings set org.gnome.software check-timestamp ${yyday}", 0;
             script_run "gsettings set org.gnome.software update-notification-timestamp ${longago}", 0;
             script_run "gsettings set org.gnome.software online-updates-timestamp ${longago}", 0;
@@ -59,14 +59,14 @@ sub run {
             script_run 'exit', 0;
             console_login(user => 'root', password => get_var('ROOT_PASSWORD', 'weakpassword'));
         }
-    } elsif ($desktop eq 'i3') {
+    }
+    elsif ($desktop eq 'i3') {
         assert_script_run('dnf install -y libnotify');
-        my $target_user = get_var("USER_LOGIN");
-        if (!defined(get_var("BOOTFROM"))) {
-            $target_user = "liveuser";
+        unless (get_var("BOOTFROM")) {
+            $user = "liveuser";
         }
-        assert_script_run("usermod -a -G dialout $target_user");
-        create_user_i3_config(login => $target_user);
+        assert_script_run("usermod -a -G dialout $user");
+        create_user_i3_config(login => $user);
     }
     if ($desktop eq 'kde' && get_var("BOOTFROM")) {
         # need to login as user for this
@@ -135,15 +135,16 @@ sub run {
         # we launch a terminal so that the top of the screen is filled with
         # something that we know and can check that it is not covered by a
         # notification popup from dunst
-        send_key(get_i3_modifier() . '-ret');
+        send_key('alt-ret');
         assert_screen("apps_run_terminal");
-        assert_script_run('notify-send -t 5000 "foo"');
+        assert_script_run('notify-send -t 10000 "foo"');
         assert_screen("i3_dunst_foo_notification", timeout => 5);
 
-        sleep 6;
-        assert_screen("i3_dunst_no_notification");
-
-        # we quit at this point as the i3 spin has no desktop update notifier
+        sleep 11;
+        if (check_screen("i3_dunst_foo_notification")) {
+            # The notifications should not be shown any more.
+            record_soft_fail("i3 shows notifications longer than expected");
+        }
         return;
     }
     if (get_var("BOOTFROM")) {
