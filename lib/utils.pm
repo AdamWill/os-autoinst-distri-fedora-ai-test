@@ -442,37 +442,15 @@ sub disable_firefox_studies {
     # https://bugzilla.mozilla.org/show_bug.cgi?id=1703903
     assert_script_run 'mkdir -p $(rpm --eval %_libdir)/firefox/distribution';
     assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true, "OfferToSaveLogins": false, "OverrideFirstRunPage": "", "OverridePostUpdatePage": ""}}\' > $(rpm --eval %_libdir)/firefox/distribution/policies.json';
-    # Now create a preferences override file that disables all sorts
-    # of annoying onboarding screens and "helpful" features that mess
-    # up our tests
+    # Now create a preferences override file that disables the
+    # quicksuggest and total cookie protection onboarding screens
     # see https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig
     # for why this wacky pair of files with required values is needed
     # and https://bugzilla.mozilla.org/show_bug.cgi?id=1703903 again
-    # for some of the actual values, the rest I stole from SUSE
-    # `prepare_firefox_autoconfig`
+    # for the actual values
     assert_script_run 'mkdir -p $(rpm --eval %_libdir)/firefox/browser/defaults/preferences';
-    type_string(q{cat <<EOF > $(rpm --eval %_libdir)/firefox/browser/defaults/preferences/openqa-overrides.js
-// required comment(?)
-pref("general.config.filename", "openqa-overrides.cfg");
-pref("general.config.obscure_value", 0);
-EOF
-});
-    type_string(q{cat <<EOF > $(rpm --eval %_libdir)/firefox/openqa-overrides.cfg
-// Mandatory comment
-// https://firefox-source-docs.mozilla.org/browser/components/newtab/content-src/asrouter/docs/first-run.html
-pref("app.normandy.enabled", false);
-pref("browser.aboutwelcome.enabled", false);
-pref("browser.discovery.enabled", false);
-pref("browser.messaging-system.whatsNewPanel.enabled", false);
-pref("browser.startup.upgradeDialog.enabled", false);
-pref("browser.uitour.enabled", false);
-pref("browser.urlbar.quicksuggest.shouldShowOnboardingDialog", false);
-pref("datareporting.policy.firstRunURL", "");
-pref("messaging-system.rsexperimentloader.enabled", false);
-pref("privacy.restrict3rdpartystorage.rollout.enabledByDefault", false);
-pref("trailhead.firstrun.branches", "nofirstrun-empty");
-EOF
-});
+    assert_script_run 'printf "// required comment\npref(\'general.config.filename\', \'openqa-overrides.cfg\');\npref(\'general.config.obscure_value\', 0);\n" > $(rpm --eval %_libdir)/firefox/browser/defaults/preferences/openqa-overrides.js';
+    assert_script_run 'printf "// required comment\npref(\'browser.urlbar.quicksuggest.shouldShowOnboardingDialog\', false);\npref(\'privacy.restrict3rdpartystorage.rollout.enabledByDefault\', false);\n" > $(rpm --eval %_libdir)/firefox/openqa-overrides.cfg';
 }
 
 sub repos_mirrorlist {
