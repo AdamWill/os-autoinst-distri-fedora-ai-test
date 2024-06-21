@@ -127,9 +127,12 @@ sub run {
                 # we direct the installer to virtio-console1, and use
                 # virtio-console as a root console
                 select_console('user-virtio-console');
-                unless (wait_serial "Use text mode", timeout => 120) { die "Anaconda has not started."; }
-                type_string "2\n";
-                unless (wait_serial "Installation") { die "Text version of Anaconda has not started."; }
+                my $match = wait_serial ["Use text mode", "Installation"], timeout => 120;
+                 die "Anaconda has not started." unless ($match);
+                if ($match =~ m/Use text mode/) {
+                    type_string "2\n";
+                    die "Text version of Anaconda has not started." unless (wait_serial "Installation");
+                }
             }
             else {
                 assert_screen ["anaconda_use_text_mode", "anaconda_main_hub_text"], 300;
