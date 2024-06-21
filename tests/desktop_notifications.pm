@@ -131,6 +131,10 @@ sub run {
             assert_and_click 'desktop_expand_systray';
             assert_and_click 'desktop_systray_notifications';
         }
+        # In F32+ we may get an 'akonadi did something' message
+        if (check_screen 'akonadi_migration_notification', 5) {
+            click_lastmatch;
+        }
     }
     if (get_var("BOOTFROM")) {
         # we should see an update notification and no others
