@@ -132,10 +132,11 @@ sub run {
                 unless (wait_serial "Installation") { die "Text version of Anaconda has not started."; }
             }
             else {
-                assert_screen "anaconda_use_text_mode", 300;
-                type_string "2\n";
-                # wait for text version of Anaconda main hub
-                assert_screen "anaconda_main_hub_text", 300;
+                assert_screen ["anaconda_use_text_mode", "anaconda_main_hub_text"], 300;
+                if (match_has_tag "anaconda_use_text_mode") {
+                    type_string "2\n";
+                    assert_screen "anaconda_main_hub_text", 60;
+                }
             }
         }
         else {
