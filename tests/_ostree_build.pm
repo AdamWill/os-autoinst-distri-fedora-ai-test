@@ -52,7 +52,10 @@ sub run {
     # Just add them to all config files, as the names change a lot
     assert_script_run 'sed -i -e "s,repos:,' . $repl . ',g" *.yaml';
     # ensure python3-dnf is in the built ostree for _advisory_post
-    assert_script_run 'sed -i -e "s,packages:,packages:\n  - python3-dnf,g" *-packages.yaml';
+    # f41+
+    script_run 'sed -i -e "s,packages:,packages:\n  - python3-dnf,g" *-packages.yaml';
+    # <f41
+    script_run 'sed -i -e "s,packages:,packages:\n  - python3-dnf,g" *-pkgs.yaml';
     # change the ref name to a custom one (so we can test rebasing to
     # the 'normal' ref later)
     assert_script_run 'sed -i -e "s,ref: fedora/,ref: fedora-openqa/,g" *.yaml';
