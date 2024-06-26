@@ -580,7 +580,7 @@ sub setup_repos {
         # avoids some more. grep . filters empty lines, which we get
         # with dnf < 5 since this queryformat template ends with \n for
         # dnf >= 5
-        assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}\n" | sort -u | grep -v testtag | grep . > /mnt/updatepkgs.txt';
+        assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}\n" --arch=' . $arch . ',noarch | sort -u | grep -v testtag | grep . > /mnt/updatepkgs.txt';
         # the | xargs here is a wacky trick that converts newlines to
         # spaces - unlike rpm, dnf < 5 always puts every package on a new
         # line, which we don't want here
