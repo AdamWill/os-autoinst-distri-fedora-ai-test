@@ -1,15 +1,16 @@
 {
   "area": [
     {
+      "xpos": 352,
+      "ypos": 123,
       "type": "match",
-      "height": 20,
-      "ypos": 160,
-      "xpos": 165,
-      "width": 113
+      "height": 19,
+      "width": 70
     }
   ],
   "properties": [],
   "tags": [
+    "apps_run_monitor",
     "systemmonitor_runs"
   ]
 }
