@@ -24,7 +24,7 @@ sub run {
 }
 
 sub test_flags {
-    return {};
+    return {always_rollback => 1};
 }
 
 1;
