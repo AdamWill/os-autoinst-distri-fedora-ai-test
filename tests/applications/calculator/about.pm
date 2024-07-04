@@ -17,7 +17,12 @@ sub run {
     # Check that it is shown.
     assert_screen("calc_about_shown");
     # Click on the Credits button and check that it shows.
-    assert_and_click("gnome_button_credits");
+    unless (check_screen("gnome_button_credits", 30)) {
+        send_key("pgdn");
+        assert_screen("gnome_button_credits", 15);
+        record_soft_failure("https://gitlab.gnome.org/GNOME/gnome-calculator/-/issues/419");
+    }
+    click_lastmatch;
     assert_screen("calc_credits_shown");
 }
 
