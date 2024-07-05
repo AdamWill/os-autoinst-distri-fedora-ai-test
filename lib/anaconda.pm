@@ -34,13 +34,13 @@ sub select_disks {
     assert_and_click "anaconda_main_hub_install_destination";
 
     # this is awkward, but on the install_repository_hd_variation test,
-    # we have two disks but on F39+ anaconda knows we're using one of
-    # them as an install source and 'protects' it (doesn't show it on
-    # INSTALLATION DESTINATION), so we need to go down the single disk
-    # branch in that case. Once F38 is EOL we could potentially tweak
-    # this to use a dedicated var or something
+    # we have two disks but in F39 and F40 anaconda knows we're using
+    # one of them as an install source and 'protects' the entire disk
+    # (doesn't show it on INSTALLATION DESTINATION), so we need to go
+    # down the single disk branch in that case. On F41+ it protects
+    # only the partition being used as a source
     my $relnum = get_release_number;
-    if (get_var('NUMDISKS') > 1 && !(get_var('TEST') eq 'install_repository_hd_variation' && $relnum > 38)) {
+    if (get_var('NUMDISKS') > 1 && !(get_var('TEST') eq 'install_repository_hd_variation' && $relnum < 41)) {
         # Multi-disk case. Select however many disks the test needs. If
         # $disks is 0, this will do nothing, and 0 disks will be selected.
         for my $n (1 .. $args{disks}) {
