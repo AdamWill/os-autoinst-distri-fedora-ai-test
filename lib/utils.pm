@@ -474,7 +474,7 @@ sub get_setup_repos_script {
 sub get_workarounds {
     my $version = shift || get_var("VERSION");
     my %workarounds = (
-        "39" => [],
+        "39" => ["FEDORA-2024-442827752b"],
         "40" => [],
         "41" => [],
     );
