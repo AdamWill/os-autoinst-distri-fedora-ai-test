@@ -474,7 +474,6 @@ sub get_setup_repos_script {
 sub get_workarounds {
     my $version = shift || get_var("VERSION");
     my %workarounds = (
-        "38" => [],
         "39" => [],
         "40" => [],
         "41" => [],
