@@ -1,0 +1,34 @@
+{
+  "area": [
+    {
+      "ypos": 42,
+      "xpos": 241,
+      "height": 55,
+      "type": "match",
+      "width": 96
+    },
+    {
+      "ypos": 568,
+      "xpos": 451,
+      "height": 71,
+      "type": "match",
+      "width": 91
+    },
+    {
+      "type": "match",
+      "width": 90,
+      "ypos": 744,
+      "xpos": 378,
+      "height": 22
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "https://gitlab.gnome.org/GNOME/gnome-maps/-/issues/693"
+    }
+  ],
+  "tags": [
+    "maps_info_poysdorf"
+  ]
+}

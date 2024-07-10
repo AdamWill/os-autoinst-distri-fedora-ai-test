@@ -13,7 +13,7 @@ sub run {
     assert_and_click("gnome_burger_menu");
     assert_and_click("maps_menu_export");
     # wait for the export screen to appear and settle
-    assert_screen("maps_button_export");
+    assert_and_click("maps_button_export");
     wait_still_screen(2);
 
     # Rename the file and export it.
@@ -21,7 +21,7 @@ sub run {
     # just going to rename the proposed file name.
     send_key("ctrl-a");
     type_very_safely("exported-map.png");
-    assert_and_click("maps_button_export");
+    assert_and_click("maps_button_save");
 
     # After the map has been exported, we will open
     # it in an image viewer to see that it is correct.

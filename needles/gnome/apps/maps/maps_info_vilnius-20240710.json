@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 98,
+      "type": "match",
+      "xpos": 381,
+      "ypos": 187,
+      "height": 60
+    },
+    {
+      "type": "match",
+      "width": 52,
+      "ypos": 101,
+      "xpos": 457,
+      "height": 36
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_info_vilnius"
+  ]
+}
