@@ -19,6 +19,10 @@ sub run {
     # Use the menu to switch on highlighting.
     assert_and_click("gnome_burger_menu");
     assert_and_click("gte_preferences_submenu");
+    # This fixes a problem where on smaller screens
+    # some options are hidden and we need to scroll
+    # to see them.
+    send_key_until_needlematch("gte_toggle_line_highlight", "tab", 20);
     assert_and_click("gte_toggle_line_highlight");
     # Dismiss the menu
     assert_and_click("gte_preferences_off");
@@ -33,6 +37,7 @@ sub run {
     # Display the side panel.
     assert_and_click("gnome_burger_menu");
     assert_and_click("gte_preferences_submenu");
+    send_key_until_needlematch("gte_toggle_side_panel", "tab", 20);
     assert_and_click("gte_toggle_side_panel");
     assert_and_click("gte_preferences_off");
     assert_screen "gte_side_panel_on";
@@ -40,6 +45,7 @@ sub run {
     # Display the grid.
     assert_and_click("gnome_burger_menu");
     assert_and_click("gte_preferences_submenu");
+    send_key_until_needlematch("gte_toggle_grid", "tab", 20);
     assert_and_click("gte_toggle_grid");
     assert_and_click("gte_preferences_off");
     assert_screen "gte_grid_on";
