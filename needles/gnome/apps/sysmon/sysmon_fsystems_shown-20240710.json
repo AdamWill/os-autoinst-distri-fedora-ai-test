@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 0,
+      "width": 148,
+      "height": 29,
+      "ypos": 217,
+      "type": "match"
+    },
+    {
+      "xpos": 589,
+      "ypos": 42,
+      "width": 113,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_fsystems_shown"
+  ]
+}
