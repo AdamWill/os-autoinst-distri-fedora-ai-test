@@ -35,6 +35,10 @@ sub run {
     # optional as it's not really part of the test
     script_run "dnf -y install sssd-tools", 220;
     script_run "sss_debuglevel 9";
+    # trigger a systemctl daemon reload now to try and avoid it being
+    # sometimes triggered during realm package install and causing
+    # cockpit to restart and breaking the test
+    script_run "systemctl daemon-reload", 90;
     my $cockpitver = script_output 'rpm -q cockpit --queryformat "%{VERSION}\n"';
     # run firefox and login to cockpit
     # note: we can't use wait_screen_change, wait_still_screen or
