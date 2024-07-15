@@ -13,13 +13,25 @@ sub run {
     assert_and_click("gnome_burger_menu");
     assert_and_click("maps_menu_export");
 
-    # The Rawhide version is not the latest one, so
-    # this will only be valid for non Silverblue images.
-    # For Silverblue, check the else statement. When
-    # the newest version get into Silverblue, 
-    # the condition should be removed.
+    my $relnum = get_release_number;
+    # the export flow was changed in gnome-maps 47. Releases earlier
+    # than Rawhide and, for now, the flatpak build are still 46, so
+    # we use the older flow there
     # FIXME!
-    if (get_var('SUBVARIANT') ne 'Silverblue') {
+    if ($relnum < 41 || get_var('CANNED')) {
+        # old flow
+        # wait for the export screen to appear and settle
+        assert_screen('maps_button_export');
+        wait_still_screen(2);
+        # Rename the file and export it.
+        # The name entry field should have focus already, so we are
+        # just going to rename the proposed file name.
+        send_key('ctrl-a');
+        type_very_safely('exported-map.png');
+        assert_and_click('maps_button_export');
+    }
+    else {
+        # new flow
         # wait for the export screen to appear and settle
         assert_and_click("maps_button_export");
         wait_still_screen(2);
@@ -29,12 +41,6 @@ sub run {
         send_key("ctrl-a");
         type_very_safely("exported-map.png");
         assert_and_click("maps_button_save");
-    }
-    else {
-        assert_screen('maps_button_export');
-        send_key('ctrl-a');
-        type_very_safely('exported-map.png');
-        assert_and_click('maps_button_export');
     }
 
     # After the map has been exported, we will open
