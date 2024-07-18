@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "height": 28,
+      "width": 87,
+      "xpos": 357,
+      "ypos": 102,
+      "type": "match"
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "wtf why is this greyed out?"
+    }
+  ],
+  "tags": [
+    "anaconda_select_install_lang",
+    "ENV-DISTRI-fedora"
+  ]
+}
