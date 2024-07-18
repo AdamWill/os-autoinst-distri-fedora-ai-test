@@ -159,6 +159,10 @@ sub post_fail_hook {
         upload_logs "/var/tmp/imgbuild/program.log", failok => 1;
     }
 
+    if (get_var("TEST") eq "podman") {
+        upload_logs "/tmp/podman-bats.txt", failok => 1;
+    }
+
     if (get_var("ADVISORY_OR_TASK") && get_var("TEST") ne "install_default_update_netinst") {
         unless (get_var("TEST") eq "support_server" && get_var("VERSION") ne get_var("CURRREL")) {
             # For update tests, let's do the update package info log stuff,
