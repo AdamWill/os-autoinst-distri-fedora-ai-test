@@ -77,17 +77,6 @@
             },
             "version": "*"
         },
-        "fedora-updates-server-upgrade-aarch64-*": {
-            "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "updates-server-upgrade",
-            "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
-                "NUMDISKS": "2",
-                "RETRY": "1"
-            },
-            "version": "*"
-        },
         "fedora-updates-server-upgrade-ppc64le-*": {
             "arch": "ppc64le",
             "distri": "fedora",
@@ -499,28 +488,24 @@
         },
         "realmd_join_cockpit": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "realmd_join_cockpit_ad": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "realmd_join_sssd": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "realmd_join_sssd_ad": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
@@ -537,28 +522,24 @@
         },
         "server_cockpit_basic": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "server_cockpit_default": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "server_cockpit_updates": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "server_database_client": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
@@ -587,35 +568,30 @@
         },
         "server_remote_logging_client": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "server_remote_logging_server": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "server_role_deploy_database_server": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "server_role_deploy_domain_controller": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
         },
         "server_samba_domain_controller": {
             "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
                 "fedora-updates-server-ppc64le-*-ppc64le": 5,
                 "fedora-updates-server-x86_64-*-64bit": 5
             }
