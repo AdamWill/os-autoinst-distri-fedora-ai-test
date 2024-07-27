@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "height": 52,
+      "xpos": 432,
+      "width": 175,
+      "type": "match",
+      "ypos": 431
+    },
+    {
+      "height": 16,
+      "ypos": 633,
+      "width": 15,
+      "xpos": 210,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "getting_started"
+  ]
+}
