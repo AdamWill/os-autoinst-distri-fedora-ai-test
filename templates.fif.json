@@ -3026,7 +3026,7 @@
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP2REL%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%UP2REL%_server_5_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "upgrade_2_server_domain_controller",
@@ -3048,7 +3048,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%UP2REL%_server_4_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP2REL%_server_5_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -3062,7 +3062,7 @@
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP2REL%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%UP2REL%_server_5_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -3211,7 +3211,7 @@
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP1REL%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%UP1REL%_server_5_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "MAX_JOB_TIME": "10800",
                 "NICTYPE": "tap",
@@ -3234,7 +3234,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_f%UP1REL%_server_4_%ARCH%.qcow2",
+                "HDD_1": "disk_f%UP1REL%_server_5_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -3249,7 +3249,7 @@
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP1REL%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%UP1REL%_server_5_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "MAX_JOB_TIME": "10800",
                 "NICTYPE": "tap",

@@ -5,7 +5,7 @@
             "distri": "fedora",
             "flavor": "updates-container",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -16,7 +16,7 @@
             "distri": "fedora",
             "flavor": "updates-container",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -27,7 +27,7 @@
             "distri": "fedora",
             "flavor": "updates-container",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -60,7 +60,7 @@
             "distri": "fedora",
             "flavor": "updates-server",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -71,7 +71,7 @@
             "distri": "fedora",
             "flavor": "updates-server",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -102,7 +102,7 @@
             "distri": "fedora",
             "flavor": "updates-server",
             "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_4_%ARCH%.qcow2",
+                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
