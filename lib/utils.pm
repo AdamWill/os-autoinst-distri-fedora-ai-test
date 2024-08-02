@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround/;
 
 
 # We introduce this global variable to hold the list of applications that have
@@ -1235,6 +1235,27 @@ sub advisory_get_installed_packages {
     upload_logs "/mnt/testedpkgs.txt", failok => 1;
 }
 
+sub acnp_handle_output {
+    my ($ret, $wrapper, $fatal) = @_;
+    # handle output of updvercheck.py. Split out so the lorax
+    # tests can use the same logic
+    if ($ret == 2) {
+        record_soft_failure "Some update package(s) not installed, but this is probably OK, see script output";
+    }
+    if ($ret == 1 || $ret == 3) {
+        my $message = "Package(s) from update not installed when it should have been! See script output";
+        $message = "Script failed unexpectedly!" if ($ret == 1);
+        if ($fatal) {
+            set_var("_ACNMP_DONE", "1") unless $wrapper;
+            die $message;
+        }
+        else {
+            # if we're already in post_fail_hook, we don't want to die again
+            record_info $message;
+        }
+    }
+}
+
 sub advisory_check_nonmatching_packages {
     # For update tests (this only works if we've been through
     # _repo_setup_updates), figure out if we have a different version
@@ -1290,23 +1311,7 @@ sub advisory_check_nonmatching_packages {
     my $cmd = 'python3 ./updvercheck.py /mnt/updatepkgs.txt /tmp/installedupdatepkgs.txt';
     $cmd .= " $advisory" if ($advisory);
     my $ret = script_run $cmd;
-    # 2 is warnings only, 3 is problems, 1 means the script died in
-    # some other way (probably a bug)
-    if ($ret == 2) {
-        record_soft_failure "Some update package(s) not installed, but this is probably OK, see script output";
-    }
-    if ($ret == 1 || $ret == 3) {
-        my $message = "Package(s) from update not installed when it should have been! See script output";
-        $message = "Script failed unexpectedly!" if ($ret == 1);
-        if ($args{fatal}) {
-            set_var("_ACNMP_DONE", "1") unless $wrapper;
-            die $message;
-        }
-        else {
-            # if we're already in post_fail_hook, we don't want to die again
-            record_info $message;
-        }
-    }
+    acnp_handle_output($ret, $wrapper, $args{fatal});
 }
 
 sub select_rescue_mode {

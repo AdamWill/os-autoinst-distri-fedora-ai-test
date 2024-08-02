@@ -103,6 +103,15 @@ sub run {
     $cmd .= " --repo=/etc/yum.repos.d/openqa-testtag.repo" if ($tag || $copr);
     $cmd .= " ./results";
     assert_script_run $cmd, 9000;
+    # do a package version check on the packages installed to the
+    # installer environment - see
+    # https://pagure.io/releng/failed-composes/issue/6538#comment-917347
+    assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o updvercheck.py https://pagure.io/fedora-qa/os-autoinst-distri-fedora/raw/lorax-check-packages/f/updvercheck.py', timeout => 180;
+    my $advisory = get_var("ADVISORY");
+    my $cmd = 'python3 ./updvercheck.py /mnt/updatepkgs.txt pylorax.log';
+    $cmd .= " $advisory" if ($advisory);
+    my $ret = script_run $cmd;
+    acnp_handle_output($ret, 0, 1);
     # good to have the log around for checks
     upload_logs "lorax.log", failok => 1;
     assert_script_run "mv results/images/boot.iso ./${advortask}-${subv}-ostree-${arch}.iso";
