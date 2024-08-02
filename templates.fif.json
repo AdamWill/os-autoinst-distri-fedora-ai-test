@@ -1387,8 +1387,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "desktop_update_graphical",
-                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
-                "RETRY": 2
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "install_anaconda_text": {
