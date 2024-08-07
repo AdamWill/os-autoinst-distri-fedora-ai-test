@@ -14,6 +14,8 @@ sub run {
     # we need to install the check tool
     $self->root_console(tty => 3);
     script_run("loadkeys us");
+    # repo setup before using dnf
+    repo_setup();
     assert_script_run("dnf -y install fontquery");
     # and give the user tty perms for later
     assert_script_run("chmod 666 /dev/${serialdev}");
