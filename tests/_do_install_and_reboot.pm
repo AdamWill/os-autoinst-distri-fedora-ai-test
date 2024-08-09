@@ -175,7 +175,7 @@ sub run {
         else {
             # regenerate the bootloader config, only necessary if we
             # edited /etc/default/grub
-            assert_script_run "chroot $mount grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
+            assert_script_run 'chroot ' . $mount . ' grub2-mkconfig -o $(readlink -m /etc/grub2.cfg)';
         }
     }
     if (grep { $_ eq 'abrt' } @actions) {
