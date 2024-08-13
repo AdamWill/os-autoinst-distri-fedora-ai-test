@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 671,
+      "width": 57,
+      "ypos": 345,
+      "height": 22
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "archiver_format_selector"
+  ]
+}
