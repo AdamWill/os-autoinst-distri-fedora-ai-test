@@ -475,7 +475,7 @@ sub get_workarounds {
     my $version = shift || get_var("VERSION");
     my %workarounds = (
         "39" => [],
-        "40" => ["FEDORA-2024-f86a143437"],
+        "40" => [],
         "41" => [],
         "42" => [],
     );
