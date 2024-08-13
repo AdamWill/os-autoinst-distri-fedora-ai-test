@@ -5,7 +5,7 @@ use utils;
 
 our $desktop = get_var("DESKTOP");
 our $syspwd = get_var("USER_PASSWORD") || "weakpassword";
-our $term = "gnome-terminal";
+our $term = "terminal";
 if ($desktop eq "kde") {
     $term = "konsole";
 }

@@ -22,7 +22,7 @@ sub run {
     desktop_vt;
 
     # On the console, the fonts might differ than in GUI.
-    # We will perform the tests in the gnome-terminal.
+    # We will perform the tests in the gnome terminal.
     # First, open it!
     desktop_switch_layout 'ascii';
     wait_still_screen(2);

@@ -3,7 +3,8 @@ use strict;
 use testapi;
 use utils;
 
-# This test tests if Terminal starts.
+# This test tests if Terminal starts (which will be gnome-terminal
+# in Fedora < 41, ptyxis in Fedora >= 41)
 
 sub run {
     my $self = shift;
@@ -12,7 +13,7 @@ sub run {
     assert_screen "apps_run_terminal";
 
     # Register application
-    register_application("gnome-terminal");
+    register_application("terminal");
 
     # Close the application
     quit_with_shortcut();

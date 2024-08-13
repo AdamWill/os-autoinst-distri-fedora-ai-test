@@ -41,7 +41,7 @@ sub run {
     my $editor = "gnome-text-editor";
     my $viewer = "evince";
     my $maximize = "super-up";
-    my $term = "gnome-terminal";
+    my $term = "terminal";
     if ($desktop eq "kde") {
         $editor = "kwrite";
         $viewer = "okular";

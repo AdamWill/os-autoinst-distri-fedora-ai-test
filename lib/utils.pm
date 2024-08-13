@@ -1649,7 +1649,7 @@ sub solidify_wallpaper {
     }
     elsif ($desktop eq "gnome") {
         # Start the terminal to set up backgrounds.
-        menu_launch_type "gnome-terminal";
+        menu_launch_type "terminal";
         # wait to be sure it's fully open
         wait_still_screen(stilltime => 5, similarity_level => 38);
         # When the application opens, run command in it to set the background to black
