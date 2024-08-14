@@ -21,8 +21,9 @@ sub run {
         assert_script_run "dnf ${params} system-upgrade download", 6000;
     }
 
-    upload_logs "/var/log/dnf.log";
-    upload_logs "/var/log/dnf.rpm.log";
+    upload_logs "/var/log/dnf.log", failok => 1;
+    upload_logs "/var/log/dnf5.log", failok => 1;
+    upload_logs "/var/log/dnf.rpm.log", failok => 1;
 
     script_run "dnf system-upgrade reboot", 0;
     # fail immediately if we see a DNF error message, but keep an eye
