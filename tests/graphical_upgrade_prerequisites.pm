@@ -64,13 +64,6 @@ sub run {
 
     # For Gnome desktop only.
     if ($desktop eq "gnome") {
-        # FIXME workaround for https://bugzilla.redhat.com/show_bug.cgi?id=2268590
-        # upgrade fails if modular repo definitions are present
-        # remove when that is fixed
-        unless (script_run "ls /etc/yum.repos.d/*modul*") {
-            record_soft_failure "Modular repos present! Upgrade will fail, so removing";
-            assert_script_run "rm -f /etc/yum.repos.d/*modul*";
-        }
         # Switch to a user account
         enter_cmd("su -l $user");
         # Navigate to the version file directory

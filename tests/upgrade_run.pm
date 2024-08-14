@@ -14,10 +14,6 @@ sub run {
     cleanup_workaround_repo;
     repo_setup();
     my $params = "-y --releasever=${relnum}";
-    if ($relnum > 38) {
-        # FIXME can probably be removed when F38 goes EOL
-        $params .= " --nogpgcheck --disablerepo=*modular*";
-    }
 
     if (script_run "dnf ${params} system-upgrade download", 6000) {
         record_soft_failure "dnf failed so retry with --allowerasing";
