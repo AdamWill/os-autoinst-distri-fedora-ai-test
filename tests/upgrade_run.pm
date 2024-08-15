@@ -25,7 +25,7 @@ sub run {
     upload_logs "/var/log/dnf5.log", failok => 1;
     upload_logs "/var/log/dnf.rpm.log", failok => 1;
 
-    script_run "dnf system-upgrade reboot", 0;
+    script_run "dnf -y system-upgrade reboot", 0;
     # fail immediately if we see a DNF error message, but keep an eye
     # out for the bootloader so we can handle it if requested
     check_screen ["upgrade_fail", "bootloader"], 15;
