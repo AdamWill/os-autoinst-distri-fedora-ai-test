@@ -59,6 +59,9 @@ sub run {
     # change the ref name to a custom one (so we can test rebasing to
     # the 'normal' ref later)
     assert_script_run 'sed -i -e "s,ref: fedora/,ref: fedora-openqa/,g" *.yaml';
+    # FIXME disable archive repo on F41 until it actually exists
+    # https://pagure.io/releng/archive-repo-manager/pull-request/24
+    assert_script_run 'sed -i -e "/archive/d" common.yaml' if ($version eq "41");
     assert_script_run 'popd';
     # now make the ostree repo
     assert_script_run "mkdir -p /var/tmp/ostree";
