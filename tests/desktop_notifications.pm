@@ -91,7 +91,7 @@ sub run {
         type_very_safely get_var("USER_PASSWORD", "weakpassword");
         send_key 'ret';
     }
-    elsif ($desktop eq 'gnome' && $relnum > 40) {
+    elsif ($desktop eq 'gnome' && $relnum > 41) {
         # with https://fedoraproject.org/wiki/Changes/AnacondaWebUIforFedoraWorkstation
         # we get a short g-i-s flow on live boot then the welcome tour
         gnome_initial_setup(live => 1, livetry => 1);

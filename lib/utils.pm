@@ -867,11 +867,11 @@ sub gnome_initial_setup {
     }
     if ($args{prelogin}) {
         # 'language', 'keyboard' and 'timezone' were skipped between F28
-        # and F39 in the 'new user' mode by
+        # and F42 in the 'new user' mode by
         # https://fedoraproject.org//wiki/Changes/ReduceInitialSetupRedundancy
         # https://bugzilla.redhat.com/show_bug.cgi?id=1474787 ,
         # except 'language' was never *really* skipped (see above)
-        if ($relnum < 41) {
+        if ($relnum < 42) {
             @nexts = grep { $_ ne 'keyboard' } @nexts;
             @nexts = grep { $_ ne 'timezone' } @nexts;
         }
