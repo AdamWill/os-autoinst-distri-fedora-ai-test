@@ -69,7 +69,7 @@ sub run {
     assert_and_click ["anaconda_main_hub_begin_installation", "anaconda_webui_begin_installation"];
     if (match_has_tag "anaconda_webui_begin_installation") {
         $webui = 1;
-        assert_and_click "anaconda_webui_confirm_installation";
+        click_lastmatch if (check_screen "anaconda_webui_confirm_installation", 10);
     }
 
     # If we want to test identification we will do it
