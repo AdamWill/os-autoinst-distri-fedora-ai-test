@@ -9,7 +9,13 @@ sub toggle_hidden {
     # Toggle hidden files using keyboard short cut or menu.
     my $type = shift;
     if ($type eq "menu") {
-        assert_and_click("gnome_burger_menu");
+        my $relnum = get_release_number;
+        if ($relnum > 40) {
+            assert_and_click("nautilus_view_menu");
+        }
+        else {
+            assert_and_click("gnome_burger_menu");
+        }
         wait_still_screen(2);
         assert_and_click("nautilus_toggle_hidden_files", timeout => '30', button => 'left', mousehide => '1');
         sleep(10);
