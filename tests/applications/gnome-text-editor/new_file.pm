@@ -41,7 +41,7 @@ sub run {
     send_key("ctrl-a");
     wait_still_screen(3);
     type_very_safely "list.md";
-    send_key("ret");
+    assert_and_click("gnome_button_save");
     assert_screen("gte_file_saved");
     # Check that the file has been created
     $self->root_console(tty => 3);

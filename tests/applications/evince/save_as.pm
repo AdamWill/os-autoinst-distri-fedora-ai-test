@@ -23,7 +23,7 @@ sub run {
     type_very_safely("alternative");
 
     # Click on the Save button
-    assert_and_click("gnome_button_save_blue", button => "left", timeout => 30);
+    assert_and_click("gnome_button_save", button => "left", timeout => 30);
 
     # Now the document is saved under a different name. We will switch to the
     # terminal console to check that it has been created.
