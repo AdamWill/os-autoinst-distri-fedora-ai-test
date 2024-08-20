@@ -151,7 +151,10 @@ sub run {
                     $count -= 1;
                     assert_screen ["live_start_anaconda_icon", "apps_menu_button_active", "next_button"], 300;
                     if (match_has_tag "next_button") {
-                        # we're on F39+ Workstation and looking at gnome-initial-setup
+                        # we're looking at gnome-initial-setup - this
+                        # is what we expect on images that use anaconda
+                        # webui, though as of 2024-08 it's disabled due
+                        # to maintenance difficulty
                         # completing g-i-s launches the installer
                         gnome_initial_setup(live => 1);
                         $launched = 1;
@@ -180,7 +183,7 @@ sub run {
                     while ($tries) {
                         $tries -= 1;
                         assert_and_click("live_start_anaconda_icon", dclick => $dclick);
-                        last if (check_screen "anaconda_select_install_lang", 180);
+                        last if (check_screen ["anaconda_select_install_lang", "anaconda_webui_welcome"], 180);
                         die "Launching installer failed after 5 tries!" unless ($tries);
                     }
                 }

@@ -861,29 +861,30 @@ sub gnome_initial_setup {
     # now, we're going to figure out how many of them this test will
     # *actually* see...
     if ($args{live}) {
-        # this is the flow we see when booting an F40+ Workstation live
-        # we only get language and keyboard
+        # this is the flow we expect to see when booting live images
+        # with anaconda webui, though as of 2024-08 it is unused as
+        # the patch has been dropped due to maintenance difficulty
         @nexts = ('language', 'keyboard');
     }
     if ($args{prelogin}) {
-        # 'language', 'keyboard' and 'timezone' were skipped between F28
-        # and F42 in the 'new user' mode by
+        # On releases that use anaconda gtkui, we configure g-i-s to
+        # skip 'language', 'keyboard' and 'timezone' using a custom
+        # vendor.conf:
         # https://fedoraproject.org//wiki/Changes/ReduceInitialSetupRedundancy
         # https://bugzilla.redhat.com/show_bug.cgi?id=1474787 ,
-        # except 'language' was never *really* skipped (see above)
-        if ($relnum < 42) {
+        # but 'language' is never *really* skipped (see above)
+        unless (get_var("_ANACONDA_WEBUI")) {
             @nexts = grep { $_ ne 'keyboard' } @nexts;
             @nexts = grep { $_ ne 'timezone' } @nexts;
         }
-        # From gnome-initial-setup 45~beta-3 on, no screens are
-        # skipped in vendor.conf. 'language' and 'keyboard' should be
-        # skipped (meaning 'language' is turned into 'welcome' and
-        # 'keyboard' is really skipped) on live installs because we saw
-        # them already, but this only works from anaconda 39.32.2 /
-        # 40.3 onwards. network installs and disk image deployments
-        # will show these screens (which is good for disk image
-        # deployments, but redundant for network installs)
-        elsif (match_has_tag "start_setup") {
+        # On releases that use anaconda-webui, we use vendor.conf to
+        # skip 'language' and 'keyboard' (meaning 'language' is turned
+        # into 'welcome' and 'keyboard' is really skipped) on live
+        # installs because we saw them already. network installs and
+        # disk image deployments will show these screens (which is good
+        # for disk image deployments, but redundant for network
+        # installs)
+        if (match_has_tag "start_setup") {
             # if we saw start_setup, that means 'language' was skipped
             # and we can assume 'keyboard' will also be skipped
             @nexts = grep { $_ ne 'keyboard' } @nexts;
