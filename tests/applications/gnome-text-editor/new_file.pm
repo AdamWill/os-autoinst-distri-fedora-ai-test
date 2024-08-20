@@ -34,6 +34,9 @@ sub run {
     # Save the newly created file.
     send_key("ctrl-s");
     wait_still_screen(3);
+    # if we hit the nautilus save-as screen, we have to click to edit
+    # the filename
+    click_lastmatch if (check_screen "nautilus_save_filename");
     # select the entire prefilled name (including extension) to overwrite it
     send_key("ctrl-a");
     wait_still_screen(3);

@@ -36,7 +36,7 @@ sub run {
         assert_and_click("maps_button_export");
         wait_still_screen(2);
         # Rename the file and export it
-        assert_and_click("maps_export_filename");
+        assert_and_click("nautilus_save_filename");
         type_very_safely("exported-map");
         assert_and_click("maps_button_save");
     }

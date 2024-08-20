@@ -15,6 +15,10 @@ sub run {
     assert_and_click("evince_menu_saveas", button => "left", timeout => 30);
     wait_still_screen(2);
 
+    # if we hit the nautilus save-as screen, we have to click to edit
+    # the filename
+    click_lastmatch if (check_screen "nautilus_save_filename");
+
     # Type a new name.
     type_very_safely("alternative");
 
