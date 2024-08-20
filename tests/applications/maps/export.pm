@@ -35,11 +35,9 @@ sub run {
         # wait for the export screen to appear and settle
         assert_and_click("maps_button_export");
         wait_still_screen(2);
-        # Rename the file and export it.
-        # The name entry field should have focus already, so we are
-        # just going to rename the proposed file name.
-        send_key("ctrl-a");
-        type_very_safely("exported-map.png");
+        # Rename the file and export it
+        assert_and_click("maps_export_filename");
+        type_very_safely("exported-map");
         assert_and_click("maps_button_save");
     }
 
