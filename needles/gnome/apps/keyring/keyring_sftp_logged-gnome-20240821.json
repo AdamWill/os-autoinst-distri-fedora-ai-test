@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 190,
+      "width": 42,
+      "type": "match",
+      "ypos": 278,
+      "height": 37
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "keyring_sftp_logged"
+  ]
+}
