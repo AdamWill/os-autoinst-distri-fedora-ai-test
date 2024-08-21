@@ -91,12 +91,6 @@ sub run {
         type_very_safely get_var("USER_PASSWORD", "weakpassword");
         send_key 'ret';
     }
-    elsif ($desktop eq 'gnome' && $relnum > 41) {
-        # with https://fedoraproject.org/wiki/Changes/AnacondaWebUIforFedoraWorkstation
-        # we get a short g-i-s flow on live boot then the welcome tour
-        gnome_initial_setup(live => 1, livetry => 1);
-        handle_welcome_screen;
-    }
     check_desktop(timeout => 90);
     # now, WE WAIT. this is just an unconditional wait - rather than
     # breaking if we see an update notification appear - so we catch
