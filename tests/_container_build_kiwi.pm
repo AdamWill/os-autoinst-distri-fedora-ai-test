@@ -99,7 +99,7 @@ sub run {
     # now copy the descriptions in
     assert_script_run "mock -r openqa --isolation=simple --copyin fedora-kiwi-descriptions /fedora-kiwi-descriptions";
     # PULL SOME LEVERS! PULL SOME LEVERS!
-    assert_script_run "mock -r openqa --enable-network --chroot \"kiwi-ng --profile Container-Base-Generic --debug --logfile /tmp/image-root.log system build --description /fedora-kiwi-descriptions/ --target-dir /builddir/result/image\"", 7200;
+    assert_script_run "mock -r openqa --enable-network --chroot \"kiwi-ng --profile Container-Base-Generic --kiwi-file Fedora.kiwi --debug --logfile /tmp/image-root.log system build --description /fedora-kiwi-descriptions/ --target-dir /builddir/result/image\"", 7200;
     unless (script_run "mock -r openqa --isolation=simple --copyout /tmp/image-root.log .", 90) {
         upload_logs "image-root.log";
     }
