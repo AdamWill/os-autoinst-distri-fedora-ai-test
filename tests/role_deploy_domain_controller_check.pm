@@ -27,9 +27,10 @@ sub run {
     # test failed due to server issue)
     $self->post_fail_hook();
     if (get_var("FREEIPA_REPLICA_MASTER")) {
-        # delete the replica, otherwise we may get errors at uninstall
+        # delete the replica if it's still there, otherwise we may get
+        # errors at uninstall
         assert_script_run 'echo "monkeys123" | kinit admin';
-        assert_script_run 'ipa server-del ipa003.test.openqa.fedoraproject.org';
+        script_run 'ipa server-del ipa003.test.openqa.fedoraproject.org';
     }
     assert_script_run 'systemctl stop ipa.service';
     # check server is stopped
