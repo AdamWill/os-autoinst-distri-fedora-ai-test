@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "click_point": {
+        "xpos": 8,
+        "ypos": 8
+      },
+      "width": 44,
+      "height": 19,
+      "xpos": 534,
+      "ypos": 316
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "cockpit_updates_auto_all"
+  ]
+}
