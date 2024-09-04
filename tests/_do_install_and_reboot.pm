@@ -78,7 +78,7 @@ sub run {
     # etc.
     my $identification = get_var('IDENTIFICATION');
     my $branched = get_var('VERSION');
-    if ($identification eq 'true' or ($branched ne "Rawhide" && $branched ne "ELN")) {
+    if ($identification eq 'true' or ($branched ne "Rawhide" && lc($branched) ne "eln")) {
         check_left_bar() unless ($webui);
         check_prerelease();
         check_version();

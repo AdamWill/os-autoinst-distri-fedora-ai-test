@@ -15,7 +15,7 @@ sub run {
     # disable updates-testing; on ELN it doesn't exist and trying to
     # disable it causes an error
     my $disable = '--disablerepo=openqa-testrepo*';
-    $disable .= ' --disablerepo=updates-testing' unless (get_var("VERSION") eq "ELN");
+    $disable .= ' --disablerepo=updates-testing' unless (lc(get_var("VERSION")) eq "eln");
     # update the fake acpica-tools (should come from the real repo)
     # this can take a long time if we get unlucky with the metadata refresh
     assert_script_run "dnf -y $disable update acpica-tools", 600;
