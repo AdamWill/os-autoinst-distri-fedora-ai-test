@@ -478,6 +478,7 @@ sub get_workarounds {
         "40" => [],
         "41" => [],
         "42" => [],
+        "eln" => [],
     );
     my $advortasks = $workarounds{$version};
     return @$advortasks;
@@ -589,8 +590,12 @@ sub setup_repos {
     if ($args{waonly} || $tag || $copr) {
         return unless (@was);
     }
-    # if we got this far, we're definitely downloading *something*
-    script_run "dnf -y install createrepo_c bodhi-client koji", 300;
+    # if we got this far, we're definitely downloading *something* so
+    # install the download tools. split bodhi-client out because it
+    # isn't there on ELN currently, which means we can't use workarounds
+    # specified as update IDs on ELN
+    script_run "dnf -y install createrepo_c koji", 300;
+    script_run "dnf -y install bodhi-client", 300;
     get_setup_repos_script;
     my $wastring = join(',', @was);
     my $udstring;
@@ -700,6 +705,9 @@ sub _repo_setup_updates {
     if (get_var("VERSION") eq get_var("RAWREL") && get_var("TEST") ne "support_server") {
         assert_script_run 'printf "[koji-rawhide]\nname=koji-rawhide\nbaseurl=https://kojipkgs.fedoraproject.org/repos/rawhide/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/koji-rawhide.repo';
     }
+    if (lc(get_var("VERSION")) eq "eln" && get_var("TEST") ne "support_server") {
+        assert_script_run 'printf "[koji-eln]\nname=koji-eln\nbaseurl=https://kojipkgs.fedoraproject.org/repos/eln-build/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/koji-eln.repo';
+    }
     if (get_var("CANNED")) {
         # install and use en_US.UTF-8 locale for consistent sort
         # ordering
@@ -725,7 +733,7 @@ sub _repo_setup_updates {
         # above (and their deps, which dnf will include automatically),
         # just in case they're in the update under test; otherwise we
         # get a bogus failure for the package not being updated
-        script_run "dnf -y remove bodhi-client createrepo_c koji", 600 if (get_var("INSTALL") && !get_var("CANNED"));
+        script_run "dnf -y remove createrepo_c koji", 600 if (get_var("INSTALL") && !get_var("CANNED"));
     }
     # exit the toolbox on CANNED
     if (get_var("CANNED")) {

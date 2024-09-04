@@ -8,7 +8,9 @@ sub run {
     my $version = get_var("VERSION");
     my $currrel = get_var("CURRREL");
     my $rawrel = get_var("RAWREL");
-    my $repo = $version eq $rawrel ? "fedora-rawhide.repo" : "fedora.repo";
+    my $repo = "fedora.repo";
+    $repo = "fedora-rawhide.repo" if ($version eq $rawrel);
+    $repo = "fedora-eln.repo" if (lc($version) eq "eln");
     my $advortask = get_var("ADVISORY_OR_TASK");
     my $arch = get_var("ARCH");
     # python3-dnf is for updvercheck.py
@@ -23,11 +25,18 @@ sub run {
     assert_script_run "setenforce Permissive";
     # Fedora pungi config always sets rootfs size to 3GiB since F32
     my $cmd = "lorax -p Fedora -v ${version} -r ${version} --repo=/etc/yum.repos.d/${repo} --rootfs-size 3 --squashfs-only";
-    unless ($version > $currrel) {
+    unless ($version > $currrel || lc($version) eq "eln") {
         $cmd .= " --isfinal --repo=/etc/yum.repos.d/fedora-updates.repo";
+    }
+    if (lc($version) eq "eln") {
+        $cmd .= " --variant=BaseOS --nomacboot --volid=Fedora-eln-BaseOS-${arch}"
+    }
+    else {
+        $cmd .= " --variant=Everything --volid=Fedora-E-dvd-${arch}"
     }
     $cmd .= " --repo=/etc/yum.repos.d/workarounds.repo" if (get_workarounds);
     $cmd .= " --repo=/etc/yum.repos.d/koji-rawhide.repo" if ($version eq $rawrel);
+    $cmd .= " --repo=/etc/yum.repos.d/koji-eln.repo" if (lc($version) eq "eln");
     $cmd .= " --repo=/etc/yum.repos.d/advisory.repo" unless (get_var("TAG") || get_var("COPR"));
     $cmd .= " --repo=/etc/yum.repos.d/openqa-testtag.repo" if (get_var("TAG") || get_var("COPR"));
     $cmd .= " ./results";
