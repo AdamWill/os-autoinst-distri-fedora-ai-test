@@ -4,8 +4,8 @@ use strict;
 
 use base 'Exporter';
 use Exporter;
-
 use testapi;
+
 our @EXPORT = qw/clone_host_file setup_tap_static get_host_dns/;
 
 sub clone_host_file {
@@ -29,6 +29,7 @@ sub setup_tap_static {
     # this is a common thing for tap tests, where we set up networking
     # for the system with a static IP address and possibly a specific
     # hostname
+
     my $ip = shift;
     my $hostname = shift || "";
     if ($hostname) {
