@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "gnome_button_unlock"
+  ],
+  "area": [
+    {
+      "xpos": 914,
+      "ypos": 119,
+      "width": 67,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

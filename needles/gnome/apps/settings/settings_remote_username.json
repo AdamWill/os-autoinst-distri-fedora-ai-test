@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "settings_remote_username"
+  ],
+  "area": [
+    {
+      "xpos": 366,
+      "ypos": 535,
+      "width": 72,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

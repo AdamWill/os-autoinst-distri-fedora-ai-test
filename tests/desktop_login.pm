@@ -174,31 +174,6 @@ sub switch_user {
     }
 }
 
-sub reboot_system {
-    if ($desktop eq 'i3') {
-        # we are still in i3 if the bar is visible
-        if (check_screen('i3-bar')) {
-            logout_user();
-        }
-        assert_and_click('lightdm_power_menu');
-        assert_and_click('lightdm_power_menu-reboot');
-        assert_and_click('lightdm_power_menu-reboot-confirm');
-    }
-
-    # Reboots the system and handles everything until the next GDM screen.
-    else {
-        # In a logged in desktop, we access power options through system menu
-        assert_and_click "system_menu_button";
-        # In KDE reboot entry is right here, on GNOME we need to
-        # enter some kind of power option submenu
-        assert_screen ["power_entry", "reboot_entry"];
-        click_lastmatch;
-        assert_and_click "reboot_entry" if (match_has_tag("power_entry"));
-        assert_and_click "restart_confirm";
-    }
-    boot_to_login_screen();
-}
-
 sub power_off {
     # Powers-off the machine.
     if (get_var('DESKTOP') eq 'i3') {

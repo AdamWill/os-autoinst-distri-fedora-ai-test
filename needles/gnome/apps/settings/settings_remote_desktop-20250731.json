@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 400,
+      "height": 21,
+      "type": "match",
+      "width": 113,
+      "ypos": 276
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "settings_remote_desktop"
+  ]
+}

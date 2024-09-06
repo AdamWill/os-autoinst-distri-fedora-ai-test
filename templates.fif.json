@@ -1915,8 +1915,8 @@
                 "REPOSITORY_VARIATION": "%LOCATION%",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_GECOS": "I;'[] <>i[ \"d,. };[,r]",
-	        "USER_LOGIN": "test",		
-		"USER_PASSWORD": "weakpassword"
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
             }
         },
         "install_updates_img_local": {
@@ -2207,6 +2207,39 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
+            }
+        },
+        "remote_desktop_server": {
+            "profiles": {
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 35
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "GNOME_SCHEMA": "https://pagure.io/fedora-qa/openqa_testdata/raw/thetree/f/configuration/99_openqa.gschema.override",
+                "NICTYPE": "tap",
+                "POSTINSTALL": "remote_desktop_server",
+                "POST_STATIC": "172.16.2.116 kaermorhen.test.openqa.fedoraproject.org",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "remote_desktop_client": {
+            "profiles": {
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "GNOME_SCHEMA": "https://pagure.io/fedora-qa/openqa_testdata/raw/thetree/f/configuration/99_openqa.gschema.override",
+                "NICTYPE": "tap",
+                "POSTINSTALL": "remote_desktop_client",
+                "PARALLEL_WITH": "remote_desktop_server",
+                "POST_STATIC": "172.16.2.117 visimir.test.openqa.fedoraproject.org",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "WORKER_CLASS": "tap"
             }
         },
         "rpmostree_overlay": {
