@@ -273,6 +273,7 @@ sub load_postinstall_tests() {
         autotest::loadtest "tests/_memcheck.pm";
         return;
     }
+
     # RDP client test's work is done once install is complete
     if (get_var("RDP_CLIENT")) {
         return;
@@ -288,6 +289,12 @@ sub load_postinstall_tests() {
     # to do it twice
     if (get_var("POST_STATIC") && !get_var("UPGRADE")) {
         autotest::loadtest "tests/_post_network_static.pm";
+    }
+
+    # If we want to modify Gnome session using the schema override,
+    # we will do it now (it has to be after static network config)
+    if (get_var("GNOME_SCHEMA") && get_var("DESKTOP") eq "gnome") {
+        autotest::loadtest("tests/_modify_gnome_desktop.pm");
     }
 
     # if scheduler passed an advisory or task ID, update packages from that

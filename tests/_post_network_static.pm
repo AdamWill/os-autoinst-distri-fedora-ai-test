@@ -13,8 +13,23 @@ sub run {
     }
     my ($ip, $hostname) = split(/ /, get_var("POST_STATIC"));
     $hostname //= 'localhost.localdomain';
+    # It is possible on certain tests that the following code will be running
+    # while we are inside a graphical session. In this case we need to switch
+    # to the console before we proceed with the network settings.
+    my $desktop = 0;
+    unless (check_screen("root_console")) {
+        $desktop = 1;
+        $self->root_console(tty => 3);
+    }
+
     # set up networking
     setup_tap_static($ip, $hostname);
+
+    # If we have switched to console from a graphical
+    # environment, here we come back to it.
+    if ($desktop) {
+        desktop_vt();
+    }
 }
 
 sub test_flags {
