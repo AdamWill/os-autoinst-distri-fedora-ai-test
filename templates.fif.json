@@ -2149,6 +2149,37 @@
                 "USER_LOGIN": "false"
             }
         },
+        "remote_desktop_server": {
+            "profiles": {
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 35
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "POSTINSTALL": "remote_desktop_server",
+                "POST_STATIC": "172.16.2.177 kaermorhen.test.openqa.fedoraproject.org",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "remote_desktop_client": {
+            "profiles": {
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "POSTINSTALL": "remote_desktop_client",
+                "PARALLEL_WITH": "remote_desktop_server",
+                "POST_STATIC": "172.16.2.179 visimir.test.openqa.fedoraproject.org",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "WORKER_CLASS": "tap"
+            }
+        },
         "rpmostree_overlay": {
             "profile_groups": {
                 "coreos-iot-silverblue": 20

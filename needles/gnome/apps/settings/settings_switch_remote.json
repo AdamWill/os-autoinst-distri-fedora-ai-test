@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "settings_switch_remote"
+  ],
+  "area": [
+    {
+      "xpos": 366,
+      "ypos": 208,
+      "width": 165,
+      "height": 22,
+      "type": "match"
+    }
+  ]
+}

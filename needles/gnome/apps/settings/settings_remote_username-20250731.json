@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "width": 491,
+      "type": "match",
+      "ypos": 503,
+      "height": 20,
+      "xpos": 371,
+      "click_point": {
+        "xpos": 476.5,
+        "ypos": 9
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "settings_remote_username"
+  ]
+}
