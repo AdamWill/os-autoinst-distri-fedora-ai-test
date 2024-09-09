@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 91,
+      "width": 173,
+      "xpos": 467,
+      "ypos": 513
+    },
+    {
+      "type": "match",
+      "height": 60,
+      "xpos": 377,
+      "width": 117,
+      "ypos": 640
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_info_wellington"
+  ]
+}
