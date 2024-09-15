@@ -1774,6 +1774,7 @@ sub kde_doublek_workaround {
     send_key $args{key};
     wait_still_screen 5;
     send_key 'esc';
+    wait_still_screen 3;
 }
 
 1;
