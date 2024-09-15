@@ -29,10 +29,10 @@ sub run {
         $cmd .= " --isfinal --repo=/etc/yum.repos.d/fedora-updates.repo";
     }
     if (lc($version) eq "eln") {
-        $cmd .= " --variant=BaseOS --nomacboot --volid=Fedora-eln-BaseOS-${arch}"
+        $cmd .= " --variant=BaseOS --nomacboot --volid=Fedora-eln-BaseOS-${arch}";
     }
     else {
-        $cmd .= " --variant=Everything --volid=Fedora-E-dvd-${arch}"
+        $cmd .= " --variant=Everything --volid=Fedora-E-dvd-${arch}";
     }
     $cmd .= " --repo=/etc/yum.repos.d/workarounds.repo" if (get_workarounds);
     $cmd .= " --repo=/etc/yum.repos.d/koji-rawhide.repo" if ($version eq $rawrel);
