@@ -1767,11 +1767,13 @@ sub start_applications {
 # close operation before we do anything 'real'. this is repeated in
 # several tests so we share it here
 sub kde_doublek_workaround {
+    my %args = @_;
+    $args{key} //= 'k';
     wait_screen_change { send_key 'super'; };
     wait_still_screen 3;
-    send_key "k";
+    send_key $args{key};
     wait_still_screen 5;
-    send_key "esc";
+    send_key 'esc';
 }
 
 1;

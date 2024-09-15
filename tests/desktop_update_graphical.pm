@@ -24,7 +24,7 @@ sub run {
     # run the updater
     if ($desktop eq 'kde') {
         # try and avoid double-typing issues
-        kde_doublek_workaround;
+        kde_doublek_workaround(key => 'd');
         menu_launch_type('discover');
         # Wait for it to run and maximize it to make sure we see the
         # Updates entry
