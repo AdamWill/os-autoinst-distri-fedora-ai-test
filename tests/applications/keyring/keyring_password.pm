@@ -130,8 +130,7 @@ sub perform_login {
     my $password = shift;
     send_key("ret") if ($desktop eq "gnome");
     type_very_safely("$password\n");
-    wait_still_screen(3);
-    send_key("esc");
+    check_desktop;
 }
 
 sub run {
