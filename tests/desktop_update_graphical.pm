@@ -128,6 +128,10 @@ sub run {
     }
     elsif ($desktop eq 'kde') {
         assert_and_click 'kde_offline_update_reboot';
+        # this makes it faster when the confirm screen has a timeout,
+        # and avoids the test failing if it doesn't:
+        # https://invent.kde.org/plasma/discover/-/merge_requests/899
+        click_lastmatch if (check_screen 'kde_offline_update_reboot_confirm', 10);
         boot_to_login_screen;
     }
     # back to console to verify updates
