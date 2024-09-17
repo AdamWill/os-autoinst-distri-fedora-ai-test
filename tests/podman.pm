@@ -27,8 +27,8 @@ sub run {
     assert_script_run "podman pull registry.fedoraproject.org/fedora:latest", 300;
     # run hello-world to test
     validate_script_output "podman run -it registry.fedoraproject.org/fedora:latest echo Hello-World", sub { m/Hello-World/ };
-    # create a Dockerfile
-    assert_script_run 'printf \'FROM registry.fedoraproject.org/fedora:latest\nRUN /usr/bin/dnf install -y httpd\nEXPOSE 80\nCMD ["-D", "FOREGROUND"]\nENTRYPOINT ["/usr/sbin/httpd"]\n\' > Dockerfile';
+    # create a Containerfile
+    assert_script_run 'printf \'FROM registry.fedoraproject.org/fedora:latest\nRUN /usr/bin/dnf install -y httpd\nEXPOSE 80\nCMD ["-D", "FOREGROUND"]\nENTRYPOINT ["/usr/sbin/httpd"]\n\' > Containerfile';
     # Build an image
     assert_script_run 'podman build -t fedora-httpd $(pwd)', 180;
     # Verify the image
