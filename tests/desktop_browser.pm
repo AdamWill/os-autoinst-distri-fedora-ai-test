@@ -36,7 +36,14 @@ sub run {
     # wait out animations
     wait_still_screen(stilltime => 4, similarity_level => 45);
     assert_and_click 'browser_launcher';
-    assert_screen 'browser', 45;
+    unless (check_screen 'browser', 45) {
+        if (check_screen 'browser', 45) {
+            record_soft_failure "Browser start up is very slow - probably https://bugzilla.redhat.com/show_bug.cgi?id=2312900";
+        }
+        else {
+            die "Browser never reached!";
+        }
+    }
     # firefox is quite grindy on startup, let it settle
     wait_still_screen(stilltime => 5, similarity_level => 45);
     # open a new tab so we don't race with the default page load
