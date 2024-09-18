@@ -964,6 +964,8 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NO_ADVISORY_POST": "1",
+                "NO_UEFI_POST": "1",
                 "POSTINSTALL": "desktop_login",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }

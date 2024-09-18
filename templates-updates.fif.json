@@ -351,7 +351,19 @@
                 "fedora-updates-workstation-x86_64-*-64bit": 5
             }
         },
+        "desktop_keyring": {
+            "profiles": {
+                "fedora-updates-kde-x86_64-*-64bit": 5,
+                "fedora-updates-workstation-x86_64-*-64bit": 5
+            }
+        },
         "desktop_printing": {
+            "profiles": {
+                "fedora-updates-kde-x86_64-*-64bit": 5,
+                "fedora-updates-workstation-x86_64-*-64bit": 5
+            }
+        },
+        "desktop_printing_builtin": {
             "profiles": {
                 "fedora-updates-kde-x86_64-*-64bit": 5,
                 "fedora-updates-workstation-x86_64-*-64bit": 5
@@ -395,6 +407,7 @@
                 "INSTALL_UNLOCK": "support_ready",
                 "ISO": "%ADVISORY_OR_TASK%-netinst-%ARCH%.iso",
                 "NICTYPE": "tap",
+                "NO_ADVISORY_POST": "1",
                 "PACKAGE_SET": "default",
                 "PARALLEL_WITH": "support_server@%ARCH_BASE_MACHINE%",
                 "WORKER_CLASS": "tap"
@@ -599,6 +612,11 @@
         "support_server": {
             "profiles": {
                 "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
+            }
+        },
+        "toolbox": {
+            "profiles": {
+                "fedora-updates-workstation-x86_64-*-64bit": 5
             }
         },
         "upgrade_desktop_encrypted_64bit": {
