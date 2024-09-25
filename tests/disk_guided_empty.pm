@@ -17,6 +17,8 @@ sub run {
         if (get_var("NUMDISKS") > 1) {
             assert_and_click "anaconda_webui_disk_select";
             assert_and_click "anaconda_install_destination_select_disk_1";
+            # since webui 16, we have to click a Select button too
+            click_lastmatch if (check_screen "anaconda_webui_select");
         }
         # assume default selection is the appropriate one; if it
         # isn't, we'll fail soon enough
