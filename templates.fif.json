@@ -1429,14 +1429,14 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
-        "i3_tilling": {
+        "i3_tiling": {
             "profiles": {
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "i3_tilling",
+                "POSTINSTALL": "i3_tiling",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
