@@ -2,8 +2,6 @@ use base "installedtest";
 use strict;
 use testapi;
 use utils;
-use i3;
-
 
 sub run {
     my $password = get_var('USER_PASSWORD', 'weakpassword');

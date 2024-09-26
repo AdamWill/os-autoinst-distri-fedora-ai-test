@@ -4,7 +4,6 @@ use strict;
 
 use base 'distribution';
 use Cwd;
-use i3;
 
 # Fedora distribution class
 
