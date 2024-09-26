@@ -13,6 +13,7 @@ sub run {
 
     # Add a new alarm using the Add Alarm button
     assert_and_click("clocks_button_add_alarm");
+    assert_and_dclick("clocks_alarm_hour");
     wait_still_screen(2);
     type_very_safely("09");
     send_key("tab");
