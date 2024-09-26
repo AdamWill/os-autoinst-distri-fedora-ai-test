@@ -126,13 +126,6 @@ sub check_stored {
     }
 }
 
-sub perform_login {
-    my $password = shift;
-    send_key("ret") if ($desktop eq "gnome");
-    type_very_safely("$password\n");
-    check_desktop;
-}
-
 sub run {
     my $self = shift;
 
@@ -142,7 +135,8 @@ sub run {
     desktop_vt();
 
     if (check_screen("login_screen", timeout => 30)) {
-        perform_login($pass);
+        dm_perform_login($desktop, $pass);
+        check_desktop;
     }
 
     # Lets connect to localhost via SSH. This should result in
@@ -159,7 +153,8 @@ sub run {
 
     # Boot to login screen and type in the password.
     boot_to_login_screen();
-    perform_login($pass);
+    dm_perform_login($desktop, $pass);
+    check_desktop;
 
     # Repeat the connection procedure, but skip the password
     # handling process as this will be done by the keyring.

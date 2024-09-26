@@ -77,19 +77,10 @@ sub run {
     type_string "systemctl start graphical.target\n";
     # we trust systemd to switch us to the right tty here
     if (get_var("BOOTFROM")) {
+        my $password = get_var("USER_PASSWORD", "weakpassword");
         assert_screen 'graphical_login', 60;
         wait_still_screen 10, 30;
-        # GDM 3.24.1 dumps a cursor in the middle of the screen here...
-        mouse_hide;
-        if ($desktop eq 'gnome') {
-            # we have to hit enter to get the password dialog, and it
-            # doesn't always work for some reason so just try it three
-            # times
-            send_key_until_needlematch("graphical_login_input", "ret", 3, 5);
-        }
-        assert_screen "graphical_login_input";
-        type_very_safely get_var("USER_PASSWORD", "weakpassword");
-        send_key 'ret';
+        dm_perform_login($desktop, $password);
     }
     check_desktop(timeout => 90);
     # now, WE WAIT. this is just an unconditional wait - rather than

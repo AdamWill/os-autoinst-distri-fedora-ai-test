@@ -20,10 +20,7 @@ sub run {
     # "Login with a reader, but no enrolled prints"
     type_string "reboot\n";
     assert_screen "graphical_login", 180;
-    mouse_hide;
-    send_key_until_needlematch("graphical_login_input", "ret", 3, 5);
-    type_very_safely "weakpassword";
-    send_key "ret";
+    dm_perform_login('gnome', 'weakpassword');
     check_desktop(timeout => 60);
     wait_still_screen 10;
     $self->root_console(tty => 5);

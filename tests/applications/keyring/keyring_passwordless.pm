@@ -76,13 +76,6 @@ sub connect_localhost {
     enter_cmd("exit");
 }
 
-sub perform_login {
-    my $password = shift;
-    send_key("ret") if ($desktop eq "gnome");
-    type_very_safely("$password\n");
-    check_desktop;
-}
-
 sub run {
     my $self = shift;
 
@@ -99,7 +92,8 @@ sub run {
 
     # If we arrive to a login screen, perform login
     if (check_screen("login_screen", timeout => 30)) {
-        perform_login($pass);
+        dm_perform_login($desktop, $pass);
+        check_desktop;
     }
 
     # Use SSH to connect to the localhost.
@@ -110,7 +104,8 @@ sub run {
     enter_cmd("reboot");
     # Log in.
     boot_to_login_screen();
-    perform_login($pass);
+    dm_perform_login($desktop, $pass);
+    check_desktop;
 
     # Reconnect without using password. We still should be
     # able to log in.
