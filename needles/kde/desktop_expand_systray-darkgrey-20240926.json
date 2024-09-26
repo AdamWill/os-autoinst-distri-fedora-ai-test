@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 17,
+      "xpos": 880,
+      "ypos": 729,
+      "type": "match",
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "desktop_expand_systray"
+  ]
+}
