@@ -37,8 +37,9 @@ sub run {
     }
     # check to see if toolbox can list container
     assert_script_run "toolbox list | grep container1";
-    # run a specific command on a given container
-    validate_script_output "toolbox run --container container1 uname -a", sub { m/Linux toolbox/ };
+    # run a specific command on a given container, note as of 2024-10
+    # the output changed from "Linux toolbox" to "Linux toolbx"
+    validate_script_output "toolbox run --container container1 uname -a", sub { m/Linux toolbo?x/ };
     # enter container to test
     type_string "toolbox enter container1\n";
     # holds on to the screen
