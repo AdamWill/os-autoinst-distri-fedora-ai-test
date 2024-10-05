@@ -10,6 +10,7 @@
   ],
   "properties": [],
   "tags": [
-    "keyring_askpass_remember"
+    "keyring_askpass_remember",
+    "DESKTOP-kde"
   ]
 }

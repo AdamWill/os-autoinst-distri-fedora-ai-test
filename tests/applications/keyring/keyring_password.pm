@@ -46,10 +46,10 @@ sub connect_localhost {
         # in the password. We will also try to remember the
         # password and confirm the connection.
         if ($type ne "reconnect") {
-            wait_still_screen(3);
+            assert_screen("keyring_askpass_remember");
             type_very_safely($pass);
-            assert_and_click("nautilus_remember_password");
-            assert_and_click("nautilus_unlock");
+            click_lastmatch;
+            assert_and_click("keyring_askpass_confirm");
         }
         # When the connection has been established,
         # a new connection icon will appear.
@@ -83,9 +83,9 @@ sub connect_localhost {
             # Then similarly to Gnome, the password dialogue will appear
             # and we type in the password. Also, we click on Remember
             # and confirm with the OK button.
-            assert_screen("keyring_askpass_password");
+            assert_screen("keyring_askpass_remember");
             type_very_safely("$pass");
-            assert_and_click("keyring_askpass_remember");
+            click_lastmatch;
             assert_and_click("keyring_askpass_confirm");
         }
         # Check that we have logged in and exit the application.
@@ -154,7 +154,7 @@ sub run {
     # Boot to login screen and type in the password.
     boot_to_login_screen();
     dm_perform_login($desktop, $pass);
-    check_desktop;
+    check_desktop(timeout => 120);
 
     # Repeat the connection procedure, but skip the password
     # handling process as this will be done by the keyring.

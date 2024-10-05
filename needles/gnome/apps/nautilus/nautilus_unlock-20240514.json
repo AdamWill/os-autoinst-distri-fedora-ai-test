@@ -10,6 +10,8 @@
   ],
   "properties": [],
   "tags": [
-    "nautilus_unlock"
+    "nautilus_unlock",
+    "keyring_askpass_confirm",
+    "DESKTOP-gnome"
   ]
 }

@@ -46,25 +46,16 @@ sub connect_localhost {
     # the SSH key.
     my $command = "sftp $user" . '@localhost';
     enter_cmd($command);
-    sleep 2;
 
     # When connecting for the first time, we will remember
     # the key password and store it in the keyring.
     if ($type ne "reconnect") {
-        if ($desktop eq "gnome") {
-            type_very_safely("yes\n");
-            wait_still_screen(2);
-            type_very_safely("sshpassword");
-            assert_and_click("nautilus_autounlock_password");
-            assert_and_click("nautilus_unlock");
-        }
-        else {
-            type_very_safely("yes\n");
-            wait_still_screen(2);
-            type_very_safely("sshpassword");
-            assert_and_click("keyring_askpass_remember");
-            assert_and_click("keyring_askpass_confirm");
-        }
+        assert_screen("keyring_askpass_yesno");
+        type_very_safely("yes\n");
+        assert_screen("keyring_askpass_remember");
+        type_very_safely("sshpassword");
+        click_lastmatch;
+        assert_and_click("keyring_askpass_confirm");
     }
 
     # The connection should have been established if everything has worked
@@ -105,7 +96,7 @@ sub run {
     # Log in.
     boot_to_login_screen();
     dm_perform_login($desktop, $pass);
-    check_desktop;
+    check_desktop(timeout => 120);
 
     # Reconnect without using password. We still should be
     # able to log in.

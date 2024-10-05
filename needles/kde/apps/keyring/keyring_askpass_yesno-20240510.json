@@ -10,6 +10,7 @@
   ],
   "properties": [],
   "tags": [
-    "keyring_askpass_yesno"
+    "keyring_askpass_yesno",
+    "DESKTOP-kde"
   ]
 }
