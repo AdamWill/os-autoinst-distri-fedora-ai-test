@@ -1,0 +1,25 @@
+{
+  "area": [
+    {
+      "xpos": 71,
+      "width": 72,
+      "ypos": 625,
+      "type": "match",
+      "height": 14
+    },
+    {
+      "xpos": 48,
+      "ypos": 753,
+      "width": 30,
+      "height": 15,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "root_logged_in",
+    "root_console",
+    "root_console_dracut",
+    "ENV-DISTRI-fedora"
+  ]
+}
