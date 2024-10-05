@@ -80,6 +80,8 @@ sub run {
         assert_and_click("desktop_package_tool_update_apply", timeout => 1200);
         # Once we click that button, we can check the checkbutton
         # for restarting the computer automatically.
+        assert_screen ["desktop_package_tool_restart_automatically", "desktop_package_tool_action_select"];
+        click_lastmatch if (match_has_tag "desktop_package_tool_action_select");
         assert_and_click("desktop_package_tool_restart_automatically");
         # When we see auth_required, it means the restart has been triggered
         # and we need to authorize it

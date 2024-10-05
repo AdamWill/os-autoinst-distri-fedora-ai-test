@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 499,
+      "width": 49,
+      "ypos": 629,
+      "type": "match",
+      "height": 16
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_package_tool_restart_automatically"
+  ]
+}

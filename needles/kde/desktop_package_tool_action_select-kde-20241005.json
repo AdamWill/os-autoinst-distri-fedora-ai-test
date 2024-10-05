@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 15,
+      "xpos": 501,
+      "width": 99,
+      "ypos": 690
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_package_tool_action_select"
+  ]
+}
