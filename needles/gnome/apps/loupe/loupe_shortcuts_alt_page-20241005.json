@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 18,
+      "width": 18,
+      "xpos": 502,
+      "ypos": 750
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "loupe_shortcuts_alt_page"
+  ]
+}
