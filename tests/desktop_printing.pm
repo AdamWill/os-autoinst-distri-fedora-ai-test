@@ -144,15 +144,23 @@ sub run {
     # Enter key will dismiss them and return the CLI to the ready status.
     send_key("ret");
     # Open the pdf file in a Document reader and check that it is correctly printed.
-    type_safely("$viewer $filepath &\n");
+    wait_screen_change { type_safely("$viewer $filepath &\n"); };
     wait_still_screen(stilltime => 3, similarity_level => 45);
-    # Resize the window, so that the size of the document fits the bigger space
-    # and gets more readable.
-    send_key $maximize if (defined($maximize));
-    wait_still_screen(stilltime => 2, similarity_level => 45);
-    send_key "ctrl-home" if ($desktop eq "kde");
-    # Check the printed pdf.
-    assert_screen "printing_check_sentence";
+    # Maximize the screen and check the printed pdf, giving it a few
+    # chances to work
+    my $count = 5;
+    while ($count) {
+        $count -= 1;
+        send_key($maximize);
+        wait_still_screen(stilltime => 3, similarity_level => 45);
+        if ($desktop eq "kde") {
+            # ensure we're at the start of the document
+            send_key "ctrl-home";
+            wait_still_screen(stilltime => 2, similarity_level => 45);
+        }
+        last if (check_screen("printing_check_sentence", 3));
+    }
+    assert_screen("printing_check_sentence", 5);
 }
 
 
