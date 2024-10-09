@@ -115,32 +115,21 @@ sub login_user {
 
 sub check_user_logged_in {
     # Performs a check that a correct user has been locked in.
-    my $user = shift;
-    my $exitkey;
-    # In Gnome, the name of the user was accessible through menu
-    # in the upper right corner, but apparently it has been removed.
-    # Reading the login name from the terminal prompt seems to be
-    # the most reliable thing to do.
-    if ($desktop eq "gnome") {
-        menu_launch_type("terminal");
-        wait_still_screen 2;
-        $exitkey = "alt-f4";
-    }
-    elsif ($desktop eq "i3") {
-        send_key("alt-ret");
-        assert_screen("apps_run_terminal");
-        assert_script_run('[ $(whoami) = "' . "$user\" ]");
-        wait_screen_change { send_key("alt-shift-q"); };
-        return;
-    }
-    # With KDE, the user is shown in the main menu, so let us just
-    # open this and see.
-    else {
-        assert_and_click "system_menu_button";
-        $exitkey = "esc";
-    }
-    assert_screen "user_confirm_$user";
-    send_key $exitkey;
+    my %args = @_;
+    $args{termopen} //= 0;
+    $args{keepterm} //= 0;
+    my $user = $args{user};
+    # In Gnome and i3, the current user's name is not easily visible,
+    # so reading the login name from the terminal prompt seems to be
+    # the most reliable thing to do. In KDE we could see it on the
+    # launcher menu, but it keeps things clean if we use the same
+    # approach for all desktops.
+    my $exitkey = "alt-f4";
+    $exitkey = "shift-ctrl-q" if ($desktop eq "i3");
+    desktop_launch_terminal unless ($args{termopen});
+    assert_screen("apps_run_terminal");
+    assert_script_run('[ $(whoami) = "' . "$user\" ]");
+    send_key $exitkey unless ($args{keepterm});
     wait_still_screen 5;
 }
 
@@ -163,7 +152,6 @@ sub logout_user {
 sub switch_user {
     # Switch the user, i.e. leave the current user logged in and
     # log in another user simultaneously.
-    send_key "ret";
     if (check_screen "locked_screen_switch_user", 5) {
         assert_and_click "locked_screen_switch_user";
     }
@@ -276,7 +264,7 @@ sub run {
 
     # Log in with the first user account.
     login_user(user => "jack", password => $jackpass);
-    check_user_logged_in("jack");
+    check_user_logged_in(user => "jack");
     # Log out the user.
     logout_user();
 
@@ -289,7 +277,7 @@ sub run {
         # If not, we are in KDE and we will log in normally.
         login_user(user => "jim", password => $jimpass);
     }
-    check_user_logged_in("jim");
+    check_user_logged_in(user => "jim");
     # And this time reboot the system using the menu.
     reboot_system();
 
@@ -307,7 +295,7 @@ sub run {
     # only work if we were correctly denied login with the wrong password,
     # if we were let in with the wrong password it'll fail
     login_user(user => "jim", password => $jimpass);
-    check_user_logged_in("jim");
+    check_user_logged_in(user => "jim");
 
     # Lock the screen and unlock again.
     lock_screen();
@@ -315,32 +303,29 @@ sub run {
     login_user(user => "jim", password => $jimpass, method => "unlock");
 
     # Switch user tests
-    if ($desktop eq "gnome") {
-        # Because KDE at the moment (20200403) is very unreliable concerning switching the users inside
-        # the virtual machine, we will skip this part, until situation is better. Switching users will
-        # be only tested in Gnome.
-
+    unless ($desktop eq "i3") {
         # Start a terminal session to monitor on which sessions we are, when we start switching users.
         # This time, we will open the terminal window manually because we want to leave it open later.
-        menu_launch_type "terminal";
+        desktop_launch_terminal;
         wait_still_screen 2;
         # Initiate switch user
         switch_user();
         # Now, we get a new login screen, so let's do the login into the new session.
         login_user(user => "jack", password => $jackpass);
         # Check that it is a new session, the terminal window should not be visible.
-        if (check_screen "user_confirm_jim") {
+        if (check_screen "apps_run_terminal") {
             die "The session was not switched!";
         }
         else {
-            check_user_logged_in("jack");
+            # keep the terminal open so we can check later
+            check_user_logged_in(user => "jack", keepterm => 1);
         }
-        # Log out the user.
-        logout_user();
+        # Switch again.
+        switch_user();
         # Now, let us log into the original session, this time, the terminal window
         # should still be visible.
         login_user(user => "jim", password => $jimpass);
-        assert_screen "user_confirm_jim";
+        check_user_logged_in(user => "jim", termopen => 1);
 
         # We will also test another alternative - switching the user from
         # a locked screen.
@@ -348,7 +333,9 @@ sub run {
         send_key "ret";
         switch_user();
         login_user(user => "jack", password => $jackpass);
-        check_user_logged_in("jack");
+        # we should be back in the previous 'jack' session so the terminal
+        # we kept open should be there
+        check_user_logged_in(user => "jack", termopen => 1);
     }
     # Power off the machine
     power_off();
