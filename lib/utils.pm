@@ -1381,25 +1381,22 @@ sub menu_launch_type {
     # launcher, typing the specified string and hitting enter. Pass
     # the string to be typed to launch whatever it is you want.
     my $app = shift;
-    # To overcome BZ2097208, let's move the mouse out of the way
-    # and give the launcher some time to take the correct focus.
-    if (get_var("DESKTOP") eq "i3") {
-        send_key("alt-d");
+    my $key = 'super';
+    $key = 'alt-d' if (get_var("DESKTOP") eq "i3");
+    if (get_var("DESKTOP") eq "kde") {
+        # To overcome BZ2097208, let's move the mouse out of the way
+        # and give the launcher some time to take the correct focus.
+        diag("Moving the mouse away from the launcher.");
+        mouse_set(1, 1);
     }
-    else {
-        if (get_var("DESKTOP") eq "kde") {
-            diag("Moving the mouse away from the launcher.");
-            mouse_set(1, 1);
-        }
-        wait_screen_change { send_key 'super'; };
-        # srsly KDE y u so slo
-        wait_still_screen 3;
-        type_very_safely $app;
-        # Wait for KDE to place focus correctly.
-        wait_still_screen 2;
-        send_key 'ret';
-        wait_still_screen 3;
-    }
+    wait_screen_change { send_key $key; };
+    # srsly KDE y u so slo
+    wait_still_screen 3;
+    type_very_safely $app;
+    # Wait for KDE to place focus correctly.
+    wait_still_screen 2;
+    send_key 'ret';
+    wait_still_screen 3;
 }
 
 sub tell_source {
