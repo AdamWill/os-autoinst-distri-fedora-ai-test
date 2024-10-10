@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 597,
+      "type": "match",
+      "xpos": 544,
+      "width": 32,
+      "height": 42
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "locked_screen_switch_user"
+  ]
+}

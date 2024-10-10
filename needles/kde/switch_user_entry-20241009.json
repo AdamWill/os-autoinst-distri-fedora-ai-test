@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 530,
+      "ypos": 641,
+      "width": 19,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "switch_user_entry"
+  ]
+}
