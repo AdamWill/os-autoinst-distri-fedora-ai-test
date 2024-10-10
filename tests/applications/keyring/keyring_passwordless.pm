@@ -28,18 +28,11 @@ sub export_kde_vars {
 sub connect_localhost {
     my $type = shift;
 
-    # Start the terminal application. On KDE also export the variables.
-    if (get_var("DESKTOP") eq "gnome") {
-        menu_launch_type("terminal");
-        assert_screen("apps_run_terminal");
-    }
-    else {
-        # try and avoid double-typing issues
-        kde_doublek_workaround;
-        menu_launch_type("konsole");
-        assert_screen("konsole_runs");
-        export_kde_vars();
-    }
+    # Start the terminal application
+    desktop_launch_terminal;
+    assert_screen("apps_run_terminal");
+    # On KDE also export the variables
+    export_kde_vars() if (get_var("DESKTOP") eq "kde");
 
     # Establish the SFTP connection to the localhost.
     # A dialogue should appear to collect credentials to open

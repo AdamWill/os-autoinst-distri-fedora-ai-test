@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login desktop_launch_terminal/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login/;
 
 
 # We introduce this global variable to hold the list of applications that have
@@ -1609,6 +1609,22 @@ sub register_application {
     print("APPLICATION REGISTERED: $application \n");
 }
 
+# launch a terminal from a desktop, using the most efficient/reliable
+# approach (not appropriate if we really need to test launching it a
+# specific way)
+sub desktop_launch_terminal {
+    my $desktop = get_var("DESKTOP");
+    if ($desktop eq "i3") {
+        send_key "alt-ret";
+    }
+    elsif ($desktop eq "kde") {
+        send_key "ctrl-alt-t";
+    }
+    else {
+        menu_launch_type "terminal";
+    }
+}
+
 # The KDE desktop tests are very difficult to maintain, because the transparency
 # of the menu requires a lot of different needles to cover the elements.
 # Therefore it is useful to change the background to a solid colour.
@@ -1652,7 +1668,8 @@ sub solidify_wallpaper {
     }
     elsif ($desktop eq "gnome") {
         # Start the terminal to set up backgrounds.
-        menu_launch_type("terminal");
+        desktop_launch_terminal;
+        assert_screen "apps_run_terminal";
         # wait to be sure it's fully open
         wait_still_screen(stilltime => 5, similarity_level => 38);
         # When the application opens, run command in it to set the background to black
@@ -1760,7 +1777,8 @@ sub set_update_notification_timestamp {
 sub start_applications {
     my @applications = @_;
     # Open the terminal
-    menu_launch_type("terminal");
+    desktop_launch_terminal;
+    assert_screen("apps_run_terminal");
     wait_still_screen(2);
     # Iterate over the application list
     # and start each application from it.
@@ -1820,22 +1838,6 @@ sub dm_perform_login {
         type_very_safely $password;
     }
     send_key "ret";
-}
-
-# launch a terminal from a desktop, using the most efficient/reliable
-# approach (not appropriate if we really need to test launching it a
-# specific way)
-sub desktop_launch_terminal {
-    my $desktop = get_var("DESKTOP");
-    if ($desktop eq "i3") {
-        send_key "alt-ret";
-    }
-    elsif ($desktop eq "kde") {
-        send_key "ctrl-alt-t";
-    }
-    else {
-        menu_launch_type "terminal";
-    }
 }
 
 1;

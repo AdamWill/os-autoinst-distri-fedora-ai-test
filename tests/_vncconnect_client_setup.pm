@@ -6,7 +6,8 @@ use utils;
 
 sub run {
     my $self = shift;
-    menu_launch_type 'terminal';
+    desktop_launch_terminal;
+    assert_screen "apps_run_terminal";
     wait_still_screen 5;
     type_very_safely "vncviewer -FullScreen -listen\n";
     mutex_create 'vncconnect_client_ready';

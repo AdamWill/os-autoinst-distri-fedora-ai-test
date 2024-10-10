@@ -63,10 +63,8 @@ sub connect_localhost {
         # Therefore, we will use a different approach - we will enable
         # CLI keyring integration and perform an SFTP connection
         # in Konsole.
-        # try and avoid double-typing issues
-        kde_doublek_workaround;
-        menu_launch_type("konsole");
-        assert_screen("konsole_runs");
+        desktop_launch_terminal;
+        assert_screen("apps_run_terminal");
         # Export the environmental variables, this is needed for the process
         # to work correctly.
         export_kde_vars();

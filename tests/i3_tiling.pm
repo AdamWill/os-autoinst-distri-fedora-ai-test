@@ -7,7 +7,7 @@ sub run {
     my $password = get_var('USER_PASSWORD', 'weakpassword');
 
     # launch a terminal first
-    send_key("alt-ret");
+    desktop_launch_terminal;
     assert_screen("apps_run_terminal");
 
     # start blivet_gui, mousepad and check that they are split on the screen

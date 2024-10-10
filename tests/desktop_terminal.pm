@@ -10,12 +10,7 @@ sub run {
     check_desktop;
     # try and avoid double-typing issues
     kde_doublek_workaround(key => 't') if ($desktop eq "kde");
-    if ($desktop eq "i3") {
-        send_key("alt-ret");
-    }
-    else {
-        menu_launch_type('terminal');
-    }
+    desktop_launch_terminal;
     assert_screen "apps_run_terminal";
     wait_still_screen(stilltime => 5, similarity_level => 42);
     # need to be root

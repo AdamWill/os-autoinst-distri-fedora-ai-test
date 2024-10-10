@@ -24,7 +24,7 @@ sub run {
     my $self = shift;
     # Open the terminal to enable us to set the
     # volume level.
-    menu_launch_type("terminal");
+    desktop_launch_terminal;
     assert_screen("apps_run_terminal");
     # Set the volume to 0%
     type_safely('amixer -D pipewire sset Master 0%');

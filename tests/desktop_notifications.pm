@@ -146,7 +146,7 @@ sub run {
         # we launch a terminal so that the top of the screen is filled with
         # something that we know and can check that it is not covered by a
         # notification popup from dunst
-        send_key('alt-ret');
+        desktop_launch_terminal;
         assert_screen("apps_run_terminal");
         assert_script_run('notify-send -t 10000 "foo"');
         assert_screen("i3_dunst_foo_notification", timeout => 5);

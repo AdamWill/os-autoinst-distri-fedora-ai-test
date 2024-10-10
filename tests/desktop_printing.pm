@@ -71,17 +71,11 @@ sub run {
     }
     # Let's open the terminal. We will use it to start the applications
     # as well as to check for the name of the printed file.
-    if ($desktop eq "i3") {
-        send_key('alt-ret');
-        assert_screen("apps_run_terminal");
-        # switch to tabbed mode
-        send_key("alt-w");
-    }
-    else {
-        menu_launch_type($term);
-        wait_still_screen(5);
-    }
-
+    desktop_launch_terminal;
+    assert_screen("apps_run_terminal");
+    wait_still_screen 3;
+    # switch to tabbed mode
+    send_key("alt-w") if ($desktop eq "i3");
     # Open the text editor and maximize it.
     wait_screen_change { type_very_safely "$editor /home/$user/testfile.txt &\n"; };
     wait_still_screen(stilltime => 2, similarity_level => 45);

@@ -27,12 +27,12 @@ sub run {
     desktop_switch_layout 'ascii';
     wait_still_screen(2);
 
-    menu_launch_type("terminal");
+    desktop_launch_terminal;
     # Similarly to _graphical_input.pm, repeat running the command
     # if it fails the first time (it often does).
     unless (check_screen "apps_run_terminal", 30) {
         check_desktop;
-        menu_launch_type("terminal");
+        desktop_launch_terminal;
     }
     assert_screen("apps_run_terminal");
     wait_still_screen(stilltime => 5, similarity_level => 42);
