@@ -142,7 +142,7 @@ sub run {
     # The following routine uses different approaches on different
     # desktops.
     connect_localhost("connect");
-    kde_doublek_workaround;
+    kde_doublek_workaround if ($desktop eq "kde");
     # Check that the password has been stored.
     check_stored();
 
