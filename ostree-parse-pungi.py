@@ -5,7 +5,7 @@ import sys
 
 # the "current" base platform version, i.e. the one that the GNOME
 # app builds currently tagged "stable" need
-BASEVER = "40"
+BASEVER = "41"
 # a regex to find where we replace that
 BASEPATT = re.compile(r"(runtime/org.fedoraproject.Platform/.*?/f)(\d+)")
 
