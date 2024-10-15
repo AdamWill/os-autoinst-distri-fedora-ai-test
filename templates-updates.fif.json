@@ -353,7 +353,6 @@
         },
         "desktop_keyring": {
             "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
                 "fedora-updates-workstation-x86_64-*-64bit": 5
             }
         },

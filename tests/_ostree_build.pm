@@ -83,6 +83,8 @@ sub run {
     assert_script_run 'git clone https://pagure.io/pungi-fedora.git';
     assert_script_run 'cd pungi-fedora/';
     assert_script_run "git checkout ${branch}";
+    # drop cheese flatpak on f39 as it has not been bumped to f41 base
+    assert_script_run 'sed -i -e "s,app/org.gnome.Cheese/[a-z_0-9]*/stable,,g" fedora.conf' if ($version eq "39");
     assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o ostree-parse-pungi.py https://pagure.io/fedora-qa/os-autoinst-distri-fedora/raw/main/f/ostree-parse-pungi.py', timeout => 180;
     my $loraxargs = script_output "python3 ostree-parse-pungi.py $lcsubv $arch";
 
