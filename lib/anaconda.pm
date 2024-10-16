@@ -30,8 +30,14 @@ sub select_disks {
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300;
     # Damn animation delay can cause bad clicks here too - wait for it
-    sleep 1;
+    wait_still_screen 3;
     assert_and_click "anaconda_main_hub_install_destination";
+    # it seems that sometimes the first click doesn't work with wayland
+    # on anaconda. we can't reproduce this manually, so work around it
+    # by just clicking again, this is safe even if the first click
+    # *did* work
+    sleep 1;
+    click_lastmatch;
 
     # this is awkward, but on the install_repository_hd_variation test,
     # we have two disks but in F39 and F40 anaconda knows we're using
