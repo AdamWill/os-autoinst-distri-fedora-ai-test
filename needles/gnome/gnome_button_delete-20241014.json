@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 59,
+      "type": "match",
+      "ypos": 734,
+      "height": 21,
+      "xpos": 233
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "contacts_contact_remove",
+    "gnome_button_delete"
+  ]
+}
