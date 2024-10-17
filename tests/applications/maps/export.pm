@@ -18,7 +18,10 @@ sub run {
     # than Rawhide and, for now, the flatpak build are still 46, so
     # we use the older flow there
     # FIXME!
-    if ($relnum < 41 || get_var('CANNED')) {
+    # Update on 10/15/2024:
+    # Flatpakked app now uses the new flow, so the only need is for
+    # older releases.
+    if ($relnum < 41) {
         # old flow
         # wait for the export screen to appear and settle
         assert_screen('maps_button_export');
