@@ -28,6 +28,10 @@ sub run {
     }
 
     assert_and_click "anaconda_main_hub_select_packages";
+    # as with installation destination, on wayland it seems like
+    # sometimes the first click is lost, so click twice
+    sleep 1;
+    click_lastmatch;
     wait_still_screen 3;
 
     # select desired environment

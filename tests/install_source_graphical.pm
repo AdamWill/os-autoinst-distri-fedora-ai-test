@@ -58,6 +58,10 @@ sub run {
 
     # Go into the Install Source spoke
     assert_and_click "anaconda_main_hub_installation_source";
+    # as with installation destination, on wayland it seems like
+    # sometimes the first click is lost, so click twice
+    sleep 1;
+    click_lastmatch;
 
     main_repo() if (get_var("REPOSITORY_GRAPHICAL") || get_var("MIRRORLIST_GRAPHICAL"));
 
