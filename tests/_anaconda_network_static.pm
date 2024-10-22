@@ -7,6 +7,9 @@ use tapnet;
 sub run {
     my $self = shift;
     assert_and_click "anaconda_main_hub_network_host_name";
+    # as with installation destination, on wayland it seems like
+    # sometimes the first click is lost, so click twice
+    sleep 1;
     assert_and_click "anaconda_network_configure";
     assert_and_click "anaconda_network_ipv4";
     assert_and_click "anaconda_network_method";
