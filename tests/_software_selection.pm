@@ -34,6 +34,12 @@ sub run {
     click_lastmatch;
     wait_still_screen 3;
 
+    # Lately, there were glitches making the cursor skip
+    # the Workstation field and the test would fail, 
+    # let's bring the cursor home to make sure it will
+    # pass all options.
+    send_key("home");
+    wait_still_screen(2);
     # select desired environment
     send_key_until_needlematch "anaconda_${packageset}_highlighted", "tab";
 
