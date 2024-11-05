@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "width": 225,
+      "ypos": 93,
+      "type": "match",
+      "height": 42,
+      "xpos": 11
+    },
+    {
+      "width": 165,
+      "height": 20,
+      "type": "match",
+      "xpos": 84,
+      "ypos": 175
+    },
+    {
+      "type": "match",
+      "xpos": 27,
+      "height": 23,
+      "ypos": 377,
+      "width": 146
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_main_screen"
+  ]
+}

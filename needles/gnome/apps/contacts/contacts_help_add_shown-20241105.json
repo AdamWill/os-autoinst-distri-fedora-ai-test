@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 184,
+      "ypos": 39,
+      "height": 37,
+      "type": "match",
+      "xpos": 421
+    },
+    {
+      "width": 127,
+      "type": "match",
+      "height": 29,
+      "xpos": 6,
+      "ypos": 169
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "contacts_help_add_shown"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 25,
+      "type": "match",
+      "xpos": 15,
+      "ypos": 114,
+      "width": 306
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_help_shown"
+  ]
+}
