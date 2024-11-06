@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 180,
+      "ypos": 408,
+      "xpos": 18,
+      "type": "match",
+      "height": 24
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_section_desktop"
+  ]
+}

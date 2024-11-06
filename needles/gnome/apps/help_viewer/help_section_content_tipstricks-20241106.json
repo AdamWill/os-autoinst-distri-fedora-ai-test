@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "ypos": 36,
+      "type": "match",
+      "height": 37,
+      "xpos": 455,
+      "width": 108
+    },
+    {
+      "width": 201,
+      "ypos": 245,
+      "type": "match",
+      "height": 21,
+      "xpos": 3
+    },
+    {
+      "width": 107,
+      "type": "match",
+      "xpos": 8,
+      "height": 26,
+      "ypos": 305
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_section_content_tipstricks"
+  ]
+}

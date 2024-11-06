@@ -1,0 +1,36 @@
+{
+  "area": [
+    {
+      "ypos": 40,
+      "type": "match",
+      "height": 32,
+      "xpos": 465,
+      "width": 93
+    },
+    {
+      "width": 79,
+      "xpos": 5,
+      "type": "match",
+      "height": 23,
+      "ypos": 369
+    },
+    {
+      "width": 84,
+      "ypos": 453,
+      "height": 22,
+      "type": "match",
+      "xpos": 5
+    },
+    {
+      "height": 22,
+      "type": "match",
+      "xpos": 5,
+      "ypos": 531,
+      "width": 151
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_section_content_accessibility"
+  ]
+}
