@@ -23,6 +23,12 @@ sub run {
         # Select the Format option
         assert_and_click "anaconda_blivet_part_format";
         assert_and_click "anaconda_blivet_part_fs_select";
+        unless (check_screen "anaconda_blivet_part_fs_efi_filesystem", 5) {
+            record_soft_failure "https://bugzilla.redhat.com/show_bug.cgi?id=2324231";
+            for (1 .. 15) {
+                send_key "up";
+            }
+        }
         assert_and_click "anaconda_blivet_part_fs_efi_filesystem";
         # Select the mountpoint field
 
