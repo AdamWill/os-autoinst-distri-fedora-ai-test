@@ -190,9 +190,20 @@ sub custom_blivet_format_partition {
     my %args = @_;
     # Start editing the partition and select the Format option
     assert_and_click "anaconda_blivet_part_edit";
+    # workaround another case where first click doesn't always work
+    # on Wayland
+    unless (check_screen "anaconda_blivet_part_format", 10) {
+        assert_and_click "anaconda_blivet_part_edit";
+    }
     assert_and_click "anaconda_blivet_part_format";
     # Select the appropriate filesystem type.
     assert_and_click "anaconda_blivet_part_drop_select";
+    unless (check_screen "anaconda_blivet_part_fs_$args{type}", 5) {
+        record_soft_failure "https://bugzilla.redhat.com/show_bug.cgi?id=2324231";
+        for (1 .. 15) {
+            send_key "up";
+        }
+    }
     assert_and_click "anaconda_blivet_part_fs_$args{type}";
     wait_still_screen 2;
     # Fill in the label if needed.
