@@ -32,6 +32,13 @@ sub run {
     # it does not work reliably. Ergo, we will use the old known
     # ctrl-alt-f2
     select_console "tty2-console";
+    # Sometimes, we can see an authentication dialogue which
+    # prevents the test from continuing. Authenticate, 
+    # if that is the case.
+    my $pass = get_var("USER_PASSWORD", "weakpassword");
+    if (check_screen("auth_required", timeout => 30)) {
+        type_very_safely("$pass\n");
+    }
     sleep(3);
 
     # Toggle network
