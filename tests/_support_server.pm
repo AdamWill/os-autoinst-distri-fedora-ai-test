@@ -31,7 +31,7 @@ sub _pxe_setup {
         assert_script_run "mkdir -p /var/lib/tftpboot/pxelinux.cfg";
         # install bootloader packages
         assert_script_run "dnf -y install syslinux", 120;
-        assert_script_run "dnf -y --releasever=$ourversion --installroot=/var/tmp/fedora install shim-x64 grub2-efi-x64", 300;
+        assert_script_run "dnf -y --releasever=$ourversion --use-host-config --installroot=/var/tmp/fedora install shim-x64 grub2-efi-x64", 300;
         # copy bootloader files to tftp root
         assert_script_run "cp /usr/share/syslinux/{pxelinux.0,vesamenu.c32,ldlinux.c32,libcom32.c32,libutil.c32} /var/lib/tftpboot";
         assert_script_run "cp /var/tmp/fedora/boot/efi/EFI/fedora/{shim.efi,grubx64.efi} /var/lib/tftpboot";
