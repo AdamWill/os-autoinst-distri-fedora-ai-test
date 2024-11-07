@@ -701,8 +701,8 @@ sub _repo_setup_updates {
     disable_updates_repos(both => 0) if ($version > $currrel);
     # use the buildroot repo on Rawhide: see e.g.
     # https://pagure.io/fedora-ci/general/issue/376 for why
-    if (get_var("VERSION") eq get_var("RAWREL") && get_var("TEST") ne "support_server") {
-        assert_script_run 'printf "[koji-rawhide]\nname=koji-rawhide\nbaseurl=https://kojipkgs.fedoraproject.org/repos/rawhide/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/koji-rawhide.repo';
+    if ($version eq get_var("RAWREL") && get_var("TEST") ne "support_server") {
+        assert_script_run 'printf "[koji-rawhide]\nname=koji-rawhide\nbaseurl=https://kojipkgs.fedoraproject.org/repos/f' . $version . '-build/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/koji-rawhide.repo';
     }
     if (lc(get_var("VERSION")) eq "eln" && get_var("TEST") ne "support_server") {
         assert_script_run 'printf "[koji-eln]\nname=koji-eln\nbaseurl=https://kojipkgs.fedoraproject.org/repos/eln-build/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/koji-eln.repo';

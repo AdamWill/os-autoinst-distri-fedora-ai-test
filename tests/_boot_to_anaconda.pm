@@ -59,8 +59,9 @@ sub run {
         # add workaround repo if there is one
         $params .= "inst.addrepo=workarounds,nfs://172.16.2.110:/mnt/workarounds_repo " if (get_workarounds);
         # add tag repo if we're on rawhide
-        if (get_var("VERSION") eq get_var("RAWREL")) {
-            $params .= "inst.addrepo=koji-rawhide,https://kojipkgs.fedoraproject.org/repos/rawhide/latest/${arch} ";
+        my $version = get_var("VERSION");
+        if ($version eq get_var("RAWREL")) {
+            $params .= "inst.addrepo=koji-rawhide,https://kojipkgs.fedoraproject.org/repos/f${version}-build/latest/${arch} ";
         }
     }
     if (get_var("ANACONDA_TEXT")) {
