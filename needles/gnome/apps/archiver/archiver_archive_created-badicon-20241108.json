@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 64,
+      "xpos": 229,
+      "ypos": 159,
+      "width": 137
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "icon seems wrong, will report"
+    }
+  ],
+  "tags": [
+    "archiver_archive_created"
+  ]
+}
