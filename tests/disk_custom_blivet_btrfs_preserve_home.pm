@@ -40,7 +40,9 @@ sub run {
     }
 
     # Reformat the /boot partition
+    wait_still_screen 2;
     assert_and_click "anaconda_blivet_part_boot";
+    assert_and_click "anaconda_blivet_part_boot" unless (check_screen "anaconda_blivet_part_boot_selected", 5);
     wait_still_screen 5;
 
     # Go to the partition settings
