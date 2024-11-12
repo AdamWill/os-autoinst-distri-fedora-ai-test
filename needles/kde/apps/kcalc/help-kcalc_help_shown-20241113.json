@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 350,
+      "ypos": 170,
+      "width": 200,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kcalc_help_shown"
+  ]
+}

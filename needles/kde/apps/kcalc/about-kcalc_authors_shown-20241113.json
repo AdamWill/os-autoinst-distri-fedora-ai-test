@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 358,
+      "ypos": 348,
+      "width": 136,
+      "height": 25,
+      "type": "match"
+    },
+    {
+      "xpos": 362,
+      "ypos": 416,
+      "width": 169,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kcalc_authors_shown"
+  ]
+}

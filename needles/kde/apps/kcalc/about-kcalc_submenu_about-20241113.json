@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 360,
+      "ypos": 325,
+      "width": 95,
+      "height": 15,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kcalc_submenu_about"
+  ]
+}

@@ -170,9 +170,11 @@ for button in ("div", "divider", "zero", "one", "two", "three", "four", "five",
                 "six","seven", "eight", "nine", "mod", "percent", "pi", "root",
                 "square", "sub"):
     testtags.append(f"calc_button_{button}")
+    testtags.append(f"kcalc_button_{button}")
 for result in ("BokZw", "Czo4s", "O9qsL", "WIxiR", "b5y2B", "h7MfO", "qxuBK",
                 "tWshx", "uC8Ul", "3LAG3"):
     testtags.append(f"calc_result_{result}")
+    testtags.append(f"kcalc_result_{result}")
 # Needles for Contacts
 for hashname in ("jlJmL", "7XGzO", "ps61y", "OvXj~", "GqYOp", "VEFrP"):
     testtags.append(f"contacts_name_{hashname}")

@@ -1280,6 +1280,17 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
+        "kcalc": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/kcalc",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
         "maps": {
             "profiles": {
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
