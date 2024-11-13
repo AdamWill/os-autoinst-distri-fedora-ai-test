@@ -35,7 +35,7 @@ sub run {
     wait_still_screen 3;
 
     # Lately, there were glitches making the cursor skip
-    # the Workstation field and the test would fail, 
+    # the Workstation field and the test would fail,
     # let's bring the cursor home to make sure it will
     # pass all options.
     send_key("home");
