@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 197,
+      "ypos": 110,
+      "width": 19,
+      "height": 20,
+      "type": "match"
+    },
+    {
+      "xpos": 479,
+      "ypos": 111,
+      "width": 67,
+      "height": 21,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "imageviewer_runs"
+  ]
+}

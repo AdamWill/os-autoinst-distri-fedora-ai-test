@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 5,
+      "ypos": 8,
+      "width": 58,
+      "height": 90,
+      "type": "match"
+    },
+    {
+      "xpos": 6,
+      "ypos": 687,
+      "width": 61,
+      "height": 72,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gwen_fullscreen_on"
+  ]
+}

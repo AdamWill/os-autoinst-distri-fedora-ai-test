@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 310,
+      "ypos": 334,
+      "width": 136,
+      "height": 50,
+      "type": "match",
+      "match": 90
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gwen_image_rotated_left"
+  ]
+}

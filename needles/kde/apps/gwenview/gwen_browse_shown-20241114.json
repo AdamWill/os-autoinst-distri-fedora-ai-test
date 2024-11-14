@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "xpos": 32,
+      "ypos": 170,
+      "width": 75,
+      "height": 54,
+      "type": "match"
+    },
+    {
+      "xpos": 179,
+      "ypos": 172,
+      "width": 82,
+      "height": 55,
+      "type": "match"
+    },
+    {
+      "xpos": 324,
+      "ypos": 172,
+      "width": 85,
+      "height": 54,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gwen_browse_shown"
+  ]
+}

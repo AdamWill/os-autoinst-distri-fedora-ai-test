@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 370,
+      "ypos": 380,
+      "width": 81,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gwen_credits_shown"
+  ]
+}

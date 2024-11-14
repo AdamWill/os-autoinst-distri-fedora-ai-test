@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 442,
+      "ypos": 113,
+      "width": 122,
+      "height": 20,
+      "type": "match"
+    },
+    {
+      "xpos": 229,
+      "ypos": 192,
+      "width": 40,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gwen_shortcuts_shown"
+  ]
+}
