@@ -33,7 +33,7 @@ sub run {
     # ctrl-alt-f2
     select_console "tty2-console";
     # Sometimes, we can see an authentication dialogue which
-    # prevents the test from continuing. Authenticate, 
+    # prevents the test from continuing. Authenticate,
     # if that is the case.
     my $pass = get_var("USER_PASSWORD", "weakpassword");
     if (check_screen("auth_required", timeout => 30)) {
