@@ -4,11 +4,12 @@ use testapi;
 use utils;
 
 # This script starts the KCalc application
-# and saves the milestone for the consequtive
+# and saves the milestone for the following
 # tests.
 
 sub run {
     my $self = shift;
+    kde_doublek_workaround();
     # Run the application
     menu_launch_type("kcalc");
     assert_screen("kcalc_runs");
