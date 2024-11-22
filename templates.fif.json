@@ -2266,6 +2266,37 @@
                 "WORKER_CLASS": "tap"
             }
         },
+        "install_rdp_client": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "DESKTOP": "gnome",
+                "HDD_1": "disk_f%CURRREL%_desktop_5_%ARCH%.qcow2",
+                "INSTALL": "1",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "install_rdp_server",
+                "PREINSTALL": "_rdp_client_connect_pre _graphical_wait_login _rdp_client_connect",
+                "RDP_CLIENT": "1",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_rdp_server": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "GRUB": "inst.rdp inst.rdp.username=rapunzel inst.rdp.password=towertop net.ifnames=0 biosdevname=0 ip=172.16.2.114::172.16.2.2:255.255.255.0:rdp001.test.openqa.fedoraproject.org:eth0:off",
+                "NICTYPE": "tap",
+                "RDP_SERVER": "1",
+                "WORKER_CLASS": "tap"
+            }
+        },
         "install_xfs": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,

@@ -98,9 +98,9 @@ sub run {
         die "Error encountered!" if (check_screen "anaconda_error_report");
         # move the mouse a bit
         mouse_set 100, 100;
-        # also click, if we're a VNC client, seems just moving mouse
+        # also click, if we're a RDP client, seems just moving mouse
         # isn't enough to defeat blanking
-        mouse_click if (get_var("VNC_CLIENT"));
+        mouse_click if (get_var("RDP_CLIENT"));
         mouse_hide;
         last if (check_screen "anaconda_install_done", $interval);
         $timeout -= $interval;
@@ -136,10 +136,10 @@ sub run {
     # check whether install is affected by
     # https://bugzilla.redhat.com/show_bug.cgi?id=2268505 ,
     # soft fail and work around it if so
-    # our approach for taking all these actions doesn't work on VNC
+    # our approach for taking all these actions doesn't work on RDP
     # installs, fortunately we don't need any of them in that case
-    # yet, so for now let's just flush the list here if we're VNC
-    @actions = () if (get_var("VNC_CLIENT"));
+    # yet, so for now let's just flush the list here if we're RDP
+    @actions = () if (get_var("RDP_CLIENT"));
     # If we have no actions, let's just go ahead and reboot now,
     # unless this is memcheck
     unless (@actions) {

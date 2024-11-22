@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 349,
+      "ypos": 280,
+      "width": 123,
+      "height": 22,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "connections_verify_screen"
+  ]
+}

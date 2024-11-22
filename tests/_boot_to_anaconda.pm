@@ -104,15 +104,15 @@ sub run {
     $timeout = 120 if (get_var("IS_PXE"));
 
     # call do_bootloader with postinstall=0, the params, and the mutex,
-    # unless we're a VNC install client (no bootloader there)
-    unless (get_var("VNC_CLIENT")) {
+    # unless we're a RDP install client (no bootloader there)
+    unless (get_var("RDP_CLIENT")) {
         do_bootloader(postinstall => 0, params => $params, mutex => $mutex, timeout => $timeout);
     }
 
     # Read variables for identification tests (see further).
     my $identification = get_var('IDENTIFICATION');
     # proceed to installer
-    if (get_var("KICKSTART") || get_var("VNC_SERVER")) {
+    if (get_var("KICKSTART") || get_var("RDP_SERVER")) {
         # wait for the bootloader *here* - in a test that inherits from
         # anacondatest - so that if something goes wrong during install,
         # we get anaconda logs. sleep a bit first so we don't get a
@@ -123,7 +123,7 @@ sub run {
     }
     else {
         if (get_var("ANACONDA_TEXT")) {
-            # select that we don't want to start VNC; we want to run in text mode
+            # select that we don't want to start RDP; we want to run in text mode
             if (get_var("SERIAL_CONSOLE")) {
                 # we direct the installer to virtio-console1, and use
                 # virtio-console as a root console

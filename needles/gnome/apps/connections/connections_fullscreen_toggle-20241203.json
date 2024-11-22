@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 816,
+      "ypos": 42,
+      "width": 23,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "connections_fullscreen_toggle"
+  ]
+}

@@ -87,6 +87,8 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `_SECRET_BUGZILLA_PASSWORD` | string | not set | used with `BUGZILLA_LOGIN` | This is used to store a password string which does not get exposed in log files. |
 | `_SECRET_BUGZILLA_APIKEY` | string | not set | used with other secrets | This is used to store an API key which does not get exposed in log files. |
 | `USE_CUPS` | boolean | `false`/not set | if set, the desktop printing test will use cups-pdf instead of the generic method |
+| `RDP_SERVER` | boolean | `false`/not set | set to identify an RDP server which will modify the script path for installation tests |
+| `RDP_CLIENT` | boolean | `false`/not set | set to identify an RDP client which will modify the script path for installation tests |
 
 Run variables
 -------------
