@@ -28,6 +28,7 @@
             "flavor": "updates-container",
             "settings": {
                 "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
+                "KIWI_PROFILE": "Container-Base-Generic",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             },
@@ -132,6 +133,7 @@
                 "DESKTOP": "gnome",
                 "HDDSIZEGB": "15",
                 "LIVE": "1",
+                "LIVE_BUILD_TEST": "live_build",
                 "NUMDISKS": "2",
                 "PACKAGE_SET": "default",
                 "RETRY": "1",
@@ -146,7 +148,9 @@
             "settings": {
                 "DESKTOP": "kde",
                 "HDDSIZEGB": "15",
+                "KIWI_PROFILE": "KDE-Desktop-Live",
                 "LIVE": "1",
+                "LIVE_BUILD_TEST": "kiwi_build",
                 "NUMDISKS": "2",
                 "PACKAGE_SET": "default",
                 "RETRY": "1",
@@ -324,21 +328,6 @@
                 "fedora-updates-workstation-x86_64-*-64bit": 5
             }
         },
-        "container_build_kiwi": {
-            "profiles": {
-                "fedora-updates-container-x86_64-*-64bit": 5
-            },
-            "settings": {
-                "BOOTFROM": "c",
-                "HDD_1": "disk_f%VERSION%_minimal_4_%ARCH%.qcow2",
-                "HDDSIZEGB_3": "25",
-                "MAX_JOB_TIME": "10800",
-                "+NUMDISKS": "3",
-                "POSTINSTALL": "_container_build_kiwi",
-                "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "false"
-            }
-        },
         "desktop_background": {
             "profiles": {
                 "fedora-updates-kde-x86_64-*-64bit": 5,
@@ -388,7 +377,7 @@
                 "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
             },
             "settings": {
-                "+START_AFTER_TEST": "live_build@%ARCH_BASE_MACHINE%",
+                "+START_AFTER_TEST": "%LIVE_BUILD_TEST%@%ARCH_BASE_MACHINE%",
                 "INSTALL": "1",
                 "ISO": "Fedora-%SUBVARIANT%-Live-%ARCH%-%ADVISORY_OR_TASK%.iso",
                 "QEMURAM": "4096",
@@ -449,9 +438,26 @@
                 "USER_LOGIN": "false"
             }
         },
+        "kiwi_build": {
+            "profiles": {
+                "fedora-updates-container-x86_64-*-64bit": 5,
+                "fedora-updates-kde-live-iso-x86_64-*-64bit": 5
+            },
+            "settings": {
+                "+DESKTOP": "",
+                "+LIVE": "",
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%VERSION%_minimal_4_%ARCH%.qcow2",
+                "HDDSIZEGB_3": "25",
+                "MAX_JOB_TIME": "10800",
+                "+NUMDISKS": "3",
+                "POSTINSTALL": "_kiwi_build",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
+        },
         "live_build": {
             "profiles": {
-                "fedora-updates-kde-live-iso-x86_64-*-64bit": 5,
                 "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
             },
             "settings": {

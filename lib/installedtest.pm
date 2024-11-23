@@ -159,6 +159,14 @@ sub post_fail_hook {
         upload_logs "/var/tmp/imgbuild/program.log", failok => 1;
     }
 
+    if (get_var("TEST") eq "kiwi_build") {
+        unless (script_run "mock -r openqa --copyout /tmp/image-root.log .", 90) {
+            upload_logs "image-root.log";
+        }
+        my $arch = get_var("ARCH");
+        upload_logs "/var/lib/mock/fedora-openqa-${arch}/root.log";
+    }
+
     if (get_var("TEST") eq "podman") {
         upload_logs "/tmp/podman-bats.txt", failok => 1;
     }
