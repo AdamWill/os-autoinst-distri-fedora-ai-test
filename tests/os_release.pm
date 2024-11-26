@@ -12,6 +12,13 @@ sub strip_marks {
     return $string;
 }
 
+sub download_python_tests {
+    # Download the Python test script and change mode to rwx,rx,rx.
+    assert_script_run("curl https://pagure.io/fedora-qa/os-autoinst-distri-fedora/raw/os-release-addon/f/check-release.py -o ~/check-release.py --retry 10 --retry-delay 2", timeout => 60);
+    assert_script_run("chmod 755 ~/check-release.py", timeout => 20);
+    sleep(5);
+}
+
 sub run {
     # First, let us define some variables needed to run the program.
     my $self = shift;
@@ -180,6 +187,15 @@ sub run {
         print "VARIANT was not tested because the compose is not Workstation or Server Edition.\n";
         print "VARIANT_ID was not tested because the compose is not Workstation or Server Edition.\n";
     }
+
+
+    # Download Python test script to run the tests.
+    download_python_tests();
+    # Test for EOL date in the distant future.
+    assert_script_run("~/check-release.py --test future --verbose");
+
+    # Test for EOL dates match each other.
+    assert_script_run("~/check-release.py --test compare --release $version_id --verbose");
 
     # Check for fails, count them, collect their messages and die if something was found.
     my $failcount = scalar @fails;
