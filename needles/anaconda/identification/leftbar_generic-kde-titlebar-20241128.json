@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "height": 646,
+      "width": 123,
+      "ypos": 63,
+      "type": "match",
+      "xpos": 20
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "works around anaconda title bar being visible in KDE, which it should not be"
+    }
+  ],
+  "tags": [
+    "leftbar_generic"
+  ]
+}
