@@ -844,7 +844,8 @@ sub handle_welcome_screen {
 
 sub gnome_initial_setup {
     # Handle gnome-initial-setup, with variations for live mode (the
-    # short run on live boot since F39), the pre-login  mode (when no
+    # short run on live boot which was implemented at times from F39
+    # onwards, but currently isn't), the pre-login mode (when no
     # user was created during install) and post-login mode (when user
     # was created during install). post-login mode currently (2023-08)
     # unused, but may come back in future. 'livetry' indicates whether
@@ -959,24 +960,6 @@ sub gnome_initial_setup {
             # the wizard had proceeded to the final screen with no such button on it.
             # Therefore, we also try to assert the installation button to start Anaconda.
             wait_screen_change { assert_and_click ["next_button"]; };
-        }
-    }
-    unless (get_var("VNC_CLIENT") || $args{live} || $relnum > 39) {
-        # We should be at the GOA screen, except on VNC_CLIENT case
-        # where network isn't working yet. click 'Skip' one time. If
-        # it's not visible we may have hit
-        # https://bugzilla.redhat.com/show_bug.cgi?id=1997310 , which
-        # we'll handle as a soft failure
-        # This screen was removed from g-i-s in Jan 2024:
-        # https://gitlab.gnome.org/GNOME/gnome-initial-setup/-/merge_requests/221
-        # so we don't see it on F40+, and can drop this block when
-        # F39 is EOL
-        mouse_set(100, 100);
-        if (check_screen "skip_button", 60) {
-            wait_screen_change { click_lastmatch; };
-        }
-        else {
-            record_soft_failure "GOA screen not seen! Likely RHBZ #1997310";
         }
     }
     send_key "shift-tab" if ($args{live} && $args{livetry});
