@@ -44,10 +44,6 @@ sub run {
     }
     elsif ($current =~ "silverblue") {
         my $relnum = get_release_number;
-        $rebase = $relnum - 1;
-        # avoid rebasing 39 > 38 due to
-        # https://github.com/fedora-silverblue/issue-tracker/issues/470
-        $rebase = "40" if ($rebase eq "38");
         # on update tests, just rebase to the 'official' ref for the
         # release, as opposed to the custom ref we used when building;
         # this should be more reliable than a different release
