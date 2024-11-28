@@ -14,12 +14,6 @@ sub run {
     # Add a new alarm using the one minute button
     assert_screen("clocks_timer_page");
     assert_and_click("clocks_button_timer_minute");
-    # since GNOME 46, that was a 'quickstart', on older GNOME we
-    # have to hit start; remove this when no more F39 testing
-    if (check_screen("clocks_button_timer_start", 5)) {
-        wait_still_screen(2);
-        click_lastmatch;
-    }
     sleep(10);
     assert_and_click("clocks_button_timer_pause");
     assert_screen("clocks_timer_paused");
