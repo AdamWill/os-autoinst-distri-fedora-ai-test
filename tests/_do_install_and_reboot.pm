@@ -145,6 +145,14 @@ sub run {
     unless (@actions) {
         unless (get_var("MEMCHECK")) {
             assert_and_click "anaconda_install_done";
+            if (get_var("TEST") eq 'install_default_update_netinst') {
+                wait_still_screen 10;
+                if (check_screen "anaconda_grey_stuck") {
+                    record_soft_failure 'looks like anaconda shutdown stuck - https://bugzilla.redhat.com/show_bug.cgi?id=2329587';
+                    $self->root_console(timeout => 30);
+                    type_string "reboot\n";
+                }
+            }
         }
         return undef;
     }
