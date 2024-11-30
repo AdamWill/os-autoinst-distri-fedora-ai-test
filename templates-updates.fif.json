@@ -399,6 +399,7 @@
                 "NO_ADVISORY_POST": "1",
                 "PACKAGE_SET": "default",
                 "PARALLEL_WITH": "support_server@%ARCH_BASE_MACHINE%",
+                "RETRY": "5",
                 "WORKER_CLASS": "tap"
             }
         },
