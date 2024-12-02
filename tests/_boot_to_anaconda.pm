@@ -199,7 +199,13 @@ sub run {
                 }
             }
             # wait for anaconda to appear
-            assert_screen ["anaconda_select_install_lang", "anaconda_webui_welcome"], 300;
+            unless (check_screen ["anaconda_select_install_lang", "anaconda_webui_welcome"], 300) {
+                # may be hitting https://bugzilla.redhat.com/show_bug.cgi?id=2329581,
+                # try pressing a key
+                send_key "spc";
+                assert_screen ["anaconda_select_install_lang", "anaconda_webui_welcome"], 300;
+                record_soft_failure "boot hung until key pressed - #2329581";
+            }
             # on webUI path we are done now, also set a var so later
             # tests know if we're on the webUI path
             if (match_has_tag "anaconda_webui_welcome") {
