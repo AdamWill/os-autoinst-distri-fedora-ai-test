@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 270,
+      "ypos": 421,
+      "type": "match",
+      "width": 50,
+      "height": 17
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_webui_select"
+  ]
+}

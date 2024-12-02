@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 364,
+      "ypos": 726,
+      "type": "match",
+      "height": 17,
+      "width": 154
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-english",
+    "anaconda_webui_begin_installation"
+  ]
+}
