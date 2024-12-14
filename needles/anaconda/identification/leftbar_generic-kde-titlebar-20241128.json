@@ -8,12 +8,7 @@
       "xpos": 20
     }
   ],
-  "properties": [
-    {
-      "name": "workaround",
-      "value": "works around anaconda title bar being visible in KDE, which it should not be"
-    }
-  ],
+  "properties": [],
   "tags": [
     "leftbar_generic"
   ]
