@@ -50,14 +50,8 @@ sub run {
     assert_screen("gte_file_saved");
     # Check that the file has been created
     $self->root_console(tty => 3);
-    # The test started to fail on Silverblue
-    # because the target directory changed.
-    if (get_var("SUBVARIANT") eq "Silverblue") {
-        assert_script_run("ls /home/test/Documents/list.md");
-    }
-    else {
-        assert_script_run("ls /home/test/list.md");
-    }
+    # it might be in either of these places depending on version / release
+    assert_script_run("ls /home/test/Documents/list.md || ls /home/test/list.md");
     desktop_vt();
 }
 
