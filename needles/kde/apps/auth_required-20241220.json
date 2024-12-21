@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 32,
+      "type": "match",
+      "height": 41,
+      "xpos": 229,
+      "ypos": 333
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "auth_required",
+    "auth_required_password"
+  ]
+}
