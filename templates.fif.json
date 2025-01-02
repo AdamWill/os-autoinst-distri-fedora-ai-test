@@ -5,7 +5,7 @@
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
                 "PART_TABLE_TYPE": "mbr",
-                "QEMUCPU": "Nehalem",
+                "QEMUCPU": "host",
                 "QEMUCPUS": "2",
                 "QEMURAM": "3072",
                 "QEMU_VIDEO_DEVICE": "virtio-vga",
@@ -61,7 +61,7 @@
                 "INSECURE_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.fd",
                 "INSECURE_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.fd",
                 "PART_TABLE_TYPE": "gpt",
-                "QEMUCPU": "Nehalem",
+                "QEMUCPU": "host",
                 "QEMUCPUS": "2",
                 "QEMURAM": "3072",
                 "QEMU_VIDEO_DEVICE": "virtio-vga",
@@ -86,7 +86,7 @@
             "flavor": "BaseOS-boot-iso",
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
-                "+QEMUCPU": "Haswell",
+                "+QEMUCPU": "host",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -97,7 +97,7 @@
             "flavor": "BaseOS-dvd-iso",
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
-                "+QEMUCPU": "Haswell",
+                "+QEMUCPU": "host",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -659,6 +659,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "QEMUCPU": "Nehalem",
                 "STARTSTOP": "true",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
