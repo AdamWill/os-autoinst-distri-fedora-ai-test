@@ -127,7 +127,13 @@ sub check_user_logged_in {
     my $exitkey = "alt-f4";
     $exitkey = "shift-ctrl-q" if ($desktop eq "i3");
     desktop_launch_terminal unless ($args{termopen});
-    assert_screen("apps_run_terminal");
+    # the leave_button check is a workaround for
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2335913
+    assert_screen(["apps_run_terminal", "leave_button"]);
+    if (match_has_tag("leave_button")) {
+        send_key("esc");
+        assert_screen("apps_run_terminal");
+    }
     assert_script_run('[ $(whoami) = "' . "$user\" ]");
     send_key $exitkey unless ($args{keepterm});
     wait_still_screen 5;
