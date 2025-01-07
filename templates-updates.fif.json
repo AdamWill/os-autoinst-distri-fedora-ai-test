@@ -380,7 +380,8 @@
                 "+START_AFTER_TEST": "%LIVE_BUILD_TEST%@%ARCH_BASE_MACHINE%",
                 "INSTALL": "1",
                 "ISO": "Fedora-%SUBVARIANT%-Live-%ARCH%-%ADVISORY_OR_TASK%.iso",
-                "QEMURAM": "4096"
+                "QEMURAM": "4096",
+                "RETRY": "5"
             }
         },
         "install_default_update_netinst": {

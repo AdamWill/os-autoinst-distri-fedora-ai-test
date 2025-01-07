@@ -207,6 +207,7 @@
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "DESKTOP": "kde",
                 "HDDSIZEGB": "15",
+                "INSTALL_RETRY": "5",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
@@ -220,6 +221,7 @@
             "settings": {
                 "DESKTOP": "i3",
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
+                "INSTALL_RETRY": "5",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO",
@@ -356,6 +358,7 @@
                 "DESKTOP": "gnome",
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "HDDSIZEGB": "20",
+                "INSTALL_RETRY": "5",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
@@ -370,6 +373,7 @@
                 "DESKTOP": "gnome",
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "HDDSIZEGB": "20",
+                "INSTALL_RETRY": "5",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
@@ -1729,7 +1733,8 @@
             },
             "settings": {
                 "PACKAGE_SET": "default",
-                "POSTINSTALL": "_collect_data"
+                "POSTINSTALL": "_collect_data",
+                "RETRY": "%INSTALL_RETRY%"
             }
         },
         "install_default_upload": {
@@ -1752,6 +1757,7 @@
             "settings": {
                 "PACKAGE_SET": "default",
                 "POSTINSTALL": "_collect_data",
+                "RETRY": "%INSTALL_RETRY%",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
             }
         },
@@ -1982,7 +1988,8 @@
                 "fedora-KDE-live-iso-x86_64-*-64bit": 21
             },
             "settings": {
-                "INSTALL_NO_USER": "1"
+                "INSTALL_NO_USER": "1",
+                "RETRY": "%INSTALL_RETRY%"
             }
         },
         "install_package_set_kde": {
