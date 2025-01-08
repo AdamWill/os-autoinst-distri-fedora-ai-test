@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 94,
+      "ypos": 161,
+      "width": 176,
+      "height": 31,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_webui_custom_partition_creation"
+  ]
+}

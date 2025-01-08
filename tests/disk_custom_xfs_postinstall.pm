@@ -3,7 +3,8 @@ use strict;
 use testapi;
 
 sub run {
-    assert_screen "root_console";
+    my $self = shift;
+    $self->root_console(tty => 3, timeout => 30);
     # check that xfs is used on root partition
     assert_script_run "mount | grep 'on / type xfs'";
 }

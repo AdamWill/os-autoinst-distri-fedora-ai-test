@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 550,
+      "ypos": 409,
+      "width": 51,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_webui_custom_create_table"
+  ]
+}

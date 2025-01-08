@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 241,
+      "ypos": 541,
+      "width": 35,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_webui_custom_fs_biosboot"
+  ]
+}

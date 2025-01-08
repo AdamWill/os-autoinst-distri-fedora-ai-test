@@ -9,7 +9,7 @@ use testapi;
 use utils;
 use bugzilla;
 
-our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo get_mirrorlist_url crash_anaconda_text report_bug_text/;
+our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part webui_custom_start webui_custom_create_disklabel webui_custom_add_partition webui_custom_boot_partitions get_full_repo get_mirrorlist_url crash_anaconda_text report_bug_text/;
 
 sub select_disks {
     # Handles disk selection. Has one optional argument - number of
@@ -306,6 +306,76 @@ sub custom_delete_part {
     return if not $part;
     assert_and_click "anaconda_part_select_$part";
     assert_and_click "anaconda_part_delete";
+}
+
+sub webui_custom_start {
+    # enter webui's custom partitioning flow
+    assert_and_click "anaconda_webui_kebab_blue";
+    assert_and_click "anaconda_webui_storage_editor";
+    assert_and_click "anaconda_webui_storage_editor_confirm";
+}
+
+sub webui_custom_create_disklabel {
+    # create partition table on a blank disk
+    assert_and_click "anaconda_webui_custom_unformatted";
+    assert_and_click "anaconda_webui_custom_create_table";
+    assert_and_click "anaconda_webui_custom_initialize";
+}
+
+sub webui_custom_add_partition {
+    # create a new partition in webui's custom interface
+    my %args = (
+        devicetype => "",
+        size => 0,
+        filesystem => "",
+        mountpoint => "",
+        @_
+    );
+    my $pname = "";
+    if ($args{mountpoint}) {
+        $pname = $args{mountpoint};
+        $pname =~ s,/,,g;
+    }
+    assert_and_click "anaconda_webui_custom_freespace";
+    assert_and_click "anaconda_webui_custom_create_partition";
+    assert_screen "anaconda_webui_custom_partition_creation";
+    type_very_safely $pname if ($args{mountpoint});
+    send_key 'tab';
+    type_very_safely $args{mountpoint} if ($args{mountpoint});
+    send_key 'tab';
+    if ($args{filesystem}) {
+        assert_and_click "anaconda_webui_active_downcaret";
+        assert_and_click "anaconda_webui_custom_fs_$args{filesystem}";
+    }
+    wait_still_screen 2;
+    send_key 'tab';
+    wait_still_screen 2;
+    send_key 'tab';
+    wait_still_screen 2;
+    type_very_safely $args{size} if ($args{size});
+    send_key 'tab';
+    # select MB (size should always be in MB)
+    send_key 'up' if ($args{size});
+    wait_still_screen 2;
+    assert_and_click "anaconda_webui_custom_create";
+    wait_still_screen 5;
+}
+
+sub webui_custom_boot_partitions {
+    # standard steps to create /boot/efi, /boot, bios boot, PRePboot etc.
+    if (get_var("UEFI")) {
+        # if we're running on UEFI, we need esp
+        webui_custom_add_partition(size => 512, mountpoint => '/boot/efi', filesystem => 'efi_filesystem');
+    }
+    elsif (get_var("OFW")) {
+        webui_custom_add_partition(size => 4, filesystem => 'ppc_prep_boot');
+    }
+    else {
+        # from anaconda-37.12.1 onwards, GPT is default for BIOS
+        # installs, so we need a biosboot partition
+        webui_custom_add_partition(size => 1, filesystem => 'biosboot');
+    }
+    webui_custom_add_partition(size => 512, mountpoint => '/boot');
 }
 
 sub get_full_repo {

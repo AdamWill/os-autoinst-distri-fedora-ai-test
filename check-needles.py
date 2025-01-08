@@ -147,7 +147,13 @@ for scheme in ("standard", "lvmthin", "btrfs", "lvm"):
 # custom_blivet_add_partition
 for dtype in ("lvmvg", "lvmlv", "lvmthin", "raid"):
     testtags.append(f"anaconda_blivet_part_devicetype_{dtype}")
-for fsys in ("ext4", "xfs", "btrfs", "ppc_prep_boot", "swap", "efi_filesystem", "biosboot"):
+# these are in webui already...
+for fsys in ("ext4", "xfs", "efi_filesystem", "biosboot"):
+    testtags.append(f"anaconda_blivet_part_fs_{fsys}")
+    testtags.append(f"anaconda_blivet_part_fs_{fsys}_selected")
+    testtags.append(f"anaconda_webui_custom_fs_{fsys}")
+# ...these aren't yet
+for fsys in ("btrfs", "ppc_prep_boot", "swap"):
     testtags.append(f"anaconda_blivet_part_fs_{fsys}")
     testtags.append(f"anaconda_blivet_part_fs_{fsys}_selected")
 # this is variable-y in custom_blivet_resize_partition but we only

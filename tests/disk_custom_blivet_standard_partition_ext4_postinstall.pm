@@ -3,6 +3,8 @@ use strict;
 use testapi;
 
 sub run {
+    my $self = shift;
+    $self->root_console(tty => 3, timeout => 30);
     assert_screen "root_console";
     # check number of partitions
     script_run 'fdisk -l | grep /dev/vda';    # debug
