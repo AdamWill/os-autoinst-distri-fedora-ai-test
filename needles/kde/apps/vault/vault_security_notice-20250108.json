@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 204,
+      "ypos": 130,
+      "type": "match",
+      "width": 105,
+      "height": 16
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "vault_security_notice"
+  ]
+}
