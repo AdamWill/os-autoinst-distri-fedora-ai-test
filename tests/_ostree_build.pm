@@ -38,13 +38,6 @@ sub run {
     assert_script_run 'git clone https://pagure.io/workstation-ostree-config.git';
     assert_script_run 'pushd workstation-ostree-config';
     assert_script_run "git checkout ${branch}";
-    if ($version eq "40") {
-        # https://pagure.io/workstation-ostree-config/pull-request/600
-        # fixes the issue with https://bodhi.fedoraproject.org/updates/FEDORA-2025-0a378044f0
-        # remove when it's merged
-        assert_script_run "git fetch https://pagure.io/workstation-ostree-config.git refs/pull/600/head:pr600";
-        assert_script_run "git checkout pr600";
-    }
     # now copy the advisory, workaround repo and koji-rawhide config files
     assert_script_run 'cp /etc/yum.repos.d/workarounds.repo .' if ($workarounds);
     assert_script_run 'cp /etc/yum.repos.d/koji-rawhide.repo .' if ($version eq $rawrel);
