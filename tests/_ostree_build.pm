@@ -103,6 +103,8 @@ sub run {
     $cmd .= " --repo=/etc/yum.repos.d/openqa-testtag.repo" if ($tag || $copr);
     $cmd .= " ./results";
     assert_script_run $cmd, 9000;
+    # needed for updvercheck, usually here already but not on COPR path
+    assert_script_run 'dnf -y install python3-rpm', 180;
     # do a package version check on the packages installed to the
     # installer environment - see
     # https://pagure.io/releng/failed-composes/issue/6538#comment-917347
