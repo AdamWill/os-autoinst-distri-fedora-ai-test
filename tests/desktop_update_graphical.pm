@@ -41,7 +41,7 @@ sub run {
     }
     # GNOME Software 44+ has a 3rd party source pop-up, get rid of it
     # if it shows up (but don't fail if it doesn't, we're not testing that)
-    if ($desktop eq 'gnome' && check_screen 'gnome_software_ignore', 10) {
+    if ($desktop eq 'gnome' && check_screen 'gnome_software_ignore', 15) {
         wait_still_screen 3;
         # match again as the dialog may have moved a bit
         assert_and_click 'gnome_software_ignore';
