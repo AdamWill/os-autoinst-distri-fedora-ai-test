@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 57,
+      "height": 56,
+      "xpos": 483,
+      "ypos": 645
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "panel_screenshot_trigger"
+  ]
+}
