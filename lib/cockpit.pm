@@ -52,7 +52,8 @@ sub select_cockpit_update {
     click_lastmatch;
     if (match_has_tag "cockpit_search") {
         send_key_until_needlematch("cockpit_software_updates", "down", 10, 2);
-        click_lastmatch;
+        wait_still_screen 1;
+        assert_and_click("cockpit_software_updates");
     }
     # wait for the updates to download
     assert_screen 'cockpit_updates_check', 300;
