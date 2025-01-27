@@ -626,7 +626,7 @@ sub setup_repos {
         # Koji task case (KOJITASK will be set). If multiple tasks,
         # they're concatenated with underscores, switch to commas
         $udstring = get_var("KOJITASK");
-        $udstring =~ s/_/,/;
+        $udstring =~ s/_/,/g;
     }
     else {
         die "Neither ADVISORY_NVRS nor KOJITASK set! Don't know what to do" unless (@was && ($args{waonly} || $tag || $copr));
