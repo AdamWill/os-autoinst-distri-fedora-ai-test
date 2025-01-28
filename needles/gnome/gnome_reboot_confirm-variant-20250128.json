@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "height": 18,
+      "xpos": 578,
+      "type": "match",
+      "width": 53,
+      "ypos": 446
+    },
+    {
+      "xpos": 395,
+      "ypos": 309,
+      "width": 144,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "gnome_reboot_confirm"
+  ]
+}

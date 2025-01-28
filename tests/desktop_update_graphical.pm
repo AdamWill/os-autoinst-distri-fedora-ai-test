@@ -88,19 +88,22 @@ sub run {
     # or 'download' then 'apply'
     for (my $n = 1; $n < 6; $n++) {
         if (check_screen $tags, 120) {
-            # if we see 'apply', we're done here, quit out of the loop
-            last if (match_has_tag 'desktop_package_tool_update_apply');
-            # if we see 'download', let's hit it, and continue waiting
-            # for apply (only)
-            wait_screen_change { click_lastmatch; };
-            $n -= 1 if ($n > 1);
-            if (get_var("TAG") || get_var("COPR")) {
-                # we might get a 'download unsigned software' prompt
-                # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2246
-                click_lastmatch if (check_screen "desktop_package_tool_update_download_unsigned", 30);
+            # if we have a download button, we want to hit it, even if
+            # we also have a restart button. then continue waiting for
+            # apply (only)
+            if (check_screen 'desktop_package_tool_update_download') {
+                wait_screen_change { click_lastmatch; };
+                $n -= 1 if ($n > 1);
+                if (get_var("TAG") || get_var("COPR")) {
+                    # we might get a 'download unsigned software' prompt
+                    # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2246
+                    click_lastmatch if (check_screen "desktop_package_tool_update_download_unsigned", 30);
+                }
+                $tags = ['desktop_package_tool_update_apply'];
+                next;
             }
-            $tags = ['desktop_package_tool_update_apply'];
-            next;
+            # if we *only* saw apply, we're done, break out
+            last;
         }
         # move the mouse to stop the screen blanking on idle
         mouse_set 10, 10;
