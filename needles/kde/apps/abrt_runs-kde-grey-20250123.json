@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "ypos": 17,
+      "xpos": 447,
+      "height": 15,
+      "type": "match",
+      "width": 131
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "UI is weirdly grey - https://bugzilla.redhat.com/show_bug.cgi?id=2341867"
+    }
+  ],
+  "tags": [
+    "abrt_runs"
+  ]
+}
