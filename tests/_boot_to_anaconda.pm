@@ -193,24 +193,24 @@ sub run {
                     while ($tries) {
                         $tries -= 1;
                         assert_and_click("live_start_anaconda_icon", dclick => $dclick);
-                        last if (check_screen ["anaconda_select_install_lang", "anaconda_webui_welcome"], 180);
+                        last if (check_screen ["anaconda_select_install_lang", "anaconda_webui_installmethod"], 180);
                         die "Launching installer failed after 5 tries!" unless ($tries);
                     }
                 }
             }
             # wait for anaconda to appear
-            unless (check_screen ["anaconda_select_install_lang", "anaconda_webui_welcome"], 300) {
+            unless (check_screen ["anaconda_select_install_lang", "anaconda_webui_installmethod"], 300) {
                 # may be hitting https://bugzilla.redhat.com/show_bug.cgi?id=2329581,
                 # try pressing a key
                 send_key "spc";
-                assert_screen ["anaconda_select_install_lang", "anaconda_webui_welcome"], 300;
+                assert_screen ["anaconda_select_install_lang", "anaconda_webui_installmethod"], 300;
                 record_soft_failure "boot hung until key pressed - #2329581";
             }
-            # on webUI path we are done now, also set a var so later
-            # tests know if we're on the webUI path
-            if (match_has_tag "anaconda_webui_welcome") {
+            # on webUI path set a var so later tests know
+            if (match_has_tag "_ANACONDA_WEBUI") {
                 set_var("_ANACONDA_WEBUI", 1);
-                return;
+                # if we got straight to install method screen, we're done
+                return if (match_has_tag "anaconda_webui_installmethod");
             }
             # we click to work around RHBZ #1566066 if it happens
             click_lastmatch;
@@ -224,14 +224,14 @@ sub run {
             # appropriate language, here
             assert_and_click "anaconda_select_install_lang_filtered";
             assert_screen "anaconda_select_install_lang_selected", 10;
-            assert_and_click "anaconda_select_install_lang_continue";
+            assert_and_click ["anaconda_select_install_lang_continue", "anaconda_webui_next"];
 
             # wait 180 secs for hub or Rawhide warning dialog to appear
             # (per https://bugzilla.redhat.com/show_bug.cgi?id=1666112
             # the nag screen can take a LONG time to appear sometimes).
             # If the hub appears, return - we're done now. If Rawhide
             # warning dialog appears, accept it.
-            if (check_screen ["anaconda_rawhide_accept_fate", "anaconda_main_hub"], 180) {
+            if (check_screen ["anaconda_rawhide_accept_fate", "anaconda_main_hub", "anaconda_webui_installmethod"], 180) {
                 if (match_has_tag("anaconda_rawhide_accept_fate")) {
                     assert_and_click "anaconda_rawhide_accept_fate";
                 }
@@ -247,7 +247,7 @@ sub run {
             # Here, we will watch for the graphical elements in Anaconda main hub.
             my $branched = get_var('VERSION');
             if ($identification eq 'true' or ($branched ne "Rawhide" && lc($branched) ne "eln")) {
-                check_left_bar();    # See utils.pm
+                check_left_bar() unless get_var('_ANACONDA_WEBUI');    # See utils.pm
                 check_prerelease();
                 check_version();
             }
@@ -255,7 +255,7 @@ sub run {
             # didn't match anything: if the Rawhide warning didn't
             # show by now it never will, so we'll just wait for the
             # hub to show up.
-            assert_screen "anaconda_main_hub", 900;
+            assert_screen ["anaconda_main_hub", "anaconda_webui_installmethod"], 900;
             _handle_incomplete_hub;
         }
     }

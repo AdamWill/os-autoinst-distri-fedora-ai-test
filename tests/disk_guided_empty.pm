@@ -9,8 +9,8 @@ sub run {
     # If we want to test graphics during installation, we need to
     # call the test suite with an "IDENTIFICATION=true" variable.
     my $identification = get_var('IDENTIFICATION');
-    assert_screen ["anaconda_main_hub", "anaconda_webui_welcome"];
-    if (match_has_tag "anaconda_webui_welcome") {
+    assert_screen ["anaconda_main_hub", "anaconda_webui_installmethod"];
+    if (match_has_tag "anaconda_webui_installmethod") {
         # long term we'll want two paths through select_disks or
         # a webui_select_disks, but for now, just throw it in here
         # as it's simple on this single path

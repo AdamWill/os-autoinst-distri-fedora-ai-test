@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 265,
+      "ypos": 168,
+      "width": 159,
+      "height": 22,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "_ANACONDA_WEBUI",
+    "anaconda_select_install_lang"
+  ]
+}
