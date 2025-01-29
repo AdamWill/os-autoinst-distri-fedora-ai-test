@@ -37,7 +37,7 @@ These variables control settings of underlying virtual machine where tests runs 
 | `QEMUTHREADS` | integer | 0 | number of CPU threads to use for Qemu |
 | `QEMUVGA` | `virtio`, `qxl`, `cirrus`, `std` | `std` (effectively) | display device to use for VM (deprecated, use `QEMU_VIDEO_DEVICE`) |
 | `QEMU_COMPRESS_QCOW2` | boolean | `false`/not set | compress qcow2 images |
-| `QEMU_VIDEO_DEVICE` | `virtio`, `qxl`, `cirrus`, `std` | `std` (effectively) | display device to use for VM (deprecated, use `QEMU_VIDEO_DEVICE`) |
+| `QEMU_VIDEO_DEVICE` | see `qemu-kvm -device help` and https://www.kraxel.org/blog/2019/09/display-devices-in-qemu/ | `VGA` (x86), `virtio-gpu-pci` (ARM), `virtio-gpu` (s390x) | display device to use for VM (passed as `-device X`) |
 | `SKIPTO` | name of snapshot | not set | restore VM from given snapshot - better used with `MAKETESTSNAPSHOTS` |
 | `UEFI` | boolean | `false`/not set | whether to use UEFI (UEFI BIOS files should be installed) |
 | `UEFI_BIOS` | filename | `false`/not set, `ovmf-x86_64-ms.bin` when `UEFI` is set | filename of UEFI BIOS |
