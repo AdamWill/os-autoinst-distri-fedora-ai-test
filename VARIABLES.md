@@ -35,8 +35,9 @@ These variables control settings of underlying virtual machine where tests runs 
 | `QEMUCPUS` | integer | 1 | number of processor cores to use for Qemu |
 | `QEMURAM` | integer | 1024 | size of RAM to use (in MiB) |
 | `QEMUTHREADS` | integer | 0 | number of CPU threads to use for Qemu |
-| `QEMUVGA` | see `qemu-kvm -device help` | `cirrus` (should be set to `std` on Fedora, cirrus driver [was retired](https://lists.fedoraproject.org/pipermail/devel/2014-May/199459.html)) | display device to use for VM |
+| `QEMUVGA` | `virtio`, `qxl`, `cirrus`, `std` | `std` (effectively) | display device to use for VM (deprecated, use `QEMU_VIDEO_DEVICE`) |
 | `QEMU_COMPRESS_QCOW2` | boolean | `false`/not set | compress qcow2 images |
+| `QEMU_VIDEO_DEVICE` | `virtio`, `qxl`, `cirrus`, `std` | `std` (effectively) | display device to use for VM (deprecated, use `QEMU_VIDEO_DEVICE`) |
 | `SKIPTO` | name of snapshot | not set | restore VM from given snapshot - better used with `MAKETESTSNAPSHOTS` |
 | `UEFI` | boolean | `false`/not set | whether to use UEFI (UEFI BIOS files should be installed) |
 | `UEFI_BIOS` | filename | `false`/not set, `ovmf-x86_64-ms.bin` when `UEFI` is set | filename of UEFI BIOS |
