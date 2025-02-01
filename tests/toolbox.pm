@@ -55,14 +55,14 @@ sub run {
     # Toolbox remove image and their associated containers
     assert_script_run "toolbox rmi --all --force";
     # create a rhel image with distro and release flags
-    assert_script_run "toolbox -y create --distro rhel --release 9.1", 300;
+    assert_script_run "toolbox -y create --distro rhel --release 9.5", 300;
     # validate rhel release file to ensure correct version
-    type_string "toolbox enter rhel-toolbox-9.1\n";
+    type_string "toolbox enter rhel-toolbox-9.5\n";
     assert_screen "console_in_toolbox", 180;
     type_string "exit\n";
     sleep 3;
     #run a specific command on a given choice of distro and release
-    validate_script_output "toolbox run --distro rhel --release 9.1 cat /etc/redhat-release", sub { m/Red Hat Enterprise Linux release 9.1 \(Plow\)/ };
+    validate_script_output "toolbox run --distro rhel --release 9.5 cat /etc/redhat-release", sub { m/Red Hat Enterprise Linux release 9.5 \(Plow\)/ };
 
 
 }
