@@ -116,9 +116,18 @@ sub desktop_switch_layout {
     # if already selected, we're good
     return if (check_screen "${environment}_layout_${layout}", 3);
     # otherwise we need to switch
-    my $switcher = "alt-shift";    # anaconda
-    $switcher = "super-spc" if $environment eq 'gnome';
-    # KDE? not used yet
+    # in anaconda f42+ key combo switching doesn't work and can't be
+    # fixed - https://bugzilla.redhat.com/show_bug.cgi?id=2319565
+    if ($environment eq 'anaconda') {
+        my $count = 3;
+        while ($count) {
+            assert_and_click "anaconda_layout_indicator";
+            return if (check_screen "anaconda_layout_${layout}", 3);
+            $count--;
+        }
+        die "never managed to switch to layout ${layout}!";
+    }
+    my $switcher = "super-spc";    # gnome; FIXME for other envs if used
     # FIXME we use send_key_until_needlematch because sometimes the
     # switch just doesn't work in gdm:
     # https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/6066#note_1707051
