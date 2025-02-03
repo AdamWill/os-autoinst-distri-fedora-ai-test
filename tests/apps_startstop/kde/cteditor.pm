@@ -10,7 +10,7 @@ sub run {
 
     menu_launch_type 'contactthemeeditor';
     # Check that it is started
-    assert_screen 'cteditor_runs';
+    assert_screen 'apps_run_cteditor';
     # Close the application
     quit_with_shortcut();
 }

@@ -29,7 +29,7 @@ sub run {
     assert_and_click 'kde_cancel_button';
     wait_still_screen 2;
     # Check that it is started
-    assert_screen 'kgpg_runs';
+    assert_screen 'apps_run_kgpg';
     # Close the application
     quit_with_shortcut();
 }

@@ -12,7 +12,7 @@ sub run {
     kde_doublek_workaround();
     # Run the application
     menu_launch_type("kcalc");
-    assert_screen("kcalc_runs");
+    assert_screen("apps_run_kcalc");
     # wait for system to settle before snapshotting
     sleep 10;
 }

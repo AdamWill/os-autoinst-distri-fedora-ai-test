@@ -13,7 +13,7 @@ sub run {
     set_update_notification_timestamp();
     # Start the Application
     menu_launch_type("system monitor");
-    assert_screen("systemmonitor_runs");
+    assert_screen("apps_run_systemmonitor");
 
     # Make it fill the entire window.
     send_key("super-up");

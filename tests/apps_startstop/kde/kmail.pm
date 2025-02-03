@@ -17,7 +17,7 @@ sub run {
         # Click on the exit icon
         assert_and_click("kde_exit_icon");
     }
-    assert_screen("kmail_runs");
+    assert_screen("apps_run_kmail");
 
     # Close the application
     quit_with_shortcut();

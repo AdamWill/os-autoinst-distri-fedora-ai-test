@@ -10,7 +10,7 @@ sub run {
     # Start the application
     menu_launch_type 'system monitor';
     # Check that it is started
-    assert_screen 'systemmonitor_runs', timeout => 60;
+    assert_screen 'apps_run_systemmonitor', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }

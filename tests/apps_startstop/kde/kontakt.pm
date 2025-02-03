@@ -17,7 +17,7 @@ sub run {
         assert_and_click("kde_exit_icon");
     }
     # Check that the application window is there.
-    assert_screen 'kontact_runs';
+    assert_screen 'apps_run_kontact';
     # Close the application
     quit_with_shortcut();
 }

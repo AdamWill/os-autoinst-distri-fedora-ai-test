@@ -11,7 +11,7 @@ sub run {
     # Start the application
     menu_launch_type 'kcalc';
     # Check that it is started
-    assert_screen 'kcalc_runs', timeout => 60;
+    assert_screen 'apps_run_kcalc', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }

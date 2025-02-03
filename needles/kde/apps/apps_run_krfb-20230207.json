@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 60,
+      "xpos": 256,
+      "type": "match",
+      "width": 52,
+      "ypos": 346
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_krfb"
+  ]
+}

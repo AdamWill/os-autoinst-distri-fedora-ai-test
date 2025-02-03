@@ -13,7 +13,7 @@ sub run {
     # want to run 'konsole' from the kicker menu in this test
     menu_launch_type 'konsole';
     # Check that it is started
-    assert_screen 'konsole_runs', timeout => 60;
+    assert_screen 'apps_run_konsole', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }

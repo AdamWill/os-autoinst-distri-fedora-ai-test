@@ -31,7 +31,7 @@ sub run {
         menu_launch_type('discover');
         # Wait for it to run and maximize it to make sure we see the
         # Updates entry
-        assert_screen('discover_runs');
+        assert_screen('apps_run_discover');
         wait_still_screen 2;
         wait_screen_change { send_key "super-pgup"; };
         wait_still_screen 2;

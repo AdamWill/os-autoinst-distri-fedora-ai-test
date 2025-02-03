@@ -11,7 +11,7 @@ sub run {
     # Start the application
     menu_launch_type 'dolphin';
     # Check that it is started
-    assert_screen 'dolphin_runs', timeout => 60;
+    assert_screen 'apps_run_dolphin', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }

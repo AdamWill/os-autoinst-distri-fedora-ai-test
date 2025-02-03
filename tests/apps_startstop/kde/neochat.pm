@@ -10,7 +10,7 @@ sub run {
     # Start the application
     menu_launch_type 'neochat';
     # Check that it is started
-    assert_screen "neochat_runs";
+    assert_screen "apps_run_neochat";
     # Close the application
     quit_with_shortcut();
 }

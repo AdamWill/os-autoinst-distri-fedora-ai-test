@@ -14,7 +14,7 @@ sub run {
     assert_and_click 'kde_ok';
     wait_still_screen 2;
     # Check that it is started
-    assert_screen 'kimport_runs', timeout => 60;
+    assert_screen 'apps_run_kimport', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }

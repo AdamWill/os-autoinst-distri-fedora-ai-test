@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "width": 145,
+      "ypos": 382,
+      "xpos": 595,
+      "type": "match"
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "workaround for bug 2060540 (window is too large for screen). this is fragile, will fail if there is a crash"
+    }
+  ],
+  "tags": [
+    "apps_run_abrt"
+  ]
+}

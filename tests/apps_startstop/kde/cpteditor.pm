@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     menu_launch_type 'print theme';
     # Check that it is started
-    assert_screen 'cpteditor_runs', timeout => 60;
+    assert_screen 'apps_run_cpteditor', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }

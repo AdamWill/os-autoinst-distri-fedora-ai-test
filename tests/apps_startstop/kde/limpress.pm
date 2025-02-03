@@ -10,7 +10,7 @@ sub run {
     # Start the application
     menu_launch_type 'libreoffice impress';
     # Check that it is started
-    assert_screen 'limpress_runs', timeout => 60;
+    assert_screen 'apps_run_limpress', timeout => 60;
     # Close the template chooser, then the application
     send_key 'esc';
     quit_with_shortcut();

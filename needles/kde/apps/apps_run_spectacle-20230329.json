@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 522,
+      "ypos": 92,
+      "width": 60,
+      "height": 17
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_spectacle"
+  ]
+}

@@ -10,7 +10,7 @@ sub run {
     # Start the application
     menu_launch_type 'libreoffice calc';
     # Check that it is started
-    assert_screen 'lcalc_runs', timeout => 60;
+    assert_screen 'apps_run_lcalc', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }

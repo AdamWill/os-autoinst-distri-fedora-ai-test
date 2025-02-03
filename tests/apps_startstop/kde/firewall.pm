@@ -22,7 +22,7 @@ sub run {
     wait_still_screen 3;
 
     # Check that it is started
-    assert_screen 'firewall_runs';
+    assert_screen 'apps_run_firewall';
     # Close the application
     quit_with_shortcut();
 }

@@ -16,7 +16,7 @@ sub run {
     send_key 'ret';
     wait_still_screen 2;
     # Check that it is started
-    assert_screen 'kparted_runs';
+    assert_screen 'apps_run_kparted';
     # Close the application
     quit_with_shortcut();
 }

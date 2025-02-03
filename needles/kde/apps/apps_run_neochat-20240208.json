@@ -1,0 +1,15 @@
+{
+    "area": [
+        {
+            "height": 23,
+            "type": "match",
+            "width": 80,
+            "xpos": 524,
+            "ypos": 186
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "apps_run_neochat"
+    ]
+}

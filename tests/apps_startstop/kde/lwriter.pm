@@ -10,7 +10,7 @@ sub run {
     # Start the application
     menu_launch_type 'libreoffice writer';
     # Check that it is started
-    assert_screen 'lwriter_runs';
+    assert_screen 'apps_run_lwriter';
     quit_with_shortcut();
 }
 

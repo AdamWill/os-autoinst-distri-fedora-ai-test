@@ -13,7 +13,7 @@ sub run {
     # Start the application
     menu_launch_type 'info center';
     # Check that it is started
-    assert_screen 'infocenter_runs', timeout => 60;
+    assert_screen 'apps_run_infocenter', timeout => 60;
     # Open the Devices menu item.
     assert_and_click "infocenter_menu_devices";
     # If the disks module is present, open it

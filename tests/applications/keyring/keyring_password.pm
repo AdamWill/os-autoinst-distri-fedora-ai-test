@@ -98,7 +98,7 @@ sub check_stored {
     # On KDE, we will use the KWalletManager.
     if (get_var("DESKTOP") eq "kde") {
         menu_launch_type("kwalletmanager");
-        assert_screen("kwalletmanager_runs");
+        assert_screen("apps_run_kwalletmanager");
         send_key("super-pgup");
         # Navigate to the stored entry and check
         # that the credentials are stored there.

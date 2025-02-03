@@ -10,7 +10,7 @@ sub run {
     # Start the application
     menu_launch_type('akregator');
     # Check that it is started
-    assert_screen 'akregator_runs', timeout => 60;
+    assert_screen 'apps_run_akregator', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }

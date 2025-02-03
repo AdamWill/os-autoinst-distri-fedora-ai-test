@@ -11,7 +11,7 @@ sub run {
     # Start the application
     menu_launch_type 'kcharselect';
     # Check that it is started
-    assert_screen 'kcharselect_runs', timeout => 60;
+    assert_screen 'apps_run_kcharselect', timeout => 60;
     # Close the application
     quit_with_shortcut();
 }
