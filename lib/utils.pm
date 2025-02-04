@@ -128,9 +128,9 @@ sub desktop_switch_layout {
         die "never managed to switch to layout ${layout}!";
     }
     my $switcher = "super-spc";    # gnome; FIXME for other envs if used
-    # FIXME we use send_key_until_needlematch because sometimes the
-    # switch just doesn't work in gdm:
-    # https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/6066#note_1707051
+                                   # FIXME we use send_key_until_needlematch because sometimes the
+                                   # switch just doesn't work in gdm:
+                                   # https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/6066#note_1707051
     send_key_until_needlematch("${environment}_layout_${layout}", $switcher, 3, 3);
 }
 
