@@ -33,7 +33,7 @@ sub run {
     # usually a good idea for this kinda thing
     assert_script_run "setenforce Permissive";
     # install the tools we need
-    assert_script_run "dnf -y install git lorax flatpak ostree rpm-ostree dbus-daemon moreutils", 300;
+    assert_script_run "dnf -y install git lorax flatpak ostree rpm-ostree dbus-daemon moreutils", 480;
     # now check out workstation-ostree-config
     assert_script_run 'git clone https://pagure.io/workstation-ostree-config.git';
     assert_script_run 'pushd workstation-ostree-config';
