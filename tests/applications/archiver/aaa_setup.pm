@@ -22,12 +22,7 @@ sub run {
     set_update_notification_timestamp();
 
     # Start the application
-    menu_launch_type("nautilus");
-    # Check it has started
-    assert_screen 'apps_run_files';
-    # Fullsize the window.
-    wait_screen_change { send_key("super-up"); };
-    wait_still_screen 3;
+    menu_launch_type("nautilus", checkstart => 1, maximize => 1);
 
     # Open the Documents directory
     assert_and_click("gnome_open_location_documents");

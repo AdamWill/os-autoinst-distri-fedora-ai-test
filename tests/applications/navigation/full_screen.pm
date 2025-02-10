@@ -12,7 +12,7 @@ sub run {
     sleep(5);
     # The full screen is not supported by any application, but it
     # is supported by several, such as Terminal.
-    menu_launch_type("terminal", "maximize");
+    menu_launch_type("terminal", maximize => 1);
     # If we see prompt, everything is ok.
     assert_screen("terminal_prompt");
 

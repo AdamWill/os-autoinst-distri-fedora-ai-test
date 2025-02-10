@@ -72,16 +72,16 @@ sub run {
     ### Switch between more applications
 
     # Start more applications.
-    menu_launch_type("clocks", "maximize");
+    menu_launch_type("clocks", maximize => 1);
     # Sometime, Clocks start with an access request,
     # deny it.
     if (check_screen('grant_access', 5)) {
         send_key('ret');
     }
     assert_screen('apps_run_clocks');
-    menu_launch_type("calculator", "maximize");
+    menu_launch_type("calculator", maximize => 1);
     assert_screen('apps_run_calculator');
-    menu_launch_type("terminal", "maximize");
+    menu_launch_type("terminal", maximize => 1);
     assert_screen('apps_run_terminal');
 
     ## Going forwards

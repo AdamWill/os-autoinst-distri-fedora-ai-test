@@ -240,6 +240,10 @@ testtags.extend(f"anaconda_main_hub_{fsys}" for fsys in ('language_support', 'se
 'time_date', 'create_user','keyboard_layout'))
 for selection in ("hide", "maximize", "restore"):
     testtags.append(f"calculator_context_{selection}")
+# After the change to menu_launch_type, applications should be whitelisted here
+# to prevent the unused needles warning in case of apps_run_<application>.
+for app in ("focuswriter", "gvim"):
+    testtags.append(f"apps_run_{app}")
 
 # retcode tracker
 ret = 0

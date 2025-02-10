@@ -11,9 +11,9 @@ sub run {
     # Let us wait here for a couple of seconds to give the VM time to settle.
     # Starting right over might result in erroneous behavior.
     sleep(5);
-    menu_launch_type("text editor", "maximize");
+    menu_launch_type("text editor", maximize => 1);
     assert_screen("apps_run_texteditor");
-    menu_launch_type("files", "maximize");
+    menu_launch_type("files", maximize => 1);
     assert_screen("apps_run_files");
 
     # If we are at Nautilus switch to editor

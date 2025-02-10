@@ -31,8 +31,7 @@ sub run {
     # Now, we will switch into the Desktop and we will try to run the application
     desktop_vt();
     wait_still_screen(3);
-    menu_launch_type("gvim");
-    assert_screen("apps_run_gvim");
+    menu_launch_type("gvim", checkstart => 1);
     # Switch off the application
     type_very_safely(":qa\n");
 

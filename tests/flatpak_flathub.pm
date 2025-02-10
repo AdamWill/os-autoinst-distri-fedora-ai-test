@@ -37,9 +37,7 @@ sub run {
     # Switch to desktop and try to run the application.
     desktop_vt();
     wait_still_screen(3);
-    menu_launch_type("focuswriter");
-    # Check that it started
-    assert_screen("apps_run_focuswriter");
+    menu_launch_type("focuswriter", checkstart => 1);
     # Stop the application
     send_key("alt-f4");
 

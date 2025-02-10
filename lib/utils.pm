@@ -1370,27 +1370,43 @@ sub menu_launch_type {
     # Launch an application in a graphical environment, by opening a
     # launcher, typing the specified string and hitting enter. Pass
     # the string to be typed to launch whatever it is you want.
-    my ($app, $maximize) = @_;
+    # Use maximize => 1 to maximize the application after it
+    # is started.
+    # Use checkstart => 1 to check that the application has started
+    my ($application, %args) = @_;
     my $desktop = get_var("DESKTOP");
+
+    # The standard combo key is the "super" key, just in I3
+    # it is different.
     my $key = 'super';
     $key = 'alt-d' if ($desktop eq "i3");
+
+    # In KDE, we have been experiencing BZ2097208.
+    # To overcome this let's move the mouse out of the way
+    # and give the launcher some time to take the correct focus.
     if ($desktop eq "kde") {
-        # To overcome BZ2097208, let's move the mouse out of the way
-        # and give the launcher some time to take the correct focus.
         diag("Moving the mouse away from the launcher.");
         mouse_set(1, 1);
     }
+    # Open the launching mode
     wait_screen_change { send_key $key; };
-    # srsly KDE y u so slo
+    # Give enough wait time for the everything to settle,
+    # especially KDE is quite slow in responses.
     wait_still_screen 3;
-    type_very_safely $app;
-    # Wait for KDE to place focus correctly.
+    type_very_safely($application);
+    # Wait to place focus correctly.
     wait_still_screen 2;
     send_key 'ret';
     wait_still_screen 3;
-    diag("Launcher: The application $app should have been launched.");
-    # If we should maximize the application
-    if ($maximize) {
+
+    # If check that app is running was requested
+    # with checkstart => 1
+    if ($args{checkstart}) {
+        assert_screen("apps_run_$application");
+    }
+    # If maximizing the application was requested
+    # with maximize => 1
+    if ($args{maximize}) {
         if ($desktop eq "kde") {
             send_key('super-pgup');
         }
@@ -1398,10 +1414,9 @@ sub menu_launch_type {
             send_key('super-up');
         }
         else {
-            diag('Maximizing in this desktop is not supported at the moment!');
+            record_soft_failure('Maximizing in this desktop is not supported at the moment!');
         }
         wait_still_screen 3;
-        diag("Maximizer: The application should have been maximized.");
     }
 }
 
@@ -1618,6 +1633,7 @@ sub register_application {
 # launch a terminal from a desktop, using the most efficient/reliable
 # approach (not appropriate if we really need to test launching it a
 # specific way)
+# Check, that the application has started.
 sub desktop_launch_terminal {
     my $desktop = get_var("DESKTOP");
     if ($desktop eq "i3") {
@@ -1627,7 +1643,7 @@ sub desktop_launch_terminal {
         send_key "ctrl-alt-t";
     }
     else {
-        menu_launch_type "terminal";
+        menu_launch_type("terminal", checkstart => 1);
     }
 }
 

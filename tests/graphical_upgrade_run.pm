@@ -50,7 +50,7 @@ sub run {
     # on which DE we are on.
     my $pkgmgr = "software";
     $pkgmgr = "discover" if ($desktop eq "kde");
-    menu_launch_type($pkgmgr);
+    menu_launch_type($pkgmgr, checkstart => 1);
 
     # On Gnome, the upgrade is safely visible when
     # we visit the Update page by clicking on the
