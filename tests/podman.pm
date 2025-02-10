@@ -9,13 +9,18 @@ use utils;
 sub run {
     my $self = shift;
     $self->root_console(tty => 3);
-    # on non-canned flavors, we need to install podman
-    assert_script_run "dnf -y install podman", 240 unless (get_var("CANNED"));
+    # on non-canned flavors, we need to install podman, may as well
+    # also install the tests now
+
     # check podman is installed
-    assert_script_run "rpm -q podman";
+
     my $relnum = get_release_number;
-    unless (get_var("CANNED")) {
-        # run the upstream integration tests
+    if (get_var("CANNED")) {
+        # check podman is pre-installed
+        assert_script_run "rpm -q podman";
+    }
+    else {
+        # install podman and run the upstream integration tests
         assert_script_run "dnf -y install podman podman-tests bats", 300;
         # needed so we exit 1 when the bats command fails
         assert_script_run "set -o pipefail";
