@@ -734,7 +734,7 @@ sub _repo_setup_updates {
         # where the updated packages should have been installed
         # already and we want to fail if they weren't, or CANNED
         # tests, there's no point updating the toolbox
-        script_run "dnf -y update", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
+        assert_script_run "dnf -y --best update", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
         # on liveinst tests, we'll remove the packages we installed
         # above (and their deps, which dnf will include automatically),
         # just in case they're in the update under test; otherwise we
