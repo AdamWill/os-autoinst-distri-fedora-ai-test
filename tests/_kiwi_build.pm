@@ -9,6 +9,7 @@ sub run {
     my $version = get_var("VERSION");
     my $advortask = get_var("ADVISORY_OR_TASK");
     my $rawrel = get_var("RAWREL");
+    my $brrepo = get_var("BUILDROOT_REPO");
     my $branch;
     my $repoxml;
     my $releasever;
@@ -53,8 +54,8 @@ sub run {
     assert_script_run 'printf "$(head -n -1 ' . $repoxml . ')\n	<repository type=\"rpm-md\" alias=\"openqa-testtag\" sourcetype=\"baseurl\">\n		<source path=\"' . get_var("UPDATE_OR_TAG_REPO") . '\"/>\n	</repository>\n</image>\n" > ' . $repoxml if ($tag || $copr);
     # and the workarounds repo
     assert_script_run 'printf "$(head -n -1 ' . $repoxml . ')\n	<repository type=\"rpm-md\" alias=\"workarounds\" sourcetype=\"baseurl\">\n		<source path=\"file:///mnt/workarounds_repo\"/>\n	</repository>\n</image>\n" > ' . $repoxml if ($workarounds);
-    # and the buildroot repo, for Rawhide
-    assert_script_run 'printf "$(head -n -1 ' . $repoxml . ')\n	<repository type=\"rpm-md\" alias=\"koji-rawhide\" sourcetype=\"baseurl\">\n		<source path=\"https://kojipkgs.fedoraproject.org/repos/f' . $version . '-build/latest/\$basearch/\"/>\n	</repository>\n</image>\n" > ' . $repoxml if ($version eq $rawrel);
+    # and the buildroot repo, if applicable
+    assert_script_run 'printf "$(head -n -1 ' . $repoxml . ')\n	<repository type=\"rpm-md\" alias=\"buildroot\" sourcetype=\"baseurl\">\n		<source path=\"https://kojipkgs.fedoraproject.org/repos/' . $brrepo . '/latest/\$basearch/\"/>\n	</repository>\n</image>\n" > ' . $repoxml if ($brrepo);
     # upload the repositories XML so we can check it
     # NOTE: koji kiwi plugin does much more futzing around with the XML
     # it flattens includes, fiddles with the repos, and and messes with

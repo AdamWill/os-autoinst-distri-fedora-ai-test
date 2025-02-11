@@ -708,13 +708,11 @@ sub _repo_setup_updates {
     repos_mirrorlist();
     # Disable updates-testing so other bad updates don't break us
     disable_updates_repos(both => 0) if ($version > $currrel);
-    # use the buildroot repo on Rawhide: see e.g.
-    # https://pagure.io/fedora-ci/general/issue/376 for why
-    if ($version eq get_var("RAWREL") && get_var("TEST") ne "support_server") {
-        assert_script_run 'printf "[koji-rawhide]\nname=koji-rawhide\nbaseurl=https://kojipkgs.fedoraproject.org/repos/f' . $version . '-build/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/koji-rawhide.repo';
-    }
-    if (lc(get_var("VERSION")) eq "eln" && get_var("TEST") ne "support_server") {
-        assert_script_run 'printf "[koji-eln]\nname=koji-eln\nbaseurl=https://kojipkgs.fedoraproject.org/repos/eln-build/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/koji-eln.repo';
+    # use the buildroot repo on Rawhide and Branched pre-ut-activation:
+    # see e.g. https://pagure.io/fedora-ci/general/issue/376 for why
+    my $brrepo = get_var("BUILDROOT_REPO");
+    if ($brrepo && get_var("TEST") ne "support_server") {
+        assert_script_run 'printf "[buildroot]\nname=buildroot\nbaseurl=https://kojipkgs.fedoraproject.org/repos/' . $brrepo . '/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/buildroot.repo';
     }
     if (get_var("CANNED")) {
         # install and use en_US.UTF-8 locale for consistent sort

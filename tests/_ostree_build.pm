@@ -8,6 +8,7 @@ sub run {
     my $version = get_var("VERSION");
     my $currrel = get_var("CURRREL");
     my $rawrel = get_var("RAWREL");
+    my $brrepo = get_var("BUILDROOT_REPO");
     my $repo = $version eq $rawrel ? "fedora-rawhide.repo" : "fedora.repo";
     my $branch;
     if ($version eq $rawrel) {
@@ -38,15 +39,15 @@ sub run {
     assert_script_run 'git clone https://pagure.io/workstation-ostree-config.git';
     assert_script_run 'pushd workstation-ostree-config';
     assert_script_run "git checkout ${branch}";
-    # now copy the advisory, workaround repo and koji-rawhide config files
+    # now copy the advisory, workaround repo and buildroot repo config files
     assert_script_run 'cp /etc/yum.repos.d/workarounds.repo .' if ($workarounds);
-    assert_script_run 'cp /etc/yum.repos.d/koji-rawhide.repo .' if ($version eq $rawrel);
+    assert_script_run 'cp /etc/yum.repos.d/buildroot.repo .' if ($brrepo);
     assert_script_run 'cp /etc/yum.repos.d/advisory.repo .' unless ($tag || $copr);
     assert_script_run 'cp /etc/yum.repos.d/openqa-testtag.repo .' if ($tag || $copr);
     # and add them to the config file
     my $repl = 'repos:';
     $repl .= '\n  - workarounds' if ($workarounds);
-    $repl .= '\n  - koji-rawhide' if ($version eq $rawrel);
+    $repl .= '\n  - buildroot' if ($brrepo);
     $repl .= '\n  - advisory' unless ($tag || $copr);
     $repl .= '\n  - openqa-testtag' if ($tag || $copr);
     # Just add them to all config files, as the names change a lot
@@ -98,7 +99,7 @@ sub run {
         $cmd .= " --isfinal --repo=/etc/yum.repos.d/fedora-updates.repo";
     }
     $cmd .= " --repo=/etc/yum.repos.d/workarounds.repo" if ($workarounds);
-    $cmd .= " --repo=/etc/yum.repos.d/koji-rawhide.repo" if ($version eq $rawrel);
+    $cmd .= " --repo=/etc/yum.repos.d/buildroot.repo" if ($brrepo);
     $cmd .= " --repo=/etc/yum.repos.d/advisory.repo" unless ($tag || $copr);
     $cmd .= " --repo=/etc/yum.repos.d/openqa-testtag.repo" if ($tag || $copr);
     $cmd .= " ./results";

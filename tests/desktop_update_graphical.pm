@@ -11,11 +11,11 @@ sub run {
     # use a tty console for repo config and package prep
     $self->root_console(tty => 3);
     disable_updates_repos;
-    # for update tests, disable koji-rawhide at this point, otherwise
+    # for update tests, disable buildroot repo at this point, otherwise
     # gnome-software will complain about things being unsigned even
     # though the repo has gpgcheck=0
-    if (get_var("ADVISORY_OR_TASK") && get_var("VERSION") eq get_var("RAWREL")) {
-        assert_script_run 'sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/koji-rawhide.repo';
+    if (get_var("BUILDROOT_REPO")) {
+        assert_script_run 'sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/buildroot.repo';
     }
     # fwupd causes problems sometimes, and we're not testing it
     script_run "systemctl stop fwupd.service";

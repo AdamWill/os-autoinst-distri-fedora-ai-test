@@ -140,6 +140,12 @@ sub run {
         # In F32+ we may get an 'akonadi did something' message
         if (check_screen 'akonadi_migration_notification', 5) {
             click_lastmatch;
+            # ...and on F42+ that makes the notification pane close
+            # so we have to open it again
+            if (check_screen 'desktop_expand_systray', 5) {
+                click_lastmatch;
+                assert_and_click 'desktop_systray_notifications';
+            }
         }
     }
     if ($desktop eq 'i3') {

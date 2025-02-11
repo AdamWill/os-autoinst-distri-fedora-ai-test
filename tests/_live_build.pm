@@ -8,6 +8,7 @@ sub run {
     my $self = shift;
     my $version = get_var("VERSION");
     my $rawrel = get_var("RAWREL");
+    my $brrepo = get_var("BUILDROOT_REPO");
     my $branch;
     my $repoks;
     my $releasever;
@@ -43,7 +44,7 @@ sub run {
     assert_script_run 'echo "repo --name=workarounds --baseurl=file:///mnt/workarounds_repo" >> ' . $repoks if ($workarounds);
     # and the buildroot repo, for Rawhide
     if ($version eq $rawrel) {
-        assert_script_run 'echo "repo --name=koji-rawhide --baseurl=https://kojipkgs.fedoraproject.org/repos/f' . $version . '-build/latest/\$basearch/" >> ' . $repoks;
+        assert_script_run 'echo "repo --name=buildroot --baseurl=https://kojipkgs.fedoraproject.org/repos/' . $brrepo . '/latest/\$basearch/" >> ' . $repoks;
     }
     # now flatten the kickstart
     assert_script_run "ksflatten -c fedora-live-${lcsubv}.ks -o openqa.ks";

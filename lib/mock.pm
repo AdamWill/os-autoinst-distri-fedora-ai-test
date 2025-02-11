@@ -43,9 +43,10 @@ sub mock_setup {
     $repos .= '[openqa-testtag]\nname=Tag test repo\nbaseurl=' . get_var("UPDATE_OR_TAG_REPO") . '\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\npriority=1\n' if ($tag || $copr);
     # and the workaround repo
     $repos .= '\n[workarounds]\nname=Workarounds repo\nbaseurl=file:///mnt/workarounds_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n' if ($workarounds);
-    # also the buildroot repo, for Rawhide
-    if ($version eq $rawrel) {
-        $repos .= '\n[koji-rawhide]\nname=Buildroot repo\nbaseurl=https://kojipkgs.fedoraproject.org/repos/f' . $version . '-build/latest/\$basearch/\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\nskip_if_unavailable=1\n';
+    # also the buildroot repo if applicable
+    my $brrepo = get_var("BUILDROOT_REPO");
+    if ($brrepo) {
+        $repos .= '\n[buildroot]\nname=Buildroot repo\nbaseurl=https://kojipkgs.fedoraproject.org/repos/' . $brrepo . '/latest/\$basearch/\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\nskip_if_unavailable=1\n';
     }
     $repos .= '\"\"\"';
     assert_script_run 'printf "' . $repos . '" >> /etc/mock/openqa.cfg';
