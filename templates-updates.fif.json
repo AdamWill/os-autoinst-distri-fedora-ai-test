@@ -132,8 +132,8 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "HDDSIZEGB": "15",
+                "KIWI_PROFILE": "Workstation-Live",
                 "LIVE": "1",
-                "LIVE_BUILD_TEST": "live_build",
                 "NUMDISKS": "2",
                 "PACKAGE_SET": "default",
                 "RETRY": "1",
@@ -150,7 +150,6 @@
                 "HDDSIZEGB": "15",
                 "KIWI_PROFILE": "KDE-Desktop-Live",
                 "LIVE": "1",
-                "LIVE_BUILD_TEST": "kiwi_build",
                 "NUMDISKS": "2",
                 "PACKAGE_SET": "default",
                 "RETRY": "1",
@@ -377,7 +376,7 @@
                 "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
             },
             "settings": {
-                "+START_AFTER_TEST": "%LIVE_BUILD_TEST%@%ARCH_BASE_MACHINE%",
+                "+START_AFTER_TEST": "kiwi_build@%ARCH_BASE_MACHINE%",
                 "INSTALL": "1",
                 "ISO": "Fedora-%SUBVARIANT%-Live-%ARCH%-%ADVISORY_OR_TASK%.iso",
                 "QEMURAM": "4096"
@@ -440,7 +439,8 @@
         "kiwi_build": {
             "profiles": {
                 "fedora-updates-container-x86_64-*-64bit": 5,
-                "fedora-updates-kde-live-iso-x86_64-*-64bit": 5
+                "fedora-updates-kde-live-iso-x86_64-*-64bit": 5,
+                "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
             },
             "settings": {
                 "+DESKTOP": "",
@@ -451,24 +451,6 @@
                 "MAX_JOB_TIME": "10800",
                 "+NUMDISKS": "3",
                 "POSTINSTALL": "_kiwi_build",
-                "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "false"
-            }
-        },
-        "live_build": {
-            "profiles": {
-                "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
-            },
-            "settings": {
-                "+DESKTOP": "",
-                "+LIVE": "",
-                "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "selinux=0",
-                "HDD_1": "disk_f%VERSION%_minimal_4_%ARCH%.qcow2",
-                "HDDSIZEGB_3": "25",
-                "MAX_JOB_TIME": "10800",
-                "+NUMDISKS": "3",
-                "POSTINSTALL": "_live_build",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "false"
             }

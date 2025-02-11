@@ -81,6 +81,7 @@ sub run {
     }
     my %expected_formats = (
         'KDE-Desktop-Live' => 'iso',
+        'Workstation-Live' => 'iso',
         'Container-Base-Generic' => 'oci.tar.xz'
     );
     my $format = $expected_formats{$kiwiprofile};
