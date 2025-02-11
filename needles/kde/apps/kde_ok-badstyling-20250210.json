@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 465,
+      "ypos": 626,
+      "width": 112,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "bad button styling since 20250204.n.0 - https://bugzilla.redhat.com/show_bug.cgi?id=2344793"
+    }
+  ],
+  "tags": [
+    "kde_ok"
+  ]
+}
