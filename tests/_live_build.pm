@@ -43,7 +43,7 @@ sub run {
     # and the workarounds repo
     assert_script_run 'echo "repo --name=workarounds --baseurl=file:///mnt/workarounds_repo" >> ' . $repoks if ($workarounds);
     # and the buildroot repo, for Rawhide
-    if ($version eq $rawrel) {
+    if ($brrepo) {
         assert_script_run 'echo "repo --name=buildroot --baseurl=https://kojipkgs.fedoraproject.org/repos/' . $brrepo . '/latest/\$basearch/" >> ' . $repoks;
     }
     # now flatten the kickstart
