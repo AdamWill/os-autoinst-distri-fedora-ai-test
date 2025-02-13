@@ -27,6 +27,12 @@ sub run {
     # Create the expected content of the release file
     # and compare it with its real counterpart.
     my $expected = "Fedora release $expectver ($speltnum)";
+    # On Fedora 42, the code name Adams was introduced to
+    # celebrate the number 42 with regards to Douglas Adams
+    # Hitchhiker's Guide to Galaxy and the universal number.
+    if ($expectver == 42) {
+        $expected = "Fedora release 42 (Adams)";
+    }
     validate_script_output 'cat /etc/fedora-release', sub { $_ eq $expected };
 }
 
