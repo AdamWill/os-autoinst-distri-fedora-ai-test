@@ -233,9 +233,13 @@ sub run {
     assert_script_run "dnf -y install GraphicsMagick", 300;
     assert_script_run "gm convert -size 1024x768 xc:black /usr/share/backgrounds/black.png";
     assert_script_run "gm convert -size 1024x768 xc:black /usr/share/backgrounds/black.webp";
+    assert_script_run "gm convert -size 1024x768 xc:black /usr/share/backgrounds/black.jxl";
     if (script_run 'for i in /usr/share/backgrounds/f*/default/*.png; do ln -sf /usr/share/backgrounds/black.png $i; done') {
-        # if that failed, they're probably in webp format
-        assert_script_run 'for i in /usr/share/backgrounds/f*/default/*.webp; do ln -sf /usr/share/backgrounds/black.webp $i; done';
+        # if that failed, they're probably in webp format...
+        if (script_run 'for i in /usr/share/backgrounds/f*/default/*.webp; do ln -sf /usr/share/backgrounds/black.webp $i; done') {
+            # ...no? jpeg xl maybe?
+            assert_script_run 'for i in /usr/share/backgrounds/f*/default/*.jxl; do ln -sf /usr/share/backgrounds/black.jxl $i; done';
+        }
     }
     if ($desktop eq "kde") {
         # use solid blue background for SDDM
