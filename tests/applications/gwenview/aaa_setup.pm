@@ -17,6 +17,7 @@ sub run {
     # Exit the terminal
     desktop_vt;
 
+    kde_doublek_workaround(key => 'g');
     # Start the application
     menu_launch_type("gwenview");
     # Check that is started
