@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "xpos": 498,
+      "height": 56,
+      "width": 79,
+      "ypos": 341,
+      "type": "match"
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "matches skinny dropdown caused by rhbz#2346436"
+    }
+  ],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server",
+    "anaconda_part_fs",
+    "anaconda_part_fs_xfs_selected"
+  ]
+}
