@@ -451,6 +451,8 @@
                 "MAX_JOB_TIME": "10800",
                 "+NUMDISKS": "3",
                 "POSTINSTALL": "_kiwi_build",
+                "QEMUCPUS": "4",
+                "QEMURAM": "8192",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "false"
             }
