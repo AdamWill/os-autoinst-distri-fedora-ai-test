@@ -10,7 +10,7 @@ sub run {
     # start the application
     start_with_launcher('apps_menu_weather');
     # give access rights if asked
-    if (check_screen('grant_access', 1)) {
+    if (check_screen('grant_access', 5)) {
         assert_and_click 'grant_access';
     }
     wait_still_screen 2;

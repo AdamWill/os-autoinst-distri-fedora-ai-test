@@ -12,7 +12,7 @@ sub run {
     start_with_launcher('apps_menu_maps');
     # Check that is started
     # give access rights if asked
-    if (check_screen('grant_access', 1)) {
+    if (check_screen('grant_access', 5)) {
         assert_and_click 'grant_access';
     }
     assert_screen 'apps_run_maps';
