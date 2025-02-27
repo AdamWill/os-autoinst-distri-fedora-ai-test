@@ -75,7 +75,7 @@ sub run {
     menu_launch_type("clocks", "maximize");
     # Sometime, Clocks start with an access request,
     # deny it.
-    if (check_screen('grant_access')) {
+    if (check_screen('grant_access', 5)) {
         send_key('ret');
     }
     assert_screen('apps_run_clocks');
