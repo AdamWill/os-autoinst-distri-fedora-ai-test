@@ -8,11 +8,9 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application
-    start_with_launcher('apps_menu_fmw');
+    menu_launch_type 'mediawriter';
     # Check that is started
     assert_screen 'apps_run_fmw';
-    # Register application
-    register_application('fedora-media-writer');
     # Close the application
     quit_with_shortcut();
 }
@@ -20,6 +18,7 @@ sub run {
 sub test_flags {
     return {};
 }
+
 
 1;
 
