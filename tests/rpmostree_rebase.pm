@@ -45,6 +45,8 @@ sub run {
     elsif ($current =~ "silverblue") {
         my $relnum = get_release_number;
         $rebase = $relnum - 1;
+        # special case: rebasing from >41 to 41 doesn't work
+        $rebase = 43 if ($rebase == 41);
         # on update tests, just rebase to the 'official' ref for the
         # release, as opposed to the custom ref we used when building;
         # this should be more reliable than a different release
