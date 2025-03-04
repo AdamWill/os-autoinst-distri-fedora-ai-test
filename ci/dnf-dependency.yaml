@@ -1,0 +1,16 @@
+# See https://github.com/ansible/ansible/issues/84206 for the background on this
+# When the server is on ansible >= 2.19 things should just work, but ours are
+# not (RHEL 9 has 2.14, RHEL 8 has 2.15, as I write this)
+
+- name: Ensure that python3-libdnf5 is installed
+  block:
+    - name: Check whether python3-libdnf5 is installed
+      ansible.builtin.command: "rpm -q python3-libdnf5"
+      register: p3dnf5
+      failed_when: "1 != 1"
+      changed_when: "1 != 1"
+      check_mode: no
+
+    - name: Install python3-libdnf5 with direct dnf command
+      ansible.builtin.command: "dnf -y install python3-libdnf5"
+      when: "p3dnf5.rc != 0"

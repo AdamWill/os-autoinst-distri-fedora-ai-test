@@ -1,5 +1,8 @@
 - hosts: all
   tasks:
+    - name: Include dnf dependency workaround task
+      ansible.builtin.include_tasks:
+        file: dnf-dependency.yaml
     - name: Install required packages
       package:
         name: ['os-autoinst', 'perl-Test-Strict', 'perl-Test-Harness', 'perl-JSON', 'perl-REST-Client', 'perl-Code-TidyAll']

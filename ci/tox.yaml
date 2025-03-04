@@ -1,5 +1,8 @@
 - hosts: all
   tasks:
+    - name: Include dnf dependency workaround task
+      ansible.builtin.include_tasks:
+        file: dnf-dependency.yaml
     - name: Ensure tox is installed
       include_role:
         name: ensure-tox
