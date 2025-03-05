@@ -45,7 +45,11 @@ sub run {
         # According to the ticket, the 'fedora.json' file
         # which lists the available versions will be created
         # after the Software starts. Let's start it then on Gnome.
-        menu_launch_type("software", checkstart => 1);
+        # Do not use the default start checks, because they could
+        # fail, check manually instead.
+        menu_launch_type("software");
+        check_software_start();
+
         # When Software is started for the first time, it asks whether
         # a user wants to use Third Party software. We want to Ignore
         # this and proceed, so if we see that we click on Ignore.

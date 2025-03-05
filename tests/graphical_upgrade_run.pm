@@ -48,9 +48,16 @@ sub run {
 
     # Start the package manager application depending
     # on which DE we are on.
-    my $pkgmgr = "software";
-    $pkgmgr = "discover" if ($desktop eq "kde");
-    menu_launch_type($pkgmgr, checkstart => 1);
+    if ($desktop eq "gnome") {
+        # Do not do start checking through menu_launch_type as this
+        # could fail on Gnome because of the third party dialogue.
+        # Use the Software specific check instead.
+        menu_launch_type("software");
+        check_software_start();
+    }
+    else {
+        menu_launch_type("discover", checkstart => 1);
+    }
 
     # On Gnome, the upgrade is safely visible when
     # we visit the Update page by clicking on the

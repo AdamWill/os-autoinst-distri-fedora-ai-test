@@ -13,12 +13,8 @@ sub run {
 
 
     # check if third party dialog appears, if so, click it away
-    if (check_screen 'gnome_software_ignore', 10) {
-        wait_still_screen 3;
-        # match again as the dialog may have moved a bit
-        assert_and_click 'gnome_software_ignore';
-    }
-    assert_screen 'desktop_package_tool_update';
+    check_software_start();
+
     # Register application
     register_application("gnome-software");
     # Close the application
