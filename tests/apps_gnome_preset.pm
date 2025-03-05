@@ -10,6 +10,8 @@ sub run {
     my $self = shift;
     #  Change the background to black.
     solidify_wallpaper;
+    # Surpress the update notification
+    set_update_notification_timestamp();
 }
 
 # If this test fails, the others will probably start failing too,
