@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 128,
+      "height": 23,
+      "ypos": 83,
+      "xpos": 7,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gte_help_bread_main"
+  ]
+}

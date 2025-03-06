@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "xpos": 432,
+      "ypos": 38,
+      "type": "match",
+      "width": 161,
+      "height": 34
+    },
+    {
+      "height": 22,
+      "width": 101,
+      "type": "match",
+      "ypos": 366,
+      "xpos": 81
+    },
+    {
+      "type": "match",
+      "ypos": 545,
+      "xpos": 82,
+      "height": 23,
+      "width": 79
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_section_content_user"
+  ]
+}

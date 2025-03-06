@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 3,
+      "ypos": 88,
+      "type": "match",
+      "width": 161,
+      "height": 59
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "clocks_help_shown"
+  ]
+}
