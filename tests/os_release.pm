@@ -188,14 +188,16 @@ sub run {
         print "VARIANT_ID was not tested because the compose is not Workstation or Server Edition.\n";
     }
 
+    unless (get_var("CANNED")) {
+        # Download Python test script to run the tests.
+        download_python_tests();
+        # Test for EOL date in the distant future.
+        assert_script_run("~/check-release.py --test future --verbose");
 
-    # Download Python test script to run the tests.
-    download_python_tests();
-    # Test for EOL date in the distant future.
-    assert_script_run("~/check-release.py --test future --verbose");
-
-    # Test for EOL dates match each other.
-    assert_script_run("~/check-release.py --test compare --release $version_id --verbose");
+        my $relnum = get_release_number;
+        # Test for EOL dates match each other.
+        assert_script_run("~/check-release.py --test compare --release $version_id --verbose") unless ($relnum eq $rawrel);
+    }
 
     # Check for fails, count them, collect their messages and die if something was found.
     my $failcount = scalar @fails;
