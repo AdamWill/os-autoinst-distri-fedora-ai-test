@@ -13,7 +13,7 @@ sub run {
     # use compose repo (compose tests) or set up update repo (update tests)
     cleanup_workaround_repo;
     repo_setup();
-    my $params = "-y --releasever=${relnum}";
+    my $params = "-y --best --releasever=${relnum}";
 
     if (script_run "dnf ${params} system-upgrade download", 6000) {
         record_soft_failure "dnf failed so retry with --allowerasing";
