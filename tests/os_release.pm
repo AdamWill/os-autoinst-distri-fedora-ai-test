@@ -79,6 +79,8 @@ sub run {
     # handles that
     $version_id = 'Rawhide' if ($version_id eq $rawrel);
     my $varstr = spell_version_number($version_id);
+    # 42 is speshul
+    $varstr = "Adams" if ($version_id eq "42");
     my $target = lc($version_id);
     $version_id = $rawrel if ($version_id eq "Rawhide");
 
