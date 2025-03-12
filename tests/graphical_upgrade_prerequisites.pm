@@ -24,13 +24,6 @@ sub run {
     if ($desktop eq "gnome") {
         # Install Gnome specific packages
         assert_script_run("dnf install -y jq dbus-x11");
-        # FIXME on Fedora 40, update gnome-software from updates-testing
-        # to ensure we have the fix for
-        # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2514
-        # drop this when the update is stable
-        if ($curr eq "40") {
-            assert_script_run("dnf -y --enablerepo=updates-testing update gnome-software", 180);
-        }
         # Leave the CLI and come back to the login screen.
         desktop_vt();
         # Log onto the graphical session
