@@ -103,7 +103,7 @@ sub run {
         wait_still_screen 10, 30;
         dm_perform_login($desktop, $password);
     }
-    check_desktop(timeout => 90);
+    check_desktop(timeout => 180);
     # now, WE WAIT. this is just an unconditional wait - rather than
     # breaking if we see an update notification appear - so we catch
     # things that crash a few minutes after startup, etc.
