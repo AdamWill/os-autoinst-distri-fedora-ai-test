@@ -14,7 +14,7 @@ sub strip_marks {
 
 sub download_python_tests {
     # Download the Python test script and change mode to rwx,rx,rx.
-    assert_script_run("curl https://pagure.io/fedora-qa/os-autoinst-distri-fedora/raw/os-release-addon/f/check-release.py -o ~/check-release.py --retry 10 --retry-delay 2", timeout => 60);
+    assert_script_run("curl " . autoinst_url . "/data/check-release.py -o ~/check-release.py --retry 10 --retry-delay 2", timeout => 60);
     assert_script_run("chmod 755 ~/check-release.py", timeout => 20);
     sleep(5);
 }

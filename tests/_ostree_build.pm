@@ -86,7 +86,7 @@ sub run {
     assert_script_run 'git clone https://pagure.io/pungi-fedora.git';
     assert_script_run 'cd pungi-fedora/';
     assert_script_run "git checkout ${branch}";
-    assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o ostree-parse-pungi.py https://pagure.io/fedora-qa/os-autoinst-distri-fedora/raw/main/f/ostree-parse-pungi.py', timeout => 180;
+    assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o ostree-parse-pungi.py ' . autoinst_url . '/data/ostree-parse-pungi.py', timeout => 180;
     my $loraxargs = script_output "python3 ostree-parse-pungi.py $lcsubv $arch";
 
     # this 'temporary file cleanup' thing can actually wipe bits of
@@ -111,7 +111,7 @@ sub run {
     # do a package version check on the packages installed to the
     # installer environment - see
     # https://pagure.io/releng/failed-composes/issue/6538#comment-917347
-    assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o updvercheck.py https://pagure.io/fedora-qa/os-autoinst-distri-fedora/raw/lorax-check-packages/f/updvercheck.py', timeout => 180;
+    assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o updvercheck.py ' . autoinst_url . '/data/updvercheck.py', timeout => 180;
     my $advisory = get_var("ADVISORY");
     my $cmd = 'python3 ./updvercheck.py /mnt/updatepkgs.txt pylorax.log';
     $cmd .= " $advisory" if ($advisory);
