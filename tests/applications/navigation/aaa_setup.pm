@@ -26,7 +26,7 @@ sub run {
     else {
         assert_script_run("dnf install -y extremetuxracer", timeout => 180);
     }
-    assert_script_run("curl -O https://pagure.io/fedora-qa/openqa_testdata/blob/thetree/f/video/video.ogv", timeout => 120);
+    assert_script_run("curl -O " . autoinst_url . "/data/video.ogv", timeout => 120);
     # Put the downloaded video in the Videos folder
     assert_script_run("mv video.ogv /home/$user/Videos/");
     desktop_vt();

@@ -474,7 +474,7 @@ sub repos_mirrorlist {
 sub get_setup_repos_script {
     # ensure the 'setup_repos.py' downloader script is present
     if (script_run "ls /usr/local/bin/setup_repos.py") {
-        assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o /usr/local/bin/setup_repos.py https://pagure.io/fedora-qa/os-autoinst-distri-fedora/raw/main/f/setup_repos.py', timeout => 180;
+        assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o /usr/local/bin/setup_repos.py ' . autoinst_url . '/data/setup_repos.py', timeout => 180;
         assert_script_run 'chmod ugo+x /usr/local/bin/setup_repos.py';
     }
 }
@@ -1297,7 +1297,7 @@ sub advisory_check_nonmatching_packages {
     # ensure python3-dnf is present for the check script
     assert_script_run 'dnf -y install python3-dnf' unless (get_var("CANNED"));
     # download the check script and run it
-    assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o updvercheck.py https://pagure.io/fedora-qa/os-autoinst-distri-fedora/raw/main/f/updvercheck.py', timeout => 180;
+    assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o updvercheck.py ' . autoinst_url . '/data/updvercheck.py', timeout => 180;
     my $advisory = get_var("ADVISORY");
     my $cmd = 'python3 ./updvercheck.py /mnt/updatepkgs.txt /tmp/installedupdatepkgs.txt';
     $cmd .= " $advisory" if ($advisory);
