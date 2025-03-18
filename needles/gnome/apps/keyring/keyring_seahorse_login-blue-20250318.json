@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 19,
+      "width": 41,
+      "type": "match",
+      "xpos": 35,
+      "ypos": 121
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "keyring_seahorse_login"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 589,
+      "ypos": 488,
+      "height": 17,
+      "width": 55
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_unlock",
+    "keyring_askpass_confirm",
+    "DESKTOP-gnome"
+  ]
+}

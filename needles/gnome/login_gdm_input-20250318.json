@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 451,
+      "xpos": 399,
+      "height": 45,
+      "width": 56
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "graphical_login_input",
+    "DESKTOP-gnome",
+    "LANGUAGE-english"
+  ]
+}
