@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 32,
+      "width": 168,
+      "type": "match",
+      "ypos": 543,
+      "xpos": 472
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "tour_updown"
+  ]
+}
