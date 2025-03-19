@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 178,
+      "xpos": 44,
+      "type": "match",
+      "width": 250,
+      "height": 27
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_issues_opened"
+  ]
+}

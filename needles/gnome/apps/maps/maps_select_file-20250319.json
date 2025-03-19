@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 233,
+      "xpos": 283,
+      "type": "match",
+      "width": 121,
+      "height": 51
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_select_file"
+  ]
+}
