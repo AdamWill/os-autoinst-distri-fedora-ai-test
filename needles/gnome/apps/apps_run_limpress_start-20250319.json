@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 786,
+      "ypos": 692,
+      "type": "match",
+      "width": 49,
+      "height": 19
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_limpress_start",
+    "libreoffice_any"
+  ]
+}

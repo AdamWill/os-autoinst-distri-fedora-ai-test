@@ -10,6 +10,11 @@ sub run {
 
     # Start the application
     start_with_launcher('apps_menu_contacts');
+    # If a setup page appears, set up a local account.
+    if (check_screen("contacts_welcome") and get_var("VERSION") => 42) {
+        assert_and_click("contacts_select_local_book");
+        assert_and_click("gnome_button_done");
+    }
     # Check that is started
     assert_screen 'apps_run_contacts';
     # Register application

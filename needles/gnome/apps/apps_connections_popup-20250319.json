@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 489,
+      "xpos": 509,
+      "type": "match",
+      "width": 170,
+      "height": 30
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_connections_popup"
+  ]
+}

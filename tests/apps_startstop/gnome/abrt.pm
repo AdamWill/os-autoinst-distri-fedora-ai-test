@@ -11,7 +11,7 @@ sub run {
 
     if ($subvariant ne "Silverblue") {
         # Start the application
-        start_with_launcher('apps_menu_abrt', 'apps_menu_utilities');
+        start_with_launcher('apps_menu_abrt', 'apps_menu_system');
         # Check that it is started
         assert_screen 'apps_run_abrt';
         # Register application
