@@ -33,7 +33,7 @@ sub run {
     wait_still_screen(2);
     type_very_safely("Reykjav");
     assert_and_click("gnome_city_button_reykjavik");
-    assert_and_click("gnome_add_button_blue");
+    assert_and_click("gnome_add_button");
     assert_screen("clocks_city_added_reykjavik");
 
     # Click onto the Delete button to remove the listed cities.
