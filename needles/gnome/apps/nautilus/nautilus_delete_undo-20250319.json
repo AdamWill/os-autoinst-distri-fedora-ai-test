@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 621,
+      "ypos": 711,
+      "height": 21,
+      "width": 42
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_delete_undo"
+  ]
+}

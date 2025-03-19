@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 20,
+      "width": 100,
+      "type": "match",
+      "ypos": 295,
+      "xpos": 22
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_directory_documents"
+  ]
+}

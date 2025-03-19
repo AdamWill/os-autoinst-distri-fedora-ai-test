@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 115,
+      "xpos": 8,
+      "type": "match",
+      "width": 248,
+      "height": 54
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_search_file_shown"
+  ]
+}

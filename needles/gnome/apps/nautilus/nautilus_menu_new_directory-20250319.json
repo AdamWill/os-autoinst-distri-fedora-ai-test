@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 761,
+      "ypos": 96,
+      "type": "match",
+      "width": 82,
+      "height": 20
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_menu_new_directory"
+  ]
+}
