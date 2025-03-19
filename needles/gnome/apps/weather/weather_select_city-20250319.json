@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 345,
+      "xpos": 350,
+      "type": "match",
+      "width": 98,
+      "height": 39
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "weather_select_city"
+  ]
+}
