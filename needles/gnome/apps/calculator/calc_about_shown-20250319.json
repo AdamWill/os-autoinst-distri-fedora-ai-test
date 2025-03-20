@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 225,
+      "xpos": 443,
+      "type": "match",
+      "width": 144,
+      "height": 128
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_about_shown"
+  ]
+}

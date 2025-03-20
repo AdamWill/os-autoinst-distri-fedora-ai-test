@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 256,
+      "height": 20,
+      "xpos": 141,
+      "ypos": 657,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_select_linuxroot"
+  ]
+}

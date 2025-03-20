@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 601,
+      "ypos": 526,
+      "height": 21,
+      "width": 54
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_button_delete"
+  ]
+}

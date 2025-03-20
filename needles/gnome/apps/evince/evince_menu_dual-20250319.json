@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 20,
+      "width": 40,
+      "type": "match",
+      "xpos": 805,
+      "ypos": 335
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "evince_menu_dual"
+  ]
+}

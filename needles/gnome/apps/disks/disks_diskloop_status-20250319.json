@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 234,
+      "ypos": 394,
+      "height": 28,
+      "width": 139
+    },
+    {
+      "width": 123,
+      "height": 33,
+      "xpos": 553,
+      "ypos": 241,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_diskloop_status"
+  ]
+}

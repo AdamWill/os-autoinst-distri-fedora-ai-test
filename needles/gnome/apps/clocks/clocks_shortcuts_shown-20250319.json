@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 161,
+      "ypos": 194,
+      "height": 22,
+      "width": 60
+    },
+    {
+      "type": "match",
+      "ypos": 194,
+      "xpos": 613,
+      "height": 21,
+      "width": 103
+    },
+    {
+      "type": "match",
+      "ypos": 144,
+      "xpos": 476,
+      "height": 22,
+      "width": 75
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "clocks_shortcuts_shown"
+  ]
+}

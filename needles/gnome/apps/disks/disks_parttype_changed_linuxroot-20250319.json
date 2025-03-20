@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 216,
+      "ypos": 453,
+      "height": 23,
+      "width": 368
+    },
+    {
+      "height": 11,
+      "width": 93,
+      "type": "match",
+      "ypos": 273,
+      "xpos": 283
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_parttype_changed_linuxroot"
+  ]
+}

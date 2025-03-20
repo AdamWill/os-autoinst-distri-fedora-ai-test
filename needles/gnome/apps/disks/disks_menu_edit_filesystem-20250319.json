@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 21,
+      "width": 123,
+      "type": "match",
+      "ypos": 233,
+      "xpos": 317
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_menu_edit_filesystem"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 135,
+      "height": 19,
+      "xpos": 445,
+      "ypos": 112,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_gvim"
+  ]
+}

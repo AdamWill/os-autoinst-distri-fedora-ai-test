@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 392,
+      "xpos": 345,
+      "height": 30,
+      "width": 33
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_result_3LAG3"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 595,
+      "ypos": 62,
+      "type": "match",
+      "width": 146,
+      "height": 49
+    },
+    {
+      "width": 269,
+      "height": 45,
+      "ypos": 233,
+      "xpos": 593,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "panel_calendar_shown"
+  ]
+}

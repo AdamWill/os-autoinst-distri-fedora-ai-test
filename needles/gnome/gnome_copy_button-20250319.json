@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 116,
+      "height": 19,
+      "xpos": 454,
+      "ypos": 430,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_copy_button"
+  ]
+}

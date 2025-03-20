@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 392,
+      "ypos": 451,
+      "height": 46,
+      "width": 41
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-turkish",
+    "graphical_login_input"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "height": 18,
+      "width": 241,
+      "type": "match",
+      "ypos": 398,
+      "xpos": 473
+    },
+    {
+      "type": "match",
+      "ypos": 416,
+      "xpos": 269,
+      "height": 19,
+      "width": 153
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_partition_mounted_three"
+  ]
+}

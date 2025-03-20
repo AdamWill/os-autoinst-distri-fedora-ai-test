@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 39,
+      "height": 20,
+      "ypos": 114,
+      "xpos": 234,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "evince_open_file_dialog"
+  ]
+}

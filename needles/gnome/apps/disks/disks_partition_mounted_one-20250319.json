@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 234,
+      "height": 23,
+      "xpos": 472,
+      "ypos": 396,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_partition_mounted_one"
+  ]
+}

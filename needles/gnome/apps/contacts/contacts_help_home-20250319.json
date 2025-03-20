@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 85,
+      "xpos": 148,
+      "height": 20,
+      "width": 76
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "contacts_help_home"
+  ]
+}

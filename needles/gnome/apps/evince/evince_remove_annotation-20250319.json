@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 417,
+      "ypos": 562,
+      "type": "match",
+      "width": 142,
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "evince_remove_annotation"
+  ]
+}

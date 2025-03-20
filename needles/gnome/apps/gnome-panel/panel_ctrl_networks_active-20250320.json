@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 73,
+      "height": 27,
+      "xpos": 647,
+      "ypos": 157,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "panel_ctrl_networks"
+  ]
+}

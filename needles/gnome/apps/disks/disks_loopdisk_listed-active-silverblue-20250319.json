@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 0,
+      "ypos": 162,
+      "height": 35,
+      "width": 169
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_loopdisk_listed"
+  ]
+}

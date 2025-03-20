@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 405,
+      "xpos": 47,
+      "type": "match",
+      "width": 68,
+      "height": 20
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "chars_select_activities"
+  ]
+}
