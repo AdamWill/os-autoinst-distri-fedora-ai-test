@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 131,
+      "height": 20,
+      "ypos": 105,
+      "xpos": 29,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "video_add_local_video"
+  ]
+}

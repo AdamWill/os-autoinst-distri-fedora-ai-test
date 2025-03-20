@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 97,
+      "height": 16,
+      "xpos": 153,
+      "ypos": 188,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "terminal_prompt"
+  ]
+}

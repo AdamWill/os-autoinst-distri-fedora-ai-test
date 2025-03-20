@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 3,
+      "ypos": 3,
+      "type": "match",
+      "width": 1001,
+      "height": 755
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "navigation_terminal_fullscreen"
+  ]
+}
