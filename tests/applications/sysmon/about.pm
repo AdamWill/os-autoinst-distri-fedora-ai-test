@@ -12,7 +12,7 @@ sub run {
     # Check that About dialogue has started.
     assert_screen("sysmon_about_shown");
     # Click on the Credits button
-    assert_and_click("gnome_button_credits");
+    assert_and_click("gnome_selector_credits");
     # Check that Credits are shown
     assert_screen("sysmon_credits_shown");
 }

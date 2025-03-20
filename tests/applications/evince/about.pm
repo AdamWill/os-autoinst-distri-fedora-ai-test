@@ -19,7 +19,7 @@ sub run {
     assert_screen("evince_about_shown");
 
     # Click on Credits button to see the second part of the dialogue.
-    assert_and_click("gnome_button_credits", button => "left", timeout => 30);
+    assert_and_click("gnome_selector_credits", button => "left", timeout => 30);
 
     # Check that Credits are accessible and visible, too.
     assert_screen("evince_credits_shown");

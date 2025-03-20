@@ -13,7 +13,7 @@ sub run {
     # Check that the correct font is shown.
     assert_screen("fonts_about_shown");
     # Click on Credits to see them.
-    assert_and_click("gnome_button_credits");
+    assert_and_click("gnome_selector_credits");
 
     # Check that Credits are shown
     assert_screen("fonts_credits_shown");
@@ -21,14 +21,14 @@ sub run {
     send_key("esc");
 
     # Click on Legal to see legal info.
-    assert_and_click("gnome_button_legal");
+    assert_and_click("gnome_selector_legal");
     # Check that Credits are shown
     assert_screen("fonts_legal_shown");
     # Return to previous screen
     send_key("esc");
 
     # Check that a project website can be reached.
-    assert_and_click("gnome_button_website");
+    assert_and_click("gnome_selector_website");
     # Check that the website has been opened
     assert_screen("fonts_website_opened");
 }

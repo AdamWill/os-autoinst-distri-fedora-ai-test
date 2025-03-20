@@ -18,7 +18,7 @@ sub run {
     assert_screen("contacts_about_shown");
     # Click on Credits to move to credits and check we
     # have moved.
-    assert_and_click("gnome_button_credits");
+    assert_and_click("gnome_selector_credits");
     assert_screen("contacts_credits_shown");
 }
 

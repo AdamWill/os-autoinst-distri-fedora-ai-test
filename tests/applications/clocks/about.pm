@@ -14,7 +14,7 @@ sub run {
     # Click on About Clocks to see the About info.
     assert_and_click("clocks_menu_about");
     assert_screen("clocks_about_displayed");
-    assert_and_click("gnome_button_credits");
+    assert_and_click("gnome_selector_credits");
     assert_screen("clocks_credits_shown");
 
 }

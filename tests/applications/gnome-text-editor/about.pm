@@ -19,7 +19,7 @@ sub run {
     assert_screen "gte_about_shown";
 
     # Click on Credits to move to another screen.
-    assert_and_click "gnome_button_credits";
+    assert_and_click "gnome_selector_credits";
     wait_still_screen(2);
 
     # Check that Credits were shown.

@@ -17,7 +17,7 @@ sub run {
     assert_screen("disks_about_shown");
 
     # Click on the Credits button.
-    assert_and_click("gnome_button_credits");
+    assert_and_click("gnome_selector_credits");
 
     # Check that Credits are shown.
     assert_screen("disks_credits_shown");

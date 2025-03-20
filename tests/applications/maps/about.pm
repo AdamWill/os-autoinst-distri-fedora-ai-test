@@ -18,7 +18,7 @@ sub run {
     assert_screen("maps_about_shown");
 
     # Check that you can visit application webpages
-    assert_and_click("maps_link_website");
+    assert_and_click("gnome_selector_website");
     assert_screen("maps_website_opened");
 
     # Close the web browser
@@ -32,12 +32,12 @@ sub run {
     send_key("alt-f4");
 
     # Check that credits are shown.
-    assert_and_click("maps_button_credits");
+    assert_and_click("gnome_selector_credits");
     assert_screen("maps_credits_shown");
     send_key("esc");
 
     # Check that legal info is shown.
-    assert_and_click("maps_button_legal");
+    assert_and_click("gnome_selector_legal");
     assert_screen("maps_legal_shown");
     send_key("esc");
 }
