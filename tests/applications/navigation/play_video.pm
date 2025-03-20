@@ -15,7 +15,7 @@ sub run {
     # of videos, check that it runs and that the
     # video is displayed in that view or we will add
     # the video to the grid.
-    unless (check_screen("video_grid_shown")) {
+    unless (check_screen("video_grid_shown", 10)) {
         assert_and_click("video_add_video");
         assert_and_click("video_add_local_video");
         wait_still_screen(3);
