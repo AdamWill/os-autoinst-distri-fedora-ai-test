@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 66,
+      "height": 22,
+      "xpos": 596,
+      "ypos": 512,
+      "type": "match"
+    },
+    {
+      "type": "match",
+      "xpos": 457,
+      "ypos": 299,
+      "height": 85,
+      "width": 113
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "chars_love_eyes_dialogue"
+  ]
+}
