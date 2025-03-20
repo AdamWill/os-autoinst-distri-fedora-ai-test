@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 20,
+      "ypos": 101,
+      "width": 145,
+      "height": 16,
+      "type": "match"
+    },
+    {
+      "xpos": 18,
+      "ypos": 142,
+      "width": 144,
+      "height": 40,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fonts_adwaita_info"
+  ]
+}
