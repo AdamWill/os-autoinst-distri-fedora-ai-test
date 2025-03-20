@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 462,
+      "xpos": 603,
+      "type": "match",
+      "width": 72,
+      "height": 27
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "panel_area_today"
+  ]
+}
