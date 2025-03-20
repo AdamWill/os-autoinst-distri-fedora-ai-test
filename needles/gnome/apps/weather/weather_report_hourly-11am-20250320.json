@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 67,
+      "height": 24,
+      "xpos": 771,
+      "ypos": 219,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "weather_report_hourly"
+  ]
+}
