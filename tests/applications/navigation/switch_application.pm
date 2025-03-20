@@ -63,6 +63,9 @@ sub run {
     send_key("alt-tab");
     assert_screen("apps_run_texteditor");
 
+    # move the window to the left to be sure both will be visible
+    # for clicking
+    send_key("super-left");
     # Switch by clicking on the certain application.
     assert_and_click("files_inactive");
     assert_screen("apps_run_files");
