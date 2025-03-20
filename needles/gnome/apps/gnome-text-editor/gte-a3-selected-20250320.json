@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 162,
+      "xpos": 255,
+      "height": 144,
+      "width": 395
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gte-a3-selected"
+  ]
+}

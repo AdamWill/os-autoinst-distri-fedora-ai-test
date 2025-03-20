@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 77,
+      "height": 21,
+      "ypos": 152,
+      "xpos": 493,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_texteditor",
+    "apps_run_editor"
+  ]
+}

@@ -23,7 +23,8 @@ sub run {
     type_very_safely "Happy shopping.";
 
     # Switch on Markdown Highlighting.
-    assert_and_click("gte_settings_button");
+    # it's under the 'settings' menu on < 48, 'info' menu on >= 48
+    assert_and_click(["gte_settings_button", "gte_info_button"]);
     assert_and_click "gte_select_highlighting";
     wait_still_screen(2);
     type_very_safely "markdown";

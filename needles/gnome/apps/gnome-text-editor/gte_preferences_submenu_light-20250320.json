@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 811,
+      "ypos": 500,
+      "type": "match",
+      "width": 86,
+      "height": 17
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gte_preferences_submenu"
+  ]
+}
