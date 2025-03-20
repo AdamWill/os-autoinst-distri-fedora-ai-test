@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 189,
+      "xpos": 793,
+      "height": 145,
+      "width": 82
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "loupe_side_panel"
+  ]
+}
