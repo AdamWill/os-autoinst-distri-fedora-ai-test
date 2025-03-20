@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "ypos": 207,
+      "xpos": 80,
+      "type": "match",
+      "width": 41,
+      "height": 22
+    },
+    {
+      "width": 63,
+      "height": 21,
+      "xpos": 114,
+      "ypos": 355,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_resources_shown"
+  ]
+}
