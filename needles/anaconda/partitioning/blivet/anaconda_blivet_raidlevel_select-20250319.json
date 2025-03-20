@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 361,
+      "ypos": 245,
+      "type": "match",
+      "width": 107,
+      "height": 24
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_raidlevel_select"
+  ]
+}
