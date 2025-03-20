@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 505,
+      "xpos": 6,
+      "height": 25,
+      "width": 92
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_help_using_factorial"
+  ]
+}
