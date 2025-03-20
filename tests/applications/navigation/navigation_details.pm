@@ -31,11 +31,7 @@ sub run {
     # Sometimes, the details take a time to load,
     # if that happens, fail softly.
     unless (check_screen('navigation_details_shown', timeout => 30)) {
-        if (check_screen('navigation_details_notloaded')) {
-            record_soft_failure('Window details not loaded in time.');
-        }
-    }
-    else {
+        record_soft_failure('Window details not loaded in time.');
         assert_screen("navigation_details_shown", timeout => 60);
     }
     release_key("alt");
