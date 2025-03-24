@@ -38,7 +38,7 @@ sub run {
         $isolation = 'simple';
     }
     # install the tools we need
-    assert_script_run "dnf -y install mock git", 300;
+    assert_script_run "dnf -y install mock git", 420;
     # set up the mock config
     mock_setup;
     # now check out the fedora kiwi descriptions
