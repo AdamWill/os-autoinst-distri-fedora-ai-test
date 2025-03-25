@@ -12,11 +12,7 @@ sub run {
     set_update_notification_timestamp();
 
     # Start the application
-    menu_launch_type("characters");
-    # Check it has started
-    assert_screen 'apps_run_chars';
-    # Fullsize the window.
-    send_key("super-up");
+    menu_launch_type("characters", checkstart => 1, maximize => 1);
 }
 
 sub test_flags {

@@ -9,9 +9,7 @@ sub run {
     my $self = shift;
 
     # Start the application
-    menu_launch_type 'kwallet';
-    # Check that it is started
-    assert_screen 'apps_run_kwallet', timeout => 60;
+    menu_launch_type('kwallet', timeout => 60, checkstart => 1);
     # Close the application
     quit_with_shortcut();
 }

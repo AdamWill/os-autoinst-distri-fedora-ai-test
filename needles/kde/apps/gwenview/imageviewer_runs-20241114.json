@@ -17,6 +17,7 @@
   ],
   "properties": [],
   "tags": [
-    "imageviewer_runs"
+    "apps_run_gwenview",
+    "apps_run_imageviewer"
   ]
 }

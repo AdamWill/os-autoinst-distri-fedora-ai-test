@@ -8,9 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application with command
-    menu_launch_type 'ark';
-    # Check that it is started
-    assert_screen 'apps_run_ark', timeout => 60;
+    menu_launch_type('ark', checkstart => 1, timeout => 60);
     # Close the application
     quit_with_shortcut();
 }

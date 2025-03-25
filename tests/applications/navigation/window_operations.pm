@@ -27,8 +27,7 @@ sub run {
     # Let's start a new application. We'll go with Calculator,
     # because it has a small window that fits nicely into
     # a small screen we use in openQA.
-    menu_launch_type("calculator");
-    assert_screen("apps_run_calculator");
+    menu_launch_type("calculator", checkstart => 1);
 
     # Maximize the application - right click and select from
     # the context menu.

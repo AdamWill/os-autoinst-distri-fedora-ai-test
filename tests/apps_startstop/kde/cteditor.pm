@@ -7,7 +7,6 @@ use utils;
 
 sub run {
     my $self = shift;
-
     menu_launch_type 'contactthemeeditor';
     # Check that it is started
     assert_screen 'apps_run_cteditor';

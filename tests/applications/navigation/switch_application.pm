@@ -49,10 +49,9 @@ sub run {
     my $self = shift;
 
     ### Switch between two applications
-    menu_launch_type("files");
-    assert_screen("apps_run_files");
+    menu_launch_type("files", checkstart => 1);
     menu_launch_type("text editor");
-    assert_screen('apps_run_texteditor');
+    assert_screen("apps_run_texteditor");
     # From the setup script, we should be seeing the editor
     # window.
     # Switch to the other application.

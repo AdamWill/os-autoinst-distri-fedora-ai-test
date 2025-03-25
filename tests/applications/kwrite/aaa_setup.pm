@@ -20,9 +20,7 @@ sub run {
     # Workaround the KDE double char problem
     kde_doublek_workaround();
     # Start the application
-    menu_launch_type("kwrite");
-    # Check that it started
-    assert_screen("apps_run_kwrite");
+    menu_launch_type("kwrite", checkstart => 1, maximize => 1);
 
     # Hit key-combo to open the file
     send_key("ctrl-o");
@@ -38,10 +36,6 @@ sub run {
 
     # Open it
     send_key("ret");
-    wait_still_screen(3);
-
-    # Make the application fullscreen
-    assert_and_click("kde_window_maximize");
     wait_still_screen(3);
 
     # Check that the document has been opened

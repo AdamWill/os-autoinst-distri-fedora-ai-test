@@ -19,12 +19,7 @@ sub run {
 
     kde_doublek_workaround(key => 'g');
     # Start the application
-    menu_launch_type("gwenview");
-    # Check that is started
-    assert_screen 'imageviewer_runs';
-
-    # Fullsize the application window.
-    send_key("super-pgup");
+    menu_launch_type("gwenview", checkstart => 1, maximize => 1);
 
     # Open the test file to create a starting point for the other tests.
     send_key("ctrl-o");

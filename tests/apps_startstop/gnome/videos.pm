@@ -12,9 +12,9 @@ sub run {
 
     if ($subvariant ne "Silverblue") {
         # Start the application
-        start_with_launcher('apps_menu_videos');
+        start_with_launcher('apps_menu_video');
         # Check that is started
-        assert_screen 'apps_run_videos';
+        assert_screen 'apps_run_video';
         # Register application
         if ($version eq "Rawhide") {
             register_application("showtime");

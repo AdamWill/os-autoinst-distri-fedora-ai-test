@@ -22,9 +22,7 @@ sub run {
     # Set the update notification timestamp
     set_update_notification_timestamp();
     # Start the application
-    menu_launch_type("text-editor");
-    # Check that it started
-    assert_screen("apps_run_texteditor");
+    menu_launch_type("text_editor", checkstart => 1, maximize => 1);
 
     # Open the test file
     send_key("ctrl-o");
@@ -38,10 +36,6 @@ sub run {
 
     # Open it
     send_key("ret");
-    wait_still_screen(3);
-
-    # Make the application fullscreen
-    send_key("super-up");
     wait_still_screen(3);
 
     # Check that the document has been opened

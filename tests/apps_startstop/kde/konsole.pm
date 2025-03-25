@@ -11,9 +11,7 @@ sub run {
     # Start the application
     # we don't use desktop_launch_terminal here as we specifically
     # want to run 'konsole' from the kicker menu in this test
-    menu_launch_type 'konsole';
-    # Check that it is started
-    assert_screen 'apps_run_konsole', timeout => 60;
+    menu_launch_type('konsole', checkstart => 1, timeout => 60);
     # Close the application
     quit_with_shortcut();
 }

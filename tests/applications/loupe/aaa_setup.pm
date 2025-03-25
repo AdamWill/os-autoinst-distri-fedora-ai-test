@@ -20,12 +20,7 @@ sub run {
     # Set the update notification timestamp
     set_update_notification_timestamp();
     # Start the application
-    menu_launch_type("image viewer");
-    # Check that is started
-    assert_screen 'apps_run_imageviewer';
-
-    # Fullsize the Loupe window.
-    send_key("super-up");
+    menu_launch_type("loupe", checkstart => 1, maximize => 1);
 
     # Open the test file to create a starting point for the other EoG tests.
     send_key("ctrl-o");

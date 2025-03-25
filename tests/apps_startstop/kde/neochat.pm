@@ -8,9 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application
-    menu_launch_type 'neochat';
-    # Check that it is started
-    assert_screen "apps_run_neochat";
+    menu_launch_type('neochat', checkstart => 1);
     # Close the application
     quit_with_shortcut();
 }

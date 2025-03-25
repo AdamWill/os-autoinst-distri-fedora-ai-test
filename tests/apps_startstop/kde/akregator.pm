@@ -8,9 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application
-    menu_launch_type('akregator');
-    # Check that it is started
-    assert_screen 'apps_run_akregator', timeout => 60;
+    menu_launch_type('akregator', checkstart => 1, timeout => 60);
     # Close the application
     quit_with_shortcut();
 }

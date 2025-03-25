@@ -8,9 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application
-    menu_launch_type 'mediawriter';
-    # Check that is started
-    assert_screen 'apps_run_fmw';
+    menu_launch_type('mediawriter', checkstart => 1);
     # Close the application
     quit_with_shortcut();
 }

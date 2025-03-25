@@ -22,9 +22,7 @@ sub run {
     set_update_notification_timestamp();
 
     # Start the application
-    menu_launch_type("evince");
-    # Check that is started
-    assert_screen 'apps_run_dviewer';
+    menu_launch_type("evince", checkstart => 1);
 
     # Open the test file to create a starting point for the other Evince tests.
     # Click on Open button to open the File Open Dialog

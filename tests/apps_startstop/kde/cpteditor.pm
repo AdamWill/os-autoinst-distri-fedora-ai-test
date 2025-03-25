@@ -7,7 +7,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    menu_launch_type 'print theme';
+    menu_launch_type('print theme');
     # Check that it is started
     assert_screen 'apps_run_cpteditor', timeout => 60;
     # Close the application

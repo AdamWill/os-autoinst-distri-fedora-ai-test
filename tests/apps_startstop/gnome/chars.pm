@@ -11,7 +11,7 @@ sub run {
     # Start the application
     start_with_launcher('apps_menu_chars');
     # Check that is started
-    assert_screen 'apps_run_chars';
+    assert_screen 'apps_run_characters';
     # Register application
     register_application("gnome-characters");
     # Close the application

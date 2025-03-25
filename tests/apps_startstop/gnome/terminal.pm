@@ -9,8 +9,7 @@ use utils;
 sub run {
     my $self = shift;
     # open the application
-    menu_launch_type "terminal";
-    assert_screen "apps_run_terminal";
+    menu_launch_type("terminal", checkstart => 1);
 
     # Register application
     register_application("terminal");

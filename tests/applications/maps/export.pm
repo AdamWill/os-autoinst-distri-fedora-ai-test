@@ -48,9 +48,7 @@ sub run {
     # it in an image viewer to see that it is correct.
     #
     # Open the Image Viewer
-    menu_launch_type("image viewer");
-    assert_screen("apps_run_imageviewer");
-    send_key("super-up");
+    menu_launch_type("loupe", checkstart => 1, maximize => 1);
     # Read the file into the application.
     send_key("ctrl-o");
     assert_and_click("gnome_dirs_pictures");

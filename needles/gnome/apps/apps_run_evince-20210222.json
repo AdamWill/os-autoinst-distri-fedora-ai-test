@@ -10,6 +10,7 @@
     ],
     "properties": [],
     "tags": [
-        "apps_run_dviewer"
+        "apps_run_dviewer",
+        "apps_run_evince"
     ]
 }

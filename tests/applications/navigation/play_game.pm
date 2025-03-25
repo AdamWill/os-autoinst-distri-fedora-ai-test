@@ -31,8 +31,7 @@ sub run {
     my $self = shift;
 
     # Open the game
-    menu_launch_type("tux racer");
-    assert_screen("apps_run_tuxracer");
+    menu_launch_type("tux_racer", checkstart => 1);
 
     # Check that it has started in the fullscreen mode.
     if (check_screen("panel_controls")) {

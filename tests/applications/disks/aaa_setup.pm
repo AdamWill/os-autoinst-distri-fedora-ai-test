@@ -33,13 +33,7 @@ sub run {
     # Set the update notification_timestamp
     set_update_notification_timestamp();
 
-    menu_launch_type("disks");
-    wait_still_screen(3);
-
-    # Make it fill the entire window.
-    send_key("super-up");
-    wait_still_screen(2);
-    assert_screen("apps_run_disks");
+    menu_launch_type("disks", checkstart => 1, maximize => 1);
 
     # Click on the listed icon of the new loop device.
     assert_and_click("disks_diskloop_listed");

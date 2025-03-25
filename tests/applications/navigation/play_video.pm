@@ -9,8 +9,7 @@ use utils;
 sub run {
     my $self = shift;
     # Start the Video player
-    menu_launch_type("video");
-    assert_screen("apps_run_videos");
+    menu_launch_type("video", checkstart => 1);
     # The Video player should start with a grid view
     # of videos, check that it runs and that the
     # video is displayed in that view or we will add

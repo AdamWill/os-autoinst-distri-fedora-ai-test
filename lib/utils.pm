@@ -1366,8 +1366,10 @@ sub menu_launch_type {
     # Use maximize => 1 to maximize the application after it
     # is started.
     # Use checkstart => 1 to check that the application has started
+    # Use timeout => X to override the default timeout (30)
     my ($application, %args) = @_;
     my $desktop = get_var("DESKTOP");
+    my $timeout = $args{timeout} // 30;
 
     # The standard combo key is the "super" key, just in I3
     # it is different.
@@ -1392,11 +1394,6 @@ sub menu_launch_type {
     send_key 'ret';
     wait_still_screen 3;
 
-    # If check that app is running was requested
-    # with checkstart => 1
-    if ($args{checkstart}) {
-        assert_screen("apps_run_$application");
-    }
     # If maximizing the application was requested
     # with maximize => 1
     if ($args{maximize}) {
@@ -1410,6 +1407,12 @@ sub menu_launch_type {
             record_soft_failure('Maximizing in this desktop is not supported at the moment!');
         }
         wait_still_screen 3;
+    }
+
+    # If check that app is running was requested
+    # with checkstart => 1
+    if ($args{checkstart}) {
+        assert_screen("apps_run_$application", timeout => $timeout);
     }
 }
 

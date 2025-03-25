@@ -34,8 +34,7 @@ sub connect_localhost {
     # connection to the localhost.
     if (get_var("DESKTOP") eq "gnome") {
         # Start Nautilus.
-        menu_launch_type("nautilus");
-        assert_screen("apps_run_files");
+        menu_launch_type("nautilus", checkstart => 1);
         # Add a new network connection.
         assert_and_click("nautilus_other_locations");
         assert_and_click("nautilus_enter_address");
@@ -97,9 +96,7 @@ sub check_stored {
     # desktop and check that the password has been stored there.
     # On KDE, we will use the KWalletManager.
     if (get_var("DESKTOP") eq "kde") {
-        menu_launch_type("kwallet");
-        assert_screen("apps_run_kwallet");
-        send_key("super-pgup");
+        menu_launch_type("kwalletmanager", checkstart => 1, maximize => 1);
         # Navigate to the stored entry and check
         # that the credentials are stored there.
         assert_and_dclick("keyring_wallet_passwords_unfold");
@@ -110,10 +107,7 @@ sub check_stored {
     }
     else {
         # Start the Seahorse application and maximize it.
-        menu_launch_type("seahorse");
-        assert_screen("apps_run_seahorse");
-        send_key("super-up");
-
+        menu_launch_type("seahorse", checkstart => 1, maximize => 1);
         # Navigate to the stored entry and check
         # that the credentials are stored there.
         assert_and_click("keyring_seahorse_login");

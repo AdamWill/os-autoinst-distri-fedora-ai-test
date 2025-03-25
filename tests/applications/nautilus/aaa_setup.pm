@@ -26,10 +26,7 @@ sub run {
     # Set the update notification timestamp
     set_update_notification_timestamp();
     # Start the application
-    menu_launch_type("nautilus");
-    # Check that is started
-    assert_screen 'apps_run_files';
-    wait_still_screen("2");
+    menu_launch_type("nautilus", checkstart => 1);
 
     # Check that the icons are shown
     assert_screen("nautilus_big_icon");

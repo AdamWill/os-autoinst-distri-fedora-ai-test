@@ -9,9 +9,7 @@ sub run {
     my $self = shift;
 
     # Start the application
-    menu_launch_type 'kcalc';
-    # Check that it is started
-    assert_screen 'apps_run_kcalc', timeout => 60;
+    menu_launch_type('kcalc', checkstart => 1, timeout => 1);
     # Close the application
     quit_with_shortcut();
 }

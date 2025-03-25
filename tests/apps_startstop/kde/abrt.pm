@@ -8,8 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application
-    menu_launch_type('abrt');
-    assert_screen 'apps_run_abrt';
+    menu_launch_type('abrt', checkstart => 1);
     # Close the application
     quit_with_shortcut();
 }

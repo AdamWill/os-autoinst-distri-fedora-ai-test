@@ -9,9 +9,7 @@ sub run {
     my $self = shift;
 
     # Start the application
-    menu_launch_type 'krdc';
-    # Check that it is started
-    assert_screen 'apps_run_krdc', timeout => 60;
+    menu_launch_type('krdc', checkstart => 1, timeout => 60);
     # Close the application
     quit_with_shortcut();
 }

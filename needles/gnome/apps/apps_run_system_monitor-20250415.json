@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 462,
+      "ypos": 45,
+      "width": 100,
+      "height": 21,
+      "type": "match"
+    },
+    {
+      "xpos": 44,
+      "ypos": 90,
+      "width": 36,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_system_monitor"
+  ]
+}

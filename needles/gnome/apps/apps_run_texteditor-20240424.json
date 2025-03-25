@@ -11,6 +11,7 @@
   "properties": [],
   "tags": [
     "apps_run_texteditor",
-    "apps_run_editor"
+    "apps_run_editor",
+    "apps_run_text_editor"
   ]
 }

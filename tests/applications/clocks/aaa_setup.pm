@@ -24,6 +24,8 @@ sub run {
     set_update_notification_timestamp();
 
     # Start the Application
+    # We need to do extra checking, therefore we want to start simple
+    # and not use the menu_launch_type, so we do the checks manually.
     menu_launch_type("clocks");
     assert_screen ["apps_run_clocks", "grant_access"];
     # give access rights if asked
