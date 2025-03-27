@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 45,
+      "height": 45,
+      "xpos": 417,
+      "ypos": 506,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "power_off_confirm"
+  ]
+}
