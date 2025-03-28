@@ -1,0 +1,26 @@
+{
+  "area": [
+    {
+      "click_point": {
+        "xpos": 50,
+        "ypos": 10
+      },
+      "type": "match",
+      "ypos": 275,
+      "xpos": 432,
+      "height": 56,
+      "width": 161
+    },
+    {
+      "xpos": 561,
+      "ypos": 160,
+      "type": "match",
+      "width": 133,
+      "height": 30
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_package_tool_upgrade_system"
+  ]
+}
