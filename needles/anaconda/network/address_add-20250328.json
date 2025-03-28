@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 35,
+      "height": 18,
+      "ypos": 310,
+      "xpos": 785,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_network_address_add"
+  ]
+}
