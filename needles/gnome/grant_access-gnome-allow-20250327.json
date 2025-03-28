@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 577,
+      "ypos": 444,
+      "type": "match",
+      "width": 45,
+      "height": 16
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "grant_access"
+  ]
+}
