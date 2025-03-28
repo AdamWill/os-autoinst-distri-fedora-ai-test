@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 152,
+      "xpos": 237,
+      "type": "match",
+      "width": 45,
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_search_bar"
+  ]
+}
