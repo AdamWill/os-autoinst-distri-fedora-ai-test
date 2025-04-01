@@ -898,6 +898,33 @@
                 "USER_LOGIN": "false"
             }
         },
+        "check_packages_signed": {
+            "profiles": {
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 15,
+                "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 12,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 10,
+                "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 12,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 12,
+                "fedora-i3-live-x86_64-*-64bit": 70
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "check_packages_signed",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
         "cloud_autocloud": {
             "profiles": {
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 30,
@@ -1733,7 +1760,7 @@
             },
             "settings": {
                 "PACKAGE_SET": "default",
-                "POSTINSTALL": "_collect_data",
+                "POSTINSTALL": "check_packages_signed _collect_data",
                 "RETRY": "%INSTALL_RETRY%"
             }
         },
