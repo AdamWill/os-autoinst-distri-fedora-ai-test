@@ -9,7 +9,11 @@ use utils;
 sub run {
     my $self = shift;
     # Send the TAB key until the Cantarell font is found.
-    send_key_until_needlematch("fonts_c059_font", "tab", 30, 1);
+    # hit tab twice as many times for silverblue, because every
+    # font is shown twice:
+    # https://gitlab.com/fedora/sigs/flatpak/fedora-flatpaks/-/issues/48
+    my $tabs = get_var("CANNED") ? 60 : 30;
+    send_key_until_needlematch("fonts_c059_font", "tab", $tabs, 1);
     click_lastmatch();
     # Check that the correct font is shown.
     assert_screen("fonts_c059_shown");
