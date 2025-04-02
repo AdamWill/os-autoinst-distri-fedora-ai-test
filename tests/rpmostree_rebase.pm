@@ -55,7 +55,14 @@ sub run {
         $target = "fedora/${rebase}/${arch}/silverblue";
     }
     elsif ($current =~ "coreos") {
-        $rebase = $current =~ "stable" ? "testing" : "stable";
+#        $rebase = $current =~ "stable" ? "testing" : "stable";
+        # per above, rebasing from >41 to <=41 doesn't work
+        # as of 2025-04-02, 'stable' and 'testing' are 41,
+        # 'next' is 42, 'rawhide' is 43, so...
+        $rebase = "stable";
+        $rebase = "testing" if ($current =~ "stable");
+        $rebase = "next" if ($current =~ "rawhide");
+        $rebase = "rawhide" if ($current =~ "next");
         $target = "fedora:fedora/${arch}/coreos/${rebase}";
     }
 
