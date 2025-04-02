@@ -197,7 +197,9 @@ sub custom_blivet_format_partition {
     }
     assert_and_click "anaconda_blivet_part_format";
     # Select the appropriate filesystem type.
-    assert_and_click "anaconda_blivet_part_drop_select";
+    wait_screen_change { assert_and_click "anaconda_blivet_part_drop_select"; };
+    # sometimes that click doesn't work and we have to do it again
+    click_lastmatch if (check_screen "anaconda_blivet_part_drop_select");
     unless (check_screen "anaconda_blivet_part_fs_$args{type}", 5) {
         record_soft_failure "https://bugzilla.redhat.com/show_bug.cgi?id=2324231";
         for (1 .. 15) {
