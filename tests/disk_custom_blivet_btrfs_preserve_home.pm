@@ -80,6 +80,7 @@ sub run {
     # continue to delete them.
     while (check_screen "anaconda_blivet_part_root_exists", 2) {
         assert_and_click "anaconda_blivet_part_root_exists";
+        wait_still_screen 2;
         assert_and_click "anaconda_blivet_part_delete";
         assert_and_click "anaconda_blivet_btn_ok";
         sleep 5;
