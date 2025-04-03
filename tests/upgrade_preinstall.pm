@@ -20,9 +20,6 @@ sub run {
     # from branched to rawhide to ensure we don't get packages from
     # updates-testing for anything we do between here and upgrade_run
     disable_updates_repos(both => 0);
-    # disable openh264 repo, otherwise stuff from it might cause
-    # trouble when it's disabled by repo_setup later
-    assert_script_run "rm -f /etc/yum.repos.d/fedora-cisco-openh264.repo";
     assert_script_run 'dnf -y update --refresh', 1800;
     script_run "reboot", 0;
 
