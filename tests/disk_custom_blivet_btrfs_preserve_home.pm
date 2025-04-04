@@ -76,12 +76,15 @@ sub run {
     # taking any effect.
     sleep 5;
 
-    # delete root subvolume. first click may not work
-    assert_and_click "anaconda_blivet_part_root_exists";
-    wait_still_screen 2;
-    click_lastmatch if (check_screen "anaconda_blivet_part_root_exists");
-    assert_and_click "anaconda_blivet_part_delete";
-    assert_and_click "anaconda_blivet_btn_ok";
+    # While there are some root subvolumes (it seems that there can be more than one)
+    # continue to delete them.
+    while (check_screen "anaconda_blivet_part_root_exists", 2) {
+        assert_and_click "anaconda_blivet_part_root_exists";
+        wait_still_screen 2;
+        assert_and_click "anaconda_blivet_part_delete";
+        assert_and_click "anaconda_blivet_btn_ok";
+        sleep 5;
+    }
 
     # Add new root partition
     assert_and_click "anaconda_add";
