@@ -100,7 +100,7 @@ sub run {
         Workstation => ["workstation", "Workstation Edition"],
         AtomicHost => ["atomic.host", "Atomic Host"],
         CoreOS => ["coreos", "CoreOS"],
-        KDE => ["kde", "KDE Plasma"],
+        KDE => ["kde", "KDE Plasma Desktop Edition"],
         Silverblue => ["silverblue", "Silverblue"],
         IoT => ["iot", "IoT Edition"],
     );
