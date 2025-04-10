@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 448,
+      "height": 38,
+      "width": 127,
+      "ypos": 96
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "navigation_three_workspaces"
+  ]
+}
