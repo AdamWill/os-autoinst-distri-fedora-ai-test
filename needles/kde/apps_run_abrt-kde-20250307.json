@@ -2,14 +2,14 @@
   "area": [
     {
       "xpos": 447,
+      "ypos": 17,
       "type": "match",
-      "width": 129,
-      "height": 15,
-      "ypos": 17
+      "width": 135,
+      "height": 15
     }
   ],
   "properties": [],
   "tags": [
-    "abrt_runs"
+    "apps_run_abrt"
   ]
 }

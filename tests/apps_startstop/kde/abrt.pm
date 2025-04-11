@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     # Start the application
     menu_launch_type('abrt');
-    assert_screen 'abrt_runs';
+    assert_screen 'apps_run_abrt';
     # Close the application
     quit_with_shortcut();
 }
