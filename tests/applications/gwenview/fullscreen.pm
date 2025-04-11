@@ -11,6 +11,8 @@ sub run {
     # Toggle full screen
     send_key("ctrl-shift-f");
     wait_still_screen 2;
+    # move mouse to middle of screen to make header bar go away
+    mouse_set("500", "350");
     assert_screen("gwen_fullscreen_on");
 
     # Return to normal mode
