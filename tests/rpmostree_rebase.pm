@@ -58,12 +58,9 @@ sub run {
         # previously we did this:
         # $rebase = $current =~ "stable" ? "testing" : "stable";
         # but per above, rebasing from >41 to <=41 doesn't work
-        # as of 2025-04-02, 'stable' and 'testing' are 41,
-        # 'next' is 42, 'rawhide' is 43, so...
-        $rebase = "stable";
-        $rebase = "testing" if ($current =~ "stable");
-        $rebase = "next" if ($current =~ "rawhide");
-        $rebase = "rawhide" if ($current =~ "next");
+        # as of 2025-04-15, 'stable' is 41, 'next' and 'testing' are
+        # 42, so...
+        $rebase = $current =~ "testing" ? "next" : "testing";
         $target = "fedora:fedora/${arch}/coreos/${rebase}";
     }
 
