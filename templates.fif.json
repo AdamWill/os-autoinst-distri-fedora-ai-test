@@ -3040,6 +3040,27 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
+        "uefi_no_fallback": {
+            "profiles": {
+                "fedora-BaseOS-boot-iso-x86_64-*-64bit": 50,
+                "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-Everything-boot-iso-x86_64-*-64bit": 11,
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 40,
+                "fedora-Server-boot-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-boot-iso-x86_64-*-64bit": 11,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 10,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
+                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60,
+                "fedora-i3-live-x86_64-*-64bit": 70
+            },
+            "settings": {
+                "ENTRYPOINT": "_boot_to_anaconda _uefi_no_fallback"
+            }
+        },
         "unwanted_packages": {
             "profiles": {
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 50,
