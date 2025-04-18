@@ -7,8 +7,8 @@ sub run {
     # run connections
     menu_launch_type('Connections');
     # If we see the Welcome screen, dismiss it.
-    if (check_screen("connections_welcome", timeout => 10)) {
-        assert_and_click("connections_no_thanks");
+    if (check_screen("connections_no_thanks", timeout => 10)) {
+        click_lastmatch;
     }
     # Add a connection
     assert_and_click("connections_add_connection");
@@ -18,7 +18,6 @@ sub run {
     assert_and_click("connections_connect_button");
 
     # "Verify" connection.
-    assert_screen("connections_verify_screen");
     assert_and_click("connections_verify_button");
 
     # Fill in credentials

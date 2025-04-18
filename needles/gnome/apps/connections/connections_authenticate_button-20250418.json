@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 555,
+      "height": 19,
+      "type": "match",
+      "ypos": 556,
+      "width": 96
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "connections_authenticate_button"
+  ]
+}
