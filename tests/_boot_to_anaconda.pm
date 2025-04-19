@@ -184,18 +184,9 @@ sub run {
                 # if we hit the g-i-s flow we already launched
                 unless ($launched) {
                     # for KDE we need to double-click
-                    my $relnum = get_release_number;
                     my $dclick = 0;
                     $dclick = 1 if (get_var("DESKTOP") eq "kde");
-                    # FIXME launching the installer sometimes fails on KDE
-                    # https://bugzilla.redhat.com/show_bug.cgi?id=2280840
-                    my $tries = 5;
-                    while ($tries) {
-                        $tries -= 1;
-                        assert_and_click("live_start_anaconda_icon", dclick => $dclick);
-                        last if (check_screen ["anaconda_select_install_lang", "anaconda_webui_installmethod"], 180);
-                        die "Launching installer failed after 5 tries!" unless ($tries);
-                    }
+                    assert_and_click("live_start_anaconda_icon", dclick => $dclick);
                 }
             }
             # wait for anaconda to appear
