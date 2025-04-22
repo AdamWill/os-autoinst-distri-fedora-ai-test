@@ -1,0 +1,15 @@
+{
+    "area": [
+        {
+            "height": 23,
+            "type": "match",
+            "width": 76,
+            "xpos": 309,
+            "ypos": 295
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "gnome_filedialogue_video_select"
+    ]
+}

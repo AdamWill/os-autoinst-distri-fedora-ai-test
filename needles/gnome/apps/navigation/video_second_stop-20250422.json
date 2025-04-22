@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 64,
+      "xpos": 445,
+      "ypos": 230,
+      "type": "match",
+      "height": 84
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "video_second_stop"
+  ]
+}

@@ -9,22 +9,16 @@ use utils;
 sub run {
     my $self = shift;
     # Start the Video player
-    menu_launch_type("videos");
+    menu_launch_type("video");
     assert_screen("apps_run_videos");
     # The Video player should start with a grid view
     # of videos, check that it runs and that the
     # video is displayed in that view or we will add
     # the video to the grid.
-    unless (check_screen("video_grid_shown", 10)) {
-        assert_and_click("video_add_video");
-        assert_and_click("video_add_local_video");
-        wait_still_screen(3);
-        assert_and_click("gnome_filedialogue_videos");
-        assert_and_click("video_add_button");
-    }
-    assert_screen("video_grid_shown");
-    # We will start the Video by clicking on the icon
-    click_lastmatch();
+    assert_and_click("gnome_button_open");
+    assert_and_click("gnome_filedialogue_videos");
+    assert_and_click("gnome_filedialogue_video_select");
+    assert_and_click("gnome_button_open");
     # The Video should not start in the full screen mode
     # therefore, we check for panel controls.
     assert_screen("panel_controls");

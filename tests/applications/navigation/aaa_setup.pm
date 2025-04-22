@@ -20,8 +20,8 @@ sub run {
     $self->root_console(tty => 3);
     if ($canned) {
         assert_script_run('flatpak install -y net.sourceforge.ExtremeTuxRacer', timeout => 300);
-        # On Silverblue, Totem is not installed by default. Install it.
-        assert_script_run('flatpak install -y org.gnome.Totem', timeout => 300);
+        # On Silverblue, Showtime is not installed by default. Install it.
+        assert_script_run('flatpak install -y org.gnome.Showtime', timeout => 300);
     }
     else {
         assert_script_run("dnf install -y extremetuxracer", timeout => 180);
