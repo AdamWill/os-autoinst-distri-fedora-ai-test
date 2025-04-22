@@ -44,10 +44,12 @@ sub run {
     desktop_vt();
 
     my $desktop = get_var("DESKTOP");
+    my $relnum = get_release_number;
     # Set up some variables to make the test compatible with different desktops.
     # Defaults are for the Gnome desktop.
     my $editor = "gnome-text-editor";
     my $viewer = "evince";
+    $viewer = "papers" if ($desktop eq "gnome" && $relnum > 42);
     my $maximize = "super-up";
     my $term = "terminal";
     if ($desktop eq "kde") {
