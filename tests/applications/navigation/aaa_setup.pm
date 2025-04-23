@@ -25,6 +25,8 @@ sub run {
     }
     else {
         assert_script_run("dnf install -y extremetuxracer", timeout => 180);
+        # make sure totem doesn't beat showtime on upgrades
+        script_run("dnf -y remove totem", timeout => 180);
     }
     assert_script_run("curl -O " . autoinst_url . "/data/video.ogv", timeout => 120);
     # Put the downloaded video in the Videos folder
