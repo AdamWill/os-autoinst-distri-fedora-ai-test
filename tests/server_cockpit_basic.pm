@@ -13,7 +13,12 @@ sub run {
     # the date dropdown changes and messes with the button locations, so wait
     wait_still_screen 2;
     # set priority to info and above in case there are no errors
-    assert_and_click "cockpit_logs_priority_text";
+    assert_screen ["cockpit_logs_priority_text", "cockpit_logs_toggle_filters"];
+    if (match_has_tag "cockpit_logs_toggle_filters") {
+        click_lastmatch;
+        assert_screen "cockpit_logs_priority_text";
+    }
+    click_lastmatch;
     send_key "backspace";
     send_key "backspace";
     send_key "backspace";
