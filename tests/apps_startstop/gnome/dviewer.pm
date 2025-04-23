@@ -4,15 +4,17 @@ use testapi;
 use utils;
 
 # This test checks that Document Viewer starts.
+# Before Workstation Rawhide (43), that application was represented
+# by Evince, now it is being replaced with Papers.
 
 sub run {
     my $self = shift;
     # Start the application
-    start_with_launcher('apps_menu_dviewer', 'apps_menu_utilities');
-    # Check that is started
-    assert_screen 'apps_run_dviewer';
-    # Register application
-    register_application("evince");
+    start_with_launcher('apps_menu_papers', 'apps_menu_utilities');
+    # Check that is has started
+    assert_screen('apps_run_papers');
+    # Register the application into the list
+    register_application('papers');
     # Close the application
     quit_with_shortcut();
 }

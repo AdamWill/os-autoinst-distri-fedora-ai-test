@@ -8,6 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     my $subvariant = get_var("SUBVARIANT", "Workstation");
+    my $version = get_var("VERSION");
 
     if ($subvariant ne "Silverblue") {
         # Start the application
@@ -15,7 +16,12 @@ sub run {
         # Check that is started
         assert_screen 'apps_run_videos';
         # Register application
-        register_application("totem");
+        if ($version eq "Rawhide") {
+            register_application("showtime");
+        }
+        else {
+            register_application("totem");
+        }
         # Close the application
         quit_with_shortcut();
     }
