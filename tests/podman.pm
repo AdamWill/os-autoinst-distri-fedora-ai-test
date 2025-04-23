@@ -22,6 +22,9 @@ sub run {
     else {
         # install podman and run the upstream integration tests
         assert_script_run "dnf -y install podman podman-tests bats", 600;
+        # podman system tests use a relative path for podman-testing by default,
+        # we need to set it to the location where the podman-tests package installs it.
+        assert_script_run 'export PODMAN_TESTING=/usr/bin/podman-testing';
         # needed so we exit 1 when the bats command fails
         assert_script_run "set -o pipefail";
         assert_script_run "bats --filter-tags distro-integration /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 600;
