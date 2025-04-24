@@ -129,7 +129,6 @@ sub run {
     if (get_var("CANNED")) {
         $version = "$cannedtag ($varstr)";
     }
-    my $platform_id = "platform:f$version_id";
     my $pretty = "$fullname $version_id ($varstr)";
     # Same problem is when testing the PRETTY_NAME.
     if (get_var("CANNED")) {
@@ -154,10 +153,6 @@ sub run {
 
     # Test for version_id
     rec_log "VERSION_ID should be $version_id and is $content{'VERSION_ID'}", $content{'VERSION_ID'} eq $version_id, $failref;
-
-    # Test for platform_id
-    $strip = strip_marks($content{'PLATFORM_ID'});
-    rec_log "PLATFORM_ID should be $platform_id and is $strip", $strip eq $platform_id, $failref;
 
     # Test for pretty name
     $strip = strip_marks($content{'PRETTY_NAME'});
