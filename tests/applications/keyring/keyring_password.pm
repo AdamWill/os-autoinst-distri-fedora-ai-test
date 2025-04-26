@@ -96,7 +96,7 @@ sub check_stored {
     # desktop and check that the password has been stored there.
     # On KDE, we will use the KWalletManager.
     if (get_var("DESKTOP") eq "kde") {
-        menu_launch_type("kwalletmanager", checkstart => 1, maximize => 1);
+        menu_launch_type("kwallet", checkstart => 1, maximize => 1);
         # Navigate to the stored entry and check
         # that the credentials are stored there.
         assert_and_dclick("keyring_wallet_passwords_unfold");
