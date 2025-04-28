@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 677,
+      "ypos": 417,
+      "width": 34,
+      "height": 21,
+      "type": "match"
+    },
+    {
+      "xpos": 202,
+      "ypos": 341,
+      "width": 71,
+      "height": 16,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "papers_shortcuts_shown"
+  ]
+}

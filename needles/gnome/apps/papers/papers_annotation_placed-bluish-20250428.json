@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 426,
+      "height": 36,
+      "ypos": 520,
+      "width": 68
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "papers_annotation_placed"
+  ]
+}

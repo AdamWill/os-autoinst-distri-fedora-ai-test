@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 464,
+      "ypos": 226,
+      "width": 94,
+      "height": 78,
+      "type": "match"
+    },
+    {
+      "xpos": 356,
+      "ypos": 410,
+      "width": 84,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "papers_about_shown"
+  ]
+}

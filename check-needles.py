@@ -242,7 +242,7 @@ for selection in ("hide", "maximize", "restore"):
     testtags.append(f"calculator_context_{selection}")
 # After the change to menu_launch_type, applications should be whitelisted here
 # to prevent the unused needles warning in case of apps_run_<application>.
-for app in ("evince", "focuswriter", "gvim"):
+for app in ("focuswriter", "gvim"):
     testtags.append(f"apps_run_{app}")
 # Needles that only originate from menu_launch_type and since they only occur
 # in a variable, we need to whitelist them here, otherwise the script will
@@ -253,6 +253,8 @@ runapps = ("seahorse", "kwrite", "tuxracer", "akregator", "ark", "discover", "do
            "kolourpaint", "korganizer", "characters", "tux_racer")
 for app in runapps:
     testtags.append(f"apps_run_{app}")
+for zoom in ('papers_zoom_add', 'papers_zoom_subtract'):
+    testtags.append(zoom)
 
 # retcode tracker
 ret = 0

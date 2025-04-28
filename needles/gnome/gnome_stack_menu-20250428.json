@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 955,
+      "ypos": 42,
+      "width": 13,
+      "height": 26,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_stack_menu"
+  ]
+}

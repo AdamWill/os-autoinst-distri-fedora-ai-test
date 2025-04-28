@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 142,
+      "ypos": 142,
+      "width": 93,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "papers_toggle_night_mode"
+  ]
+}
