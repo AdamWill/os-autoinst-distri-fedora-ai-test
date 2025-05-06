@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 20,
+      "xpos": 402,
+      "type": "match",
+      "ypos": 485,
+      "width": 51
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "gnome_software_ignore"
+  ]
+}
