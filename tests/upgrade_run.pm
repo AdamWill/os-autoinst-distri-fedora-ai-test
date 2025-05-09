@@ -17,8 +17,11 @@ sub run {
 
     if (script_run "dnf ${params} system-upgrade download", 6000) {
         record_soft_failure "dnf failed so retry with --allowerasing";
-        $params .= " --allowerasing";
-        assert_script_run "dnf ${params} system-upgrade download", 6000;
+        if $relnum < 41 {
+            assert_script_run "dnf ${params} --allowerasing system-upgrade download", 6000;
+        }
+        else {
+            assert_script_run "dnf ${params} system-upgrade --allowerasing download", 6000;
     }
 
     upload_logs "/var/log/dnf.log", failok => 1;
