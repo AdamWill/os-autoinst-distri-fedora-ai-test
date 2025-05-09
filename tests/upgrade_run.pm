@@ -21,7 +21,7 @@ sub run {
             assert_script_run "dnf ${params} --allowerasing system-upgrade download", 6000;
         }
         else {
-            assert_script_run "dnf ${params} system-upgrade --allowerasing download", 6000;
+            assert_script_run "dnf ${params} system-upgrade download --allowerasing", 6000;
         }
     }
 
