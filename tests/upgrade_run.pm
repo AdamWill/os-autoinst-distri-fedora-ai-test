@@ -22,6 +22,7 @@ sub run {
         }
         else {
             assert_script_run "dnf ${params} system-upgrade --allowerasing download", 6000;
+        }
     }
 
     upload_logs "/var/log/dnf.log", failok => 1;
