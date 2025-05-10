@@ -26,7 +26,7 @@ can write this data to a JSON file and/or call the upstream loader on it directl
 the command-line arguments specified.
 
 The input data must contain definitions of Machines, Products, TestSuites, and Profiles. It may
-also contain Flavors. It also *may* contain JobTemplates, but does not have to and is expected to
+also contain Flavors and ProductDefaults. It also *may* contain JobTemplates, but is expected to
 contain none or only a few oddballs.
 
 The format for Machines, Products and TestSuites is based on the upstream format but with various
@@ -46,6 +46,11 @@ processing Products, fifloader will merge in the settings from the product's fla
 exists in the Flavors dict and defines any settings. If both the Product and the Flavor define
 a given setting, the Product's definition wins. The purpose of the Flavors dict is to reduce
 duplication of settings between multiple products with the same flavor.
+
+The ProductDefaults dict contains default values for Products. Any key/value pair in this dict
+will be merged into every Product in the *same file*. Conflicts are resolved in favor of the
+Product, naturally. Note that this merge happens *before* the file merge, so ProductDefaults are
+*per file*, they are not merged from multiple input files as described below.
 
 The expected format of the Profiles dict is a dict-of-dicts. For each entry, the key is a unique
 name, and the value is a dict with keys 'machine' and 'product', each value being a valid name from
@@ -79,7 +84,7 @@ complete TestSuite definition, with the value of its `profiles` key as `{'foo': 
 file may contain a TestSuite entry with the same key (name) as the complete definition in the other
 file, and the value as a dict with only a `profiles` key (with the value `{'bar': 20}`). This
 loader will combine those into a single complete TestSuite entry with the `profiles` value
-`{'foo': 10, 'bar': 20}`.
+`{'foo': 10, 'bar': 20}`. As noted above, ProductDefaults are *not* merged in this way.
 """
 
 import argparse
@@ -92,7 +97,7 @@ import jsonschema
 
 SCHEMAPATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemas')
 
-def schema_validate(instance, fif=True, complete=True, schemapath=SCHEMAPATH):
+def schema_validate(instance, fif=True, state='complete', schemapath=SCHEMAPATH):
     """Validate some input against one of our JSON schemas. We have
     'complete' and 'incomplete' schemas for FIF and the upstream
     template format. The 'complete' schemas expect the validated
@@ -106,10 +111,8 @@ def schema_validate(instance, fif=True, complete=True, schemapath=SCHEMAPATH):
     filename = 'openqa-'
     if fif:
         filename = 'fif-'
-    if complete:
-        filename += 'complete.json'
-    else:
-        filename += 'incomplete.json'
+    filename += state
+    filename += '.json'
     base_uri = "file://{0}/".format(schemapath)
     resolver = jsonschema.RefResolver(base_uri, None)
     schemafile = os.path.join(schemapath, filename)
@@ -126,8 +129,8 @@ def merge_inputs(inputs, validate=False, clean=False):
     """Merge multiple input files. Expects JSON file names. Optionally
     validates the input files before merging, and the merged output.
     Returns a 6-tuple of machines, flavors, products, profiles,
-    testsuites and jobtemplates (the first four as dicts, the fifth as
-    a list).
+    testsuites and jobtemplates (the first five as dicts, the last as a
+    list).
     """
     machines = {}
     flavors = {}
@@ -145,9 +148,16 @@ def merge_inputs(inputs, validate=False, clean=False):
         except Exception as err:
             print("Reading input file {} failed!".format(_input))
             sys.exit(str(err))
+        # validate against pre-products-merge schema
+        if validate:
+            schema_validate(data, fif=True, state="predefault")
+        for (pname, product) in data["Products"].items():
+            temp = dict(data.get("ProductDefaults", {}))
+            temp.update(product)
+            data["Products"][pname] = temp
         # validate against incomplete schema
         if validate:
-            schema_validate(data, fif=True, complete=False)
+            schema_validate(data, fif=True, state="incomplete")
 
         # simple merges for all these
         for (datatype, tgt) in (
@@ -195,7 +205,10 @@ def merge_inputs(inputs, validate=False, clean=False):
             merged['TestSuites'] = testsuites
         if jobtemplates:
             merged['JobTemplates'] = jobtemplates
-        schema_validate(merged, fif=True, complete=clean)
+        state = "incomplete"
+        if clean:
+            state = "complete"
+        schema_validate(merged, fif=True, state=state)
         print("Input template data is valid")
 
     return (machines, flavors, products, profiles, testsuites, jobtemplates)
@@ -346,7 +359,10 @@ def run(args):
         out['TestSuites'] = testsuites
     if args.validate:
         # validate generated data against upstream schema
-        schema_validate(out, fif=False, complete=args.clean)
+        state = "incomplete"
+        if args.clean:
+            state = "complete"
+        schema_validate(out, fif=False, state=state)
         print("Generated template data is valid")
     if args.write:
         # write generated output to given filename

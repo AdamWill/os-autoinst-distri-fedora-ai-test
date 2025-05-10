@@ -12,6 +12,7 @@
   "properties": {
     "Machines": { "$ref": "fif-machines.json" },
     "Flavors": { "$ref": "fif-flavors.json" },
+    "ProductDefaults": { "$ref": "fif-productdefaults.json" },
     "Products": { "$ref": "fif-products.json" },
     "Profiles": { "$ref": "fif-profiles.json" },
     "TestSuites": { "$ref": "fif-testsuites.json" },

@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "fif-incomplete.json",
   "type": "object",
-  "title": "Schema for incomplete Fedora Intermediate Format (FIF) openQA job template data",
+  "title": "Schema for Fedora Intermediate Format (FIF) openQA job template data before products defaults merge",
   "anyOf": [
     { "required": [ "Machines" ]},
     { "required": [ "Products" ]},
@@ -13,7 +13,7 @@
     "Machines": { "$ref": "fif-machines.json" },
     "Flavors": { "$ref": "fif-flavors.json" },
     "ProductDefaults": { "$ref": "fif-productdefaults.json" },
-    "Products": { "$ref": "fif-products.json" },
+    "Products": { "$ref": "fif-products-predefault.json" },
     "Profiles": { "$ref": "fif-profiles.json" },
     "TestSuites": { "$ref": "fif-testsuites.json" },
     "JobTemplates": { "$ref": "openqa-jobtemplates.json" }

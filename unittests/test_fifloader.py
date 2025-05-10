@@ -45,19 +45,21 @@ def _get_merged(input1='templates.fif.json', input2='templates-updates.fif.json'
 
 def test_schema_validate():
     """Test for schema_validate."""
-    with open(os.path.join(DATAPATH, 'templates.fif.json'), 'r') as tempfh:
+    # this one has no Flavors and complete Products, to check such a
+    # layout matches the 'complete' schema as it should
+    with open(os.path.join(DATAPATH, 'templates.complete.fif.json'), 'r') as tempfh:
         tempdata = json.load(tempfh)
     with open(os.path.join(DATAPATH, 'templates-updates.fif.json'), 'r') as updfh:
         updata = json.load(updfh)
-    assert fifloader.schema_validate(tempdata, fif=True, complete=True) is True
-    assert fifloader.schema_validate(tempdata, fif=True, complete=False) is True
-    assert fifloader.schema_validate(updata, fif=True, complete=False) is True
+    assert fifloader.schema_validate(tempdata, fif=True, state="complete") is True
+    assert fifloader.schema_validate(tempdata, fif=True, state="incomplete") is True
+    assert fifloader.schema_validate(updata, fif=True, state="incomplete") is True
     with pytest.raises(jsonschema.exceptions.ValidationError):
-        fifloader.schema_validate(updata, fif=True, complete=True)
+        fifloader.schema_validate(updata, fif=True, state="complete")
     with pytest.raises(jsonschema.exceptions.ValidationError):
-        fifloader.schema_validate(tempdata, fif=False, complete=True)
+        fifloader.schema_validate(tempdata, fif=False, state="complete")
     with pytest.raises(jsonschema.exceptions.ValidationError):
-        fifloader.schema_validate(tempdata, fif=False, complete=False)
+        fifloader.schema_validate(tempdata, fif=False, state="incomplete")
     # we test successful openQA validation later in test_run
 
 # we test merging in both orders, because it can work in one order
@@ -88,6 +90,11 @@ def test_merge_inputs(input1, input2):
     # and we should still have the settings (note, combining settings
     # is not supported, the last-read settings dict is always used)
     assert len(testsuites['base_selinux']['settings']) == 6
+    # check product defaults were merged correctly
+    assert products['fedora-Server-dvd-iso-ppc64le-*']['distri'] == 'fedora'
+    assert products['fedora-Server-dvd-iso-ppc64le-*']['version'] == '*'
+    assert products['fedora-Server-dvd-iso-x86_64-*']['distri'] == 'fedora'
+    assert products['fedora-Server-dvd-iso-x86_64-*']['version'] == 'Rawhide'
 
 def test_generate_job_templates():
     """Test for generate_job_templates."""
@@ -184,7 +191,7 @@ def test_run(fakerun):
                        os.path.join(DATAPATH, 'templates-updates.fif.json')])
         written = json.load(tempfh)
     # check written data matches upstream data schema
-    assert fifloader.schema_validate(written, fif=False, complete=True) is True
+    assert fifloader.schema_validate(written, fif=False, state="complete") is True
     # test the loader stuff, first with one failure of subprocess.run
     # and success on the second try:
     fakerun.side_effect=[subprocess.CalledProcessError(1, "cmd"), True]
