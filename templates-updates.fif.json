@@ -1,118 +1,40 @@
 {
-    "Products": {
-        "fedora-updates-container-aarch64-*": {
-            "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "updates-container",
+    "Flavors": {
+        "updates-container": {
             "settings": {
                 "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
-            },
-            "version": "*"
+            }
         },
-        "fedora-updates-container-ppc64le-*": {
-            "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "updates-container",
-            "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
-                "NUMDISKS": "2",
-                "RETRY": "1"
-            },
-            "version": "*"
-        },
-        "fedora-updates-container-x86_64-*": {
-            "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-container",
-            "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
-                "KIWI_PROFILE": "Container-Base-Generic",
-                "NUMDISKS": "2",
-                "RETRY": "1"
-            },
-            "version": "*"
-        },
-        "fedora-updates-everything-boot-iso-x86_64-*": {
-            "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-everything-boot-iso",
+        "updates-everything-boot-iso": {
             "settings": {
                 "NUMDISKS": "2",
                 "RETRY": "1"
-            },
-            "version": "*"
+            }
         },
-        "fedora-updates-kde-x86_64-*": {
-            "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-kde",
+        "updates-kde": {
             "settings": {
                 "+HDD_1": "disk_f%VERSION%_kde_5_%ARCH%.qcow2",
                 "DESKTOP": "kde",
                 "NUMDISKS": "2",
                 "RETRY": "1"
-            },
-            "version": "*"
+            }
         },
-        "fedora-updates-server-aarch64-*": {
-            "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "updates-server",
+        "updates-server": {
             "settings": {
                 "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"
-            },
-            "version": "*"
+            }
         },
-        "fedora-updates-server-ppc64le-*": {
-            "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "updates-server",
-            "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
-                "NUMDISKS": "2",
-                "RETRY": "1"
-            },
-            "version": "*"
-        },
-        "fedora-updates-server-upgrade-ppc64le-*": {
-            "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "updates-server-upgrade",
+        "updates-server-upgrade": {
             "settings": {
                 "NUMDISKS": "2",
                 "RETRY": "1"
-            },
-            "version": "*"
+            }
         },
-        "fedora-updates-server-upgrade-x86_64-*": {
-            "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-server-upgrade",
-            "settings": {
-                "NUMDISKS": "2",
-                "RETRY": "1"
-            },
-            "version": "*"
-        },
-        "fedora-updates-server-x86_64-*": {
-            "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-server",
-            "settings": {
-                "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
-                "NUMDISKS": "2",
-                "RETRY": "1"
-            },
-            "version": "*"
-        },
-        "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*": {
-            "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-silverblue-dvd_ostree-iso",
+        "updates-silverblue-dvd_ostree-iso": {
             "settings": {
                 "CANNED": "1",
                 "DESKTOP": "gnome",
@@ -122,13 +44,9 @@
                 "PACKAGE_SET": "default",
                 "RETRY": "2",
                 "SUBVARIANT": "Silverblue"
-            },
-            "version": "*"
+            }
         },
-        "fedora-updates-workstation-live-iso-x86_64-*": {
-            "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-workstation-live-iso",
+        "updates-workstation-live-iso": {
             "settings": {
                 "DESKTOP": "gnome",
                 "HDDSIZEGB": "15",
@@ -138,13 +56,9 @@
                 "PACKAGE_SET": "default",
                 "RETRY": "1",
                 "SUBVARIANT": "Workstation"
-            },
-            "version": "*"
+            }
         },
-        "fedora-updates-kde-live-iso-x86_64-*": {
-            "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-kde-live-iso",
+        "updates-kde-live-iso": {
             "settings": {
                 "DESKTOP": "kde",
                 "HDDSIZEGB": "15",
@@ -154,30 +68,116 @@
                 "PACKAGE_SET": "default",
                 "RETRY": "1",
                 "SUBVARIANT": "KDE"
+            }
+        },
+        "updates-workstation-upgrade": {
+            "settings": {
+                "DESKTOP": "gnome",
+                "NUMDISKS": "2",
+                "RETRY": "1"
+            }
+        },
+        "updates-workstation": {
+            "settings": {
+                "DESKTOP": "gnome",
+                "+HDD_1": "disk_f%VERSION%_desktop_5_%ARCH%.qcow2",
+                "NUMDISKS": "2",
+                "RETRY": "1"
+            }
+        }
+    },
+    "Products": {
+        "fedora-updates-container-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "updates-container",
+            "version": "*"
+        },
+        "fedora-updates-container-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "updates-container",
+            "version": "*"
+        },
+        "fedora-updates-container-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-container",
+            "settings": {
+                "KIWI_PROFILE": "Container-Base-Generic"
             },
+            "version": "*"
+        },
+        "fedora-updates-everything-boot-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-everything-boot-iso",
+            "version": "*"
+        },
+        "fedora-updates-kde-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-kde",
+            "version": "*"
+        },
+        "fedora-updates-server-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "updates-server",
+            "version": "*"
+        },
+        "fedora-updates-server-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "updates-server",
+            "version": "*"
+        },
+        "fedora-updates-server-upgrade-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "updates-server-upgrade",
+            "version": "*"
+        },
+        "fedora-updates-server-upgrade-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-server-upgrade",
+            "version": "*"
+        },
+        "fedora-updates-server-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-server",
+            "version": "*"
+        },
+        "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-silverblue-dvd_ostree-iso",
+            "version": "*"
+        },
+        "fedora-updates-workstation-live-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-workstation-live-iso",
+            "version": "*"
+        },
+        "fedora-updates-kde-live-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-kde-live-iso",
             "version": "*"
         },
         "fedora-updates-workstation-upgrade-x86_64-*": {
             "arch": "x86_64",
             "distri": "fedora",
             "flavor": "updates-workstation-upgrade",
-            "settings": {
-                "DESKTOP": "gnome",
-                "NUMDISKS": "2",
-                "RETRY": "1"
-            },
             "version": "*"
         },
         "fedora-updates-workstation-x86_64-*": {
             "arch": "x86_64",
             "distri": "fedora",
             "flavor": "updates-workstation",
-            "settings": {
-                "DESKTOP": "gnome",
-                "+HDD_1": "disk_f%VERSION%_desktop_5_%ARCH%.qcow2",
-                "NUMDISKS": "2",
-                "RETRY": "1"
-            },
             "version": "*"
         }
     },
