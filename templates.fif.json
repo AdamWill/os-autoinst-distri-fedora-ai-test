@@ -228,219 +228,155 @@
             }
         }
     },
+    "ProductDefaults": {
+        "distri": "fedora",
+        "version": "*"
+    },
     "Products": {
         "fedora-BaseOS-boot-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "BaseOS-boot-iso",
-            "version": "*"
+            "flavor": "BaseOS-boot-iso"
         },
         "fedora-BaseOS-dvd-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "BaseOS-dvd-iso",
-            "version": "*"
+            "flavor": "BaseOS-dvd-iso"
         },
         "fedora-Cloud_Base-qcow2-qcow2-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "Cloud_Base-qcow2-qcow2",
-            "version": "*"
+            "flavor": "Cloud_Base-qcow2-qcow2"
         },
         "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "Cloud_Base-qcow2-qcow2",
-            "version": "*"
+            "flavor": "Cloud_Base-qcow2-qcow2"
         },
         "fedora-Cloud_Base-qcow2-qcow2-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "Cloud_Base-qcow2-qcow2",
-            "version": "*"
+            "flavor": "Cloud_Base-qcow2-qcow2"
         },
         "fedora-CoreOS-colive-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "CoreOS-colive-iso",
-            "version": "*"
+            "flavor": "CoreOS-colive-iso"
         },
         "fedora-Everything-boot-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "Everything-boot-iso",
-            "version": "*"
+            "flavor": "Everything-boot-iso"
         },
         "fedora-Everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
             "flavor": "Everything-boot-iso",
             "settings": {
                 "+QEMURAM": 3072
-            },
-            "version": "*"
+            }
         },
         "fedora-IoT-dvd_ostree-iso-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "IoT-dvd_ostree-iso",
-            "version": "*"
+            "flavor": "IoT-dvd_ostree-iso"
         },
         "fedora-IoT-dvd_ostree-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "IoT-dvd_ostree-iso",
-            "version": "*"
+            "flavor": "IoT-dvd_ostree-iso"
         },
         "fedora-KDE-live-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "KDE-live-iso",
-            "version": "*"
+            "flavor": "KDE-live-iso"
         },
         "fedora-i3-live-x86_64*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "i3-live-iso",
-            "version": "*"
+            "flavor": "i3-live-iso"
         },
         "fedora-Minimal-raw_xz-raw.xz-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "Minimal-raw_xz-raw.xz",
-            "version": "*"
+            "flavor": "Minimal-raw_xz-raw.xz"
         },
         "fedora-Server-boot-iso-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "Server-boot-iso",
-            "version": "*"
+            "flavor": "Server-boot-iso"
         },
         "fedora-Server-boot-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "Server-boot-iso",
-            "version": "*"
+            "flavor": "Server-boot-iso"
         },
         "fedora-Server-boot-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
             "flavor": "Server-boot-iso",
             "settings": {
                 "+QEMURAM": 3072
-            },
-            "version": "*"
+            }
         },
         "fedora-Server-dvd-iso-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "Server-dvd-iso",
-            "version": "*"
+            "flavor": "Server-dvd-iso"
         },
         "fedora-Server-dvd-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "Server-dvd-iso",
-            "version": "*"
+            "flavor": "Server-dvd-iso"
         },
         "fedora-Server-dvd-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "Server-dvd-iso",
-            "version": "*"
+            "flavor": "Server-dvd-iso"
         },
         "fedora-Server-raw_xz-raw.xz-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "Server-raw_xz-raw.xz",
-            "version": "*"
+            "flavor": "Server-raw_xz-raw.xz"
         },
         "fedora-Silverblue-dvd_ostree-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "Silverblue-dvd_ostree-iso",
-            "version": "*"
+            "flavor": "Silverblue-dvd_ostree-iso"
         },
         "fedora-Silverblue-dvd_ostree-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "Silverblue-dvd_ostree-iso",
-            "version": "*"
+            "flavor": "Silverblue-dvd_ostree-iso"
         },
         "fedora-Workstation-live-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "Workstation-live-iso",
-            "version": "*"
+            "flavor": "Workstation-live-iso"
         },
         "fedora-Workstation-live-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
             "flavor": "Workstation-live-iso",
             "settings": {
                 "INSTALL_RETRY": "5"
-            },
-            "version": "*"
+            }
         },
         "fedora-Workstation-live_osbuild-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "Workstation-live_osbuild-iso",
-            "version": "*"
+            "flavor": "Workstation-live_osbuild-iso"
         },
         "fedora-Workstation-upgrade-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "Workstation-upgrade",
-            "version": "*"
+            "flavor": "Workstation-upgrade"
         },
         "fedora-Workstation-raw_xz-raw.xz-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "Workstation-raw_xz-raw.xz",
-            "version": "*"
+            "flavor": "Workstation-raw_xz-raw.xz"
         },
         "fedora-Workstation-upgrade-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "Workstation-upgrade",
-            "version": "*"
+            "flavor": "Workstation-upgrade"
         },
         "fedora-universal-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "universal",
-            "version": "*"
+            "flavor": "universal"
         },
         "fedora-universal-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "universal",
-            "version": "*"
+            "flavor": "universal"
         },
         "fedora-universal-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "universal",
-            "version": "*"
+            "flavor": "universal"
         },
         "fedora-seasonal-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "seasonal",
-            "version": "*"
+            "flavor": "seasonal"
         },
         "fedora-seasonal-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "seasonal",
-            "version": "*"
+            "flavor": "seasonal"
         },
         "fedora-seasonal-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "seasonal",
-            "version": "*"
+            "flavor": "seasonal"
         }
     },
     "Profiles": {

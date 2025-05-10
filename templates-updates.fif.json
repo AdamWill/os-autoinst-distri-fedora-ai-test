@@ -86,99 +86,73 @@
             }
         }
     },
+    "ProductDefaults": {
+        "distri": "fedora",
+        "version": "*"
+    },
     "Products": {
         "fedora-updates-container-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "updates-container",
-            "version": "*"
+            "flavor": "updates-container"
         },
         "fedora-updates-container-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "updates-container",
-            "version": "*"
+            "flavor": "updates-container"
         },
         "fedora-updates-container-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
             "flavor": "updates-container",
             "settings": {
                 "KIWI_PROFILE": "Container-Base-Generic"
-            },
-            "version": "*"
+            }
         },
         "fedora-updates-everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-everything-boot-iso",
-            "version": "*"
+            "flavor": "updates-everything-boot-iso"
         },
         "fedora-updates-kde-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-kde",
-            "version": "*"
+            "flavor": "updates-kde"
         },
         "fedora-updates-server-aarch64-*": {
             "arch": "aarch64",
-            "distri": "fedora",
-            "flavor": "updates-server",
-            "version": "*"
+            "flavor": "updates-server"
         },
         "fedora-updates-server-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "updates-server",
-            "version": "*"
+            "flavor": "updates-server"
         },
         "fedora-updates-server-upgrade-ppc64le-*": {
             "arch": "ppc64le",
-            "distri": "fedora",
-            "flavor": "updates-server-upgrade",
-            "version": "*"
+            "flavor": "updates-server-upgrade"
         },
         "fedora-updates-server-upgrade-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-server-upgrade",
-            "version": "*"
+            "flavor": "updates-server-upgrade"
         },
         "fedora-updates-server-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-server",
-            "version": "*"
+            "flavor": "updates-server"
         },
         "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-silverblue-dvd_ostree-iso",
-            "version": "*"
+            "flavor": "updates-silverblue-dvd_ostree-iso"
         },
         "fedora-updates-workstation-live-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-workstation-live-iso",
-            "version": "*"
+            "flavor": "updates-workstation-live-iso"
         },
         "fedora-updates-kde-live-iso-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-kde-live-iso",
-            "version": "*"
+            "flavor": "updates-kde-live-iso"
         },
         "fedora-updates-workstation-upgrade-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-workstation-upgrade",
-            "version": "*"
+            "flavor": "updates-workstation-upgrade"
         },
         "fedora-updates-workstation-x86_64-*": {
             "arch": "x86_64",
-            "distri": "fedora",
-            "flavor": "updates-workstation",
-            "version": "*"
+            "flavor": "updates-workstation"
         }
     },
     "Profiles": {
