@@ -25,9 +25,9 @@ on this format as it compares to the upstream format. It produces data in the up
 can write this data to a JSON file and/or call the upstream loader on it directly, depending on
 the command-line arguments specified.
 
-The input data must contain definitions of Machines, Products, TestSuites, and Profiles. The input
-data *may* contain JobTemplates, but does not have to and is expected to contain none or only a few
-oddballs.
+The input data must contain definitions of Machines, Products, TestSuites, and Profiles. It may
+also contain Flavors. It also *may* contain JobTemplates, but does not have to and is expected to
+contain none or only a few oddballs.
 
 The format for Machines, Products and TestSuites is based on the upstream format but with various
 quality-of-life improvements. Upstream, each of these is a list-of-dicts, each dict containing a
@@ -36,7 +36,16 @@ easier to read and easier to access). In the upstream format, each Machine, Prod
 dict can contain an entry with the key 'settings' which defines variables. The value (for some
 reason...) is a list of dicts, each dict of the format {"key": keyname, "value": value}. This
 loader expects a more obvious and simple format where the value of the 'settings' key is simply a
-dict of keys and values.
+dict of keys and values. With this loader, Products can inherit settings from Flavors to reduce
+duplication - see below.
+
+The expected format of the Flavors dict is a dict-of-dicts. For each entry, the key is a flavor
+name that is expected to be used as the 'flavor' for one or more Product(s). The value is a dict
+with only a 'settings' key, containing settings in the same format described above. When
+processing Products, fifloader will merge in the settings from the product's flavor, if it
+exists in the Flavors dict and defines any settings. If both the Product and the Flavor define
+a given setting, the Product's definition wins. The purpose of the Flavors dict is to reduce
+duplication of settings between multiple products with the same flavor.
 
 The expected format of the Profiles dict is a dict-of-dicts. For each entry, the key is a unique
 name, and the value is a dict with keys 'machine' and 'product', each value being a valid name from
@@ -116,10 +125,12 @@ def schema_validate(instance, fif=True, complete=True, schemapath=SCHEMAPATH):
 def merge_inputs(inputs, validate=False, clean=False):
     """Merge multiple input files. Expects JSON file names. Optionally
     validates the input files before merging, and the merged output.
-    Returns a 5-tuple of machines, products, profiles, testsuites and
-    jobtemplates (the first four as dicts, the fifth as a list).
+    Returns a 6-tuple of machines, flavors, products, profiles,
+    testsuites and jobtemplates (the first four as dicts, the fifth as
+    a list).
     """
     machines = {}
+    flavors = {}
     products = {}
     profiles = {}
     testsuites = {}
@@ -141,6 +152,7 @@ def merge_inputs(inputs, validate=False, clean=False):
         # simple merges for all these
         for (datatype, tgt) in (
                 ('Machines', machines),
+                ('Flavors', flavors),
                 ('Products', products),
                 ('Profiles', profiles),
                 ('JobTemplates', jobtemplates),
@@ -173,6 +185,8 @@ def merge_inputs(inputs, validate=False, clean=False):
         merged = {}
         if machines:
             merged['Machines'] = machines
+        if flavors:
+            merged['Flavors'] = flavors
         if products:
             merged['Products'] = products
         if profiles:
@@ -184,12 +198,12 @@ def merge_inputs(inputs, validate=False, clean=False):
         schema_validate(merged, fif=True, complete=clean)
         print("Input template data is valid")
 
-    return (machines, products, profiles, testsuites, jobtemplates)
+    return (machines, flavors, products, profiles, testsuites, jobtemplates)
 
 def generate_job_templates(products, profiles, testsuites):
     """Given machines, products, profiles and testsuites (after
-    merging, but still in intermediate format), generates job
-    templates and returns them as a list.
+    merging and handling of flavors, but still in intermediate format),
+    generates job templates and returns them as a list.
     """
     jobtemplates = []
     for (name, suite) in testsuites.items():
@@ -222,12 +236,13 @@ def generate_job_templates(products, profiles, testsuites):
             jobtemplates.append(jobtemplate)
     return jobtemplates
 
-def reverse_qol(machines, products, testsuites):
+def reverse_qol(machines, flavors, products, testsuites):
     """Reverse all our quality-of-life improvements in Machines,
-    Products and TestSuites. We don't do profiles as only this loader
-    uses them, upstream loader does not. We don't do jobtemplates as
-    we don't do any QOL stuff for that. Returns the same tuple it's
-    passed.
+    Flavors, Products and TestSuites. We don't do profiles as only
+    this loader uses them, upstream loader does not. We don't do
+    jobtemplates as we don't do any QOL stuff for that. Returns
+    machines, products and testsuites - flavors are a loader-only
+    concept.
     """
     # first, some nested convenience functions
     def to_list_of_dicts(datadict):
@@ -248,6 +263,14 @@ def reverse_qol(machines, products, testsuites):
         for (key, value) in settdict.items():
             converted.append({'key': key, 'value': value})
         return converted
+
+    # merge flavors into products
+    for product in products.values():
+        flavsets = flavors.get(product["flavor"], {}).get("settings", {})
+        if flavsets:
+            temp = dict(flavsets)
+            temp.update(product.get("settings", {}))
+            product["settings"] = temp
 
     # drop profiles from test suites - these are only used for job
     # template generation and should not be in final output. if suite
@@ -307,10 +330,10 @@ def run(args):
     args = parse_args(args)
     if not args.validate and not args.write and not args.load:
         sys.exit("--no-validate specified and neither --write nor --load specified! Doing nothing.")
-    (machines, products, profiles, testsuites, jobtemplates) = merge_inputs(
+    (machines, flavors, products, profiles, testsuites, jobtemplates) = merge_inputs(
         args.files, validate=args.validate, clean=args.clean)
     jobtemplates.extend(generate_job_templates(products, profiles, testsuites))
-    (machines, products, testsuites) = reverse_qol(machines, products, testsuites)
+    (machines, products, testsuites) = reverse_qol(machines, flavors, products, testsuites)
     # now produce the output in upstream-compatible format
     out = {}
     if jobtemplates:

@@ -28,14 +28,19 @@
             }
         }
     },
+    "Flavors": {
+        "Server-dvd-iso": {
+            "settings": {
+                "TEST_TARGET": "ISO",
+                "RETRY": "1"
+            }
+        }
+    },
     "Products": {
         "fedora-Server-dvd-iso-ppc64le-*": {
             "arch": "ppc64le",
             "distri": "fedora",
             "flavor": "Server-dvd-iso",
-            "settings": {
-                "TEST_TARGET": "ISO"
-            },
             "version": "*"
         },
         "fedora-Server-dvd-iso-x86_64-*": {
@@ -43,7 +48,8 @@
             "distri": "fedora",
             "flavor": "Server-dvd-iso",
             "settings": {
-                "TEST_TARGET": "ISO"
+                "TEST_TARGET": "COMPOSE",
+                "QEMURAM": "3072"
             },
             "version": "*"
         }
