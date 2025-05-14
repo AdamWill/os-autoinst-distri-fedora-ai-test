@@ -73,20 +73,26 @@ def test_schema_validate():
 )
 def test_merge_inputs(input1, input2):
     """Test for merge_inputs."""
-    (machines, flavors, products, profiles, testsuites, jobtemplates) = _get_merged(input1, input2)
+    (machines, flavors, products, profiles, pgroups, testsuites, jobtemplates) = _get_merged(
+        input1,
+        input2
+    )
     # a few known attributes of the test data to ensure the merge worked
     assert len(machines) == 2
     assert len(flavors) == 1
     assert len(products) == 4
     assert len(profiles) == 4
+    assert len(pgroups) == 3
     assert not jobtemplates
     # testsuite merging is the most complex feature
     # len should be 3 as there is 1 unique suite in each input file,
     # and one defined in both which should be merged
     assert len(testsuites) == 3
     # check the merged suite was merged correctly
-    # we should have the profiles from *both* input files...
-    assert len(testsuites['base_selinux']['profiles']) == 4
+    # we should have the profiles and profile groups from *both*
+    # input files...
+    assert len(testsuites['base_selinux']['profiles']) == 2
+    assert len(testsuites['base_selinux']['profile_groups']) == 2
     # and we should still have the settings (note, combining settings
     # is not supported, the last-read settings dict is always used)
     assert len(testsuites['base_selinux']['settings']) == 6
@@ -98,8 +104,8 @@ def test_merge_inputs(input1, input2):
 
 def test_generate_job_templates():
     """Test for generate_job_templates."""
-    (machines, _, products, profiles, testsuites, _) = _get_merged()
-    templates = fifloader.generate_job_templates(products, profiles, testsuites)
+    (machines, _, products, profiles, pgroups, testsuites, _) = _get_merged()
+    templates = fifloader.generate_job_templates(products, profiles, pgroups, testsuites)
     # we should get one template per profile in merged input
     assert len(templates) == 8
     for template in templates:
@@ -112,9 +118,17 @@ def test_generate_job_templates():
             assert item in template
         assert template['test_suite_name'] in list(testsuites.keys())
 
+    # check profile group expansion
+    idus = [t for t in templates if t['test_suite_name'] == 'install_default_upload']
+    assert len(idus) == 2
+    assert {t['machine_name'] for t in idus} == {'ppc64le', '64bit'}
+    aboots = [t for t in templates if t['test_suite_name'] == 'base_selinux']
+    assert len(aboots) == 4
+    assert {t['machine_name'] for t in aboots} == {'ppc64le', '64bit'}
+
 def test_reverse_qol():
     """Test for reverse_qol."""
-    (machines, flavors, products, _, testsuites, _) = _get_merged()
+    (machines, flavors, products, _, _, testsuites, _) = _get_merged()
     (machines, products, testsuites) = fifloader.reverse_qol(machines, flavors, products, testsuites)
     assert isinstance(machines, list)
     assert isinstance(products, list)
@@ -127,8 +141,9 @@ def test_reverse_qol():
         for item in datatype:
             # all items should have one of these
             settlists.append(item['settings'])
-            # no items should have one of these
+            # no items should have these
             assert 'profiles' not in item
+            assert 'profile_groups' not in item
     for settlist in settlists:
         assert isinstance(settlist, list)
         for setting in settlist:

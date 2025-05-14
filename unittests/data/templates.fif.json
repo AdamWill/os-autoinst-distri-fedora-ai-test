@@ -65,10 +65,21 @@
             "product": "fedora-Server-dvd-iso-x86_64-*"
         }
     },
+    "ProfileGroups": {
+        "fedora-server-2arch": {
+            "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 0,
+            "fedora-Server-dvd-iso-x86_64-*-64bit": 1
+        },
+        "fedora-server-1arch": {
+            "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 0
+        }
+    },
     "TestSuites": {
         "base_selinux": {
+            "profile_groups": {
+                "fedora-server-1arch": 40
+            },
             "profiles": {
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
@@ -81,9 +92,8 @@
             }
         },
         "install_default_upload": {
-            "profiles": {
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 10
+            "profile_groups": {
+                "fedora-server-2arch": 10
             },
             "settings": {
                 "PACKAGE_SET": "default",

@@ -136,6 +136,7 @@ def merge_inputs(inputs, validate=False, clean=False):
     flavors = {}
     products = {}
     profiles = {}
+    pgroups = {}
     testsuites = {}
     jobtemplates = []
 
@@ -165,6 +166,7 @@ def merge_inputs(inputs, validate=False, clean=False):
                 ('Flavors', flavors),
                 ('Products', products),
                 ('Profiles', profiles),
+                ('ProfileGroups', pgroups),
                 ('JobTemplates', jobtemplates),
         ):
             if datatype in data:
@@ -177,14 +179,22 @@ def merge_inputs(inputs, validate=False, clean=False):
             for (name, newsuite) in data['TestSuites'].items():
                 try:
                     existing = testsuites[name]
-                    # combine and stash the profiles
-                    existing['profiles'].update(newsuite['profiles'])
-                    combinedprofiles = existing['profiles']
+                    # combine and stash the profiles and groups
+                    combinedprofiles = {}
+                    if 'profiles' in existing:
+                        existing['profiles'].update(newsuite['profiles'])
+                        combinedprofiles = existing['profiles']
+                    combinedpgroups = {}
+                    if 'profile_groups' in existing:
+                        existing['profile_groups'].update(newsuite.get('profile_groups', {}))
+                        combinedpgroups = existing['profile_groups']
                     # now update the existing suite with the new one, this
-                    # will overwrite the profiles
+                    # will overwrite the profiles and groups
                     existing.update(newsuite)
-                    # now restore the combined profiles
+                    # now restore the combined profiles and groups
                     existing['profiles'] = combinedprofiles
+                    if combinedpgroups:
+                        existing['profile_groups'] = combinedpgroups
                 except KeyError:
                     testsuites[name] = newsuite
 
@@ -201,6 +211,8 @@ def merge_inputs(inputs, validate=False, clean=False):
             merged['Products'] = products
         if profiles:
             merged['Profiles'] = profiles
+        if pgroups:
+            merged['ProfileGroups'] = pgroups
         if testsuites:
             merged['TestSuites'] = testsuites
         if jobtemplates:
@@ -211,19 +223,26 @@ def merge_inputs(inputs, validate=False, clean=False):
         schema_validate(merged, fif=True, state=state)
         print("Input template data is valid")
 
-    return (machines, flavors, products, profiles, testsuites, jobtemplates)
+    return (machines, flavors, products, profiles, pgroups, testsuites, jobtemplates)
 
-def generate_job_templates(products, profiles, testsuites):
+def generate_job_templates(products, profiles, pgroups, testsuites):
     """Given machines, products, profiles and testsuites (after
     merging and handling of flavors, but still in intermediate format),
     generates job templates and returns them as a list.
     """
     jobtemplates = []
     for (name, suite) in testsuites.items():
-        if 'profiles' not in suite:
+        suiteprofs = {}
+        for (pgroup, baseprio) in suite.get('profile_groups', {}).items():
+            if pgroup not in pgroups:
+                sys.exit(f"Error: profile group {pgroup} does not exist!")
+            for (gotprof, pprio) in pgroups[pgroup].items():
+                suiteprofs[gotprof] = pprio+baseprio
+        suiteprofs.update(suite.get('profiles', {}))
+        if not suiteprofs:
             print("Warning: no profiles for test suite {}".format(name))
             continue
-        for (profile, prio) in suite['profiles'].items():
+        for (profile, prio) in suiteprofs.items():
             jobtemplate = {'test_suite_name': name, 'prio': prio}
             # x86_64 compose
             jobtemplate['group_name'] = 'fedora'
@@ -285,11 +304,13 @@ def reverse_qol(machines, flavors, products, testsuites):
             temp.update(product.get("settings", {}))
             product["settings"] = temp
 
-    # drop profiles from test suites - these are only used for job
-    # template generation and should not be in final output. if suite
-    # *only* contained profiles, drop it
+    # drop profiles and groups from test suites - these are only used
+    # for job template generation and should not be in final output.
+    # if suite *only* contained profiles/groups, drop it
     for suite in testsuites.values():
-        del suite['profiles']
+        for prop in ('profiles', 'profile_groups'):
+            if prop in suite:
+                del suite[prop]
     testsuites = {name: suite for (name, suite) in testsuites.items() if suite}
 
     machines = to_list_of_dicts(machines)
@@ -343,9 +364,9 @@ def run(args):
     args = parse_args(args)
     if not args.validate and not args.write and not args.load:
         sys.exit("--no-validate specified and neither --write nor --load specified! Doing nothing.")
-    (machines, flavors, products, profiles, testsuites, jobtemplates) = merge_inputs(
+    (machines, flavors, products, profiles, pgroups, testsuites, jobtemplates) = merge_inputs(
         args.files, validate=args.validate, clean=args.clean)
-    jobtemplates.extend(generate_job_templates(products, profiles, testsuites))
+    jobtemplates.extend(generate_job_templates(products, profiles, pgroups, testsuites))
     (machines, products, testsuites) = reverse_qol(machines, flavors, products, testsuites)
     # now produce the output in upstream-compatible format
     out = {}

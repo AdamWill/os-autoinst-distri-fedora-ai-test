@@ -25,6 +25,11 @@
             "product": "fedora-updates-server-x86_64-*"
         }
     },
+    "ProfileGroups": {
+        "fedora-updates-server-1arch": {
+            "fedora-updates-server-ppc64le-*-ppc64le": 1
+        }
+    },
     "TestSuites": {
         "advisory_boot": {
             "profiles": {
@@ -39,8 +44,10 @@
             }
         },
         "base_selinux": {
+            "profile_groups": {
+                "fedora-updates-server-1arch": 40
+            },
             "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 40,
                 "fedora-updates-server-x86_64-*-64bit": 40
             }
         }
