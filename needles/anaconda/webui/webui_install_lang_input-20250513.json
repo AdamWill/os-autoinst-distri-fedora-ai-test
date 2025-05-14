@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 21,
+      "xpos": 455,
+      "ypos": 177,
+      "width": 68
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_select_install_lang_input"
+  ]
+}

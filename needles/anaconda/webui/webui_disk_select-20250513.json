@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 207,
+      "width": 127,
+      "xpos": 273,
+      "height": 22,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_webui_disk_select"
+  ]
+}
