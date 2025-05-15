@@ -338,7 +338,11 @@ sub webui_custom_add_partition {
         $pname = $args{mountpoint};
         $pname =~ s,/,,g;
     }
-    assert_and_click "anaconda_webui_custom_freespace";
+    # freespace may not be visible
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2366666
+    assert_and_click "anaconda_webui_custom_storage_pane";
+    send_key_until_needlematch "anaconda_webui_custom_freespace", "down", 20, 2;
+    click_lastmatch;
     assert_and_click "anaconda_webui_custom_create_partition";
     assert_screen "anaconda_webui_custom_partition_creation";
     type_very_safely $pname if ($args{mountpoint});

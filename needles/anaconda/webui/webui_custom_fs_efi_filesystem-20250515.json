@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 72,
+      "width": 78,
+      "ypos": 606,
+      "type": "match",
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_webui_custom_fs_efi_filesystem"
+  ]
+}
