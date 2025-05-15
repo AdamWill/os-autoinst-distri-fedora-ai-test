@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 46,
+      "xpos": 135,
+      "height": 21,
+      "ypos": 129,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_menu_about"
+  ]
+}

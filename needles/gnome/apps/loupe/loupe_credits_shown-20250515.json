@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 356,
+      "type": "match",
+      "width": 128,
+      "height": 21,
+      "ypos": 175
+    },
+    {
+      "ypos": 398,
+      "height": 18,
+      "width": 96,
+      "xpos": 358,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "loupe_credits_shown"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 200,
+      "height": 22,
+      "ypos": 225,
+      "type": "match",
+      "xpos": 468
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "chars_legal_shown"
+  ]
+}

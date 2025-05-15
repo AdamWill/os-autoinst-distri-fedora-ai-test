@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 78,
+      "xpos": 284,
+      "height": 80,
+      "ypos": 276,
+      "type": "match"
+    },
+    {
+      "width": 145,
+      "xpos": 441,
+      "type": "match",
+      "ypos": 535,
+      "height": 30
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "tour_start"
+  ]
+}

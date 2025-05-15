@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 78,
+      "height": 23,
+      "type": "match",
+      "ypos": 168,
+      "xpos": 472
+    },
+    {
+      "width": 16,
+      "ypos": 250,
+      "type": "match",
+      "height": 21,
+      "xpos": 238
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_shortcuts_shown"
+  ]
+}

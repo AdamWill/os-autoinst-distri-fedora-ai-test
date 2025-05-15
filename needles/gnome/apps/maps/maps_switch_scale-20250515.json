@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 86,
+      "type": "match",
+      "xpos": 40,
+      "ypos": 97,
+      "height": 22
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_switch_scale"
+  ]
+}

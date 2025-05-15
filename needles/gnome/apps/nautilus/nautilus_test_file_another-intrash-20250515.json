@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "ypos": 176,
+      "height": 20,
+      "width": 116,
+      "xpos": 234,
+      "type": "match"
+    },
+    {
+      "ypos": 40,
+      "height": 28,
+      "xpos": 299,
+      "type": "match",
+      "width": 65
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_test_file_another"
+  ]
+}

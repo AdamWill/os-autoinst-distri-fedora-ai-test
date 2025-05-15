@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 21,
+      "xpos": 495,
+      "height": 64,
+      "ypos": 331,
+      "type": "match"
+    },
+    {
+      "width": 90,
+      "height": 57,
+      "ypos": 699,
+      "type": "match",
+      "xpos": 408
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "clocks_city_details"
+  ]
+}
