@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 2,
+      "ypos": 105,
+      "type": "match",
+      "height": 34,
+      "width": 54
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kwrite_lines_numbered_off"
+  ]
+}
