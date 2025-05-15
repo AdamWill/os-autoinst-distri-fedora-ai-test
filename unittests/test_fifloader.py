@@ -129,6 +129,11 @@ def test_generate_job_templates():
     assert len(aboots) == 4
     assert {t['machine_name'] for t in aboots} == {'ppc64le', '64bit'}
 
+    # test the recursion check
+    pgroups['fedora-server-1arch']['fedora-server-2arch'] = 0
+    with pytest.raises(SystemExit, match=r"^Infinite recursion.*"):
+        templates = fifloader.generate_job_templates(products, profiles, pgroups, testsuites)
+
 def test_reverse_qol():
     """Test for reverse_qol."""
     (machines, flavors, products, _, _, testsuites, _) = _get_merged()

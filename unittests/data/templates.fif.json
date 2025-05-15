@@ -67,7 +67,7 @@
     },
     "ProfileGroups": {
         "fedora-server-2arch": {
-            "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 0,
+            "fedora-server-1arch": 0,
             "fedora-Server-dvd-iso-x86_64-*-64bit": 1
         },
         "fedora-server-1arch": {

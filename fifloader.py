@@ -222,6 +222,22 @@ def merge_inputs(inputs, validate=False, clean=False):
 
     return (machines, flavors, products, profiles, pgroups, testsuites, jobtemplates)
 
+def recurse_pgroup(pgroup, baseprio, pgroups, seen):
+    """Recursion handler allowing nested profile groups. Takes the
+    top-level profile group name and priority, the full ProfileGroups
+    dict, and a set for infinite recursion checking.
+    """
+    profiles = {}
+    for (item, prio) in pgroups[pgroup].items():
+        if item in seen:
+            sys.exit(f"Infinite recursion between profile groups {pgroup} and {item}")
+        seen.add(item)
+        if item in pgroups:
+            profiles.update(recurse_pgroup(item, prio+baseprio, pgroups, seen))
+        else:
+            profiles[item] = prio+baseprio
+    return profiles
+
 def generate_job_templates(products, profiles, pgroups, testsuites):
     """Given machines, products, profiles and testsuites (after
     merging and handling of flavors, but still in intermediate format),
@@ -231,10 +247,7 @@ def generate_job_templates(products, profiles, pgroups, testsuites):
     for (name, suite) in testsuites.items():
         suiteprofs = {}
         for (pgroup, baseprio) in suite.get('profile_groups', {}).items():
-            if pgroup not in pgroups:
-                sys.exit(f"Error: profile group {pgroup} does not exist!")
-            for (gotprof, pprio) in pgroups[pgroup].items():
-                suiteprofs[gotprof] = pprio+baseprio
+            suiteprofs.update(recurse_pgroup(pgroup, baseprio, pgroups, set()))
         suiteprofs.update(suite.get('profiles', {}))
         if not suiteprofs:
             print("Warning: no profiles for test suite {}".format(name))
