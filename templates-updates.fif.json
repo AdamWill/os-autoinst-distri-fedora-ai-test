@@ -233,12 +233,33 @@
             "product": "fedora-updates-workstation-x86_64-*"
         }
     },
+    "ProfileGroups": {
+        "updates-container-3arch": {
+            "fedora-updates-container-aarch64-*-aarch64": 0,
+            "fedora-updates-container-ppc64le-*-ppc64le": 0,
+            "fedora-updates-container-x86_64-*-64bit": 0
+        },
+        "updates-server-2arch": {
+            "fedora-updates-server-ppc64le-*-ppc64le": 0,
+            "fedora-updates-server-x86_64-*-64bit": 0
+        },
+        "updates-server-3arch": {
+            "updates-server-2arch": 0,
+            "fedora-updates-server-aarch64-*-aarch64": 0
+        },
+        "updates-desktops": {
+            "fedora-updates-kde-x86_64-*-64bit": 0,
+            "fedora-updates-workstation-x86_64-*-64bit": 0
+        },
+        "updates-base-tests": {
+            "updates-server-3arch": 0,
+            "updates-desktops": 0
+        }
+    },
     "TestSuites": {
         "advisory_boot": {
-            "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-3arch": 5
             },
             "settings": {
                 "ADVISORY_BOOT_TEST": "1",
@@ -248,69 +269,43 @@
             }
         },
         "base_selinux": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-server-aarch64-*-aarch64": 5,
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-base-tests": 5
             }
         },
         "base_service_manipulation": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-server-aarch64-*-aarch64": 5,
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-base-tests": 5
             }
         },
         "base_services_start": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-server-aarch64-*-aarch64": 5,
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-base-tests": 5
             }
         },
         "base_update_cli": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-server-aarch64-*-aarch64": 5,
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-base-tests": 5
             }
         },
         "base_reboot_unmount": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-server-aarch64-*-aarch64": 5,
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-base-tests": 5
             }
         },
         "base_system_logging": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-server-aarch64-*-aarch64": 5,
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-base-tests": 5
             }
         },
         "desktop_background": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-desktops": 5
             }
         },
         "desktop_browser": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-desktops": 5
             }
         },
         "desktop_keyring": {
@@ -319,27 +314,23 @@
             }
         },
         "desktop_printing": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-desktops": 5
             }
         },
         "desktop_printing_builtin": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-desktops": 5
             }
         },
         "desktop_terminal": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-desktops": 5
             }
         },
         "desktop_update_graphical": {
-            "profiles": {
-                "fedora-updates-kde-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-desktops": 5
             }
         },
         "install_default_update_live": {
@@ -347,7 +338,8 @@
                 "fedora-updates-kde-live-iso-x86_64-*-bios": 5,
                 "fedora-updates-kde-live-iso-x86_64-*-64bit": 5,
                 "fedora-updates-workstation-live-iso-x86_64-*-bios": 5,
-                "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
+                "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5,
+                "fedora-updates-workstation-live-iso-x86_64-*-bios": 5
             },
             "settings": {
                 "+START_AFTER_TEST": "kiwi_build@%ARCH_BASE_MACHINE%",
@@ -449,41 +441,33 @@
             }
         },
         "podman": {
-            "profiles": {
-                "fedora-updates-container-aarch64-*-aarch64": 5,
-                "fedora-updates-container-ppc64le-*-ppc64le": 5,
-                "fedora-updates-container-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-container-3arch": 5
             }
         },
         "podman_client": {
-            "profiles": {
-                "fedora-updates-container-aarch64-*-aarch64": 5,
-                "fedora-updates-container-ppc64le-*-ppc64le": 5,
-                "fedora-updates-container-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-container-3arch": 5
             }
         },
         "realmd_join_cockpit": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "realmd_join_cockpit_ad": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "realmd_join_sssd": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "realmd_join_sssd_ad": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "rpmostree_overlay": {
@@ -497,34 +481,28 @@
             }
         },
         "server_cockpit_basic": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "server_cockpit_default": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "server_cockpit_updates": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "server_database_client": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "server_firewall_default": {
-            "profiles": {
-                "fedora-updates-server-aarch64-*-aarch64": 5,
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-3arch": 5
             }
         },
         "server_freeipa_replication_client": {
@@ -543,33 +521,28 @@
             }
         },
         "server_remote_logging_client": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "server_remote_logging_server": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "server_role_deploy_database_server": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "server_role_deploy_domain_controller": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "server_samba_domain_controller": {
-            "profiles": {
-                "fedora-updates-server-ppc64le-*-ppc64le": 5,
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-2arch": 5
             }
         },
         "support_server": {
