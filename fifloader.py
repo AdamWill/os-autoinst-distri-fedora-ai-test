@@ -179,20 +179,17 @@ def merge_inputs(inputs, validate=False, clean=False):
             for (name, newsuite) in data['TestSuites'].items():
                 try:
                     existing = testsuites[name]
-                    # combine and stash the profiles and groups
-                    combinedprofiles = {}
-                    if 'profiles' in existing:
-                        existing['profiles'].update(newsuite['profiles'])
-                        combinedprofiles = existing['profiles']
-                    combinedpgroups = {}
-                    if 'profile_groups' in existing:
-                        existing['profile_groups'].update(newsuite.get('profile_groups', {}))
-                        combinedpgroups = existing['profile_groups']
+                    # copy, combine and stash the profiles and groups
+                    combinedprofiles = dict(existing.get('profiles', {}))
+                    combinedprofiles.update(newsuite.get('profiles', {}))
+                    combinedpgroups = dict(existing.get('profile_groups', {}))
+                    combinedpgroups.update(newsuite.get('profile_groups', {}))
                     # now update the existing suite with the new one, this
                     # will overwrite the profiles and groups
                     existing.update(newsuite)
                     # now restore the combined profiles and groups
-                    existing['profiles'] = combinedprofiles
+                    if combinedprofiles:
+                        existing['profiles'] = combinedprofiles
                     if combinedpgroups:
                         existing['profile_groups'] = combinedpgroups
                 except KeyError:

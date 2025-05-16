@@ -85,14 +85,17 @@ def test_merge_inputs(input1, input2):
     assert len(pgroups) == 3
     assert not jobtemplates
     # testsuite merging is the most complex feature
-    # len should be 3 as there is 1 unique suite in each input file,
-    # and one defined in both which should be merged
-    assert len(testsuites) == 3
+    # len should be 4 as there is 1 unique suite in each input file,
+    # and two defined in both which should be merged
+    assert len(testsuites) == 4
     # check the merged suite was merged correctly
     # we should have the profiles and profile groups from *both*
     # input files...
     assert len(testsuites['base_selinux']['profiles']) == 2
     assert len(testsuites['base_selinux']['profile_groups']) == 2
+    # ...including when only one file has each attribute...
+    assert len(testsuites['base_update_cli']['profile_groups']) == 1
+    assert len(testsuites['base_update_cli']['profiles']) == 1
     # and we should still have the settings (note, combining settings
     # is not supported, the last-read settings dict is always used)
     assert len(testsuites['base_selinux']['settings']) == 6
@@ -107,7 +110,7 @@ def test_generate_job_templates():
     (machines, _, products, profiles, pgroups, testsuites, _) = _get_merged()
     templates = fifloader.generate_job_templates(products, profiles, pgroups, testsuites)
     # we should get one template per profile in merged input
-    assert len(templates) == 8
+    assert len(templates) == 11
     for template in templates:
         assert template['group_name'] in ['fedora', 'Fedora PowerPC', 'Fedora AArch64',
                                           'Fedora Updates', 'Fedora PowerPC Updates',

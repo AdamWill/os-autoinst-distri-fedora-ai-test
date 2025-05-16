@@ -50,6 +50,11 @@
             "profiles": {
                 "fedora-updates-server-x86_64-*-64bit": 40
             }
+        },
+        "base_update_cli": {
+            "profiles": {
+                "fedora-updates-server-ppc64le-*-ppc64le": 40
+            }
         }
     }
 }

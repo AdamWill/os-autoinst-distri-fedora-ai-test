@@ -91,6 +91,11 @@
                 "USER_LOGIN": "false"
             }
         },
+        "base_update_cli": {
+            "profile_groups": {
+                "fedora-server-2arch": 30
+            }
+        },
         "install_default_upload": {
             "profile_groups": {
                 "fedora-server-2arch": 10
