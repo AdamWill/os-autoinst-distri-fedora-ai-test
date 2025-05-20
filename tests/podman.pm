@@ -25,9 +25,6 @@ sub run {
         # podman system tests use a relative path for podman-testing by default,
         # we need to set it to the location where the podman-tests package installs it.
         assert_script_run 'export PODMAN_TESTING=/usr/bin/podman-testing';
-        # Temporary work around to skip test which failed on kernel 6.15.rc4 or newer.
-        # This should be reverted once the upstream test changes land in fedora.
-        assert_script_run 'sed -i "/podman run --device-read-bps/a skip \"This test is invalid and needs upstream fixes (https://github.com/containers/podman/pull/26022)\"" /usr/share/podman/test/system/030-run.bats';
         # needed so we exit 1 when the bats command fails
         assert_script_run "set -o pipefail";
         assert_script_run "bats --filter-tags distro-integration /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 600;
