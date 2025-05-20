@@ -26,8 +26,8 @@ can write this data to a JSON file and/or call the upstream loader on it directl
 the command-line arguments specified.
 
 The input data must contain definitions of Machines, Products, TestSuites, and Profiles. It may
-also contain Flavors and ProductDefaults. It also *may* contain JobTemplates, but is expected to
-contain none or only a few oddballs.
+also contain Flavors, ProductDefaults and ProfileGroups. It also *may* contain JobTemplates, but
+is expected to contain none or only a few oddballs.
 
 The format for Machines, Products and TestSuites is based on the upstream format but with various
 quality-of-life improvements. Upstream, each of these is a list-of-dicts, each dict containing a
@@ -57,10 +57,25 @@ name, and the value is a dict with keys 'machine' and 'product', each value bein
 the Machines or Products dict respectively. The name of each profile can be anything as long as
 it's unique.
 
-For TestSuites, this loader then expects an additional 'profiles' key in each dict, whose value is
-a dict indicating the Profiles from which we should generate one or more job templates for that
-test suite. For each entry in the dict, the key is a profile name from the Profiles dict, and the
-value is the priority to give the generated job template.
+The expected format of the ProfileGroups dict is a dict-of-dicts. For each entry, the key is the
+name of a "profile group". The value is a dict whose keys are profile names or profile group
+names and whose values are priority numbers. As the name implies a profile group is just a group of
+profiles; the idea is to allow test suites to specify sets of profiles that commonly go together
+without having to constantly repeat them. Profile groups can be nested - a profile group can
+contain a reference to another profile group. Any level of recursion is fine so long as there is
+no loop (the loader will detect loops and exit with an error).
+
+For TestSuites, this loader then expects at least a 'profiles' key or a 'profile_groups' key in
+each dict (having both is fine). The value of 'profiles' is a dict indicating the Profiles from
+which we should generate one or more job templates for that test suite. For each entry in the dict,
+the key is a profile name from the Profiles dict, and the value is the priority to give the
+generated job template. The value of 'profile_groups' is a similar dict, except the keys are
+names of profile groups rather than profiles. When using profile groups, the priority value given
+in the profile group is added to the value given in the profile_groups dict to produce a total
+priority. Effectively this means the priority value given in the test suite is the base priority
+for the whole group, and the priority values in the profile group should be used to adjust that
+base priority for the relative importance of the profiles within the group; the values in the
+group may well all be 0.
 
 This loader will generate JobTemplates from the combination of TestSuites and Profiles. It means
 that, for instance, if you want to add a new test suite and run it on the same set of images and
