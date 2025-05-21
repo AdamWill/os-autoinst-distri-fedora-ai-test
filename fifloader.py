@@ -29,74 +29,70 @@ The input data must contain definitions of Machines, Products, TestSuites, and P
 also contain Flavors, ProductDefaults and ProfileGroups. It also *may* contain JobTemplates, but
 is expected to contain none or only a few oddballs.
 
+Fundamentally, FIF and this loader offer a different design approach from the upstream formats
+and loader. With the upstream formats - both legacy and YAML - the philosophy is that you define
+Machines, Products and TestSuites, and then you create Templates that define a run of a given
+test suite on a given machine and product. The Templates can be grouped into JobGroups. We found
+that this approach is awkward for the most typical development task: adding new tests. When you
+add a new test you have to define multiple templates for every context you want to run it in.
+The newer YAML format reduces the amount of boilerplate needed for this, but you still have to
+add multiple entries to multiple groups, just to add a new test. So the philosophy of this loader
+is that the contexts in which a test suite runs are defined all together right within the test
+suite. You define Machines, Products, and Profiles, which are combinations of Machine and Product.
+Then you define TestSuites, with additional properties not present in the upstream format which
+define the Profiles for which they are run. The loader generates JobTemplates from this. Job
+groups, currently, are tied to products; when a job template is created, it is put in the group
+associated with the product.
+
 The format for Machines, Products and TestSuites is based on the upstream format but with various
-quality-of-life improvements. Upstream, each of these is a list-of-dicts, each dict containing a
-'name' key. This loader expects each to be a dict-of-dicts, with the names as keys (this is both
-easier to read and easier to access). In the upstream format, each Machine, Product and TestSuite
-dict can contain an entry with the key 'settings' which defines variables. The value (for some
-reason...) is a list of dicts, each dict of the format {"key": keyname, "value": value}. This
-loader expects a more obvious and simple format where the value of the 'settings' key is simply a
-dict of keys and values. With this loader, Products can inherit settings from Flavors to reduce
-duplication - see below.
+quality-of-life improvements. Instead of a list of dicts each having a 'name' property, they are
+dicts-of-dicts, with the names as keys (easier to read and to access). The 'settings' property of
+each machine/product/test suite is a simple key:value dict, instead of a list of dicts of the
+format {"key": keyname, "value": value}.
 
-Each Product must have a 'group_name' key whose value is the name of a job group which all job
-templates that test against that Product will be a part of. This association is an invention of
-this loader, derived from how Fedora organizes tests. The value is used by this loader, then the
-entry is dropped entirely as part of conversion to the upstream format. group_name can be set via
-ProductDefaults (see below).
-
-The expected format of the Flavors dict is a dict-of-dicts. For each entry, the key is a flavor
-name that is expected to be used as the 'flavor' for one or more Product(s). The value is a dict
-with only a 'settings' key, containing settings in the same format described above. When
-processing Products, fifloader will merge in the settings from the product's flavor, if it
-exists in the Flavors dict and defines any settings. If both the Product and the Flavor define
-a given setting, the Product's definition wins. The purpose of the Flavors dict is to reduce
-duplication of settings between multiple products with the same flavor.
-
-The ProductDefaults dict contains default values for Products. Any key/value pair in this dict
-will be merged into every Product in the *same file*. Conflicts are resolved in favor of the
-Product, naturally. Note that this merge happens *before* the file merge, so ProductDefaults are
-*per file*, they are not merged from multiple input files as described below.
+Additionally, Products must have a 'group_name' property - the name of a job group which all job
+templates that test against that Product will be a part of. This is only used by the script, it
+is dropped before conversion to the upstream format. It can be set via ProductDefaults (see below).
 
 The expected format of the Profiles dict is a dict-of-dicts. For each entry, the key is a unique
 name, and the value is a dict with keys 'machine' and 'product', each value being a valid name from
 the Machines or Products dict respectively. The name of each profile can be anything as long as
 it's unique.
 
-The expected format of the ProfileGroups dict is a dict-of-dicts. For each entry, the key is the
-name of a "profile group". The value is a dict whose keys are profile names or profile group
-names and whose values are priority numbers. As the name implies a profile group is just a group of
-profiles; the idea is to allow test suites to specify sets of profiles that commonly go together
-without having to constantly repeat them. Profile groups can be nested - a profile group can
-contain a reference to another profile group. Any level of recursion is fine so long as there is
-no loop (the loader will detect loops and exit with an error).
+In addition to 'settings', TestSuites must have either a 'profiles' a 'profile_groups' property
+(having both is fine). In each case, the value is a dict in the format {name: priority}. For
+'profiles', the names are profile names. For 'profile_groups', the names are profile group names
+(see below).
 
-For TestSuites, this loader then expects at least a 'profiles' key or a 'profile_groups' key in
-each dict (having both is fine). The value of 'profiles' is a dict indicating the Profiles from
-which we should generate one or more job templates for that test suite. For each entry in the dict,
-the key is a profile name from the Profiles dict, and the value is the priority to give the
-generated job template. The value of 'profile_groups' is a similar dict, except the keys are
-names of profile groups rather than profiles. When using profile groups, the priority value given
-in the profile group is added to the value given in the profile_groups dict to produce a total
-priority. Effectively this means the priority value given in the test suite is the base priority
-for the whole group, and the priority values in the profile group should be used to adjust that
-base priority for the relative importance of the profiles within the group; the values in the
-group may well all be 0.
-
-This loader will generate JobTemplates from the combination of TestSuites and Profiles. It means
-that, for instance, if you want to add a new test suite and run it on the same set of images and
-arches as several other tests are already run, you do not need to do a large amount of copying and
-pasting to create a bunch of JobTemplates that look a lot like other existing JobTemplates but with
-a different test_suite value; you can just specify an appropriate profiles dict, which is much
-shorter and easier and less error-prone. Thus specifying JobTemplates directly is not usually
+The loader will resolve any profile groups to individual profile names, summing priority values as
+it goes, then add any profiles from 'profiles', and generate one JobTemplate for each profile. As
+explained below, profile groups can be nested. Thus specifying JobTemplates directly is not usually
 needed and is expected to be used only for some oddball case which the generation system does not
 handle.
 
-The loader will automatically set the group_name for each job template based on Fedora-specific
-logic which we previously followed manually when creating job templates (e.g. it is set to 'Fedora
-PowerPC' for compose tests run on the PowerPC arch); thus this loader is not really generic but
-specific to Fedora conventions. This could possibly be changed (e.g. by allowing the logic for
-deciding group names to be configurable) if anyone else wants to use it.
+The additional allowed dicts are all optional, intended to reduce boilerplate in large projects.
+
+Flavors allows settings to be shared between products that use the same flavor. Its keys are
+flavor names. The values are dicts with only a 'settings' key, containing settings in the same
+format as the mandatory dicts. When processing Products, fifloader will merge in any settings it
+finds in Flavors for the product's flavor. If both the Product and the Flavor define a setting,
+the Product's definition wins.
+
+ProductDefaults contains default values for Products. Any key/value pair in this dict will be
+merged into every Product in the *same file*. Conflicts are resolved in favor of the Product,
+naturally. Note that this merge happens *before* the file merge, so ProductDefaults are *per file*,
+they are not merged from multiple input files as described below.
+
+ProfileGroups allows profiles to be grouped into commonly-used combinations, with nesting allowed.
+Its keys are group names - these are arbitrary, and referred from TestSuites, see above. Each value
+is a dict whose keys are profile names or profile group names and whose values are priority
+numbers. Any level of recursion is fine so long as there is no loop (the loader will detect loops
+and exit with an error). Priority values are summed when resolving profile groups, so the final
+value is the value specified for the group in the TestSuite plus the value specified at all
+intermediate stages of nested group resolution plus the value assigned to the profile at the final
+stage of resolution. Practically this means the priority values given in profile groups should be
+used to indicate the importance of the profiles/groups within the group *relative to each other*,
+and function to 'fine-tune' the overall priority given to the group at the TestSuite level.
 
 Multiple input files will be combined. Mostly this involves simply updating dicts, but there is
 special handling for TestSuites to allow multiple input files to each include entries for 'the
@@ -106,6 +102,18 @@ file may contain a TestSuite entry with the same key (name) as the complete defi
 file, and the value as a dict with only a `profiles` key (with the value `{'bar': 20}`). This
 loader will combine those into a single complete TestSuite entry with the `profiles` value
 `{'foo': 10, 'bar': 20}`. As noted above, ProductDefaults are *not* merged in this way.
+
+The files used by the tests also act as examples of the required format:
+unittests/data/templates.fif.json
+unittests/data/templates-updates.fif.json
+They demonstrate all features of the loader, including all the optional convenience dicts, and
+multiple input file combination - you can see how templates-updates.fif.json uses TestSuites
+entries with the same names as ones from templates.fif.json and no 'settings' property.
+
+The loader includes JSON schemas for both its own format and the upstream format, and validates
+data against the schemas at all stages, so if you mess up the format, you'll get a validation
+error that should tell you what you got wrong. If there's an undiscovered bug in the script that
+causes it to produce invalid output, the upstream format schema validation should catch it.
 """
 
 import argparse
