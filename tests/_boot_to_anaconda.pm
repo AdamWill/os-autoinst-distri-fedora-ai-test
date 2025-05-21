@@ -224,6 +224,15 @@ sub run {
             # appropriate language, here
             assert_and_click "anaconda_select_install_lang_filtered";
             assert_screen "anaconda_select_install_lang_selected", 10;
+
+            # If we want to test a different keyboard layout, we need to change it
+            # now.
+            my $keyboard = get_var('LAYOUT', undef);
+            if ($keyboard) {
+                webui_change_keyboard_layout();
+            }
+
+
             assert_and_click ["anaconda_select_install_lang_continue", "anaconda_webui_next"];
 
             # wait 180 secs for hub or Rawhide warning dialog to appear

@@ -9,7 +9,7 @@ use testapi;
 use utils;
 use bugzilla;
 
-our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part webui_custom_start webui_custom_create_disklabel webui_custom_add_partition webui_custom_boot_partitions webui_create_user anaconda_create_user get_full_repo get_mirrorlist_url crash_anaconda_text report_bug_text/;
+our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part webui_custom_start webui_custom_create_disklabel webui_custom_add_partition webui_custom_boot_partitions webui_create_user anaconda_create_user get_full_repo get_mirrorlist_url crash_anaconda_text report_bug_text webui_encrypt_disk webui_change_keyboard_layout/;
 
 sub select_disks {
     # Handles disk selection. Has one optional argument - number of
@@ -620,3 +620,56 @@ sub report_bug_text {
     type_string "4\n";
 
 }
+
+
+# This subroutine changes a keyboard layout on Live systems with
+# Anaconda WebUI and checks that it behaves the expected way.
+# Note, the routine does not have any checking mechanisms, you
+# have to do that in the main code.
+sub webui_change_keyboard_layout {
+    # Add the German layout next to the default US layout
+    assert_and_click('anaconda_webui_change_layout');
+    assert_and_click('anaconda_webui_add_input');
+    assert_and_click('anaconda_webui_german_germany');
+    assert_and_click('anaconda_webui_german_default');
+    assert_and_click('anaconda_webui_button_add');
+    assert_and_click('anaconda_webui_closing_icon');
+    # Check that a warning has been issued and the system
+    # does not want to continue with these settings.
+    assert_screen('anaconda_webui_error_morelayouts');
+    if (check_screen('anaconda_webui_next')) {
+        record_soft_failure('The Next button should not be highlighted.');
+    }
+    # Remove the default US layout and leave the newly added one.
+    assert_and_click('anaconda_webui_change_layout');
+    assert_and_click('anaconda_webui_source_english');
+    assert_and_click('anaconda_webui_layout_remove');
+    assert_and_click('anaconda_webui_closing_icon');
+    # Check that the layout has been selected, that there is no
+    # warning message.
+    assert_screen('anaconda_webui_german_selected');
+    if (check_screen('anaconda_webui_error_morelayouts')) {
+        die('The more layouts warning is shown where it should not be.');
+    }
+}
+
+# This subroutine adds a disk encryption on webUI. It will click
+# the radiobutton and fill in the password, then continue.
+sub webui_encrypt_disk {
+    my $password = shift;
+    assert_and_click('anaconda_webui_storage_configuration');
+    assert_and_click('anaconda_webui_encrypt_data');
+    assert_and_click('anaconda_webui_encryption_layout');
+    type_very_safely('german');
+    assert_and_click('anaconda_webui_layout_german');
+    assert_and_click('anaconda_webui_password_field');
+    type_very_safely(get_var('ENCRYPT_PASSWORD'));
+    for (1 .. 2) {
+        send_key("tab");
+    }
+    assert_and_click("anaconda_webui_password_confirm");
+    type_very_safely(get_var('ENCRYPT_PASSWORD'));
+    assert_and_click("anaconda_webui_next");
+}
+
+1;

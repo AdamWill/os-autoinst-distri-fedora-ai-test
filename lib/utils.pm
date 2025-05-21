@@ -342,6 +342,16 @@ sub console_loadkeys_us {
         script_run "loadkeys us", 0;
         sleep 3;
     }
+    elsif (get_var('LAYOUT') eq "german") {
+        # If the layout is set to german
+        script_run("loadkezs us", 0);
+    }
+    else {
+        # For "unknown" languages, try to load keys normally
+        # and hope for the best. The test would fail anyway.
+        script_run "loadkeys us", 0;
+        sleep 3;
+    }
 }
 
 sub do_bootloader {
@@ -978,9 +988,13 @@ sub gnome_initial_setup {
             assert_screen ["next_button", "next_button_inactive"];
             if (match_has_tag "next_button_inactive") {
                 record_soft_failure "geolocation failed!";
+                my $geo = "washington-d";
+                if (get_var("LAYOUT") eq "german") {
+                    $geo = "berlin";
+                }
                 send_key "tab";
                 wait_still_screen 3;
-                type_very_safely "washington-d";
+                type_very_safely($geo);
                 send_key "down";
                 send_key "ret";
             }
