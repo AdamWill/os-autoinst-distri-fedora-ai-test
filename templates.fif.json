@@ -191,17 +191,6 @@
                 "TEST_TARGET": "ISO"
             }
         },
-        "Workstation-live_osbuild-iso": {
-            "settings": {
-                "DESKTOP": "gnome",
-                "DEPLOY_UPLOAD_TEST": "install_default_upload",
-                "HDDSIZEGB": "20",
-                "INSTALL_RETRY": "5",
-                "LIVE": "1",
-                "PACKAGE_SET": "default",
-                "TEST_TARGET": "ISO"
-            }
-        },
         "Workstation-upgrade": {
             "settings": {
                 "DESKTOP": "gnome",
@@ -350,10 +339,6 @@
             "settings": {
                 "INSTALL_RETRY": "5"
             }
-        },
-        "fedora-Workstation-live_osbuild-iso-x86_64-*": {
-            "arch": "x86_64",
-            "flavor": "Workstation-live_osbuild-iso"
         },
         "fedora-Workstation-upgrade-x86_64-*": {
             "arch": "x86_64",
@@ -531,10 +516,6 @@
             "machine": "bios",
             "product": "fedora-Workstation-live-iso-x86_64-*"
         },
-        "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": {
-            "machine": "64bit",
-            "product": "fedora-Workstation-live_osbuild-iso-x86_64-*"
-        },
         "fedora-Workstation-upgrade-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-Workstation-upgrade-x86_64-*"
@@ -625,8 +606,7 @@
         },
         "workstation-lives": {
             "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 0,
-            "fedora-Workstation-live-iso-x86_64-*-64bit": 0,
-            "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 50
+            "fedora-Workstation-live-iso-x86_64-*-64bit": 0
         },
         "workstation-upgrade-raw": {
             "fedora-Workstation-upgrade-x86_64-*-64bit": 0,
@@ -2231,8 +2211,7 @@
                 "fedora-KDE-live-iso-x86_64-*-64bit": 30,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2550,7 +2529,6 @@
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 40
@@ -2576,7 +2554,6 @@
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 10,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
-                "fedora-Workstation-live_osbuild-iso-x86_64-*-64bit": 60,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
