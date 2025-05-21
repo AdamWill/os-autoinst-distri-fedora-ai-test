@@ -1,12 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "fif-product.json",
+  "$id": "fif-product-predefault.json",
   "title": "FIF single product schema (pre-defaults-merge)",
   "type": "object",
   "properties": {
     "arch": { "$ref": "fif-arch.json" },
     "distri": { "$ref": "fif-distri.json" },
     "flavor": { "type": "string" },
+    "group_name": { "type": "string" },
     "version": { "$ref": "fif-version.json" },
     "settings": { "$ref": "fif-settingshash.json" },
     "name": { "type": "string" }

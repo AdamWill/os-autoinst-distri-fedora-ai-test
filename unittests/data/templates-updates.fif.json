@@ -4,6 +4,7 @@
             "arch": "ppc64le",
             "distri": "fedora",
             "flavor": "updates-server",
+            "group_name": "Fedora PowerPC Updates",
             "settings": {},
             "version": "*"
         },
@@ -11,6 +12,7 @@
             "arch": "x86_64",
             "distri": "fedora",
             "flavor": "updates-server",
+            "group_name": "Fedora Updates",
             "settings": {},
             "version": "*"
         }

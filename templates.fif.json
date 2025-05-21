@@ -230,6 +230,7 @@
     },
     "ProductDefaults": {
         "distri": "fedora",
+        "group_name": "fedora",
         "version": "*"
     },
     "Products": {
@@ -243,11 +244,13 @@
         },
         "fedora-Cloud_Base-qcow2-qcow2-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "Cloud_Base-qcow2-qcow2"
+            "flavor": "Cloud_Base-qcow2-qcow2",
+            "group_name": "Fedora AArch64"
         },
         "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "Cloud_Base-qcow2-qcow2"
+            "flavor": "Cloud_Base-qcow2-qcow2",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-Cloud_Base-qcow2-qcow2-x86_64-*": {
             "arch": "x86_64",
@@ -259,7 +262,8 @@
         },
         "fedora-Everything-boot-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "Everything-boot-iso"
+            "flavor": "Everything-boot-iso",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-Everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
@@ -270,7 +274,8 @@
         },
         "fedora-IoT-dvd_ostree-iso-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "IoT-dvd_ostree-iso"
+            "flavor": "IoT-dvd_ostree-iso",
+            "group_name": "Fedora AArch64"
         },
         "fedora-IoT-dvd_ostree-iso-x86_64-*": {
             "arch": "x86_64",
@@ -286,15 +291,18 @@
         },
         "fedora-Minimal-raw_xz-raw.xz-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "Minimal-raw_xz-raw.xz"
+            "flavor": "Minimal-raw_xz-raw.xz",
+            "group_name": "Fedora AArch64"
         },
         "fedora-Server-boot-iso-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "Server-boot-iso"
+            "flavor": "Server-boot-iso",
+            "group_name": "Fedora AArch64"
         },
         "fedora-Server-boot-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "Server-boot-iso"
+            "flavor": "Server-boot-iso",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-Server-boot-iso-x86_64-*": {
             "arch": "x86_64",
@@ -305,11 +313,13 @@
         },
         "fedora-Server-dvd-iso-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "Server-dvd-iso"
+            "flavor": "Server-dvd-iso",
+            "group_name": "Fedora AArch64"
         },
         "fedora-Server-dvd-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "Server-dvd-iso"
+            "flavor": "Server-dvd-iso",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-Server-dvd-iso-x86_64-*": {
             "arch": "x86_64",
@@ -317,11 +327,13 @@
         },
         "fedora-Server-raw_xz-raw.xz-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "Server-raw_xz-raw.xz"
+            "flavor": "Server-raw_xz-raw.xz",
+            "group_name": "Fedora AArch64"
         },
         "fedora-Silverblue-dvd_ostree-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "Silverblue-dvd_ostree-iso"
+            "flavor": "Silverblue-dvd_ostree-iso",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-Silverblue-dvd_ostree-iso-x86_64-*": {
             "arch": "x86_64",
@@ -329,7 +341,8 @@
         },
         "fedora-Workstation-live-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "Workstation-live-iso"
+            "flavor": "Workstation-live-iso",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-Workstation-live-iso-x86_64-*": {
             "arch": "x86_64",
@@ -348,19 +361,23 @@
         },
         "fedora-Workstation-raw_xz-raw.xz-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "Workstation-raw_xz-raw.xz"
+            "flavor": "Workstation-raw_xz-raw.xz",
+            "group_name": "Fedora AArch64"
         },
         "fedora-Workstation-upgrade-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "Workstation-upgrade"
+            "flavor": "Workstation-upgrade",
+            "group_name": "Fedora AArch64"
         },
         "fedora-universal-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "universal"
+            "flavor": "universal",
+            "group_name": "Fedora AArch64"
         },
         "fedora-universal-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "universal"
+            "flavor": "universal",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-universal-x86_64-*": {
             "arch": "x86_64",
@@ -368,11 +385,13 @@
         },
         "fedora-seasonal-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "seasonal"
+            "flavor": "seasonal",
+            "group_name": "Fedora AArch64"
         },
         "fedora-seasonal-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "seasonal"
+            "flavor": "seasonal",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-seasonal-x86_64-*": {
             "arch": "x86_64",

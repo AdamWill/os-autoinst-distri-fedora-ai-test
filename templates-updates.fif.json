@@ -88,16 +88,19 @@
     },
     "ProductDefaults": {
         "distri": "fedora",
+        "group_name": "Fedora Updates",
         "version": "*"
     },
     "Products": {
         "fedora-updates-container-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-container"
+            "flavor": "updates-container",
+            "group_name": "Fedora AArch64 Updates"
         },
         "fedora-updates-container-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "updates-container"
+            "flavor": "updates-container",
+            "group_name": "Fedora PowerPC Updates"
         },
         "fedora-updates-container-x86_64-*": {
             "arch": "x86_64",
@@ -116,15 +119,18 @@
         },
         "fedora-updates-server-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-server"
+            "flavor": "updates-server",
+            "group_name": "Fedora AArch64 Updates"
         },
         "fedora-updates-server-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "updates-server"
+            "flavor": "updates-server",
+            "group_name": "Fedora PowerPC Updates"
         },
         "fedora-updates-server-upgrade-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "updates-server-upgrade"
+            "flavor": "updates-server-upgrade",
+            "group_name": "Fedora PowerPC Updates"
         },
         "fedora-updates-server-upgrade-x86_64-*": {
             "arch": "x86_64",

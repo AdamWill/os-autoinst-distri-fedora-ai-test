@@ -33,12 +33,14 @@
             "distri": "fedora",
             "arch": "ppc64le",
             "flavor": "Server-dvd-iso",
+            "group_name": "Fedora PowerPC",
             "version": "*"
         },
         "fedora-Server-dvd-iso-x86_64-*": {
             "distri": "fedora",
             "arch": "x86_64",
             "flavor": "Server-dvd-iso",
+            "group_name": "fedora",
             "settings": {
                 "TEST_TARGET": "COMPOSE",
                 "QEMURAM": "3072"

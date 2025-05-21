@@ -39,6 +39,12 @@ loader expects a more obvious and simple format where the value of the 'settings
 dict of keys and values. With this loader, Products can inherit settings from Flavors to reduce
 duplication - see below.
 
+Each Product must have a 'group_name' key whose value is the name of a job group which all job
+templates that test against that Product will be a part of. This association is an invention of
+this loader, derived from how Fedora organizes tests. The value is used by this loader, then the
+entry is dropped entirely as part of conversion to the upstream format. group_name can be set via
+ProductDefaults (see below).
+
 The expected format of the Flavors dict is a dict-of-dicts. For each entry, the key is a flavor
 name that is expected to be used as the 'flavor' for one or more Product(s). The value is a dict
 with only a 'settings' key, containing settings in the same format described above. When
@@ -269,27 +275,13 @@ def generate_job_templates(products, profiles, pgroups, testsuites):
             continue
         for (profile, prio) in suiteprofs.items():
             jobtemplate = {'test_suite_name': name, 'prio': prio}
-            # x86_64 compose
-            jobtemplate['group_name'] = 'fedora'
             jobtemplate['machine_name'] = profiles[profile]['machine']
             product = products[profiles[profile]['product']]
+            jobtemplate['group_name'] = product['group_name']
             jobtemplate['arch'] = product['arch']
             jobtemplate['flavor'] = product['flavor']
             jobtemplate['distri'] = product['distri']
             jobtemplate['version'] = product['version']
-            if jobtemplate['machine_name'] == 'ppc64le':
-                if 'updates' in product['flavor']:
-                    jobtemplate['group_name'] = "Fedora PowerPC Updates"
-                else:
-                    jobtemplate['group_name'] = "Fedora PowerPC"
-            elif jobtemplate['machine_name'] in ('aarch64', 'ARM'):
-                if 'updates' in product['flavor']:
-                    jobtemplate['group_name'] = "Fedora AArch64 Updates"
-                else:
-                    jobtemplate['group_name'] = "Fedora AArch64"
-            elif 'updates' in product['flavor']:
-                # x86_64 updates
-                jobtemplate['group_name'] = "Fedora Updates"
             jobtemplates.append(jobtemplate)
     return jobtemplates
 
@@ -321,8 +313,10 @@ def reverse_qol(machines, flavors, products, testsuites):
             converted.append({'key': key, 'value': value})
         return converted
 
-    # merge flavors into products
     for product in products.values():
+        # delete group names, this association is a loader-only concept
+        del product["group_name"]
+        # merge flavors into products
         flavsets = flavors.get(product["flavor"], {}).get("settings", {})
         if flavsets:
             temp = dict(flavsets)

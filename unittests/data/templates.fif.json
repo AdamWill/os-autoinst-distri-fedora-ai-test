@@ -43,11 +43,13 @@
     "Products": {
         "fedora-Server-dvd-iso-ppc64le-*": {
             "arch": "ppc64le",
-            "flavor": "Server-dvd-iso"
+            "flavor": "Server-dvd-iso",
+            "group_name": "Fedora PowerPC"
         },
         "fedora-Server-dvd-iso-x86_64-*": {
             "arch": "x86_64",
             "flavor": "Server-dvd-iso",
+            "group_name": "fedora",
             "settings": {
                 "TEST_TARGET": "COMPOSE",
                 "QEMURAM": "3072"

@@ -8,6 +8,7 @@
     "arch": { "$ref": "fif-arch.json" },
     "distri": { "$ref": "fif-distri.json" },
     "flavor": { "type": "string" },
+    "group_name": { "type": "string" },
     "version": { "$ref": "fif-version.json" },
     "settings": { "$ref": "fif-settingshash.json" },
     "name": { "type": "string" }
