@@ -1657,11 +1657,18 @@ sub solidify_wallpaper {
         # once to make this work
         # https://bugs.kde.org/show_bug.cgi?id=487715
         mouse_click;
-        # Run the Desktop settings
-        hold_key 'alt';
-        send_key 'd';
-        send_key 's';
-        release_key 'alt';
+        # Run the Desktop settings. shortcut changed from alt-d, alt-s
+        # to ctrl-shift-d in 6.3.90, use release number as proxy
+        my $relnum = get_release_number;
+        if ($relnum > 42) {
+            send_key 'ctrl-shift-d';
+        }
+        else {
+            hold_key 'alt';
+            send_key 'd';
+            send_key 's';
+            release_key 'alt';
+        }
         # give the window a few seconds to stabilize
         wait_still_screen 3;
         # Select type of background
