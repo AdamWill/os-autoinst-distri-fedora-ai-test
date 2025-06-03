@@ -23,6 +23,11 @@ sub run {
 
     # Install the rest of the updates, or any updates
     # that have not been previously installed.
+    assert_screen 'cockpit_updates_all_install';
+    # it seems like sometimes the refresh process clears briefly then
+    # comes back, so we'll wait it out
+    # https://github.com/cockpit-project/cockpit/issues/22064
+    wait_still_screen 3;
     assert_and_click 'cockpit_updates_all_install';
     my $run = 0;
     while ($run < 40) {
