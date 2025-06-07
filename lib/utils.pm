@@ -1261,7 +1261,7 @@ sub advisory_check_nonmatching_packages {
     my $rpmcmd = "rpm";
     my $timeout = 180;
     # longer if we have a lot of packages
-    my $pkgs = script_output "wc -l /mnt/updatepkgs.txt";
+    my $pkgs = script_output "cat /mnt/updatepkgs.txt | wc -l";
     $timeout *= 2 if ($pkgs > 100);
     $timeout *= 2 if ($pkgs > 400);
     $timeout *= 2 if ($pkgs > 1600);
