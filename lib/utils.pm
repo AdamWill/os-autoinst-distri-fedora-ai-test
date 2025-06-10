@@ -580,16 +580,37 @@ sub setup_repos {
         # according to the 'configs' arg
         assert_script_run 'printf "[openqa-testtag]\nname=openqa-testtag\nbaseurl=' . get_var("UPDATE_OR_TAG_REPO") . '/\ncost=2000\nenabled=' . $args{configs} . '\ngpgcheck=0\npriority=1\n" > /etc/yum.repos.d/openqa-testtag.repo';
         # write out the info files
-        # -q avoids most progress spew into the output. grep -v testtag
-        # avoids some more. grep . filters empty lines, which we get
-        # with dnf < 5 since this queryformat template ends with \n for
-        # dnf >= 5
-        assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}\n" --arch=' . $arch . ',noarch | sort -u | grep -v testtag | grep . > /mnt/updatepkgs.txt';
-        # the | xargs here is a wacky trick that converts newlines to
-        # spaces - unlike rpm, dnf < 5 always puts every package on a new
-        # line, which we don't want here
-        # https://unix.stackexchange.com/a/110759
-        assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{NAME} " | xargs > /mnt/updatepkgnames.txt';
+        if ($copr) {
+            # -q avoids most progress spew into the output. grep -v testtag
+            # avoids some more. grep . filters empty lines, which we get
+            # with dnf < 5 since this queryformat template ends with \n for
+            # dnf >= 5
+            assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}\n" --arch=' . $arch . ',noarch | sort -u | grep -v testtag | grep . > /mnt/updatepkgs.txt';
+            # the | xargs here is a wacky trick that converts newlines to
+            # spaces - unlike rpm, dnf < 5 always puts every package on a new
+            # line, which we don't want here
+            # https://unix.stackexchange.com/a/110759
+            assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery --qf "%{NAME} " | xargs > /mnt/updatepkgnames.txt';
+        }
+        else {
+            # for side tags we use koji because the repo has *every* package
+            # on CANNED, we need to enter the toolbox
+            if (get_var("CANNED")) {
+                type_string "toolbox -y enter\n";
+                # this is simply to wait till we're in the toolbox
+                assert_script_run "true", 180;
+            }
+            assert_script_run 'dnf -y install koji', 300;
+            assert_script_run 'koji list-tagged ' . $tag . ' --latest | tail -n+3 | cut -d\' \' -f1 | rev | cut -d\'-\' -f3- | rev > /mnt/updatepkgnames.txt';
+            # exit the toolbox on CANNED
+            if (get_var("CANNED")) {
+                type_string "exit\n";
+                wait_serial "# ";
+            }
+            upload_logs '/mnt/updatepkgnames.txt';
+            # now *only* query those packages via dnf to generate updatepkgs
+            assert_script_run 'dnf -q --disablerepo=* --enablerepo=openqa-testtag repoquery `tr "\n" " " < /mnt/updatepkgnames.txt` --qf "%{SOURCERPM} %{NAME} %{EPOCH} %{VERSION} %{RELEASE}\n" --arch=' . $arch . ',noarch | sort -u | grep -v testtag | grep . > /mnt/updatepkgs.txt';
+        }
     }
     my @was = get_workarounds($args{version});
     # bail if there are no workarounds:
@@ -1268,7 +1289,7 @@ sub advisory_check_nonmatching_packages {
     $timeout *= 2 if ($pkgs > 4800);
     my $wrapper = $args{wrapper};
     $rpmcmd = "$wrapper rpm" if ($wrapper);
-    $timeout *= 2 if ($wrapper);
+    $timeout *= 3 if ($wrapper);
     # this creates /tmp/installedupdatepkgs.txt as a sorted list of installed
     # packages with the same name as packages from the update, in the same form
     # as /mnt/updatepkgs.txt. The '--last | head -1' tries to handle the
