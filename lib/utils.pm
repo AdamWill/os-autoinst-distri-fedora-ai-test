@@ -601,7 +601,10 @@ sub setup_repos {
                 assert_script_run "true", 180;
             }
             assert_script_run 'dnf -y install koji', 300;
-            assert_script_run 'koji list-tagged ' . $tag . ' --latest | tail -n+3 | cut -d\' \' -f1 | rev | cut -d\'-\' -f3- | rev > /mnt/updatepkgnames.txt';
+            # this finds (just) the names of every binary package directly
+            # tagged into the tag in question. first cut gets nvr, then
+            # rev/cut/rev does an rsplit to get the name from the nvr
+            assert_script_run 'koji list-tagged ' . $tag . ' --latest --rpms --arch=noarch --arch=' . $arch . ' | cut -d" " -f1 | rev | cut -d"-" -f3- | rev | grep -v -e "-debuginfo$" | grep -v -e "-debugsource$" > /mnt/updatepkgnames.txt';
             # exit the toolbox on CANNED
             if (get_var("CANNED")) {
                 type_string "exit\n";
