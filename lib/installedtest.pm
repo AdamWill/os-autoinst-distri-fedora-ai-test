@@ -35,6 +35,8 @@ sub root_console {
 sub post_fail_hook {
     my $self = shift;
 
+    return if get_var("TEST") eq 'rmdepcheck';
+
     if (check_screen ['emergency_rescue', 'emergency_rescue_nopassword'], 3) {
         if (match_has_tag 'emergency_rescue') {
             my $password = get_var("ROOT_PASSWORD", "weakpassword");
