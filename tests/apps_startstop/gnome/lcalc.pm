@@ -12,6 +12,11 @@ sub run {
     if ($subvariant ne "Silverblue") {
         # Start the application
         start_with_launcher('apps_menu_lcalc');
+        # Check for the First Use warning and dismiss it,
+        # before you try to quit the application.
+        if (check_screen("lcalc_warning_firsttime", timeout => 15)) {
+            send_key("alt-f4");
+        }
         # Check that is started
         assert_screen 'apps_run_lcalc';
         # Register application

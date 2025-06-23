@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "tags": [
+    "lcalc_warning_firsttime"
+  ],
+  "area": [
+    {
+      "xpos": 198,
+      "ypos": 255,
+      "width": 277,
+      "height": 29,
+      "type": "match",
+      "match": "90"
+    }
+  ]
+}
