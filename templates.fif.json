@@ -1961,45 +1961,6 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
-        "iot_zezere_ignition": {
-                "profiles": {
-                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
-            },
-            "settings": {
-                "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "zezere.url=http://172.16.2.118",
-                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "NICTYPE": "tap",
-                "PARALLEL_WITH": "iot_zezere_server",
-                "POSTINSTALL": "iot_zezere_ignition",
-                "POST_STATIC": "172.16.2.119 zezere001.test.openqa.fedoraproject.org",
-                "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
-                "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
-            }
-        },
-        "iot_zezere_server": {
-            "profiles": {
-                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
-            },
-            "settings": {
-                "BOOTFROM": "c",
-                "CANNED": "",
-                "HDD_1": "disk_f%CURRREL%_minimal_4_%ARCH%.qcow2",
-                "NICTYPE": "tap",
-                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
-                "POSTINSTALL": "_iot_zezere_server _setup_browser _iot_zezere_remote",
-                "POST_STATIC": "172.16.2.118 zezere002.test.openqa.fedoraproject.org",
-                "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
-                "TEST_TARGET": "NONE",
-                "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
-            }
-        },
         "kwrite": {
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42
