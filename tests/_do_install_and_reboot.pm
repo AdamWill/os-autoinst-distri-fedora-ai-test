@@ -1,61 +1,85 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use anaconda;
 use utils;
 
 
 sub _set_root_password {
-    # Set root password, unless we don't want to or can't
     # can also hit a transition animation
     wait_still_screen 2;
-    my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
-    unless (get_var("INSTALLER_NO_ROOT")) {
-        assert_and_click "anaconda_install_root_password";
-        # we have to click 'enable root account' before typing the
-        #password
-        assert_and_click "anaconda_install_root_password_screen";
-        # wait out animation
-        wait_still_screen 2;
-        desktop_switch_layout("ascii", "anaconda") if (get_var("SWITCHED_LAYOUT"));
-        # these screens seems insanely subject to typing errors, so
-        # type super safely. This doesn't really slow the test down
-        # as we still get done before the install process is complete.
-        type_very_safely $root_password;
-        wait_screen_change { send_key "tab"; };
-        type_very_safely $root_password;
-        # Another screen to test identification on
-        my $identification = get_var('IDENTIFICATION');
-        if ($identification eq 'true') {
-            check_top_bar();
-            # we don't check version or pre-release because here those
-            # texts appear on the banner which makes the needling
-            # complex and fragile (banner is different between variants,
-            # and has a gradient so for RTL languages the background color
-            # differs; pre-release text is also translated)
-        }
-        assert_and_click "anaconda_spoke_done";
-        # exiting this screen can take a while, so check for the hub
-        assert_screen "anaconda_main_hub", 60;
+    my $root_password = get_var("ROOT_PASSWORD", "weakpassword");
+    assert_and_click "anaconda_install_root_password";
+    # we have to click 'enable root account' before typing the
+    #password
+    assert_and_click "anaconda_install_root_password_screen";
+    # wait out animation
+    wait_still_screen 2;
+    desktop_switch_layout("ascii", "anaconda") if (get_var("SWITCHED_LAYOUT"));
+    # these screens seems insanely subject to typing errors, so
+    # type super safely. This doesn't really slow the test down
+    # as we still get done before the install process is complete.
+    type_very_safely $root_password;
+    wait_screen_change { send_key "tab"; };
+    type_very_safely $root_password;
+    # Another screen to test identification on
+    my $identification = get_var('IDENTIFICATION');
+    if ($identification eq 'true') {
+        check_top_bar();
+        # we don't check version or pre-release because here those
+        # texts appear on the banner which makes the needling
+        # complex and fragile (banner is different between variants,
+        # and has a gradient so for RTL languages the background color
+        # differs; pre-release text is also translated)
     }
+    assert_and_click "anaconda_spoke_done";
+    # exiting this screen can take a while, so check for the hub
+    assert_screen "anaconda_main_hub", 60;
+}
+
+sub _set_root_password_webui {
+    my $root_password = get_var("ROOT_PASSWORD", "weakpassword");
+    # Click the radio button, then get focus and fill the fields.
+    assert_and_click("anaconda_webui_allow_root");
+    sleep(1);
+    type_very_safely($root_password);
+    for (1 .. 2) {
+        send_key("tab");
+        sleep(1);
+    }
+    type_very_safely($root_password);
 }
 
 sub _do_root_and_user {
-    _set_root_password();
-    # Set user details, unless the test is configured not to create one
-    unless (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER")) {
-        # Wait out animation
-        wait_still_screen 8;
-        anaconda_create_user();
+    my $nouser = (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER"));
+    my $noroot = get_var("INSTALLER_NO_ROOT");
+    return if ($nouser && $noroot);
+    if (get_var("_ANACONDA_WEBUI")) {
+        webui_create_user() unless ($nouser);
+        _set_root_password_webui() unless ($noroot);
+        assert_and_click("anaconda_webui_next");
+    }
+    else {
+        _set_root_password() unless ($noroot);
+        # Set user details, unless the test is configured not to create one
+        unless ($nouser) {
+            # Wait out animation
+            wait_still_screen 8;
+            anaconda_create_user();
+        }
     }
     # Check username (and hence keyboard layout) if non-English
     if (get_var('LANGUAGE')) {
         assert_screen "anaconda_install_user_created";
     }
+
 }
 
 sub run {
     my $self = shift;
-    my $webui = 0;
+    my $webui = get_var("_ANACONDA_WEBUI");
+    my $desktop = get_var("DESKTOP");
+
     # From F31 onwards (after Fedora-Rawhide-20190722.n.1), user and
     # root password spokes are moved to main hub, so we must do those
     # before we run the install.
@@ -67,8 +91,7 @@ sub run {
     assert_screen ["anaconda_main_hub_begin_installation", "anaconda_webui_begin_installation"], 90;
     wait_still_screen 5;
     assert_and_click ["anaconda_main_hub_begin_installation", "anaconda_webui_begin_installation"];
-    if (match_has_tag "anaconda_webui_begin_installation") {
-        $webui = 1;
+    if ($webui) {
         click_lastmatch if (check_screen "anaconda_webui_confirm_installation", 10);
     }
 
@@ -110,8 +133,10 @@ sub run {
     wait_still_screen 3;
     # if this is a live install, let's go ahead and quit the installer
     # in all cases, just to make sure quitting doesn't crash etc.
-    # not on web UI, as it immediately reboots
-    assert_and_click "anaconda_install_done" if (get_var('LIVE') && !$webui);
+    if (get_var('LIVE')) {
+        # not on Workstation with webUI, as it immediately reboots
+        assert_and_click "anaconda_install_done" unless ($webui && $desktop eq "gnome");
+    }
     # there are various things we might have to do at a console here
     # before we actually reboot. let's figure them all out first...
     my @actions;
@@ -129,10 +154,9 @@ sub run {
         push(@actions, 'checkefibootmgr') if (get_var("UEFI"));
     }
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
-    # for no-webUI lives is unreliable (webUI lives reboot on "Quit"
-    # just like non-lives). And if we're already doing something
+    # for lives is unreliable. And if we're already doing something
     # else at a console, we may as well reboot from there too
-    push(@actions, 'reboot') if (!get_var("MEMCHECK") && ((get_var("LIVE") && !$webui) || @actions));
+    push(@actions, 'reboot') if (!get_var("MEMCHECK") && (get_var("LIVE") || @actions));
     # check whether install is affected by
     # https://bugzilla.redhat.com/show_bug.cgi?id=2268505 ,
     # soft fail and work around it if so

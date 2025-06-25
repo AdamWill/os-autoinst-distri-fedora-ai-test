@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use anaconda;
 use utils;
 
 sub _enter_password {

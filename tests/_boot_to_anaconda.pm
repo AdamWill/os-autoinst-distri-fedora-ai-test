@@ -205,12 +205,9 @@ sub run {
             }
             # we click to work around RHBZ #1566066 if it happens
             click_lastmatch;
-            my $language = get_var('LANGUAGE') || 'english';
-            # Workaround the new Anaconda WebUI  with two menus, where the
-            # language stuff is not visible.
-            # We will send the upper arrow to move the screen to its original position.
-            send_key_until_needlematch("anaconda_select_install_lang", "up", 30);
-            assert_and_click("anaconda_select_install_lang", timeout => 300);
+            # for webui, with the small window, just typing 'english' may
+            # not show the desired variant
+            my $language = get_var('LANGUAGE') || (get_var("_ANACONDA_WEBUI") ? 'united states' : 'english');
 
             # Select install language
             wait_screen_change { assert_and_click "anaconda_select_install_lang_input"; };

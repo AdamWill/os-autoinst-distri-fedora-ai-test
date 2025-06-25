@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start/;
 
 
 # We introduce this global variable to hold the list of applications that have
@@ -1013,83 +1013,6 @@ sub gnome_initial_setup {
     }
     # don't do it again on second load
     set_var("_SETUP_DONE", 1);
-}
-
-sub _type_user_password {
-    # convenience function used by anaconda_create_user, not meant
-    # for direct use
-    my $user_password = get_var("USER_PASSWORD") || "weakpassword";
-    if (get_var("SWITCHED_LAYOUT")) {
-        # we double the password, the second time using the native
-        # layout, so the password has both ASCII and native characters
-        desktop_switch_layout "ascii", "anaconda";
-        type_very_safely $user_password;
-        desktop_switch_layout "native", "anaconda";
-        type_very_safely $user_password;
-    }
-    else {
-        type_very_safely $user_password;
-    }
-}
-
-sub anaconda_create_user {
-    # Create a user, in the anaconda interface. This is here because
-    # the same code works both during install and for initial-setup,
-    # which runs post-install, so we can share it.
-    my %args = (
-        timeout => 90,
-        @_
-    );
-    # For some languages, i.e. Turkish, we want to use a complicated
-    # geo field to test that turkish letters will be displayed correctly
-    # and that the installer will be able to handle them and change them
-    # into the correct user name without special characters.
-    my $geofield = get_var("USER_GECOS");
-    my $user_login = get_var("USER_LOGIN") || "test";
-    unless ($geofield) {
-        # If geofield is not defined, let it be the same as login.
-        $geofield = $user_login;
-    }
-    assert_and_click("anaconda_install_user_creation", timeout => $args{timeout});
-    assert_screen "anaconda_install_user_creation_screen";
-    # wait out animation
-    wait_still_screen 2;
-    # We will type the $geofield as the user name.
-    type_very_safely $geofield;
-    # For Turkish, we especially want to check that correct characters
-    # are typed, so we will check it here.
-    if (get_var("LANGUAGE") eq "turkish") {
-        assert_screen("username_typed_correctly_turkish");
-    }
-    send_key("tab");
-    # Now set the login name.
-    type_very_safely($user_login);
-    # And fill the password stuff.
-    type_very_safely "\t\t\t";
-    _type_user_password();
-    wait_screen_change { send_key "tab"; };
-    wait_still_screen 2;
-    _type_user_password();
-    # even with all our slow typing this still *sometimes* seems to
-    # miss a character, so let's try again if we have a warning bar.
-    # But not if we're installing with a switched layout, as those
-    # will *always* result in a warning bar at this point (see below)
-    if (!get_var("SWITCHED_LAYOUT") && check_screen "anaconda_warning_bar", 3) {
-        wait_screen_change { send_key "shift-tab"; };
-        wait_still_screen 2;
-        _type_user_password();
-        wait_screen_change { send_key "tab"; };
-        wait_still_screen 2;
-        _type_user_password();
-    }
-    assert_and_click "anaconda_spoke_done";
-    # since 20170105, we will get a warning here when the password
-    # contains non-ASCII characters. Assume only switched layouts
-    # produce non-ASCII characters, though this isn't strictly true
-    if (get_var('SWITCHED_LAYOUT') && check_screen "anaconda_warning_bar", 3) {
-        wait_still_screen 1;
-        assert_and_click "anaconda_spoke_done";
-    }
 }
 
 sub check_desktop {
