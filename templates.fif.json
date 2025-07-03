@@ -4,6 +4,7 @@
             "backend": "qemu",
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
+                "MINCPU": "Nehalem",
                 "PART_TABLE_TYPE": "mbr",
                 "QEMUCPU": "host",
                 "QEMUCPUS": "2",
@@ -22,6 +23,7 @@
                 "ARCH_BASE_MACHINE": "aarch64",
                 "INSECURE_PFLASH_CODE": "/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw",
                 "INSECURE_PFLASH_VARS": "/usr/share/edk2/aarch64/vars-template-pflash.raw",
+                "MINCPU": "host",
                 "PART_TABLE_TYPE": "gpt",
                 "QEMU": "aarch64",
                 "QEMUCPU": "host",
@@ -43,6 +45,7 @@
             "backend": "qemu",
             "settings": {
                 "ARCH_BASE_MACHINE": "ppc64le",
+                "MINCPU": "host",
                 "OFW": 1,
                 "PART_TABLE_TYPE": "mbr",
                 "QEMU": "ppc64",
@@ -60,6 +63,7 @@
                 "ARCH_BASE_MACHINE": "64bit",
                 "INSECURE_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE_4M.qcow2",
                 "INSECURE_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS_4M.qcow2",
+                "MINCPU": "Nehalem",
                 "PART_TABLE_TYPE": "gpt",
                 "QEMUCPU": "host",
                 "QEMUCPUS": "2",
@@ -635,7 +639,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "QEMUCPU": "Nehalem",
+                "QEMUCPU": "%MINCPU%",
                 "STARTSTOP": "true",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
@@ -706,6 +710,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_services_start",
+                "QEMUCPU": "%MINCPU%",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
