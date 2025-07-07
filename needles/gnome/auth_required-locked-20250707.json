@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 217,
+      "xpos": 405,
+      "ypos": 500,
+      "type": "match",
+      "height": 19
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "auth_required_locked",
+    "auth_required"
+  ]
+}
