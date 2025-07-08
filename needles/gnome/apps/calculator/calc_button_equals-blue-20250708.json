@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 33,
+      "type": "match",
+      "ypos": 635,
+      "xpos": 632,
+      "width": 30
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_calculator",
+    "calc_button_equals"
+  ]
+}
