@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "tags": [
+    "software_button_details"
+  ],
+  "area": [
+    {
+      "xpos": 610,
+      "ypos": 711,
+      "width": 57,
+      "height": 20,
+      "type": "match",
+      "match": "90"
+    }
+  ]
+}

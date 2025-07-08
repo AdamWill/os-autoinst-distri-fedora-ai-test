@@ -96,6 +96,12 @@ sub run {
                     # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2246
                     click_lastmatch if (check_screen "desktop_package_tool_update_download_unsigned", 30);
                 }
+                # If there is an issue and Software reports it, let us click
+                # "Details" to see what the problem was to make later
+                # troubleshooting easier.
+                if (check_screen("software_button_details", timeout => 30)) {
+                    click_lastmatch();
+                }
                 $tags = ['desktop_package_tool_update_apply'];
                 next;
             }
