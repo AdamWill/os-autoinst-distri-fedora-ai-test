@@ -13,6 +13,8 @@ sub run {
     # use compose repo (compose tests) or set up update repo (update tests)
     cleanup_workaround_repo;
     repo_setup();
+    # enable the buildroot repo now, if relevant
+    assert_script_run 'sed -i -e "s,enabled=0,enabled=1,g" /etc/yum.repos.d/buildroot.repo' if (get_var("BUILDROOT_REPO"));
     my $params = "-y --best --releasever=${relnum}";
 
     if (script_run "dnf ${params} system-upgrade download", 6000) {

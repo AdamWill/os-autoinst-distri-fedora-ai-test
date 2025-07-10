@@ -736,7 +736,11 @@ sub _repo_setup_updates {
     # see e.g. https://pagure.io/fedora-ci/general/issue/376 for why
     my $brrepo = get_var("BUILDROOT_REPO");
     if ($brrepo && get_var("TEST") ne "support_server") {
-        assert_script_run 'printf "[buildroot]\nname=buildroot\nbaseurl=https://kojipkgs.fedoraproject.org/repos/' . $brrepo . '/latest/' . $arch . '/\ncost=2000\nenabled=1\ngpgcheck=0\n" > /etc/yum.repos.d/buildroot.repo';
+        # don't enable it for upgrade tests or else we'll install stuff
+        # from the target release in setup_repos, we'll enable it right
+        # before running the upgrade
+        my $enabled = get_var("UPGRADE") ? "0" : "1";
+        assert_script_run 'printf "[buildroot]\nname=buildroot\nbaseurl=https://kojipkgs.fedoraproject.org/repos/' . $brrepo . '/latest/' . $arch . '/\ncost=2000\nenabled=' . $enabled . '\ngpgcheck=0\n" > /etc/yum.repos.d/buildroot.repo';
     }
     if (get_var("CANNED")) {
         # install and use en_US.UTF-8 locale for consistent sort
