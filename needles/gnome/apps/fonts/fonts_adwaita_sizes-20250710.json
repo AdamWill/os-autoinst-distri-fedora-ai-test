@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 3,
+      "ypos": 258,
+      "width": 217,
+      "height": 439
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fonts_adwaita_sizes"
+  ]
+}
