@@ -4,14 +4,14 @@
             "settings": {
                 "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
-                "QEMU_VIDEO_DEVICE": "VGA",
+                "+QEMU_VIDEO_DEVICE": "VGA",
                 "RETRY": "1"
             }
         },
         "updates-everything-boot-iso": {
             "settings": {
                 "NUMDISKS": "2",
-                "QEMU_VIDEO_DEVICE": "VGA",
+                "+QEMU_VIDEO_DEVICE": "VGA",
                 "RETRY": "1"
             }
         },
@@ -27,14 +27,14 @@
             "settings": {
                 "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
-                "QEMU_VIDEO_DEVICE": "VGA",
+                "+QEMU_VIDEO_DEVICE": "VGA",
                 "RETRY": "1"
             }
         },
         "updates-server-upgrade": {
             "settings": {
                 "NUMDISKS": "2",
-                "QEMU_VIDEO_DEVICE": "VGA",
+                "+QEMU_VIDEO_DEVICE": "VGA",
                 "RETRY": "1"
             }
         },
