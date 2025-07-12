@@ -738,6 +738,7 @@ sub _repo_setup_updates {
         assert_script_run 'dnf versionlock exclude kernel-core-6.16.0-0.rc5.65.fc43';
         assert_script_run 'dnf versionlock exclude kernel-modules-6.16.0-0.rc5.65.fc43';
         assert_script_run 'dnf versionlock exclude kernel-modules-core-6.16.0-0.rc5.65.fc43';
+        assert_script_run 'dnf versionlock exclude kernel-modules-extra-6.16.0-0.rc5.65.fc43';
     }
     # use the buildroot repo on Rawhide and Branched pre-ut-activation:
     # see e.g. https://pagure.io/fedora-ci/general/issue/376 for why
