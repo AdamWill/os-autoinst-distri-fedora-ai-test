@@ -58,9 +58,6 @@ except IndexError:
     sys.exit("Must specify two input filenames!")
 try:
     updalias = sys.argv[3]
-    if updalias == "FEDORA-2025-14272e396a":
-        print("Very special update, bypassing updvercheck")
-        sys.exit()
 except IndexError:
     updalias = None
 

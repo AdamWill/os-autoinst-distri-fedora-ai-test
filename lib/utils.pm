@@ -762,7 +762,9 @@ sub _repo_setup_updates {
         # where the updated packages should have been installed
         # already and we want to fail if they weren't, or CANNED
         # tests, there's no point updating the toolbox
-        assert_script_run "dnf -y --best update", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
+        my $advortask = get_var("ADVISORY_OR_TASK");
+        my $verb = $advortask eq "FEDORA-2025-14272e396a" ? 'distro-sync' : 'update';
+        assert_script_run "dnf -y --best ${verb}", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
         # on liveinst tests, we'll remove the packages we installed
         # above (and their deps, which dnf will include automatically),
         # just in case they're in the update under test; otherwise we
