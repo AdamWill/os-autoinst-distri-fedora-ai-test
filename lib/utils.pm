@@ -732,6 +732,13 @@ sub _repo_setup_updates {
     repos_mirrorlist();
     # Disable updates-testing so other bad updates don't break us
     disable_updates_repos(both => 0) if ($version > $currrel);
+    # HACK 2025-07: lock out known-bad kernel versions
+    if ($version eq "43") {
+        assert_script_run 'dnf versionlock exclude kernel-6.16.0-0.rc5.65.fc43';
+        assert_script_run 'dnf versionlock exclude kernel-core-6.16.0-0.rc5.65.fc43';
+        assert_script_run 'dnf versionlock exclude kernel-modules-6.16.0-0.rc5.65.fc43';
+        assert_script_run 'dnf versionlock exclude kernel-modules-core-6.16.0-0.rc5.65.fc43';
+    }
     # use the buildroot repo on Rawhide and Branched pre-ut-activation:
     # see e.g. https://pagure.io/fedora-ci/general/issue/376 for why
     my $brrepo = get_var("BUILDROOT_REPO");
@@ -762,9 +769,7 @@ sub _repo_setup_updates {
         # where the updated packages should have been installed
         # already and we want to fail if they weren't, or CANNED
         # tests, there's no point updating the toolbox
-        my $advortask = get_var("ADVISORY_OR_TASK");
-        my $verb = $advortask eq "FEDORA-2025-14272e396a" ? 'distro-sync' : 'update';
-        assert_script_run "dnf -y --best ${verb}", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
+        assert_script_run "dnf -y --best update", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
         # on liveinst tests, we'll remove the packages we installed
         # above (and their deps, which dnf will include automatically),
         # just in case they're in the update under test; otherwise we
