@@ -732,19 +732,6 @@ sub _repo_setup_updates {
     repos_mirrorlist();
     # Disable updates-testing so other bad updates don't break us
     disable_updates_repos(both => 0) if ($version > $currrel);
-    # HACK 2025-07: lock out known-bad kernel versions
-    if ($version eq "43") {
-        assert_script_run 'dnf versionlock exclude kernel-6.16.0-0.rc5.65.fc43';
-        assert_script_run 'dnf versionlock exclude kernel-core-6.16.0-0.rc5.65.fc43';
-        assert_script_run 'dnf versionlock exclude kernel-modules-6.16.0-0.rc5.65.fc43';
-        assert_script_run 'dnf versionlock exclude kernel-modules-core-6.16.0-0.rc5.65.fc43';
-        assert_script_run 'dnf versionlock exclude kernel-modules-extra-6.16.0-0.rc5.65.fc43';
-        if (get_var("ADVISORY_OR_TASK") eq "FEDORA-2025-14272e396a") {
-            assert_script_run 'dnf versionlock exclude kernel-tools-6.16.0-0.rc5.65.fc43';
-            assert_script_run 'dnf versionlock exclude kernel-tools-libs-6.16.0-0.rc5.65.fc43';
-            assert_script_run 'dnf versionlock exclude python3-perf-6.16.0-0.rc5.65.fc43';
-        }
-    }
     # use the buildroot repo on Rawhide and Branched pre-ut-activation:
     # see e.g. https://pagure.io/fedora-ci/general/issue/376 for why
     my $brrepo = get_var("BUILDROOT_REPO");
