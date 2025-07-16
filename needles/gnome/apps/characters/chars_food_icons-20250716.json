@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 81,
+      "ypos": 201,
+      "type": "match",
+      "xpos": 498,
+      "height": 80
+    },
+    {
+      "xpos": 708,
+      "type": "match",
+      "width": 61,
+      "ypos": 201,
+      "height": 79
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "chars_food_icons"
+  ]
+}

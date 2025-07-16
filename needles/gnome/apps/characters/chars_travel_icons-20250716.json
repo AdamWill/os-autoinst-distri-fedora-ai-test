@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 395,
+      "ypos": 213,
+      "width": 88,
+      "height": 69
+    },
+    {
+      "height": 85,
+      "width": 77,
+      "ypos": 299,
+      "xpos": 602,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "chars_travel_icons"
+  ]
+}

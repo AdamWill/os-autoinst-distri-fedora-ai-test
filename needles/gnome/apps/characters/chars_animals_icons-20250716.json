@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 80,
+      "ypos": 198,
+      "xpos": 501,
+      "type": "match",
+      "height": 83
+    },
+    {
+      "height": 79,
+      "xpos": 606,
+      "type": "match",
+      "ypos": 200,
+      "width": 74
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "chars_animals_icons"
+  ]
+}
