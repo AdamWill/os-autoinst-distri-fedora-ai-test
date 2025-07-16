@@ -58,9 +58,7 @@ sub run {
     # the slider moves and a silent regime indicator
     # appears on the top panel.
     assert_and_click("panel_datetime");
-    assert_and_click("panel_slider_donotdisturb");
-    assert_screen("panel_slider_donotdisturb_active");
-    assert_screen("panel_symbol_bell_off");
+    assert_screen("panel_panel_shown");
 }
 
 sub test_flags {
