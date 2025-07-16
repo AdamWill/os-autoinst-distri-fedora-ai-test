@@ -25,7 +25,8 @@ sub run {
         assert_script_run 'modprobe null_blk nr_devices=1';
         # needed so we exit 1 when the bats command fails
         assert_script_run "set -o pipefail";
-        assert_script_run "bats --filter-tags distro-integration /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 600;
+        assert_script_run "bats --filter-tags '!ci:parallel' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 900;
+        assert_script_run 'bats --filter-tags ci:parallel -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 900;
         # restore default behaviour
         assert_script_run "set +o pipefail";
     }
