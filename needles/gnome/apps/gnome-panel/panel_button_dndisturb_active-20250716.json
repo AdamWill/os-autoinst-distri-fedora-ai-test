@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 839,
+      "ypos": 222,
+      "width": 129,
+      "height": 21,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "panel_button_dndisturb_active"
+  ]
+}

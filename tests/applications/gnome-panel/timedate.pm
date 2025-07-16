@@ -57,8 +57,10 @@ sub run {
     # Check that if we click on Do not disturb,
     # the slider moves and a silent regime indicator
     # appears on the top panel.
-    assert_and_click("panel_datetime");
-    assert_screen("panel_panel_shown");
+    assert_and_click("panel_controls");
+    assert_and_click("panel_button_dndisturb");
+    assert_screen("panel_button_dndisturb_active");
+
 }
 
 sub test_flags {
