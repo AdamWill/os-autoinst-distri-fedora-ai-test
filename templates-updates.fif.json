@@ -476,6 +476,18 @@
                 "updates-server-2arch": 5
             }
         },
+        "rmdepcheck": {
+            "profiles": {
+                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "ENTRYPOINT": "rmdepcheck",
+                "HDD_1": "disk_f%CURRREL%_support_6_%ARCH%.qcow2",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
+        },
         "rpmostree_overlay": {
             "profiles": {
                 "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*-64bit": 5

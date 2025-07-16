@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type prepare_update_mount setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start/;
 
 
 # We introduce this global variable to hold the list of applications that have
@@ -535,7 +535,7 @@ sub _repo_setup_compose {
     # }
 }
 
-sub _prepare_update_mount {
+sub prepare_update_mount {
     # create and mount the filesystem where we will store update/task packages
     # this is separate from setup_repos as it has to happen before we
     # enter the toolbox container on the CANNED workflow
@@ -719,7 +719,7 @@ sub _repo_setup_updates {
     console_login();
     # prepare the directory the packages will be downloaded to, unless we're
     # testing a side tag or COPR
-    _prepare_update_mount() unless ($tag || $copr);
+    prepare_update_mount() unless ($tag || $copr);
 
     # on CANNED, we need to enter the toolbox at this point
     if (get_var("CANNED")) {
