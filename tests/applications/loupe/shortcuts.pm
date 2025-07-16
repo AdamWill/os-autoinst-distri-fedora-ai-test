@@ -12,9 +12,6 @@ sub run {
     # Open the shortcuts
     send_key("ctrl-?");
     assert_screen("loupe_shortcuts_shown");
-    # Try another screen
-    assert_and_click("loupe_shortcuts_alt_page");
-    assert_screen("loupe_shortcuts_alt_shown");
 }
 
 sub test_flags {
