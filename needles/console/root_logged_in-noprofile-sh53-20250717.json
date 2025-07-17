@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 16,
+      "width": 56,
+      "ypos": 528,
+      "height": 14
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "root_console",
+    "root_logged_in"
+  ]
+}
