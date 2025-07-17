@@ -1,8 +1,8 @@
 {
   "area": [
     {
-      "xpos": 454,
-      "ypos": 470,
+      "xpos": 633,
+      "ypos": 565,
       "width": 28,
       "height": 26,
       "type": "match"
@@ -10,6 +10,6 @@
   ],
   "properties": [],
   "tags": [
-    "calc_button_square"
+    "calc_button_brackets"
   ]
 }

@@ -173,8 +173,7 @@ for section in ("desktop", "networking", "sound", "files", "user", "hardware",
     testtags.append(f"help_section_content_{section}")
 # Needles for Calculator
 for button in ("div", "divider", "zero", "one", "two", "three", "four", "five",
-                "six","seven", "eight", "nine", "mod", "percent", "pi", "root",
-                "square", "sub"):
+                "six","seven", "eight", "nine", "mod", "percent", "sub"):
     testtags.append(f"calc_button_{button}")
     testtags.append(f"kcalc_button_{button}")
 for result in ("BokZw", "Czo4s", "O9qsL", "WIxiR", "b5y2B", "h7MfO", "qxuBK",

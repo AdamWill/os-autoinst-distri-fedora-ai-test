@@ -20,7 +20,10 @@ sub rewrite {
         8 => 'eight',
         9 => 'nine',
         "." => 'divider',
-        "%" => 'percent'
+        "%" => 'percent',
+        "p" => 'pi',
+        "r" => 'root',
+        "s" => 'square'
     );
     my $rewritten = $numbers{$number};
     return $rewritten;
@@ -77,11 +80,11 @@ sub run {
     # Check that you can use brackets
     assert_and_click("calc_button_three");
     assert_and_click("calc_button_multi");
-    assert_and_click("calc_button_brackets");
+    assert_and_click("calc_button_bopen");
     assert_and_click("calc_button_two");
     assert_and_click("calc_button_add");
     assert_and_click("calc_button_three");
-    assert_and_click("calc_button_brackets");
+    assert_and_click("calc_button_bclose");
     assert_and_click("calc_button_equals");
     my $identifier = hashed_string("3*(3+2)");
     assert_screen("calc_result_$identifier");
