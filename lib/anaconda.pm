@@ -167,6 +167,8 @@ sub custom_blivet_add_partition {
         assert_and_click "anaconda_blivet_part_fs";
         # Move the mouse away from the menu
         mouse_set(10, 10);
+        # FIXME workaround https://gitlab.gnome.org/GNOME/mutter/-/issues/4211
+        send_key_until_needlematch("anaconda_blivet_part_fs_$args{filesystem}", 'up', 15, 1);
         assert_and_click "anaconda_blivet_part_fs_$args{filesystem}";
     }
     if ($args{mountpoint}) {
