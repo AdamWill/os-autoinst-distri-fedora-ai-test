@@ -90,7 +90,7 @@ sub run {
 }
 
 sub test_flags {
-    return {fatal => 1};
+    return {always_rollback => 1};
 }
 
 1;

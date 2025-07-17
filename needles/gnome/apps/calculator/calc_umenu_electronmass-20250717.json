@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 403,
+      "ypos": 573,
+      "width": 100,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_umenu_electronmass"
+  ]
+}

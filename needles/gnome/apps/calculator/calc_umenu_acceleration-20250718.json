@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 405,
+      "ypos": 609,
+      "width": 132,
+      "height": 19,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_umenu_acceleration"
+  ]
+}
