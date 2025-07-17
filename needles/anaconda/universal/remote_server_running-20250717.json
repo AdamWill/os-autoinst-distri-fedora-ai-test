@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 121,
+      "ypos": 146,
+      "width": 239,
+      "height": 14,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_remote_server_running"
+  ]
+}

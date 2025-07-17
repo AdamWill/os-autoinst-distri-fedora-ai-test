@@ -1,5 +1,6 @@
 use base "installedtest";
 use strict;
+use lockapi;
 use tapnet;
 use testapi;
 use utils;
@@ -9,6 +10,9 @@ sub run {
     boot_to_login_screen(timeout => 300);
     $self->root_console(tty => 3);
     setup_tap_static('172.16.2.115', 'rdp002.test.openqa.fedoraproject.org');
+    # wait for server to be up
+    mutex_lock("remote_server_running");
+    mutex_unlock("remote_server_running");
     # test test: check if we can see the server
     assert_script_run "ping -c 2 172.16.2.114";
     # We try to connect through Connections which should

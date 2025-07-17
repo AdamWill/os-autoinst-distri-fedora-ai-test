@@ -115,10 +115,18 @@ sub run {
     if (get_var("KICKSTART") || get_var("RDP_SERVER")) {
         # wait for the bootloader *here* - in a test that inherits from
         # anacondatest - so that if something goes wrong during install,
-        # we get anaconda logs. sleep a bit first so we don't get a
-        # match for the installer bootloader if it hangs around for a
-        # while after do_bootloader finishes (in PXE case it does)
-        sleep 60;
+        # we get anaconda logs.
+        if (get_var("RDP_SERVER")) {
+            # wait till the server is running and set a mutex
+            assert_screen("anaconda_remote_server_running", 180);
+            mutex_create("remote_server_running");
+        }
+        else {
+            # sleep a bit first so we don't get a
+            # match for the installer bootloader if it hangs around for a
+            # while after do_bootloader finishes (in PXE case it does)
+            sleep 60;
+        }
         assert_screen "bootloader", 1800;
     }
     else {
