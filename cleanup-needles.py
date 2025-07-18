@@ -49,6 +49,9 @@ keeplist = (
     "anaconda_text_error",
     # weather conditions can vary!
     "weather_icon",
+    # this needle shows the details when Software has a problem
+    # which does not happen very often
+    "software_button_details",
 )
 
 changed = False

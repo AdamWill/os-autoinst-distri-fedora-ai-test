@@ -99,6 +99,7 @@ sub run {
                 # If there is an issue and Software reports it, let us click
                 # "Details" to see what the problem was to make later
                 # troubleshooting easier.
+                record_info("Details button", "If subject is shown but no details appeared, you might want to update the software_button_details needle.");
                 if (check_screen("software_button_details", timeout => 30)) {
                     click_lastmatch();
                 }
