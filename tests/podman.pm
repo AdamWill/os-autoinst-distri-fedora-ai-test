@@ -9,11 +9,6 @@ use utils;
 sub run {
     my $self = shift;
     $self->root_console(tty => 3);
-    # on non-canned flavors, we need to install podman, may as well
-    # also install the tests now
-
-    # check podman is installed
-
     my $relnum = get_release_number;
     if (get_var("CANNED")) {
         # check podman is pre-installed
@@ -34,6 +29,23 @@ sub run {
         # restore default behaviour
         assert_script_run "set +o pipefail";
     }
+    # Open the firewall, except on CoreOS where it's not installed
+    unless (get_var("SUBVARIANT") eq "CoreOS") {
+        assert_script_run "firewall-cmd --add-port=8080/tcp";
+    }
+    # create a non-root user to check rootless operation
+    assert_script_run "useradd testman";
+    assert_script_run("echo 'testman:weakpassword' | chpasswd");
+    # let it write to the serial port
+    assert_script_run "chmod 666 /dev/${serialdev}";
+    if (script_run "grep testman /etc/subuid") {
+        # workaround https://bugzilla.redhat.com/show_bug.cgi?id=2334165#c2
+        assert_script_run("usermod --add-subuids 100000-165535 testman");
+        assert_script_run("usermod --add-subgids 100000-165535 testman");
+    }
+    # login as the non-root user
+    select_console "tty4-console";
+    console_login(user => "testman", password => "weakpassword");
     # check to see if you can pull an image from the registry
     assert_script_run "podman pull registry.fedoraproject.org/fedora:latest", 300;
     # run hello-world to test
@@ -45,16 +57,11 @@ sub run {
     # Verify the image
     validate_script_output "podman images", sub { m/fedora-httpd/ };
     # Run the container
-    assert_script_run "podman run -d -p 80:80 localhost/fedora-httpd";
+    assert_script_run "podman run -d -p 8080:80 localhost/fedora-httpd";
     # Verify the container is running
     validate_script_output "podman container ls", sub { m/fedora-httpd/ };
     # Test apache is working
-    assert_script_run "curl http://localhost";
-    # Open the firewall, except on CoreOS where it's not installed
-    unless (get_var("SUBVARIANT") eq "CoreOS") {
-        assert_script_run "firewall-cmd --permanent --zone=internal --add-interface=cni-podman0";
-        assert_script_run "firewall-cmd --permanent --zone=internal --add-port=80/tcp";
-    }
+    assert_script_run "curl http://localhost:8080";
     # tell client we're ready and wait for it to send the message
     mutex_create("podman_server_ready");
     my $children = get_children();
