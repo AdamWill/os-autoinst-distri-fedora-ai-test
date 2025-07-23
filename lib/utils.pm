@@ -653,8 +653,8 @@ sub setup_repos {
             }
         }
         $udstring = join(',', @nvrs);
-        # bump the timeout if we have a huge update
-        $timeout = 1800 if (scalar(@nvrs) > 100);
+        # bump the timeout if we have a huge update (or openjdk)
+        $timeout = 1800 if (scalar(@nvrs) > 100 || $udstring =~ m/openjdk/);
     }
     elsif (get_var("KOJITASK")) {
         # Koji task case (KOJITASK will be set). If multiple tasks,
