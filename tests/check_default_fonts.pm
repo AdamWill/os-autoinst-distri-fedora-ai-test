@@ -19,6 +19,10 @@ sub run {
     assert_script_run("dnf -y install fontquery");
     # and give the user tty perms for later
     assert_script_run("chmod 666 /dev/${serialdev}");
+    # workaround https://bugzilla.redhat.com/show_bug.cgi?id=2334165#c2
+    # set subuids for qwerty user
+    assert_script_run("usermod --add-subuids 100000-165535 qwerty");
+    assert_script_run("usermod --add-subgids 100000-165535 qwerty");
     desktop_vt;
 
     # On the console, the fonts might differ than in GUI.
