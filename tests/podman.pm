@@ -23,12 +23,22 @@ sub run {
         # load null_blk module which is needed for "podman run --device-read-bps" test case:
         # https://github.com/containers/podman/pull/26022
         assert_script_run 'modprobe null_blk nr_devices=1';
+        # silly hack that inverts the behaviour of bats' --filter -
+        # needed until https://github.com/bats-core/bats-core/pull/1114
+        # is merged or backported
+        assert_script_run 'sed -i -e \'s,! \[\[ "$description" =~ $filter \]\],\[\[ "$description" =~ $filter \]\],g\' /usr/libexec/bats-core/bats-gather-tests';
         # needed so we exit 1 when the bats command fails
         assert_script_run "set -o pipefail";
-        assert_script_run "bats --filter-tags '!ci:parallel' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 900;
-        assert_script_run 'bats --filter-tags ci:parallel -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 900;
+        # skips:
+        # "podman checkpoint --export, with volumes"
+        # fails on kernel 6.16, see https://github.com/checkpoint-restore/criu/issues/2626
+        assert_script_run "bats --filter-tags '!ci:parallel' --filter ', with volumes' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 900;
+        assert_script_run 'bats --filter-tags ci:parallel --filter ", with volumes" -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 900;
         # restore default behaviour
         assert_script_run "set +o pipefail";
+        # ensure we ran at least 100 tests (this is a check that the
+        # filter stuff didn't go haywire)
+        assert_script_run 'grep "^ok 100" /tmp/podman-bats.txt';
     }
     # Open the firewall, except on CoreOS where it's not installed
     unless (get_var("SUBVARIANT") eq "CoreOS") {
