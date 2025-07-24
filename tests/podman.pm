@@ -6,6 +6,25 @@ use tapnet;
 use testapi;
 use utils;
 
+sub run_integration_tests {
+    # run the upstream integration tests
+    # podman system tests use a relative path for podman-testing by default,
+    # we need to set it to the location where the podman-tests package installs it.
+    assert_script_run 'export PODMAN_TESTING=/usr/bin/podman-testing';
+    # needed so we exit 1 when the bats command fails
+    assert_script_run "set -o pipefail";
+    # skips:
+    # "podman checkpoint --export, with volumes"
+    # fails on kernel 6.16, see https://github.com/checkpoint-restore/criu/issues/2626
+    assert_script_run "bats --filter-tags '!ci:parallel' --filter ', with volumes' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 900;
+    assert_script_run 'bats --filter-tags ci:parallel --filter ", with volumes" -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 900;
+    # restore default behaviour
+    assert_script_run "set +o pipefail";
+    # ensure we ran at least 100 tests (this is a check that the
+    # filter stuff didn't go haywire)
+    assert_script_run 'grep "^ok 100" /tmp/podman-bats.txt';
+}
+
 sub run {
     my $self = shift;
     $self->root_console(tty => 3);
@@ -15,11 +34,8 @@ sub run {
         assert_script_run "rpm -q podman";
     }
     else {
-        # install podman and run the upstream integration tests
+        # install podman and the upstream integration tests
         assert_script_run "dnf -y install podman podman-tests bats", 600;
-        # podman system tests use a relative path for podman-testing by default,
-        # we need to set it to the location where the podman-tests package installs it.
-        assert_script_run 'export PODMAN_TESTING=/usr/bin/podman-testing';
         # load null_blk module which is needed for "podman run --device-read-bps" test case:
         # https://github.com/containers/podman/pull/26022
         assert_script_run 'modprobe null_blk nr_devices=1';
@@ -27,18 +43,8 @@ sub run {
         # needed until https://github.com/bats-core/bats-core/pull/1114
         # is merged or backported
         assert_script_run 'sed -i -e \'s,! \[\[ "$description" =~ $filter \]\],\[\[ "$description" =~ $filter \]\],g\' /usr/libexec/bats-core/bats-gather-tests';
-        # needed so we exit 1 when the bats command fails
-        assert_script_run "set -o pipefail";
-        # skips:
-        # "podman checkpoint --export, with volumes"
-        # fails on kernel 6.16, see https://github.com/checkpoint-restore/criu/issues/2626
-        assert_script_run "bats --filter-tags '!ci:parallel' --filter ', with volumes' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 900;
-        assert_script_run 'bats --filter-tags ci:parallel --filter ", with volumes" -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 900;
-        # restore default behaviour
-        assert_script_run "set +o pipefail";
-        # ensure we ran at least 100 tests (this is a check that the
-        # filter stuff didn't go haywire)
-        assert_script_run 'grep "^ok 100" /tmp/podman-bats.txt';
+        # run the integration tests with root on x86_64
+        run_integration_tests if (get_var("ARCH") eq "x86_64");
     }
     # Open the firewall, except on CoreOS where it's not installed
     unless (get_var("SUBVARIANT") eq "CoreOS") {
@@ -57,6 +63,10 @@ sub run {
     # login as the non-root user
     select_console "tty4-console";
     console_login(user => "testman", password => "weakpassword");
+    # run integration tests rootless on other arches
+    # neat way to get the tests run both rootful and rootless
+    # without causing too much load
+    run_integration_tests unless (get_var("CANNED") || get_var("ARCH") eq "x86_64");
     # check to see if you can pull an image from the registry
     assert_script_run "podman pull registry.fedoraproject.org/fedora:latest", 300;
     # run hello-world to test
