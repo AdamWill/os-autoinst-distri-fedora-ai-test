@@ -1,0 +1,25 @@
+{
+  "area": [
+    {
+      "width": 154,
+      "ypos": 214,
+      "xpos": 434,
+      "type": "match",
+      "height": 22
+    },
+    {
+      "ypos": 438,
+      "width": 61,
+      "type": "match",
+      "xpos": 599,
+      "height": 20
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "LANGUAGE-arabic",
+    "auth_required",
+    "auth_required_password"
+  ]
+}
