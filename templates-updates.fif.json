@@ -319,11 +319,6 @@
                 "fedora-updates-workstation-x86_64-*-64bit": 5
             }
         },
-        "desktop_login": {
-            "profile_groups": {
-                "updates-desktops": 5
-            }
-        },
         "desktop_printing": {
             "profile_groups": {
                 "updates-desktops": 5

@@ -347,9 +347,8 @@ sub run {
         # we kept open should be there
         check_user_logged_in(user => "jack", termopen => 1);
     }
-    # Power off the machine (unless this is an update test - we need to
-    # run post steps in that case)
-    power_off() unless (get_var("ADVISORY_OR_TASK"));
+    # Power off the machine
+    power_off();
 }
 
 sub test_flags {
