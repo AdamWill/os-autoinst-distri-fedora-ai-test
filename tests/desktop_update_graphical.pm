@@ -96,6 +96,17 @@ sub run {
                     # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2246
                     click_lastmatch if (check_screen "desktop_package_tool_update_download_unsigned", 30);
                 }
+                elsif ($desktop eq 'gnome' && !get_var("ADVISORY_OR_TASK")) {
+                    # we might get a key import prompt
+                    # https://gitlab.gnome.org/GNOME/gnome-software/-/issues/2874
+                    # this won't happen for update tests as we've already
+                    # imported it in an earlier dnf command-line operation
+                    if (check_screen 'desktop_package_tool_import_key', 30) {
+                        click_lastmatch;
+                        my $pass = get_var("USER_PASSWORD", "weakpassword");
+                        type_very_safely("$pass\n") if (check_screen("auth_required", 10));
+                    }
+                }
                 # If there is an issue and Software reports it, let us click
                 # "Details" to see what the problem was to make later
                 # troubleshooting easier.
