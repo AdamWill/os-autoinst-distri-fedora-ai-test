@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 131,
+      "height": 23,
+      "type": "match",
+      "xpos": 273,
+      "ypos": 97
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "_ANACONDA_WEBUI",
+    "anaconda_webui_datetime"
+  ]
+}
