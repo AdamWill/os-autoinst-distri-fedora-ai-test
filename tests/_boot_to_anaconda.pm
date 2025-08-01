@@ -198,11 +198,11 @@ sub run {
                 }
             }
             # wait for anaconda to appear
-            unless (check_screen ["anaconda_select_install_lang", "anaconda_webui_installmethod"], 300) {
+            unless (check_screen "anaconda_select_install_lang", 300) {
                 # may be hitting https://bugzilla.redhat.com/show_bug.cgi?id=2329581,
                 # try pressing a key
                 send_key "spc";
-                assert_screen ["anaconda_select_install_lang", "anaconda_webui_installmethod"], 300;
+                assert_screen "anaconda_select_install_lang", 300;
                 record_soft_failure "boot hung until key pressed - #2329581";
             }
             # on webUI path set a var so later tests know
@@ -231,9 +231,14 @@ sub run {
             # the nag screen can take a LONG time to appear sometimes).
             # If the hub appears, return - we're done now. If Rawhide
             # warning dialog appears, accept it.
-            if (check_screen ["anaconda_rawhide_accept_fate", "anaconda_main_hub", "anaconda_webui_installmethod"], 180) {
+            if (check_screen ["anaconda_rawhide_accept_fate", "anaconda_main_hub", "anaconda_webui_installmethod", "anaconda_webui_datetime"], 180) {
                 if (match_has_tag("anaconda_rawhide_accept_fate")) {
                     assert_and_click "anaconda_rawhide_accept_fate";
+                }
+                elsif (match_has_tag("anaconda_webui_datetime")) {
+                    assert_and_click "anaconda_webui_next";
+                    assert_screen "anaconda_webui_installmethod";
+                    return;
                 }
                 else {
                     # this is when the hub appeared already, we're done
