@@ -422,6 +422,8 @@ sub webui_create_user {
     sleep(2);
     send_key("tab");
     sleep(1);
+    # on 43.33 and later geofield is now filled here, so wipe it
+    send_key("ctrl-a");
     type_very_safely($user_login);
     sleep(2);
     send_key("tab");
