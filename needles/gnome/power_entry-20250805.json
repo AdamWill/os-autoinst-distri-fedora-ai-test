@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 40,
+      "type": "match",
+      "xpos": 960,
+      "height": 40,
+      "ypos": 54
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "power_entry",
+    "leave_button"
+  ]
+}
