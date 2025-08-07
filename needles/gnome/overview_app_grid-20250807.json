@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 43,
+      "height": 42,
+      "type": "match",
+      "xpos": 250,
+      "ypos": 685
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "overview_app_grid"
+  ]
+}
