@@ -54,6 +54,8 @@ sub run {
     }
     # wait out a possible animation
     wait_still_screen 5;
+    # get rid of a possible notification
+    click_lastmatch if (check_screen 'desktop_update_notification_ready');
     assert_and_click 'desktop_package_tool_update';
     # wait for things to settle if e.g. GNOME is refreshing
     wait_still_screen 5, 90;
