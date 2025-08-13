@@ -779,6 +779,9 @@ sub _repo_setup_updates {
 }
 
 sub repo_setup {
+    # FIXME F43 BRANCHING HACK: disable gpgcheck for openh264 repo
+    # this is needed till f44 openh264 repo is set up and MM updated
+    script_run 'sed -i -e "s,gpgcheck=1,gpgcheck=0,g" /etc/yum.repos.d/fedora-cisco-openh264.repo' if (get_var("VERSION") eq "44");
     # Run the appropriate sub-function for the job
     get_var("ADVISORY_OR_TASK") ? _repo_setup_updates : _repo_setup_compose;
 }
