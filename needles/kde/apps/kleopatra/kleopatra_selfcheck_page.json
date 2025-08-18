@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kleopatra_selfcheck_page"
+  ],
+  "area": [
+    {
+      "xpos": 472,
+      "ypos": 55,
+      "width": 138,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_kleopatra"
+  ],
+  "area": [
+    {
+      "xpos": 255,
+      "ypos": 265,
+      "width": 183,
+      "height": 25,
+      "type": "match"
+    }
+  ]
+}
