@@ -10,12 +10,13 @@ sub run {
     # this for Rawhide as Rawhide doesn't have its own backgrounds and we
     # don't have any requirement for what background Rawhide uses.
     my $version = get_var('VERSION');
+    my $desktop = get_var('DESKTOP');
     my $rawrel = get_var('RAWREL');
     return unless ($version ne "Rawhide" && $version ne $rawrel);
     # temporary for f43 branching to pass during the branch phase
     # FIXME: Remove when branching has completed
-    if ($version eq "43") {
-        record_info("Short circuit", "The background is not tested for Fedora 43. We shall switch it back on when we have fully branched.");
+    if ($version eq '43' && $desktop eq 'kde') {
+        record_info('Short circuit', 'The background is not updated in KDE for F43');
         return;
     }
     # KDE shows a different version of the welcome center on major upgrades,
