@@ -87,14 +87,12 @@
         "BaseOS-boot-iso": {
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
-                "+QEMUCPU": "host",
                 "TEST_TARGET": "ISO"
             }
         },
         "BaseOS-dvd-iso": {
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
-                "+QEMUCPU": "host",
                 "TEST_TARGET": "ISO"
             }
         },
@@ -229,11 +227,17 @@
     "Products": {
         "fedora-BaseOS-boot-iso-x86_64-*": {
             "arch": "x86_64",
-            "flavor": "BaseOS-boot-iso"
+            "flavor": "BaseOS-boot-iso",
+            "settings": {
+                "+MINCPU": "Haswell"
+            }
         },
         "fedora-BaseOS-dvd-iso-x86_64-*": {
             "arch": "x86_64",
-            "flavor": "BaseOS-dvd-iso"
+            "flavor": "BaseOS-dvd-iso",
+            "settings": {
+                "+MINCPU": "Haswell"
+            }
         },
         "fedora-Cloud_Base-qcow2-qcow2-aarch64-*": {
             "arch": "aarch64",
