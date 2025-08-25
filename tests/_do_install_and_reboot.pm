@@ -55,7 +55,12 @@ sub _do_root_and_user {
     my $noroot = get_var("INSTALLER_NO_ROOT");
     return if ($nouser && $noroot);
     if (get_var("_ANACONDA_WEBUI")) {
-        webui_create_user() unless ($nouser);
+        if ($nouser) {
+            assert_and_click 'anaconda_webui_no_local_account';
+        }
+        else {
+            webui_create_user();
+        }
         _set_root_password_webui() unless ($noroot);
         assert_and_click("anaconda_webui_next");
     }
