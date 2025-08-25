@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "ypos": 85,
+      "width": 82,
+      "height": 21,
+      "click_point": {
+        "xpos": 41,
+        "ypos": 10.5
+      },
+      "xpos": 861,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "lightdm_power_menu-reboot"
+  ]
+}
