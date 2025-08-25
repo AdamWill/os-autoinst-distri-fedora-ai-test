@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "ypos": 37,
+      "height": 35,
+      "type": "match",
+      "xpos": 450,
+      "width": 125
+    },
+    {
+      "xpos": 105,
+      "type": "match",
+      "height": 19,
+      "width": 118,
+      "ypos": 246
+    },
+    {
+      "xpos": 643,
+      "type": "match",
+      "height": 18,
+      "width": 100,
+      "ypos": 246
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_section_content_sound"
+  ]
+}

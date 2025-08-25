@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 301,
+      "xpos": 625,
+      "type": "match",
+      "height": 25,
+      "width": 36
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "papers_annotation_color"
+  ]
+}

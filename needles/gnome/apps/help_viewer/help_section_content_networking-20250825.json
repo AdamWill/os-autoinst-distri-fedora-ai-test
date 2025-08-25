@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "ypos": 173,
+      "width": 168,
+      "height": 22,
+      "type": "match",
+      "xpos": 7
+    },
+    {
+      "ypos": 38,
+      "height": 20,
+      "xpos": 420,
+      "type": "match",
+      "width": 183
+    },
+    {
+      "height": 23,
+      "xpos": 616,
+      "type": "match",
+      "width": 103,
+      "ypos": 248
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_section_content_networking"
+  ]
+}

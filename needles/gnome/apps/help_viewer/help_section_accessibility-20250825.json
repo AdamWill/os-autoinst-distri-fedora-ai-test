@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 155,
+      "height": 30,
+      "xpos": 37,
+      "type": "match",
+      "ypos": 652
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "help_section_accessibility"
+  ]
+}

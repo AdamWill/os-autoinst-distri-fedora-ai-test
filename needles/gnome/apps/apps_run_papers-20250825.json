@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 132,
+      "xpos": 446,
+      "type": "match",
+      "height": 20,
+      "ypos": 114
+    },
+    {
+      "ypos": 435,
+      "height": 25,
+      "type": "match",
+      "xpos": 396,
+      "width": 233
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_papers"
+  ]
+}
