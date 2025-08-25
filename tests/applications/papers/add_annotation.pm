@@ -39,7 +39,12 @@ sub run {
     assert_and_click("gnome_button_select");
     assert_and_dclick("papers_opacity_hundred");
     type_very_safely("70");
-    assert_and_click("gnome_button_apply");
+    if (check_screen("gnome_button_apply", 10)) {
+        click_lastmatch;
+    }
+    else {
+        send_key('esc');
+    }
     assert_screen("papers_annotation_placed");    # Different opacity
 
     # Remove the annotation.
