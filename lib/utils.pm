@@ -1361,7 +1361,7 @@ sub menu_launch_type {
         else {
             record_soft_failure('Maximizing in this desktop is not supported at the moment!');
         }
-        if $animated {
+        if ($animated) {
             # can't wait_still_screen if the app's animated
             sleep 3;
         }
