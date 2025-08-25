@@ -1324,6 +1324,7 @@ sub menu_launch_type {
     my ($application, %args) = @_;
     my $desktop = get_var("DESKTOP");
     my $timeout = $args{timeout} // 30;
+    my $animated = $args{animated} // 0;
 
     # The standard combo key is the "super" key, just in I3
     # it is different.
@@ -1360,7 +1361,13 @@ sub menu_launch_type {
         else {
             record_soft_failure('Maximizing in this desktop is not supported at the moment!');
         }
-        wait_still_screen 3;
+        if $animated {
+            # can't wait_still_screen if the app's animated
+            sleep 3;
+        }
+        else {
+            wait_still_screen 3;
+        }
     }
 
     # If check that app is running was requested

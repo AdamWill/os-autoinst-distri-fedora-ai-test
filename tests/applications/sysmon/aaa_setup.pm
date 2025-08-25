@@ -12,7 +12,7 @@ sub run {
     # Set the update notification timestamp
     set_update_notification_timestamp();
     # Start the Application
-    menu_launch_type("system_monitor", checkstart => 1, maximize => 1);
+    menu_launch_type("system_monitor", checkstart => 1, maximize => 1, animated => 1);
 }
 
 sub test_flags {
