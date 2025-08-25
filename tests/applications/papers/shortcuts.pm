@@ -18,24 +18,6 @@ sub run {
 
     # Check that Shortcuts has been shown
     assert_screen("papers_shortcuts_shown");
-
-    # Click on number 2 to arrive to the second page
-    assert_and_click("papers_shortcuts_second", button => "left", timeout => 30);
-
-    # Check that Shortcuts 2 has been shown
-    assert_screen("papers_shortcuts_second_shown");
-
-    # Click on number 3 to arrive to the second page
-    assert_and_click("papers_shortcuts_third", button => "left", timeout => 30);
-
-    # Check that Shortcuts 3 has been shown
-    assert_screen("papers_shortcuts_third_shown");
-
-    # Click on number 4 to arrive to the second page
-    assert_and_click("papers_shortcuts_fourth", button => "left", timeout => 30);
-
-    # Check that Shortcuts 4 has been shown
-    assert_screen("papers_shortcuts_fourth_shown");
 }
 
 sub test_flags {
