@@ -40,7 +40,8 @@ sub run {
         wait_still_screen(2);
         # Rename the file and export it
         assert_and_click("nautilus_save_filename");
-        type_very_safely("exported-map");
+        send_key('ctrl-a');
+        type_very_safely("exported-map.png");
         assert_and_click("gnome_button_save");
     }
 
