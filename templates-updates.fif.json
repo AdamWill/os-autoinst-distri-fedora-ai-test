@@ -1,8 +1,20 @@
 {
     "Flavors": {
+        "updates-cloud": {
+            "settings": {
+                "HDD_1": "Fedora.%ARCH%-%VERSION%.qcow2",
+                "ISO": "cloudinit.iso",
+                "KIWI_PROFILE": "Cloud-Base-Generic",
+                "NUMDISKS": "2",
+                "RETRY": "1",
+                "+START_AFTER_TEST": "kiwi_build@%ARCH_BASE_MACHINE%",
+                "SUBVARIANT": "Cloud"
+            }
+        },
         "updates-container": {
             "settings": {
                 "+HDD_1": "disk_f%VERSION%_server_5_%ARCH%.qcow2",
+                "KIWI_PROFILE": "Container-Base-Generic",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             }
@@ -92,6 +104,20 @@
         "version": "*"
     },
     "Products": {
+        "fedora-updates-cloud-aarch64-*": {
+            "arch": "aarch64",
+            "flavor": "updates-cloud",
+            "group_name": "Fedora AArch64 Updates"
+        },
+        "fedora-updates-cloud-ppc64le-*": {
+            "arch": "ppc64le",
+            "flavor": "updates-cloud",
+            "group_name": "Fedora PowerPC Updates"
+        },
+        "fedora-updates-cloud-x86_64-*": {
+            "arch": "x86_64",
+            "flavor": "updates-cloud"
+        },
         "fedora-updates-container-aarch64-*": {
             "arch": "aarch64",
             "flavor": "updates-container",
@@ -104,10 +130,7 @@
         },
         "fedora-updates-container-x86_64-*": {
             "arch": "x86_64",
-            "flavor": "updates-container",
-            "settings": {
-                "KIWI_PROFILE": "Container-Base-Generic"
-            }
+            "flavor": "updates-container"
         },
         "fedora-updates-everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
@@ -162,6 +185,18 @@
         }
     },
     "Profiles": {
+        "fedora-updates-cloud-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-updates-cloud-aarch64-*"
+        },
+        "fedora-updates-cloud-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-updates-cloud-ppc64le-*"
+        },
+        "fedora-updates-cloud-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-updates-cloud-x86_64-*"
+        },
         "fedora-updates-container-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "fedora-updates-container-aarch64-*"
@@ -258,6 +293,7 @@
             "fedora-updates-workstation-x86_64-*-64bit": 0
         },
         "updates-base-tests": {
+            "fedora-updates-cloud-x86_64-*-64bit": 0,
             "updates-server-3arch": 0,
             "updates-desktops": 0
         }
@@ -415,6 +451,7 @@
         },
         "kiwi_build": {
             "profiles": {
+                "fedora-updates-cloud-x86_64-*-64bit": 5,
                 "fedora-updates-container-x86_64-*-64bit": 5,
                 "fedora-updates-kde-live-iso-x86_64-*-64bit": 5,
                 "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
@@ -431,6 +468,7 @@
                 "QEMUCPUS": "4",
                 "QEMURAM": "8192",
                 "ROOT_PASSWORD": "weakpassword",
+                "+START_AFTER_TEST": "",
                 "USER_LOGIN": "false"
             }
         },

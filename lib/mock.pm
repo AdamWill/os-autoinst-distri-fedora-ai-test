@@ -11,6 +11,8 @@ use utils;
 our @EXPORT = qw/mock_setup/;
 
 sub mock_setup {
+    my %args = @_;
+    $args{mountdev} //= 0;
     my $version = get_var("VERSION");
     my $rawrel = get_var("RAWREL");
     my $mockver = $version eq $rawrel ? "rawhide" : $version;
@@ -36,7 +38,7 @@ sub mock_setup {
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_enable\'] = True" >> /etc/mock/openqa.cfg';
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/mnt/update_repo\', \'/mnt/update_repo\'))" >> /etc/mock/openqa.cfg' unless ($tag || $copr);
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/mnt/workarounds_repo\', \'/mnt/workarounds_repo\'))" >> /etc/mock/openqa.cfg' if ($workarounds);
-    assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/dev/' . $serialdev . '\', \'/dev/' . $serialdev . '\'))" >> /etc/mock/openqa.cfg';
+    assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/dev/\', \'/dev/\'))" >> /etc/mock/openqa.cfg' if ($args{mountdev});
     my $repos = 'config_opts[\'dnf.conf\'] += \"\"\"\n';
     # add the update, tag or COPR repo to the config
     $repos .= '[advisory]\nname=Advisory repo\nbaseurl=file:///mnt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n' unless ($tag || $copr);
