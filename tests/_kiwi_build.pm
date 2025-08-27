@@ -32,8 +32,8 @@ sub run {
     my $kiwiprofile = get_var("KIWI_PROFILE");
     my $workarounds = get_workarounds;
     my $isolation = 'nspawn';
-    # lives need simple isolation and permissive selinux, sadly
-    if (index($kiwiprofile, 'Live') != -1) {
+    # lives/cloud need simple isolation and permissive selinux, sadly
+    if (index($kiwiprofile, 'Live') != -1 || index($kiwiprofile, 'Cloud') != -1) {
         assert_script_run "setenforce Permissive";
         $isolation = 'simple';
     }
@@ -82,7 +82,8 @@ sub run {
     my %expected_formats = (
         'KDE-Desktop-Live' => 'iso',
         'Workstation-Live' => 'iso',
-        'Container-Base-Generic' => 'oci.tar.xz'
+        'Container-Base-Generic' => 'oci.tar.xz',
+        'Cloud-Base-Generic' => 'qcow2'
     );
     my $format = $expected_formats{$kiwiprofile};
     my $fname = "Fedora.${arch}-${releasever}.${format}";
@@ -93,6 +94,14 @@ sub run {
         # Kiwi
         my $subv = get_var("SUBVARIANT");
         my $newfname = "Fedora-${subv}-Live-${arch}-${advortask}.iso";
+        assert_script_run "mv ${fname} ${newfname}";
+        $fname = $newfname;
+    }
+    if (index($kiwiprofile, 'Cloud') != -1) {
+        # rename to the format expected by the base tests
+        my $flavor = get_var("FLAVOR");
+        my $machine = get_var("MACHINE");
+        my $newfname = "disk_${flavor}_${machine}.qcow2";
         assert_script_run "mv ${fname} ${newfname}";
         $fname = $newfname;
     }
