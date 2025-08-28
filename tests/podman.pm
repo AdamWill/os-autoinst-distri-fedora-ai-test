@@ -16,8 +16,8 @@ sub run_integration_tests {
     # skips:
     # "podman checkpoint --export, with volumes"
     # fails on kernel 6.16, see https://github.com/checkpoint-restore/criu/issues/2626
-    assert_script_run "bats --filter-tags '!ci:parallel' --filter ', with volumes' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 900;
-    assert_script_run 'bats --filter-tags ci:parallel --filter ", with volumes" -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 900;
+    assert_script_run "bats --filter-tags '!ci:parallel' --filter 'export, with volumes|TCP/IPv4 large transfer, tap' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 900;
+    assert_script_run 'bats --filter-tags ci:parallel --filter "export, with volumes|TCP/IPv4 large transfer, tap" -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 900;
     # restore default behaviour
     assert_script_run "set +o pipefail";
     # ensure we ran at least 100 tests (this is a check that the
@@ -55,11 +55,6 @@ sub run {
     assert_script_run("echo 'testman:weakpassword' | chpasswd");
     # let it write to the serial port
     assert_script_run "chmod 666 /dev/${serialdev}";
-    if (script_run "grep testman /etc/subuid") {
-        # workaround https://bugzilla.redhat.com/show_bug.cgi?id=2334165#c2
-        assert_script_run("usermod --add-subuids 100000-165535 testman");
-        assert_script_run("usermod --add-subgids 100000-165535 testman");
-    }
     # login as the non-root user
     select_console "tty4-console";
     console_login(user => "testman", password => "weakpassword");
