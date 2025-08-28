@@ -55,11 +55,6 @@ sub run {
     assert_script_run("echo 'testman:weakpassword' | chpasswd");
     # let it write to the serial port
     assert_script_run "chmod 666 /dev/${serialdev}";
-    if (script_run "grep testman /etc/subuid") {
-        # workaround https://bugzilla.redhat.com/show_bug.cgi?id=2334165#c2
-        assert_script_run("usermod --add-subuids 100000-165535 testman");
-        assert_script_run("usermod --add-subgids 100000-165535 testman");
-    }
     # login as the non-root user
     select_console "tty4-console";
     console_login(user => "testman", password => "weakpassword");
