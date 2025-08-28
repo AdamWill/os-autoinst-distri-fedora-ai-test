@@ -9,17 +9,17 @@ sub run {
     $self->root_console(tty => 3);
 
     # This test case tests that packages can be correctly installed and removed.
-    # We will test by installing two packages - ftp and mc.
+    # We will test by installing two packages - autofs and mc.
     #
     # Install the FTP package.
-    assert_script_run("dnf install -y ftp", timeout => 240);
+    assert_script_run("dnf install -y autofs", timeout => 240);
     # Check the main packages are installed.
     # Confirm that dnf lists the package
-    assert_script_run("dnf list ftp");
+    assert_script_run("dnf list autofs");
     # Confirm that RPM lists the packages
-    assert_script_run("rpm -q ftp");
+    assert_script_run("rpm -q autofs");
     # Verify the installations using rpm --verify
-    assert_script_run("rpm --verify ftp");
+    assert_script_run("rpm --verify autofs");
 
     # Install the MC package.
     assert_script_run("dnf install -y mc", timeout => 240);
@@ -37,12 +37,12 @@ sub run {
     # which we believe is the normal user approach.
     #
     # Uninstall the packages.
-    assert_script_run("dnf remove -y ftp mc");
+    assert_script_run("dnf remove -y autofs mc");
     # Reports by the DNF
-    assert_script_run("!dnf list ftp");
+    assert_script_run("!dnf list autofs");
     assert_script_run("!dnf list mc");
     # Reports by the RPM
-    assert_script_run("!rpm -q ftp");
+    assert_script_run("!rpm -q autofs");
     assert_script_run("!rpm -q mc");
 
 }
