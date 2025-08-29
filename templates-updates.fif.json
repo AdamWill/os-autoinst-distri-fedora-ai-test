@@ -104,16 +104,6 @@
         "version": "*"
     },
     "Products": {
-        "fedora-updates-cloud-aarch64-*": {
-            "arch": "aarch64",
-            "flavor": "updates-cloud",
-            "group_name": "Fedora AArch64 Updates"
-        },
-        "fedora-updates-cloud-ppc64le-*": {
-            "arch": "ppc64le",
-            "flavor": "updates-cloud",
-            "group_name": "Fedora PowerPC Updates"
-        },
         "fedora-updates-cloud-x86_64-*": {
             "arch": "x86_64",
             "flavor": "updates-cloud"
@@ -185,14 +175,6 @@
         }
     },
     "Profiles": {
-        "fedora-updates-cloud-aarch64-*-aarch64": {
-            "machine": "aarch64",
-            "product": "fedora-updates-cloud-aarch64-*"
-        },
-        "fedora-updates-cloud-ppc64le-*-ppc64le": {
-            "machine": "ppc64le",
-            "product": "fedora-updates-cloud-ppc64le-*"
-        },
         "fedora-updates-cloud-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-updates-cloud-x86_64-*"
