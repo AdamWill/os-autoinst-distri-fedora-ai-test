@@ -23,7 +23,7 @@ sub run {
     # Set the time zone
     script_run("timedatectl set-timezone Europe/Prague");
     # Set the time
-    script_run('timedatectl set-time "2023-03-05 18:30:00"');
+    script_run("date 030518302023");
     # Make serial writable
     script_run("chmod 666 /dev/ttyS0");
     # Return to Desktop

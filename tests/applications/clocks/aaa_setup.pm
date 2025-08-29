@@ -16,7 +16,7 @@ sub run {
     # Set the time zone
     assert_script_run("timedatectl set-timezone Europe/Prague");
     # Set the time and date
-    assert_script_run("timedatectl set-time '2022-09-09 09:00:00'");
+    assert_script_run("date 090909002022");
     # Return back
     desktop_vt();
 
