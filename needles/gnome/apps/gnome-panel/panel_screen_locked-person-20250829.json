@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 286,
+      "width": 90,
+      "xpos": 467,
+      "type": "match",
+      "height": 104
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "panel_screen_locked"
+  ]
+}
