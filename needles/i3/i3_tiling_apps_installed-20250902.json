@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 3,
+      "ypos": 697,
+      "width": 170,
+      "height": 44,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "i3_tiling_apps_installed"
+  ]
+}

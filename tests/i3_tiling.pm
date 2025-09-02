@@ -10,11 +10,17 @@ sub run {
     desktop_launch_terminal;
     assert_screen("apps_run_terminal");
 
+    # Make sure to install some of the applications
+    type_very_safely("sudo dnf install -y gvim mousepad\n");
+    # Deal with sudo password
+    type_password("$password");
+    send_key("ret");
+    assert_screen("i3_tiling_apps_installed");
+
     # start blivet_gui, mousepad and check that they are split on the screen
-    x11_start_program("blivet-gui");
+    x11_start_program("gvim");
     wait_still_screen(2);
-    type_very_safely("$password\n");
-    assert_screen('apps_run_blivetgui');
+    assert_screen('apps_run_gvim');
     x11_start_program("mousepad");
     assert_screen('apps_run_mousepad');
     assert_screen("i3_windows_split");
@@ -26,7 +32,7 @@ sub run {
     wait_still_screen(2);
 
     send_key("alt-;");
-    assert_screen("blivet_gui_application");
+    assert_screen("apps_run_gvim");
 
     send_key("alt-;");
     assert_screen("mousepad_no_document_open");
@@ -41,7 +47,7 @@ sub run {
     assert_screen("mousepad_no_document_open");
 
     send_key("alt-l");
-    assert_screen("blivet_gui_application");
+    assert_screen("apps_run_gvim");
 }
 
 1;
