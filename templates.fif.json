@@ -138,6 +138,13 @@
                 "TEST_TARGET": "ISO"
             }
         },
+        "KDE-raw_xz-raw.xz": {
+            "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_arm_image_deployment_upload",
+                "DESKTOP": "kde",
+                "TEST_TARGET": "HDD_2"
+            }
+        },
         "i3-live-iso": {
             "settings": {
                 "DESKTOP": "i3",
@@ -281,6 +288,11 @@
         "fedora-KDE-live-iso-x86_64-*": {
             "arch": "x86_64",
             "flavor": "KDE-live-iso"
+        },
+        "fedora-KDE-raw_xz-raw.xz-aarch64-*": {
+            "arch": "aarch64",
+            "flavor": "KDE-raw_xz-raw.xz",
+            "group_name": "Fedora AArch64"
         },
         "fedora-i3-live-x86_64*": {
             "arch": "x86_64",
@@ -452,6 +464,10 @@
             "machine": "bios",
             "product": "fedora-KDE-live-iso-x86_64-*"
         },
+        "fedora-KDE-raw_xz-raw.xz-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-KDE-raw_xz-raw.xz-aarch64-*"
+        },
         "fedora-i3-live-x86_64-*-bios": {
             "machine": "uefi",
             "product": "fedora-i3-live-x86_64*"
@@ -568,10 +584,10 @@
     "ProfileGroups": {
         "base-tests": {
             "cloud-3arch": 0,
+            "kde-all": 2,
             "server-dvd-3arch": 0,
             "workstation-all": 0,
             "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 30,
-            "fedora-KDE-live-iso-x86_64-*-64bit": 2,
             "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 2,
             "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 2,
             "fedora-i3-live-x86_64-*-64bit": 50
@@ -593,6 +609,10 @@
         "coreos-iot-silverblue": {
             "coreos-iot": 0,
             "silverblue-all": 30
+        },
+        "kde-all": {
+            "fedora-KDE-live-iso-x86_64-*-64bit": 0,
+            "fedora-KDE-raw_xz-raw.xz-aarch64-*-aarch64": 0
         },
         "server-dvd-3arch": {
             "fedora-Server-dvd-iso-aarch64-*-aarch64": 0,
@@ -792,10 +812,10 @@
         },
         "desktop_background": {
             "profile_groups": {
+                "kde-all": 22,
                 "workstation-sb-all": 20
             },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
@@ -839,10 +859,10 @@
         },
         "desktop_browser": {
             "profile_groups": {
+                "kde-all": 22,
                 "workstation-sb-all": 20
             },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
@@ -882,10 +902,8 @@
         },
         "desktop_printing": {
             "profile_groups": {
+                "kde-all": 32,
                 "workstation-all": 30
-            },
-            "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -897,10 +915,10 @@
         },
         "desktop_printing_builtin": {
             "profile_groups": {
+                "kde-all": 32,
                 "workstation-all": 30
             },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 20,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
@@ -912,10 +930,10 @@
         },
         "desktop_terminal": {
             "profile_groups": {
+                "kde-all": 22,
                 "workstation-sb-all": 20
             },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
@@ -1036,8 +1054,8 @@
             }
         },
         "gwenview": {
-            "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 40
+            "profile_groups": {
+                "kde-all": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1058,8 +1076,8 @@
             }
         },
         "kcalc": {
-            "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 40
+            "profile_groups": {
+                "kde-all": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1161,10 +1179,10 @@
         },
         "desktop_keyring": {
             "profile_groups": {
+                "kde-all": 42,
                 "workstation-lives": 40
             },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 30,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
             },
             "settings": {
@@ -1176,10 +1194,8 @@
         },
         "desktop_update_graphical": {
             "profile_groups": {
+                "kde-all": 32,
                 "workstation-all": 30
-            },
-            "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 32
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1971,8 +1987,8 @@
             }
         },
         "kwrite": {
-            "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 42
+            "profile_groups": {
+                "kde-all": 42
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2133,10 +2149,10 @@
             "profile_groups": {
                 "server-dvd-3arch": 40,
                 "coreos-iot-silverblue": 40,
+                "kde-all": 42,
                 "workstation-all": 40
             },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-i3-live-x86_64-*-64bit": 70
@@ -2496,8 +2512,10 @@
             }
         },
         "toolbox": {
+            "profile_groups": {
+                "kde-all": 40
+            },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 40,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
