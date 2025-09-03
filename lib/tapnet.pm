@@ -6,7 +6,11 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
+use utils;
+
 our @EXPORT = qw/clone_host_file setup_tap_static get_host_dns/;
+
+my $self = shift;
 
 sub clone_host_file {
     # copy a given file from the host into the guest. Mainly used
@@ -29,6 +33,17 @@ sub setup_tap_static {
     # this is a common thing for tap tests, where we set up networking
     # for the system with a static IP address and possibly a specific
     # hostname
+
+    # It is possible on certain tests that this will be running while
+    # we are inside a graphical session. In this case we need to switch
+    # to the console before we proceed with the network settings.
+    my $console = 0;
+    unless (check_screen("root_console")) {
+        $console = 1;
+        send_key("ctrl-alt-f3");
+        wait_still_screen(5);
+        console_login(user => "root");
+    }
     my $ip = shift;
     my $hostname = shift || "";
     if ($hostname) {
@@ -53,6 +68,11 @@ sub setup_tap_static {
     assert_script_run "nmcli con up '$connection'";
     # for debugging
     assert_script_run "nmcli -t con show '$connection'";
+    # If we have switched to console from a graphical
+    # environment, here we come back to it.
+    if ($console) {
+        desktop_vt();
+    }
 }
 
 sub get_host_dns {
