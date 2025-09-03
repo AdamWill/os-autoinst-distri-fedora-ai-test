@@ -126,6 +126,16 @@ sub post_fail_hook {
         upload_logs "/tmp/var_log.tar.gz";
     }
 
+    # Also upload a text dump of the journal, for convenience
+    unless (script_run "journalctl > /var/tmp/journal.txt") {
+        upload_logs "/var/tmp/journal.txt";
+    }
+
+    # ...and AVCs
+    unless (script_run 'ausearch -m avc -ts yesterday > /tmp/avcs.txt 2>&1') {
+        upload_logs "/tmp/avcs.txt";
+    }
+
     # Sometimes useful for diagnosing FreeIPA issues
     upload_logs "/etc/nsswitch.conf", failok => 1;
 
