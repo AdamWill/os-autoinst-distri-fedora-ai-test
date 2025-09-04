@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "type": "match",
+      "xpos": 267,
+      "width": 174,
+      "ypos": 82
+    },
+    {
+      "type": "match",
+      "xpos": 739,
+      "height": 12,
+      "width": 13,
+      "ypos": 53
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_update_notification_ready"
+  ]
+}
