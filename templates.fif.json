@@ -2551,6 +2551,7 @@
         },
         "unwanted_packages": {
             "profile_groups": {
+                "kde-all": 40,
                 "workstation-all": 40
             },
             "settings": {
