@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "xpos": 9,
+      "type": "match",
+      "width": 39,
+      "ypos": 8
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-fedora",
+    "apps_menu_button",
+    "apps_menu_button_active"
+  ]
+}
