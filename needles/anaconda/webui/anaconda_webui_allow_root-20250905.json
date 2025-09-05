@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 264,
+      "click_point": {
+        "xpos": 14.5,
+        "ypos": 10.5
+      },
+      "height": 21,
+      "width": 161,
+      "ypos": 575
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_webui_allow_root"
+  ]
+}
