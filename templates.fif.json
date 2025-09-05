@@ -1998,6 +1998,18 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
+        "keyboard_layout": {
+            "profile_groups": {
+                "workstation-lives": 40
+            },
+            "settings": {
+			"ENCRYPT_PASSWORD": "gl[pf;'",
+                "PACKAGE_SET": "default",
+                "POSTINSTALL": "keyboard_layout",
+                "RETRY": "%INSTALL_RETRY%",
+                "LAYOUT": "german"
+            }
+        },
         "mediakit_fileconflicts": {
             "profile_groups": {
                 "server-dvd-3arch": 10
