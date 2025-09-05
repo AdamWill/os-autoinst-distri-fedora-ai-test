@@ -12,6 +12,9 @@ sub run {
     if ($subv eq "Workstation") {
         @unwanteds = ("gtk2", "qt");
     }
+    elsif ($subv eq "KDE") {
+        @unwanteds = ("gtk2");
+    }
     for my $unwanted (@unwanteds) {
         assert_script_run "! rpm -q $unwanted";
     }
