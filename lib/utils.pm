@@ -978,7 +978,9 @@ sub gnome_initial_setup {
             assert_screen ["next_button", "next_button_inactive"];
             if (match_has_tag "next_button_inactive") {
                 record_soft_failure "geolocation failed!";
-                send_key "tab";
+                # in GNOME 49 RC and later, the text entry field is already active;
+                # in earlier GNOMEs we have to hit tab...
+                send_key_until_needlematch("gis_tz_search_active", "tab", 2);
                 wait_still_screen 3;
                 type_very_safely "washington-d";
                 send_key "down";
