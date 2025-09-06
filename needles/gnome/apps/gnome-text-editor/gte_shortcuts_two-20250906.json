@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 64,
+      "type": "match",
+      "xpos": 687,
+      "height": 21,
+      "ypos": 295
+    },
+    {
+      "height": 20,
+      "xpos": 251,
+      "type": "match",
+      "width": 49,
+      "ypos": 245
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gte_shortcuts_two"
+  ]
+}

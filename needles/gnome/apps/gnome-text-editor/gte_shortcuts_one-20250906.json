@@ -1,0 +1,26 @@
+{
+  "area": [
+    {
+      "ypos": 119,
+      "height": 17,
+      "xpos": 410,
+      "type": "match",
+      "width": 45,
+      "click_point": {
+        "xpos": 22.5,
+        "ypos": 8.5
+      }
+    },
+    {
+      "width": 126,
+      "height": 20,
+      "type": "match",
+      "xpos": 626,
+      "ypos": 406
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gte_shortcuts_one"
+  ]
+}
