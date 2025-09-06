@@ -191,10 +191,7 @@ sub run {
                 }
                 # if we hit the g-i-s flow we already launched
                 unless ($launched) {
-                    # for KDE we need to double-click
-                    my $dclick = 0;
-                    $dclick = 1 if (get_var("DESKTOP") eq "kde");
-                    assert_and_click("live_start_anaconda_icon", dclick => $dclick);
+                    assert_and_click("live_start_anaconda_icon");
                 }
             }
             # wait for anaconda to appear
