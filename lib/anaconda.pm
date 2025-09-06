@@ -373,7 +373,7 @@ sub webui_custom_boot_partitions {
     # standard steps to create /boot/efi, /boot, bios boot, PRePboot etc.
     if (get_var("UEFI")) {
         # if we're running on UEFI, we need esp
-        webui_custom_add_partition(size => 512, mountpoint => '/boot/efi', filesystem => 'efi_filesystem');
+        webui_custom_add_partition(size => 1024, mountpoint => '/boot/efi', filesystem => 'efi_filesystem');
     }
     elsif (get_var("OFW")) {
         webui_custom_add_partition(size => 4, filesystem => 'ppc_prep_boot');
@@ -383,7 +383,7 @@ sub webui_custom_boot_partitions {
         # installs, so we need a biosboot partition
         webui_custom_add_partition(size => 1, filesystem => 'biosboot');
     }
-    webui_custom_add_partition(size => 512, mountpoint => '/boot');
+    webui_custom_add_partition(size => 1024, mountpoint => '/boot');
 }
 
 sub _type_user_password {
