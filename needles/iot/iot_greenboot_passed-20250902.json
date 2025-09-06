@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 176,
+      "ypos": 288,
+      "width": 46,
+      "height": 16,
+      "type": "match"
+    },
+    {
+      "xpos": 327,
+      "ypos": 289,
+      "width": 41,
+      "height": 15,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "iot_greenboot_passed"
+  ]
+}
