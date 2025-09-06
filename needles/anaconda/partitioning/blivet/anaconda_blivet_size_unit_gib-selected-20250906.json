@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 264,
+      "xpos": 718,
+      "type": "match",
+      "height": 17,
+      "width": 28
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_size_unit_gib",
+    "anaconda_blivet_size_unit_GiB"
+  ]
+}
