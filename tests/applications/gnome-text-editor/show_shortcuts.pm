@@ -16,10 +16,9 @@ sub run {
     send_key("ctrl-?");
 
     # Assert the screen and move to next one
-    assert_screen "gte_shortcuts_one";
-    assert_and_click "gte_shortcuts_go_two";
+    assert_and_click "gte_shortcuts_one";
 
-    # Assert the screen and move to next one
+    # Assert the screen
     assert_screen "gte_shortcuts_two";
 }
 
