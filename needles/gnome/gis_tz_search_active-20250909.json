@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 24,
+      "type": "match",
+      "xpos": 249,
+      "height": 44,
+      "ypos": 191
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-english",
+    "gis_tz_search_active"
+  ]
+}

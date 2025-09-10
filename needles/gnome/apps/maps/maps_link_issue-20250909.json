@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 355,
+      "height": 26,
+      "width": 113,
+      "ypos": 507
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "maps_link_issue"
+  ]
+}
