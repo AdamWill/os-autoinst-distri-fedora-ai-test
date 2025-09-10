@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "ypos": 373,
+      "type": "match",
+      "xpos": 583,
+      "height": 18,
+      "width": 130
+    },
+    {
+      "xpos": 984,
+      "type": "match",
+      "height": 19,
+      "width": 17,
+      "ypos": 346
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "akonadi_migration_notification"
+  ]
+}
