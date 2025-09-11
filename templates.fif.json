@@ -827,11 +827,10 @@
         },
         "desktop_login": {
             "profile_groups": {
-                "workstation-lives": 30
+                "kde-all": 32,
+                "workstation-all": 30
             },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-upgrade-x86_64-*-64bit": 40,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
