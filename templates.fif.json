@@ -653,12 +653,8 @@
     "TestSuites": {
         "apps_startstop": {
             "profile_groups": {
-                "workstation-lives": 40,
-                "silverblue-all": 50
-            },
-            "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 40,
-                "fedora-Workstation-upgrade-x86_64-*-64bit": 40
+                "kde-all": 40,
+                "workstation-sb-all": 40
             },
             "settings": {
                 "BOOTFROM": "c",
