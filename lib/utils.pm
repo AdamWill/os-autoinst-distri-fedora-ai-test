@@ -623,10 +623,18 @@ sub setup_repos {
         return unless (@was);
     }
     # if we got this far, we're definitely downloading *something* so
-    # install the download tools. split bodhi-client out because it
-    # isn't there on ELN currently, which means we can't use workarounds
-    # specified as update IDs on ELN
-    script_run "dnf -y install createrepo_c koji", 300;
+    # install the download tools
+    # as of 2025/09 this seems to sometimes fail due to something else
+    # having the rpm db locked:
+    # https://github.com/rpm-software-management/dnf5/issues/2435
+    for my $i (1 .. 5) {
+        last unless (script_run "dnf -y install createrepo_c koji", 300);
+        die "Package download tool install failed" if ($i == 5);
+        sleep 30;
+    }
+    # split bodhi-client out because it isn't there on ELN currently,
+    # which means we can't use workarounds specified as update IDs on
+    # ELN. let's hope all lock conflicts are resolved by now
     script_run "dnf -y install bodhi-client", 300;
     get_setup_repos_script;
     my $wastring = join(',', @was);
