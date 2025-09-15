@@ -1,15 +1,15 @@
 {
   "area": [
     {
-      "xpos": 465,
-      "ypos": 471,
-      "width": 58,
+      "xpos": 468,
+      "ypos": 476,
+      "width": 70,
       "height": 25,
       "type": "match"
     }
   ],
   "properties": [],
   "tags": [
-    "calc_function_sqrt"
+    "calc_select_function_round"
   ]
 }

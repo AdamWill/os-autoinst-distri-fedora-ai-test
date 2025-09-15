@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 339,
+      "ypos": 388,
+      "width": 19,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_result_median"
+  ]
+}

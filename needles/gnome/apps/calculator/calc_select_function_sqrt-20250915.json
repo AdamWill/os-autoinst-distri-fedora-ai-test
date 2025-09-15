@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 469,
+      "ypos": 408,
+      "width": 54,
+      "height": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_select_function_sqrt"
+  ]
+}

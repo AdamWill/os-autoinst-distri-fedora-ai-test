@@ -176,9 +176,11 @@ for button in ("div", "divider", "zero", "one", "two", "three", "four", "five",
                 "six","seven", "eight", "nine", "mod", "percent", "sub"):
     testtags.append(f"calc_button_{button}")
     testtags.append(f"kcalc_button_{button}")
-for function in ("sqrt", "arg", "cos"):
-    testtags.append(f"calc_function_{function}")
+for function in ("sqrt", "median", "cos", "ones", "re", "round"):
+    testtags.append(f"calc_select_function_{function}")
     testtags.append(f"calc_result_{function}")
+for category in ("complex", "programming", "rounding", "statistics", "trigonometry", "sundry"):
+    testtags.append(f"calc_functions_{category}")
 for result in ("BokZw", "Czo4s", "O9qsL", "WIxiR", "b5y2B", "h7MfO", "qxuBK",
                 "tWshx", "uC8Ul", "3LAG3"):
     testtags.append(f"calc_result_{result}")
