@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 468,
+      "ypos": 380,
+      "width": 54,
+      "height": 22,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_select_function_cos"
+  ]
+}
