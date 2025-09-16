@@ -134,7 +134,7 @@ sub check_user_logged_in {
         send_key("esc");
         assert_screen("apps_run_terminal");
     }
-    assert_script_run('[ $(whoami) = "' . "$user\" ]");
+    validate_script_output 'whoami', sub { m/^$user$/ };
     send_key $exitkey unless ($args{keepterm});
     wait_still_screen 5;
 }
