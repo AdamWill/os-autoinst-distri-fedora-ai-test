@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start/;
 
 
 # We introduce this global variable to hold the list of applications that have
@@ -50,6 +50,22 @@ sub type_very_safely {
     # similarity level 38 as there will commonly be a flashing
     # cursor and the default level (47) is too tight
     wait_still_screen(stilltime => 5, similarity_level => 38);
+}
+
+# retry a given $command up to $tries times with timeout $timeout
+# die with $error if the final try fails
+# mainly used to retry dnf commands due to
+# https://github.com/rpm-software-management/dnf5/issues/2435
+sub script_retry {
+    my ($command, $timeout, $tries, $error) = @_;
+    $timeout //= 300;
+    $tries //= 5;
+    $error //= "$command failed after $tries attempts";
+    for my $i (1 .. $tries) {
+        last unless (script_run $command, $timeout);
+        die $error if ($i == $tries);
+        sleep 30;
+    }
 }
 
 sub get_release_number {
@@ -625,17 +641,13 @@ sub setup_repos {
     # if we got this far, we're definitely downloading *something* so
     # install the download tools
     # as of 2025/09 this seems to sometimes fail due to something else
-    # having the rpm db locked:
+    # having the rpm db locked, so we retry it:
     # https://github.com/rpm-software-management/dnf5/issues/2435
-    for my $i (1 .. 5) {
-        last unless (script_run "dnf -y install createrepo_c koji", 300);
-        die "Package download tool install failed" if ($i == 5);
-        sleep 30;
-    }
+    script_retry("dnf -y install createrepo_c koji");
     # split bodhi-client out because it isn't there on ELN currently,
     # which means we can't use workarounds specified as update IDs on
-    # ELN. let's hope all lock conflicts are resolved by now
-    script_run "dnf -y install bodhi-client", 300;
+    # ELN. also use the retry loop
+    script_retry("dnf -y install bodhi-client");
     get_setup_repos_script;
     my $wastring = join(',', @was);
     my $udstring;
@@ -770,12 +782,12 @@ sub _repo_setup_updates {
         # where the updated packages should have been installed
         # already and we want to fail if they weren't, or CANNED
         # tests, there's no point updating the toolbox
-        assert_script_run "dnf -y --best update", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
+        script_retry "dnf -y --best update", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
         # on liveinst tests, we'll remove the packages we installed
         # above (and their deps, which dnf will include automatically),
         # just in case they're in the update under test; otherwise we
         # get a bogus failure for the package not being updated
-        script_run "dnf -y remove createrepo_c koji", 600 if (get_var("INSTALL") && !get_var("CANNED"));
+        script_retry "dnf -y remove createrepo_c koji", 600 if (get_var("INSTALL") && !get_var("CANNED"));
     }
     # exit the toolbox on CANNED
     if (get_var("CANNED")) {
