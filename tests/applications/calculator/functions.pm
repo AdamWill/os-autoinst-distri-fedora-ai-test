@@ -15,13 +15,14 @@ sub use_function {
     send_key("ret");
     assert_screen("calc_result_$function");
     assert_and_click("calc_button_clear");
+    # Stop for a moment to let the Calculator clean entry field
     sleep(1);
 }
 
 sub run {
     my $self = shift;
     # Wait until everything settles.
-    sleep 5;
+    sleep(5);
 
     use_function("cos", "trigonometry", "45");
     use_function("re", "complex", "20");
