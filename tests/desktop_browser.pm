@@ -38,7 +38,7 @@ sub run {
     else {
         send_key 'super';
         # wait out animations
-        wait_still_screen(stilltime => 4, similarity_level => 45);
+        wait_still_screen(stilltime => 6, similarity_level => 45);
         assert_and_click 'browser_launcher';
     }
     unless (check_screen 'browser', 45) {
