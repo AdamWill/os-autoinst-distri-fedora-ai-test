@@ -19,9 +19,9 @@ sub export_kde_vars {
     # On KDE, it is possible to update and reuse the keyring
     # on Konsole if correct environmental variables are set.
     # Set them now.
-    enter_cmd('export SSH_ASKPASS=/usr/bin/ksshaskpass');
+    enter_cmd('export SSH_ASKPASS=/usr/bin/ksshaskpass', 1);
     sleep 2;
-    enter_cmd('export SSH_ASKPASS_REQUIRE=prefer');
+    enter_cmd('export SSH_ASKPASS_REQUIRE=prefer', 1);
     sleep 2;
 }
 
@@ -38,7 +38,7 @@ sub connect_localhost {
     # A dialogue should appear to collect credentials to open
     # the SSH key.
     my $command = "sftp $user" . '@localhost';
-    enter_cmd($command);
+    enter_cmd($command, 1);
 
     # When connecting for the first time, we will remember
     # the key password and store it in the keyring.
@@ -55,9 +55,9 @@ sub connect_localhost {
     # so far.
     assert_screen("keyring_sftp_logged");
     # Finish the connection.
-    enter_cmd("bye");
+    enter_cmd("bye", 1);
     # Exit the terminal app.
-    enter_cmd("exit");
+    enter_cmd("exit", 1);
 }
 
 sub run {

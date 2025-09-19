@@ -18,9 +18,9 @@ my $desktop = get_var("DESKTOP", "gnome");
 # certain variables are set in the system. This subroutine sets up
 # those variables.
 sub export_kde_vars {
-    enter_cmd('export SSH_ASKPASS=/usr/bin/ksshaskpass');
+    enter_cmd('export SSH_ASKPASS=/usr/bin/ksshaskpass', 1);
     sleep 2;
-    enter_cmd('export SSH_ASKPASS_REQUIRE=prefer');
+    enter_cmd('export SSH_ASKPASS_REQUIRE=prefer', 1);
     sleep 2;
 }
 
@@ -69,7 +69,7 @@ sub connect_localhost {
         export_kde_vars();
         # Connect the sftp.
         my $command = "sftp $user" . '@localhost';
-        enter_cmd($command);
+        enter_cmd($command, 1);
         # If performed for the first time, also deal with the
         # password storing which is a little painful on KDE.
         if ($type ne "reconnect") {
