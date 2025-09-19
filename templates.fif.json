@@ -2041,6 +2041,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "MAX_JOB_TIME": "14400",
                 "NICTYPE": "tap",
                 "POSTINSTALL": "podman",
                 "POST_STATIC": "172.16.2.114 podman001.test.openqa.fedoraproject.org",
@@ -2057,6 +2058,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "MAX_JOB_TIME": "14400",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "podman",
                 "POSTINSTALL": "_podman_client",

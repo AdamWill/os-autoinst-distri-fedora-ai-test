@@ -16,8 +16,8 @@ sub run_integration_tests {
     # skips:
     # "podman checkpoint --export, with volumes"
     # fails on kernel 6.16, see https://github.com/checkpoint-restore/criu/issues/2626
-    assert_script_run "bats --filter-tags '!ci:parallel' --filter 'export, with volumes|TCP/IPv4 large transfer, tap' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 1800;
-    assert_script_run 'bats --filter-tags ci:parallel --filter "export, with volumes|TCP/IPv4 large transfer, tap" -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 1800;
+    assert_script_run "bats --filter-tags '!ci:parallel' --filter 'export, with volumes|TCP/IPv4 large transfer, tap' /usr/share/podman/test/system | tee /tmp/podman-bats.txt", 3600;
+    assert_script_run 'bats --filter-tags ci:parallel --filter "export, with volumes|TCP/IPv4 large transfer, tap" -j $(nproc) /usr/share/podman/test/system | tee --append /tmp/podman-bats.txt', 3600;
     # restore default behaviour
     assert_script_run "set +o pipefail";
     # ensure we ran at least 100 tests (this is a check that the
