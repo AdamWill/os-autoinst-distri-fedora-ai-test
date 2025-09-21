@@ -947,6 +947,11 @@ sub gnome_initial_setup {
             @nexts = grep { $_ ne 'keyboard' } @nexts;
             @nexts = grep { $_ ne 'timezone' } @nexts;
         }
+        # https://pagure.io/workstation-ostree-config/pull-request/682
+        # third party repo page ('software') skipped on Silverblue
+        if ($relnum > 43 && get_var('SUBVARIANT') eq 'Silverblue') {
+            @nexts = grep { $_ ne 'software' } @nexts;
+        }
         # if g-i-s ran before anaconda (as expected on the live + webui
         # flow), anaconda forwards a g-i-s state file to the installed
         # system, causing it to skip 'language' and 'keyboard' (meaning
