@@ -949,7 +949,7 @@ sub gnome_initial_setup {
         }
         # https://pagure.io/workstation-ostree-config/pull-request/682
         # third party repo page ('software') skipped on Silverblue
-        if ($relnum > 43 && get_var('SUBVARIANT') eq 'Silverblue') {
+        if ($relnum > 42 && get_var('SUBVARIANT') eq 'Silverblue') {
             @nexts = grep { $_ ne 'software' } @nexts;
         }
         # if g-i-s ran before anaconda (as expected on the live + webui
