@@ -416,14 +416,18 @@ sub webui_create_user {
     my $geofield = get_var("USER_GECOS", $user_login);
     # We click into the first field, because it seems that
     # sometimes it is not focused. Then we will navigate
-    # between fields using the Tab key.
+    # between fields using the Tab key. We will use sleeps here
+    # to make sure the system waits between key presses.
     assert_and_click("anaconda_webui_createuser_name", timeout => $args{timeout});
     type_very_safely($geofield);
     sleep(2);
     send_key("tab");
-    sleep(1);
+    sleep(2);
     # on 43.33 and later geofield is now filled here, so wipe it
     send_key("ctrl-a");
+    sleep(2);
+    send_key("delete");
+    sleep(2);
     type_very_safely($user_login);
     sleep(2);
     send_key("tab");
