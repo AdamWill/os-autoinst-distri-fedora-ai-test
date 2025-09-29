@@ -353,9 +353,8 @@
             }
         },
         "desktop_keyring": {
-            "profiles": {
-                "fedora-updates-workstation-aarch64-*-aarch64": 5,
-                "fedora-updates-workstation-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-desktops": 5
             }
         },
         "desktop_login": {
