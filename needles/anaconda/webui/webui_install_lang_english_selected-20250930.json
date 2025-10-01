@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 463,
+      "ypos": 267,
+      "width": 48,
+      "height": 22,
+      "type": "match",
+      "match": 90
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "webui_install_lang_english_selected"
+  ]
+}
