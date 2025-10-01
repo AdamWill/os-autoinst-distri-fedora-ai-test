@@ -11,6 +11,8 @@
   ],
   "properties": [],
   "tags": [
-    "webui_install_lang_english_selected"
+    "anaconda_select_install_lang_selected",
+    "anaconda_select_install_lang_filtered",
+    "LANGUAGE-english"
   ]
 }
