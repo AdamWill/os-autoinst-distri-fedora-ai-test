@@ -16,7 +16,7 @@ sub run {
     my $arch = get_var("ARCH");
     # python3-dnf is for updvercheck.py
     my $packages = "python3-dnf lorax";
-    $packages .= " hfsplus-tools" if ($arch eq "ppc64le");
+    $packages .= " hfsplus-tools" if ($arch eq "ppc64le" || $arch eq "aarch64");
     assert_script_run "dnf -y install $packages", 120;
     # this 'temporary file cleanup' thing can actually wipe bits of
     # the lorax install root while lorax is still running...

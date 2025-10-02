@@ -122,6 +122,11 @@
             "arch": "x86_64",
             "flavor": "updates-container"
         },
+        "fedora-updates-everything-boot-iso-aarch64-*": {
+            "arch": "aarch64",
+            "flavor": "updates-everything-boot-iso",
+            "group_name": "Fedora AArch64 Updates"
+        },
         "fedora-updates-everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
             "flavor": "updates-everything-boot-iso"
@@ -200,6 +205,10 @@
         "fedora-updates-container-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-updates-container-x86_64-*"
+        },
+        "fedora-updates-everything-boot-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-updates-everything-boot-iso-aarch64-*"
         },
         "fedora-updates-everything-boot-iso-x86_64-*-64bit": {
             "machine": "64bit",
@@ -399,6 +408,7 @@
         },
         "install_default_update_netinst": {
             "profiles": {
+                "fedora-updates-everything-boot-iso-aarch64-*-aarch64": 5,
                 "fedora-updates-everything-boot-iso-x86_64-*-bios": 5,
                 "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
             },
@@ -440,6 +450,7 @@
         },
         "installer_build": {
             "profiles": {
+                "fedora-updates-everything-boot-iso-aarch64-*-aarch64": 5,
                 "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
             },
             "settings": {
@@ -610,6 +621,7 @@
         },
         "support_server": {
             "profiles": {
+                "fedora-updates-everything-boot-iso-aarch64-*-aarch64": 5,
                 "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
             }
         },
