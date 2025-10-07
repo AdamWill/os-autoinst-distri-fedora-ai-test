@@ -1277,6 +1277,22 @@
                 "USER_LOGIN": "qwerty"
             }
         },
+        "install_asian_language_webui": {
+            "profile_groups": {
+                "workstation-lives": 40
+            },
+            "settings": {
+                "DESKTOP": "gnome",
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "15",
+                "INPUT_METHOD": "1",
+                "LANGUAGE": "japanese",
+                "POSTINSTALL": "_console_login",
+                "QEMU_DISABLE_SNAPSHOTS": "1",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "qwerty"
+            }
+        },
         "install_blivet_btrfs": {
             "profile_groups": {
                 "server-dvd-4arch": 40

@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 273,
+      "ypos": 126,
+      "width": 143,
+      "height": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "_ANACONDA_WEBUI",
+    "anaconda_webui_installmethod"
+  ]
+}

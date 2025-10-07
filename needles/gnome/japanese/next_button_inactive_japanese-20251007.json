@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 946,
+      "ypos": 45,
+      "width": 56,
+      "height": 22,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "next_button_inactive"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 298,
+      "type": "match",
+      "width": 100,
+      "ypos": 545,
+      "height": 57,
+      "click_point": {
+        "xpos": 42,
+        "ypos": 41.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "anaconda_webui_passphrase"
+  ]
+}

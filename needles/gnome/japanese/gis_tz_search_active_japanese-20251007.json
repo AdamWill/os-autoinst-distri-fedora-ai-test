@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 280,
+      "ypos": 184,
+      "width": 61,
+      "height": 42,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "gis_tz_search_active"
+  ]
+}

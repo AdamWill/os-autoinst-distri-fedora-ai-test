@@ -27,31 +27,28 @@ sub select_disks {
         @_
     );
     my %iscsi = %{$args{iscsi}};
-    # Anaconda hub
-    assert_screen "anaconda_main_hub", 300;
-    # Damn animation delay can cause bad clicks here too - wait for it
-    wait_still_screen 3;
-    assert_and_click "anaconda_main_hub_install_destination";
-    # it seems that sometimes the first click doesn't work with wayland
-    # on anaconda. we can't reproduce this manually, so work around it
-    # by just clicking again, this is safe even if the first click
-    # *did* work
-    sleep 1;
-    click_lastmatch;
+    unless (get_var('_ANACONDA_WEBUI')) {
+        # Anaconda hub
+        assert_screen "anaconda_main_hub", 300;
+        # Damn animation delay can cause bad clicks here too - wait for it
+        wait_still_screen 3;
+        assert_and_click "anaconda_main_hub_install_destination";
+        # it seems that sometimes the first click doesn't work with wayland
+        # on anaconda. we can't reproduce this manually, so work around it
+        # by just clicking again, this is safe even if the first click
+        # *did* work
+        sleep 1;
+        click_lastmatch;
+    }
 
-    # this is awkward, but on the install_repository_hd_variation test,
-    # we have two disks but in F39 and F40 anaconda knows we're using
-    # one of them as an install source and 'protects' the entire disk
-    # (doesn't show it on INSTALLATION DESTINATION), so we need to go
-    # down the single disk branch in that case. On F41+ it protects
-    # only the partition being used as a source
-    my $relnum = get_release_number;
-    if (get_var('NUMDISKS') > 1 && !(get_var('TEST') eq 'install_repository_hd_variation' && $relnum < 41)) {
+    if (get_var('NUMDISKS') > 1) {
+        assert_and_click "anaconda_webui_disk_select" if (get_var('_ANACONDA_WEBUI'));
         # Multi-disk case. Select however many disks the test needs. If
         # $disks is 0, this will do nothing, and 0 disks will be selected.
         for my $n (1 .. $args{disks}) {
             assert_and_click "anaconda_install_destination_select_disk_$n";
         }
+        assert_and_click "anaconda_webui_select" if (get_var('_ANACONDA_WEBUI'));
     }
     else {
         # Single disk case.

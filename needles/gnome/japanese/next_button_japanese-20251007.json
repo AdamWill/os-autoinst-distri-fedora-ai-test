@@ -1,16 +1,16 @@
 {
   "area": [
     {
-      "ypos": 717,
-      "width": 37,
+      "xpos": 950,
+      "ypos": 47,
+      "width": 51,
       "height": 18,
-      "xpos": 389,
       "type": "match"
     }
   ],
   "properties": [],
   "tags": [
-    "anaconda_webui_next",
-    "LANGUAGE-english"
+    "LANGUAGE-japanese",
+    "next_button"
   ]
 }

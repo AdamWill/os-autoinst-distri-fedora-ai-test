@@ -10,28 +10,16 @@ sub run {
     # call the test suite with an "IDENTIFICATION=true" variable.
     my $identification = get_var('IDENTIFICATION');
     assert_screen ["anaconda_main_hub", "anaconda_webui_installmethod"];
-    if (match_has_tag "anaconda_webui_installmethod") {
-        # long term we'll want two paths through select_disks or
-        # a webui_select_disks, but for now, just throw it in here
-        # as it's simple on this single path
-        if (get_var("NUMDISKS") > 1) {
-            assert_and_click "anaconda_webui_disk_select";
-            assert_and_click "anaconda_install_destination_select_disk_1";
-            # since webui 16, we have to click a Select button too
-            click_lastmatch if (check_screen "anaconda_webui_select");
-        }
-        # assume default selection is the appropriate one; if it
-        # isn't, we'll fail soon enough
+    # Go to INSTALLATION DESTINATION (on gtkui), ensure one disk is selected
+    select_disks();
+    if (get_var('_ANACONDA_WEBUI')) {
+        # go to encrypt screen
         wait_screen_change { assert_and_click "anaconda_webui_next"; };
         wait_still_screen 3;
-        # click through the 'encrypt my data' screen
-        assert_and_click "anaconda_webui_next";
-        # for now, skip the self-identification checks
+        # click through it unless we're doing encryption
+        assert_and_click "anaconda_webui_next" unless (get_var('ENCRYPT_PASSWORD'));
+        # skip self-identification tests for now
         return;
-    }
-    else {
-        # Go to INSTALLATION DESTINATION and ensure one disk is selected.
-        select_disks();
     }
 
     # updates.img tests work by changing the appearance of the INSTALLATION

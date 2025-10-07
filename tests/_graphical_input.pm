@@ -5,13 +5,20 @@ use utils;
 
 sub run {
     my $relnum = get_release_number;
-    if (get_var("LANGUAGE") eq 'japanese') {
-        # give GNOME a minute to settle
-        wait_still_screen 5;
+    # give GNOME a minute to settle
+    wait_still_screen 5;
+    if (get_var("LANGUAGE") eq 'japanese' && !check_screen ['gnome_layout_native', 'gnome_layout_ascii']) {
+        if (get_var("LIVE")) {
+            record_soft_failure "g-i-s should have done this already - https://bugzilla.redhat.com/show_bug.cgi?id=2402147";
+        }
         # since g-i-s new user mode was dropped and the replacement
         # doesn't do input method selection, and anaconda never has,
-        # we have to set up the input method manually:
+        # on the Server netinst path we have to set up the input
+        # method manually:
         # https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3749
+        # we also have to do this for live installs until
+        # https://bugzilla.redhat.com/show_bug.cgi?id=2402147
+        # is fixed
         # 'hotkey' seems to be the only thing we can type for which
         # the 'keyboard' pane is the top result; searching for
         # 'keyboard' or 'input' gives us results for uninstalled apps
