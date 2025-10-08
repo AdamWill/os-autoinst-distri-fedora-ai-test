@@ -39,6 +39,8 @@ sub _set_root_password {
 
 sub _set_root_password_webui {
     my $root_password = get_var("ROOT_PASSWORD", "weakpassword");
+    # hit tab till we can see the button, it may be off screen
+    send_key_until_needlematch("anaconda_webui_allow_root", "tab", 3, 3);
     # Click the radio button, then get focus and fill the fields.
     assert_and_click("anaconda_webui_allow_root");
     sleep(1);

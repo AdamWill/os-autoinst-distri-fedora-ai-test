@@ -952,10 +952,10 @@ sub gnome_initial_setup {
             @nexts = grep { $_ ne 'software' } @nexts;
         }
         # if g-i-s ran before anaconda (as expected on the live + webui
-        # flow), anaconda forwards a g-i-s state file to the installed
-        # system, causing it to skip 'language' and 'keyboard' (meaning
-        # 'language' is turned into 'welcome' and 'keyboard' is really
-        # skipped)
+        # flow on F44+), anaconda forwards a g-i-s state file to the
+        # installed system, causing it to skip 'language' and 'keyboard'
+        # (meaning 'language' is turned into 'welcome' and 'keyboard'
+        # is really skipped)
         if (match_has_tag "start_setup") {
             # if we saw start_setup, that means 'language' was skipped
             # and we can assume 'keyboard' will also be skipped
@@ -1006,7 +1006,13 @@ sub gnome_initial_setup {
                 # in earlier GNOMEs we have to hit tab...
                 send_key_until_needlematch("gis_tz_search_active", "tab", 2);
                 wait_still_screen 3;
-                type_very_safely "washington-d";
+                # for install_default_upload we need to pick somewhere in
+                # US eastern...
+                my $city = "washington-d";
+                # ...but for keyboard layout tests, this is typed the same
+                # on all currently-tested layouts
+                $city = "berlin" if (get_var("LAYOUT"));
+                type_very_safely $city;
                 send_key "down";
                 send_key "ret";
             }
@@ -1030,6 +1036,11 @@ sub gnome_initial_setup {
         my $user_password = get_var("USER_PASSWORD") || "weakpassword";
         type_very_safely $user_login;
         wait_screen_change { assert_and_click "next_button"; };
+        if (get_var('LANGUAGE')) {
+            # check we typed the user name as expected (hence keyboard
+            # layout is the intended one)
+            assert_screen "gis_user_created";
+        }
         type_very_safely $user_password;
         # two tabs to get to the confirm box since GNOME 44
         type_string "\t\t";

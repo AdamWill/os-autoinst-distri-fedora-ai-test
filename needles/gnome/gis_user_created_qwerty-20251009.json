@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "xpos": 343,
+      "ypos": 137,
+      "width": 95,
+      "height": 30,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-english",
+    "LANGUAGE-japanese",
+    "LANGUAGE-russian",
+    "gis_user_created"
+  ]
+}

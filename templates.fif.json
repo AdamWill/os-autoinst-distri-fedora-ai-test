@@ -1531,6 +1531,24 @@
                 "USER_LOGIN": "qwerty"
             }
         },
+        "install_european_language_webui": {
+            "profile_groups": {
+                "workstation-lives": 40
+            },
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "15",
+                "LANGUAGE": "french",
+                "NO_UEFI_POST": "1",
+                "LAYOUT": "french",
+                "POSTINSTALL": "_console_login",
+                "QEMU_DISABLE_SNAPSHOTS": "1",
+                "USER_LOGIN": "qwerty"
+            }
+        },
         "install_iscsi": {
             "profile_groups": {
                 "server-dvd-3arch": 40

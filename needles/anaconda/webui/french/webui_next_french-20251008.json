@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 403,
+      "ypos": 720,
+      "width": 50,
+      "height": 13,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-french",
+    "anaconda_webui_next"
+  ]
+}

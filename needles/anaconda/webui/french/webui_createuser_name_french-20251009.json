@@ -1,20 +1,20 @@
 {
   "area": [
     {
-      "xpos": 269,
-      "ypos": 178,
+      "ypos": 267,
       "width": 241,
-      "height": 36,
-      "type": "match",
+      "xpos": 291,
       "click_point": {
         "xpos": 193.5,
         "ypos": 20
-      }
+      },
+      "height": 36,
+      "type": "match"
     }
   ],
   "properties": [],
   "tags": [
-    "anaconda_webui_createuser_name",
-    "LANGUAGE-english"
+    "LANGUAGE-french",
+    "anaconda_webui_createuser_name"
   ]
 }

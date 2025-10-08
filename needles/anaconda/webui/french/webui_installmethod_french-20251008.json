@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 272,
+      "ypos": 129,
+      "width": 110,
+      "height": 23
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-french",
+    "_ANACONDA_WEBUI",
+    "anaconda_webui_installmethod"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 271,
+      "height": 18,
+      "ypos": 254,
+      "width": 160
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-french",
+    "anaconda_install_destination_encrypt_data"
+  ]
+}

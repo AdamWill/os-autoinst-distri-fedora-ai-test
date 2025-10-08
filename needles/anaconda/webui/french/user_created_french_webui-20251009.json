@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 563,
+      "type": "match",
+      "width": 40,
+      "ypos": 336,
+      "height": 17
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_install_user_created",
+    "LANGUAGE-french"
+  ]
+}

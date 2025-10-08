@@ -225,6 +225,33 @@ sub run {
             # appropriate language, here
             assert_and_click "anaconda_select_install_lang_filtered";
             assert_screen "anaconda_select_install_lang_selected", 10;
+            my $layout = get_var('LAYOUT');
+            if (get_var('_ANACONDA_WEBUI') && $layout) {
+                assert_screen ["anaconda_webui_layout_${layout}_selected", "anaconda_webui_layout_system", "anaconda_select_install_layout_input"];
+                unless (match_has_tag "anaconda_webui_layout_${layout}_selected") {
+                    wait_screen_change { click_lastmatch; };
+                    if (match_has_tag "anaconda_webui_layout_system") {
+                        # GNOME input settings: add the layout we want, remove the default
+                        assert_and_click "desktop_add_input_source";
+                        assert_and_click "desktop_input_source_group_${layout}";
+                        assert_and_click "desktop_input_source_${layout}";
+                        send_key "ret";
+                        wait_still_screen 3;
+                        assert_and_click "desktop_input_source_first_menu";
+                        assert_and_click "desktop_input_source_remove";
+                        wait_still_screen 3;
+                        send_key "alt-f4";
+                    }
+                    if (match_has_tag "anaconda_select_install_layout_input") {
+                        # webui native layout selection; search and pick
+                        my $totype = $layout;
+                        $totype = 'fran' if ($layout eq 'french');
+                        type_very_safely $totype;
+                        assert_and_click "anaconda_select_install_layout_${layout}_filtered";
+                    }
+                    assert_screen "anaconda_webui_layout_${layout}_selected";
+                }
+            }
             assert_and_click ["anaconda_select_install_lang_continue", "anaconda_webui_next"];
 
             # wait 180 secs for hub or Rawhide warning dialog to appear

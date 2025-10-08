@@ -14,6 +14,7 @@
   ],
   "properties": [],
   "tags": [
-    "anaconda_webui_allow_root"
+    "anaconda_webui_allow_root",
+    "LANGUAGE-english"
   ]
 }
