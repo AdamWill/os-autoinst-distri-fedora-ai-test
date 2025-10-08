@@ -171,7 +171,7 @@ sub run {
                         $count -= 1;
                         assert_screen ["live_start_anaconda_icon", "apps_menu_button_active", "next_button"], 300;
                         if (match_has_tag "next_button") {
-                            # we're on F39+ Workstation and looking at gnome-initial-setup
+                            # we're on the Workstation live early g-i-s flow
                             # completing g-i-s launches the installer
                             gnome_initial_setup(live => 1);
                             $launched = 1;
@@ -208,6 +208,8 @@ sub run {
                 # if we got straight to install method screen, we're done
                 return if (match_has_tag "anaconda_webui_installmethod");
             }
+            # give it a few seconds to settle
+            wait_still_screen 3;
             # we click to work around RHBZ #1566066 if it happens
             click_lastmatch;
             # for webui, with the small window, just typing 'english' may
@@ -216,7 +218,7 @@ sub run {
 
             # Select install language
             wait_screen_change { assert_and_click "anaconda_select_install_lang_input"; };
-            type_safely $language;
+            type_very_safely $language;
             # Needle filtering in main.pm ensures we will only look for the
             # appropriate language, here
             assert_and_click "anaconda_select_install_lang_filtered";
