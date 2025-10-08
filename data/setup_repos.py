@@ -85,14 +85,23 @@ async def download_item(item, arch, targetdir):
         # assume it's an NVR
         cmd = ("koji", "download-build", f"--arch={arch}", "--arch=noarch", item)
     # do the download and check for failure
-    (retcode, _, stderr) = await run_command(*cmd, cwd=targetdir)
-    if retcode:
-        # "No .*available for {nvr}" indicates there are no
-        # packages for this arch in the build
-        if not f"available for {item}" in stderr:
+    tries = 5
+    while tries:
+        (retcode, _, stderr) = await run_command(*cmd, cwd=targetdir)
+        if retcode:
+            # "No .*available for {nvr}" indicates there are no
+            # packages for this arch in the build
+            if f"available for {item}" in stderr:
+                return False
             print(f"Downloading {item} failed: {stderr}")
-            return item
-    return False
+            tries -= 1
+            if tries:
+                print("Retrying in 2 seconds...")
+                await asyncio.sleep(2)
+        else:
+            return False
+    # getting here means we exhausted all tries
+    return item
 
 
 async def create_workarounds_repo(workarounds, arch, config):
