@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 23,
+      "width": 117,
+      "ypos": 128,
+      "xpos": 271,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "_ANACONDA_WEBUI",
+    "anaconda_webui_installmethod"
+  ]
+}

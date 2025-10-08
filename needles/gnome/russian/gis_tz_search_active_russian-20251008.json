@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 277,
+      "ypos": 191,
+      "width": 33,
+      "height": 41,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "gis_tz_search_active"
+  ]
+}

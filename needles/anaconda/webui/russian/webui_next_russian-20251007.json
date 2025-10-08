@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 398,
+      "ypos": 717,
+      "width": 46,
+      "height": 19,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_webui_next"
+  ]
+}

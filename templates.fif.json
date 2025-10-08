@@ -1435,6 +1435,21 @@
                 "USER_LOGIN": "qwerty"
             }
         },
+        "install_cyrillic_language_webui": {
+            "profile_groups": {
+                "workstation-lives": 40
+            },
+            "settings": {
+                "DESKTOP": "gnome",
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "15",
+                "LANGUAGE": "russian",
+                "POSTINSTALL": "_console_login",
+                "QEMU_DISABLE_SNAPSHOTS": "1",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "qwerty"
+            }
+        },
         "install_default": {
             "profiles": {
                 "fedora-BaseOS-boot-iso-x86_64-*-64bit": 50,
