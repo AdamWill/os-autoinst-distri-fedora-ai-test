@@ -9,7 +9,7 @@
                 "PART_TABLE_TYPE": "mbr",
                 "QEMUCPU": "host",
                 "QEMUCPUS": "2",
-                "QEMURAM": "3072",
+                "QEMURAM": "4096",
                 "QEMU_VIDEO_DEVICE": "virtio-vga",
                 "QEMU_MAX_MIGRATION_TIME": "720",
                 "QEMU_VIRTIO_RNG": "1",
@@ -71,7 +71,7 @@
                 "PART_TABLE_TYPE": "gpt",
                 "QEMUCPU": "host",
                 "QEMUCPUS": "2",
-                "QEMURAM": "3072",
+                "QEMURAM": "4096",
                 "QEMU_VIDEO_DEVICE": "virtio-vga",
                 "XRES": "1024",
                 "YRES": "768",
@@ -275,10 +275,7 @@
         },
         "fedora-Everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
-            "flavor": "Everything-boot-iso",
-            "settings": {
-                "+QEMURAM": 3072
-            }
+            "flavor": "Everything-boot-iso"
         },
         "fedora-IoT-dvd_ostree-iso-aarch64-*": {
             "arch": "aarch64",
@@ -319,10 +316,7 @@
         },
         "fedora-Server-boot-iso-x86_64-*": {
             "arch": "x86_64",
-            "flavor": "Server-boot-iso",
-            "settings": {
-                "+QEMURAM": 3072
-            }
+            "flavor": "Server-boot-iso"
         },
         "fedora-Server-dvd-iso-aarch64-*": {
             "arch": "aarch64",
@@ -1897,7 +1891,6 @@
                 "INSTALL_UNLOCK": "support_ready",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "support_server",
-                "QEMURAM": "3072",
                 "TEST_UPDATES": "1",
                 "WORKER_CLASS": "tap"
             }
