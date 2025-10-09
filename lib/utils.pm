@@ -498,9 +498,9 @@ sub get_workarounds {
     my $version = shift || get_var("VERSION");
     my %workarounds = (
         "41" => [],
-        "42" => ["137736267"],
-        "43" => ["137736467"],
-        "44" => ["137736545"],
+        "42" => ["FEDORA-2025-2c4522dd71"],
+        "43" => ["FEDORA-2025-5357dfc7ec"],
+        "44" => [],
         "eln" => [],
     );
     my $advortasks = $workarounds{$version};
