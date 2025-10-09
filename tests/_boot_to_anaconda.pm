@@ -191,6 +191,8 @@ sub run {
                 }
                 # if we hit the g-i-s flow we already launched
                 unless ($launched) {
+                    # let it settle a bit
+                    wait_still_screen 5;
                     assert_and_click("live_start_anaconda_icon");
                 }
             }
