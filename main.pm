@@ -250,7 +250,7 @@ sub _load_early_postinstall_tests {
         _load_instance("tests/_graphical_wait_login", $instance);
     }
     # Test non-US input at this point, on language tests
-    if (get_var("SWITCHED_LAYOUT") || get_var("INPUT_METHOD")) {
+    if (get_var("LANGUAGE")) {
         _load_instance("tests/_graphical_input", $instance);
     }
 

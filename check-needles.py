@@ -238,6 +238,10 @@ for layout in ("french",):
     testtags.append(f"anaconda_webui_layout_{layout}_selected")
     testtags.append(f"desktop_input_source_{layout}")
     testtags.append(f"desktop_input_source_group_{layout}")
+# input method needles (ditto)
+for (lang, im) in (("japanese", "anthy"),):
+    testtags.append(f"desktop_input_source_{lang}")
+    testtags.append(f"desktop_input_source_{lang}_{im}")
 # for Anaconda help related needles.
 testtags.extend(f"anaconda_help_{fsys}" for fsys in ('install_destination',
 'installation_progress', 'keyboard_layout', 'language_support', 'network_host_name',

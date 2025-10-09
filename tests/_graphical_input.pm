@@ -5,9 +5,12 @@ use utils;
 
 sub run {
     my $relnum = get_release_number;
+    my $language = get_var("LANGUAGE");
+    my $im = get_var("INPUT_METHOD");
+    my $switched = get_var("SWITCHED_LAYOUT");
     # give GNOME a minute to settle
     wait_still_screen 5;
-    if (get_var("LANGUAGE") eq 'japanese' && !check_screen ['gnome_layout_native', 'gnome_layout_ascii']) {
+    if ($im && !check_screen ['gnome_layout_native', 'gnome_layout_ascii']) {
         if (get_var("LIVE")) {
             record_soft_failure "g-i-s should have done this already - https://bugzilla.redhat.com/show_bug.cgi?id=2402147";
         }
@@ -30,28 +33,20 @@ sub run {
             menu_launch_type "hotkey";
         }
         assert_and_click "desktop_add_input_source";
-        assert_and_click "desktop_input_source_japanese";
-        assert_and_click "desktop_input_source_japanese_anthy";
+        assert_and_click "desktop_input_source_${language}";
+        assert_and_click "desktop_input_source_${language}_${im}";
         send_key "ret";
         wait_still_screen 3;
         send_key "alt-f4";
     }
-    # do this from the overview because the desktop uses the stupid
-    # transparent top bar which messes with our needles
-    send_key "super";
-    assert_screen "overview_app_grid";
-    # check both layouts are available at the desktop; here,
-    # we can expect input method switching to work too
-    desktop_switch_layout 'ascii';
-    desktop_switch_layout 'native';
-    # special testing for Japanese to ensure input method actually
-    # works. If we ever test other input-method based languages we can
-    # generalize this out, for now we just inline Japanese
-    if (get_var("LANGUAGE") eq 'japanese') {
-        # wait a bit for input switch to complete
-        sleep 3;
-
-        # assume we can test input from whatever 'super' opened
+    desktop_switch_layout 'ascii' if ($switched || $im);
+    desktop_launch_terminal;
+    wait_still_screen 5;
+    desktop_switch_layout 'native' if ($switched || $im);
+    if ($im) {
+        # test that input method works as expected
+        # FIXME: if we ever want to test another IM language, make
+        # this not-Japanese-specific
         type_safely "yama";
         assert_screen "desktop_yama_hiragana";
         send_key "spc";
@@ -63,6 +58,17 @@ sub run {
         send_key "esc";
         send_key "esc";
         check_desktop;
+    }
+    else {
+        type_very_safely 'ytrewq';
+        if ($switched) {
+            desktop_switch_layout 'ascii';
+            type_very_safely 'ytrewq';
+        }
+        # ensure the characters that actually got typed match the
+        # expected layout configuration; e.g. for French we should
+        # see 'ytreza', for Russian we should see 'некуцйytrewq'
+        assert_screen 'desktop_input_expected_string';
     }
 }
 
