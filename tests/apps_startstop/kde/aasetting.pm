@@ -8,6 +8,9 @@ use utils;
 
 sub run {
     my $self = shift;
+    # FIXME: get rid of annoying akonadi notification that never goes
+    # away - https://bugzilla.redhat.com/show_bug.cgi?id=2403983
+    click_lastmatch if (check_screen 'akonadi_migration_notification');
     solidify_wallpaper;
     kde_doublek_workaround;
 }
