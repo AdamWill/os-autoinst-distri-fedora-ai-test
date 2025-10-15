@@ -1278,14 +1278,18 @@ sub advisory_check_nonmatching_packages {
     # for debugging, may as well always upload these, can't hurt anything
     upload_logs "/tmp/installedupdatepkgs.txt", failok => 1;
     upload_logs "/mnt/updatepkgs.txt", failok => 1;
+    # need to be in a toolbox on CANNED to ensure python3-rpm is available
+    # use of `toolbox run` suggested by Gemini:
+    # https://github.com/AdamWill/os-autoinst-distri-fedora-ai-test/pull/26#discussion_r2431461670
+    my $prefix = get_var("CANNED") ? 'toolbox run -- ' : '';
     # ensure python3-dnf is present for the check script
-    assert_script_run 'dnf -y install python3-dnf' unless (get_var("CANNED"));
+    assert_script_run $prefix . 'dnf -y install python3-dnf';
     # download the check script and run it
-    assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o updvercheck.py ' . autoinst_url . '/data/updvercheck.py', timeout => 180;
+    assert_script_run $prefix . 'curl --retry-delay 10 --max-time 30 --retry 5 -o updvercheck.py ' . autoinst_url . '/data/updvercheck.py', timeout => 180;
     my $advisory = get_var("ADVISORY");
     my $cmd = 'python3 ./updvercheck.py /mnt/updatepkgs.txt /tmp/installedupdatepkgs.txt';
     $cmd .= " $advisory" if ($advisory);
-    my $ret = script_run $cmd;
+    my $ret = script_run $prefix . $cmd;
     acnp_handle_output($ret, $wrapper, $args{fatal});
 }
 
