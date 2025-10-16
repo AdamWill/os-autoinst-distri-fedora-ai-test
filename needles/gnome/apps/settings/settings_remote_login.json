@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "settings_remote_login"
+  ],
+  "area": [
+    {
+      "xpos": 654,
+      "ypos": 71,
+      "width": 121,
+      "height": 23,
+      "type": "match"
+    }
+  ]
+}

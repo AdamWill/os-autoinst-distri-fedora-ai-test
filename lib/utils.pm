@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type prepare_update_mount setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start reboot_system prepare_update_mount/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -1881,5 +1881,37 @@ sub check_software_start {
     }
     assert_screen("desktop_package_tool_update");
 }
+
+# Reboots the system using the desktop environment's
+# tools to do so. Then it checks that the system has
+# reached the login screen
+sub reboot_system {
+    my $desktop = get_var("DESKTOP", "gnome");
+    if ($desktop eq 'i3') {
+        # we are still in i3 if the bar is visible
+        if (check_screen('i3-bar')) {
+            send_key("alt-shift-e");
+            assert_and_click("i3-logout-bar");
+            assert_screen("graphical_login_input");
+        }
+        assert_and_click('lightdm_power_menu');
+        assert_and_click('lightdm_power_menu-reboot');
+        assert_and_click('lightdm_power_menu-reboot-confirm');
+    }
+
+    # Reboots the system and handles everything until the next GDM screen.
+    else {
+        # In a logged in desktop, we access power options through system menu
+        assert_and_click "system_menu_button";
+        # In KDE reboot entry is right here, on GNOME we need to
+        # enter some kind of power option submenu
+        assert_screen ["power_entry", "reboot_entry"];
+        click_lastmatch;
+        assert_and_click "reboot_entry" if (match_has_tag("power_entry"));
+        assert_and_click "restart_confirm";
+    }
+    boot_to_login_screen();
+}
+
 
 1;
