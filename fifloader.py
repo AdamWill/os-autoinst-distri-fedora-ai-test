@@ -183,6 +183,10 @@ def merge_inputs(inputs, validate=False, clean=False):
             schema_validate(data, fif=True, state="predefault")
         for (pname, product) in data["Products"].items():
             temp = dict(data.get("ProductDefaults", {}))
+            if "settings" in product and "settings" in temp:
+                # merge settings co-operatively
+                prodsetts = product.pop("settings")
+                temp["settings"].update(prodsetts)
             temp.update(product)
             data["Products"][pname] = temp
         # validate against incomplete schema
