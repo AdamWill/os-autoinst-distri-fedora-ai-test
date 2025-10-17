@@ -8,7 +8,10 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application
-    menu_launch_type('abrt', checkstart => 1);
+    # typing 'abrt' prefers Partition Manager for some reason,
+    # so we have to skip checkstart
+    menu_launch_type('problem', checkstart => 0);
+    assert_screen("apps_run_abrt");
     # Close the application
     quit_with_shortcut();
 }
