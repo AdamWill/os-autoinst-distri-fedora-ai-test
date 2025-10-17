@@ -17,6 +17,13 @@ sub run {
     if (get_var("BUILDROOT_REPO")) {
         assert_script_run 'sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/buildroot.repo';
     }
+    # fwupd can cause openQA to click the wrong "Restart & Update"
+    # button in GNOME Software when some kind of firmware-ish
+    # update is available, so let's mask it
+    if ($desktop eq 'gnome') {
+        script_run "systemctl stop fwupd.service";
+        script_run "systemctl mask fwupd.service";
+    }
     prepare_test_packages;
     # get back to the desktop
     desktop_vt;
