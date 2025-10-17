@@ -190,6 +190,10 @@ sub run {
     # OK, if we're here, we got actions, so head to a console. Switch
     # to console after liveinst sometimes takes a while, so 30 secs
     $self->root_console(timeout => 30);
+    if (get_var("LIVE") && get_var("LAYOUT") eq "french") {
+        # we may need to switch to us layout. if not this is harmless
+        type_string "loqdkeys us\n";
+    }
     # this is something a couple of actions may need to know
     my $mount = "/mnt/sysimage";
     if (get_var("CANNED")) {
