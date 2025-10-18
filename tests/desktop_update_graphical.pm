@@ -17,12 +17,20 @@ sub run {
     if (get_var("BUILDROOT_REPO")) {
         assert_script_run 'sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/buildroot.repo';
     }
-    # fwupd can cause openQA to click the wrong "Restart & Update"
-    # button in GNOME Software when some kind of firmware-ish
-    # update is available, so let's mask it
+    # fwupd UEFI dbx updates can cause various problems. openQA can
+    # click the wrong "Restart & Update" button in GNOME Software. Or
+    # we can do everything correctly but LVFS can refuse the download
+    # because it thinks we're spamming it. So we need to get rid of
+    # LVFS somehow..
     if ($desktop eq 'gnome') {
+        # easy, we can mask it
         script_run "systemctl stop fwupd.service";
         script_run "systemctl mask fwupd.service";
+    }
+    else {
+        # Discover throws a snit if we mask lvfs, though. So instead
+        # we delete its lvfs plugin. That'll show it who's boss
+        assert_script_run 'rm -f /usr/lib64/qt6/plugins/discover/fwupd-backend.so';
     }
     prepare_test_packages;
     # get back to the desktop
