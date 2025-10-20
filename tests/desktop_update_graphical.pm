@@ -28,7 +28,7 @@ sub run {
         assert_script_run 'killall gnome-software';
     }
     else {
-        assert_script_run 'rm -f `rpm -ql plasma-discover-libs | grep fwupd';
+        assert_script_run 'rm -f `rpm -ql plasma-discover-libs | grep fwupd`';
     }
     prepare_test_packages;
     # get back to the desktop
