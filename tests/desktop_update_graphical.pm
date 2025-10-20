@@ -21,16 +21,14 @@ sub run {
     # click the wrong "Restart & Update" button in GNOME Software. Or
     # we can do everything correctly but LVFS can refuse the download
     # because it thinks we're spamming it. So we need to get rid of
-    # LVFS somehow..
+    # LVFS. Let's wipe the plugins (masking lvfs.service used to work
+    # but has problems these days)
     if ($desktop eq 'gnome') {
-        # easy, we can mask it
-        script_run "systemctl stop fwupd.service";
-        script_run "systemctl mask fwupd.service";
+        assert_script_run 'rm -f `rpm -ql gnome-software | grep fwupd.so`';
+        assert_script_run 'killall gnome-software';
     }
     else {
-        # Discover throws a snit if we mask lvfs, though. So instead
-        # we delete its lvfs plugin. That'll show it who's boss
-        assert_script_run 'rm -f /usr/lib64/qt6/plugins/discover/fwupd-backend.so';
+        assert_script_run 'rm -f `rpm -ql plasma-discover-libs | grep fwupd';
     }
     prepare_test_packages;
     # get back to the desktop
