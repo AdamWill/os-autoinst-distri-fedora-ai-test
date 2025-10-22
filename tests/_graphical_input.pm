@@ -69,6 +69,8 @@ sub run {
         # expected layout configuration; e.g. for French we should
         # see 'ytreza', for Russian we should see 'некуцйytrewq'
         assert_screen 'desktop_input_expected_string';
+        # clear the garbage for next command
+        send_key 'ctrl-c';
     }
 }
 
