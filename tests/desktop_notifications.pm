@@ -51,6 +51,10 @@ sub run {
             assert_script_run 'date --set="06:00:00"';
         }
         if (get_var("BOOTFROM")) {
+            # disable fwupd plugin as it seems to break notifications
+            # in openQA (but not in real life, I tested); probably
+            # because we're rate-limited
+            assert_script_run 'rm -f `rpm -ql gnome-software | grep fwupd.so`';
             # Set a bunch of update checking-related timestamps to
             # two days ago or two weeks ago to try and make sure we
             # get notifications, see:
