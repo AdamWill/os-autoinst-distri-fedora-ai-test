@@ -43,7 +43,11 @@ sub run {
     send_key("super-up");
 
     # Check that the file has been successfully opened.
-    assert_screen("papers_file_opened");
+    assert_screen(["papers_file_opened", "papers_file_opened_page_2"]);
+    if (match_has_tag("papers_file_opened_page_2")) {
+        click_lastmatch;
+        send_key_until_needlematch("papers_file_opened", "pgup", 5, 2);
+    }
 }
 
 sub test_flags {
