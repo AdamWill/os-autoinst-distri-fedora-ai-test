@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 51,
+      "ypos": 428,
+      "height": 21,
+      "xpos": 663,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "lightdm_power_menu-reboot-confirm"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 460,
+      "height": 41,
+      "ypos": 369,
+      "width": 130
+    },
+    {
+      "type": "match",
+      "height": 24,
+      "xpos": 599,
+      "ypos": 425,
+      "width": 53
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "login_screen",
+    "graphical_login_input",
+    "graphical_login",
+    "lightdm_login_screen"
+  ]
+}

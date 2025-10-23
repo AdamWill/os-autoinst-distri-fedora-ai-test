@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "xpos": 359,
+      "ypos": 96,
+      "width": 65,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-arabic",
+    "LANGUAGE-turkish",
+    "LANGUAGE-russian",
+    "desktop_input_expected_string"
+  ]
+}

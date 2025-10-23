@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "height": 28,
+      "xpos": 392,
+      "ypos": 246,
+      "width": 138,
+      "type": "match"
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "papers opens page 2 instead of page 1 - https://gitlab.gnome.org/GNOME/papers/-/issues/549"
+    }
+  ],
+  "tags": [
+    "papers_file_opened"
+  ]
+}

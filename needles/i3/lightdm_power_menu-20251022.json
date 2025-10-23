@@ -1,0 +1,33 @@
+{
+  "area": [
+    {
+      "click_point": {
+        "xpos": 42,
+        "ypos": 9.5
+      },
+      "type": "match",
+      "xpos": 966,
+      "height": 19,
+      "ypos": 4,
+      "width": 54
+    },
+    {
+      "type": "match",
+      "xpos": 358,
+      "height": 91,
+      "width": 89,
+      "ypos": 321
+    },
+    {
+      "type": "match",
+      "height": 25,
+      "xpos": 597,
+      "ypos": 424,
+      "width": 56
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "lightdm_power_menu"
+  ]
+}

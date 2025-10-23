@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 247,
+      "height": 20,
+      "width": 77,
+      "ypos": 221
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "printing_use_saveas_pdf"
+  ]
+}
