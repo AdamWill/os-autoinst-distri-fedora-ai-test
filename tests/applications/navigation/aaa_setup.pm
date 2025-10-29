@@ -19,7 +19,7 @@ sub run {
     # download testdata, and return to the desktop environment.
     $self->root_console(tty => 3);
     if ($canned) {
-        assert_script_run('flatpak install -y net.sourceforge.ExtremeTuxRacer', timeout => 300);
+        assert_script_run('flatpak install -y net.sourceforge.extremetuxracer', timeout => 300);
         # On Silverblue, Showtime is not installed by default. Install it.
         assert_script_run('flatpak install -y org.gnome.Showtime', timeout => 300);
     }
