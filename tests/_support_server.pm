@@ -99,8 +99,8 @@ sub run {
     my $self = shift;
     # disable systemd-resolved, it conflicts with dnsmasq
     unless (script_run "systemctl is-active systemd-resolved.service") {
-        script_run "systemctl stop systemd-resolved.service";
-        script_run "systemctl disable systemd-resolved.service";
+        script_run "systemctl stop systemd-resolved.service systemd-resolved-varlink.socket systemd-resolved-monitor.socket";
+        script_run "systemctl disable systemd-resolved.service systemd-resolved-varlink.socket systemd-resolved-monitor.socket";
         script_run "rm -f /etc/resolv.conf";
         script_run "systemctl restart NetworkManager";
     }
