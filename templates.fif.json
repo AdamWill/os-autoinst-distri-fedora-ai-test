@@ -2568,6 +2568,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_f%CURRREL%_support_6_%ARCH%.qcow2",
+                "HDDSIZEGB": "12",
                 "NICTYPE": "tap",
                 "NUMDISKS": "2",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -2586,6 +2587,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_f%CURRREL%_support_6_%ARCH%.qcow2",
+                "HDDSIZEGB": "12",
                 "NICTYPE": "tap",
                 "NUMDISKS": "2",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
