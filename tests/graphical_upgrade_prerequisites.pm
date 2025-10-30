@@ -43,12 +43,6 @@ sub run {
         menu_launch_type("software");
         check_software_start();
 
-        # When Software is started for the first time, it asks whether
-        # a user wants to use Third Party software. We want to Ignore
-        # this and proceed, so if we see that we click on Ignore.
-        if (check_screen("gnome_software_ignore", timeout => 60)) {
-            click_lastmatch();
-        }
         # Wait a couple of second, just in case the file needs a little
         # longer to be created.
         sleep(10);

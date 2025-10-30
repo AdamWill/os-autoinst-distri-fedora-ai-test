@@ -1874,12 +1874,13 @@ sub dm_perform_login {
 # This subroutine handles it, so we can use it on multiple
 # places around the test cases.
 sub check_software_start {
-    if (check_screen("gnome_software_ignore", 10)) {
-        wait_still_screen(3);
-        # match again as the dialog might have moved a bit
-        assert_and_click("gnome_software_ignore");
+    assert_screen(['desktop_package_tool_update', 'gnome_software_ignore'], 150);
+    if (match_has_tag 'gnome_software_ignore') {
+        wait_still_screen 3;
+        # match again as the dialog may have moved a bit
+        assert_and_click 'gnome_software_ignore';
+        assert_screen("desktop_package_tool_update");
     }
-    assert_screen("desktop_package_tool_update");
 }
 
 # Reboots the system using the desktop environment's
