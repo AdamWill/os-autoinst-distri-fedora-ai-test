@@ -150,6 +150,7 @@ sub run {
     push(@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
     push(@actions, 'abrt') if (get_var("ABRT", '') eq "system");
     push(@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
+    push(@actions, 'usbhalt') if (get_var("USBBOOT"));
     # FIXME: remove plymouth from Server install_default_upload on
     # non-aarch64 to work around RHBZ #1933378
     unless (get_var("ARCH") eq "aarch64") {
@@ -224,6 +225,16 @@ sub run {
     }
     if (grep { $_ eq 'noplymouth' } @actions) {
         assert_script_run "chroot $mount dnf -y remove plymouth";
+    }
+    if (grep { $_ eq 'usbhalt' } @actions) {
+        # halt the system cleanly to ensure install is complete
+        type_string "systemctl halt\n";
+        wait_still_screen 5;
+        # disconnect the USB stick
+        disconnect_usb;
+        # reboot via ACPI
+        power "reset";
+        return;
     }
     type_string "reboot\n" if (grep { $_ eq 'reboot' } @actions);
 }

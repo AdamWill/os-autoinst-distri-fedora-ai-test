@@ -1482,6 +1482,33 @@
                 "RETRY": "%INSTALL_RETRY%"
             }
         },
+        "install_usb": {
+            "profiles": {
+                "fedora-BaseOS-boot-iso-x86_64-*-64bit": 50,
+                "fedora-CoreOS-colive-iso-x86_64-*-bios": 21,
+                "fedora-Everything-boot-iso-ppc64le-*-ppc64le": 62,
+                "fedora-Everything-boot-iso-x86_64-*-bios": 10,
+                "fedora-Everything-boot-iso-x86_64-*-64bit": 11,
+                "fedora-KDE-live-iso-x86_64-*-bios": 16,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 16,
+                "fedora-Server-boot-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-boot-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-boot-iso-x86_64-*-bios": 10,
+                "fedora-Server-boot-iso-x86_64-*-64bit": 11,
+                "fedora-Server-dvd-iso-x86_64-*-bios": 11,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 11,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-bios": 51,
+                "fedora-Workstation-live-iso-x86_64-*-bios": 11,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 11,
+                "fedora-i3-live-x86_64-*-64bit": 70
+            },
+            "settings": {
+                "PACKAGE_SET": "default",
+                "USBBOOT": "1",
+                "POSTINSTALL": "check_packages_signed _collect_data",
+                "RETRY": "%INSTALL_RETRY%"
+            }
+        },
         "install_default_upload": {
             "profile_groups": {
                 "server-dvd-3arch": 10,
