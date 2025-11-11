@@ -103,6 +103,7 @@ sub run {
         KDE => ["kde", "KDE Plasma Desktop Edition"],
         Silverblue => ["silverblue", "Silverblue"],
         IoT => ["iot", "IoT Edition"],
+        i3 => ["i3", "i3"],
     );
     if (exists($variants{$subvariant})) {
         ($variant_id, $variant) = @{$variants{$subvariant}};
