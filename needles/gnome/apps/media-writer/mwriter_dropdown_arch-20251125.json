@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "xpos": 701,
+      "ypos": 275,
+      "width": 28,
+      "height": 182,
+      "type": "match",
+      "click_point": {
+        "xpos": 14,
+        "ypos": 91
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mwriter_dropdown_arch"
+  ]
+}
