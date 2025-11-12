@@ -268,8 +268,14 @@ runapps = ("seahorse", "kwrite", "tuxracer", "akregator", "ark", "discover", "do
            "gwenview", "kaddressbook", "kcalc", "kcharselect", "kfind", "krdc", "ktnef",
            "kwallet", "kwalletmanager", "neochat", "spectacle", "docviewer", "patience",
            "kolourpaint", "korganizer", "characters", "tux_racer", "krfb")
+           "kolourpaint", "korganizer", "characters", "tux_racer", "krfb", "media-writer")
 for app in runapps:
     testtags.append(f"apps_run_{app}")
+# For media writer test
+for media_specs in ("43", "workstation", "x86_64"):
+    testtags.append(f"mwriter_select_{media_specs}")
+    testtags.append(f"mwriter_selected_{media_specs}")
+testtags.append("mwriter_mediagroup_official")
 
 # retcode tracker
 ret = 0

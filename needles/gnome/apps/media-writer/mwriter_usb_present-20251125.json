@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 298,
+      "ypos": 396,
+      "width": 184,
+      "height": 49,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mwriter_usb_present"
+  ]
+}
