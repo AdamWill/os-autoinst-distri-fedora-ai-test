@@ -191,8 +191,7 @@ sub run {
     # to console after liveinst sometimes takes a while, so 30 secs
     $self->root_console(timeout => 30);
     if (get_var("LIVE") && get_var("LAYOUT") eq "french") {
-        # we may need to switch to us layout. if not this is harmless
-        type_string "loqdkeys us\n";
+        console_loadkeys_us;
     }
     # this is something a couple of actions may need to know
     my $mount = "/mnt/sysimage";
