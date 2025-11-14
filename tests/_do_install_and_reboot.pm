@@ -157,16 +157,10 @@ sub run {
             push(@actions, 'noplymouth');
         }
     }
-    if (get_var("CANNED") && get_var("UEFI")) {
-        push(@actions, 'checkefibootmgr') if (get_var("UEFI"));
-    }
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
     # for lives is unreliable. And if we're already doing something
     # else at a console, we may as well reboot from there too
     push(@actions, 'reboot') if (!get_var("MEMCHECK") && (get_var("LIVE") || @actions));
-    # check whether install is affected by
-    # https://bugzilla.redhat.com/show_bug.cgi?id=2268505 ,
-    # soft fail and work around it if so
     # our approach for taking all these actions doesn't work on RDP
     # installs, fortunately we don't need any of them in that case
     # yet, so for now let's just flush the list here if we're RDP
@@ -230,16 +224,6 @@ sub run {
     }
     if (grep { $_ eq 'noplymouth' } @actions) {
         assert_script_run "chroot $mount dnf -y remove plymouth";
-    }
-    if (grep { $_ eq 'checkefibootmgr' } @actions) {
-        if (script_run 'efibootmgr | grep fedora') {
-            record_soft_failure "No EFI boot manager entry created - likely RHBZ #2268505";
-            # delete the optical drive entry, if there is one, so hopefully
-            # we'll boot via fallback path
-            unless (script_run 'efibootmgr | grep CD-ROM') {
-                assert_script_run('efibootmgr -b $(efibootmgr | grep CD-ROM | head -1 | cut -f1 | sed -e "s,[^0-9],,g") -B');
-            }
-        }
     }
     type_string "reboot\n" if (grep { $_ eq 'reboot' } @actions);
 }
