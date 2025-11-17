@@ -106,8 +106,7 @@
     "Products": {
         "fedora-updates-cloud-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-cloud",
-            "group_name": "Fedora AArch64 Updates"
+            "flavor": "updates-cloud"
         },
         "fedora-updates-cloud-x86_64-*": {
             "arch": "x86_64",
@@ -115,8 +114,7 @@
         },
         "fedora-updates-container-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-container",
-            "group_name": "Fedora AArch64 Updates"
+            "flavor": "updates-container"
         },
         "fedora-updates-container-ppc64le-*": {
             "arch": "ppc64le",
@@ -129,8 +127,7 @@
         },
         "fedora-updates-everything-boot-iso-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-everything-boot-iso",
-            "group_name": "Fedora AArch64 Updates"
+            "flavor": "updates-everything-boot-iso"
         },
         "fedora-updates-everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
@@ -138,8 +135,7 @@
         },
         "fedora-updates-kde-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-kde",
-            "group_name": "Fedora AArch64 Updates"
+            "flavor": "updates-kde"
         },
         "fedora-updates-kde-x86_64-*": {
             "arch": "x86_64",
@@ -147,8 +143,7 @@
         },
         "fedora-updates-server-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-server",
-            "group_name": "Fedora AArch64 Updates"
+            "flavor": "updates-server"
         },
         "fedora-updates-server-ppc64le-*": {
             "arch": "ppc64le",
@@ -157,8 +152,7 @@
         },
         "fedora-updates-server-upgrade-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-server-upgrade",
-            "group_name": "Fedora AArch64 Updates"
+            "flavor": "updates-server-upgrade"
         },
         "fedora-updates-server-upgrade-ppc64le-*": {
             "arch": "ppc64le",
@@ -187,8 +181,7 @@
         },
         "fedora-updates-workstation-upgrade-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-workstation-upgrade",
-            "group_name": "Fedora AArch64 Updates"
+            "flavor": "updates-workstation-upgrade"
         },
         "fedora-updates-workstation-upgrade-x86_64-*": {
             "arch": "x86_64",
@@ -196,8 +189,7 @@
         },
         "fedora-updates-workstation-aarch64-*": {
             "arch": "aarch64",
-            "flavor": "updates-workstation",
-            "group_name": "Fedora AArch64 Updates"
+            "flavor": "updates-workstation"
         },
         "fedora-updates-workstation-x86_64-*": {
             "arch": "x86_64",
