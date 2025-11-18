@@ -171,9 +171,17 @@
             "arch": "x86_64",
             "flavor": "updates-silverblue-dvd_ostree-iso"
         },
+        "fedora-updates-workstation-live-iso-aarch64-*": {
+            "arch": "aarch64",
+            "flavor": "updates-workstation-live-iso"
+        },
         "fedora-updates-workstation-live-iso-x86_64-*": {
             "arch": "x86_64",
             "flavor": "updates-workstation-live-iso"
+        },
+        "fedora-updates-kde-live-iso-aarch64-*": {
+            "arch": "aarch64",
+            "flavor": "updates-kde-live-iso"
         },
         "fedora-updates-kde-live-iso-x86_64-*": {
             "arch": "x86_64",
@@ -261,6 +269,10 @@
             "machine": "64bit",
             "product": "fedora-updates-server-x86_64-*"
         },
+        "fedora-updates-kde-live-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-updates-kde-live-iso-aarch64-*"
+        },
         "fedora-updates-kde-live-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-updates-kde-live-iso-x86_64-*"
@@ -276,6 +288,10 @@
         "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*-bios": {
             "machine": "bios",
             "product": "fedora-updates-silverblue-dvd_ostree-iso-x86_64-*"
+        },
+        "fedora-updates-workstation-live-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-updates-workstation-live-iso-aarch64-*"
         },
         "fedora-updates-workstation-live-iso-x86_64-*-64bit": {
             "machine": "64bit",
@@ -325,6 +341,12 @@
             "fedora-updates-kde-x86_64-*-64bit": 0,
             "fedora-updates-workstation-aarch64-*-aarch64": 0,
             "fedora-updates-workstation-x86_64-*-64bit": 0
+        },
+        "updates-live-2arch": {
+            "fedora-updates-kde-live-iso-aarch64-*-aarch64": 5,
+            "fedora-updates-kde-live-iso-x86_64-*-64bit": 5,
+            "fedora-updates-workstation-live-iso-aarch64-*-aarch64": 5,
+            "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
         },
         "updates-base-tests": {
             "updates-cloud-2arch": 0,
@@ -415,11 +437,11 @@
             }
         },
         "install_default_update_live": {
+            "profile_groups": {
+                "updates-live-2arch": 5
+            },
             "profiles": {
                 "fedora-updates-kde-live-iso-x86_64-*-bios": 5,
-                "fedora-updates-kde-live-iso-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-live-iso-x86_64-*-bios": 5,
-                "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5,
                 "fedora-updates-workstation-live-iso-x86_64-*-bios": 5
             },
             "settings": {
@@ -487,12 +509,9 @@
         },
         "kiwi_build": {
             "profile_groups": {
-                "updates-cloud-2arch": 5
-            },
-            "profiles": {
-                "fedora-updates-container-x86_64-*-64bit": 5,
-                "fedora-updates-kde-live-iso-x86_64-*-64bit": 5,
-                "fedora-updates-workstation-live-iso-x86_64-*-64bit": 5
+                "updates-cloud-2arch": 5,
+                "updates-container-3arch": 5,
+                "updates-live-2arch": 5
             },
             "settings": {
                 "+DESKTOP": "",
