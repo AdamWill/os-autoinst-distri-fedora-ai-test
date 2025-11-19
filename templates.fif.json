@@ -1729,9 +1729,8 @@
             }
         },
         "install_package_set_kde": {
-            "profiles": {
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 50
+            "profile_groups": {
+                "server-dvd-3arch": 30
             },
             "settings": {
                 "DESKTOP": "kde",
@@ -1944,9 +1943,8 @@
             }
         },
         "install_updates_img_local": {
-            "profiles": {
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            "profile_groups": {
+                "server-dvd-3arch": 40
             },
             "settings": {
                 "GRUB": "inst.updates=hd:LABEL=UPDATES_IMG:/updates.img",
@@ -2339,8 +2337,8 @@
             }
         },
         "server_cockpit_updates": {
-            "profiles": {
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            "profile_groups": {
+                "server-dvd-3arch": 30
             },
             "settings": {
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
