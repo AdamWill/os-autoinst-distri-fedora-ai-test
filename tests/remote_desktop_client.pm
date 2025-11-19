@@ -27,35 +27,24 @@ sub run {
     }
 
     # Open the Connections and start the connection.
-    menu_launch_type("connections");
-    wait_still_screen(3);
-    assert_screen("connections_runs");
-    assert_and_click("connections_nothanks");
-    assert_and_click("connections_add_connection");
-    type_very_safely($ip);
-    assert_and_click("gnome_button_connect");
-
-    # Log onto the system.
-    assert_and_click("connection_verify");
-    assert_and_click("connection_username");
-    type_very_safely($rdpuser);
-    assert_and_click("connection_user_password");
-    type_very_safely($rdppass);
-    assert_and_click("connection_authenticate");
-    wait_still_screen(3);
-    send_key("ret");
+    connections_connect($ip, $rdpuser, $rdppass);
+    # we should arrive at the login screen, so login
+    assert_screen("login_screen");
+    wait_still_screen 3;
+    send_key_until_needlematch("graphical_login_input", "ret", 3, 5);
     type_very_safely("$password\n");
-    wait_still_screen(2);
+    assert_screen(["auth_required_password", "apps_menu_button_active"]);
 
     # When SELinux is on, the authentication dialog has appeared.
     # Wait for it a minute and deal it away.
-    if (check_screen("auth_required_password", timeout => 60)) {
+    if (match_has_tag("auth_required_password")) {
         type_very_safely("$password\n");
+        assert_screen("apps_menu_button_active");
     }
 
     # Start the terminal
-    type_very_safely("terminal\n");
     wait_still_screen(3);
+    type_very_safely("terminal\n");
 
     # Check that we are on the correct computer.
     # We can tell from the terminal prompt.

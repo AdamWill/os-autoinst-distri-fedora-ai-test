@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type prepare_update_mount setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start reboot_system/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type prepare_update_mount setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start reboot_system connections_connect/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -1914,5 +1914,35 @@ sub reboot_system {
     boot_to_login_screen();
 }
 
+# Establish a connection using GNOME Connections. Shared between the
+# RDP install test and the GNOME remote desktop test.
+sub connections_connect {
+    my ($ip, $username, $password) = @_;
+    # run connections
+    menu_launch_type('Connections');
+    # If we see the Welcome screen, dismiss it.
+    if (check_screen("connections_no_thanks", timeout => 10)) {
+        click_lastmatch;
+    }
+    # Add a connection
+    assert_and_click("connections_add_connection");
+    # Fill in the connection details
+    type_very_safely($ip);
+    assert_and_click("connections_type_rdp");
+    assert_and_click("connections_connect_button");
+
+    # "Verify" connection.
+    assert_and_click("connections_verify_button");
+
+    # Fill in credentials
+    assert_and_click("connections_username");
+    type_very_safely($username);
+    assert_and_click("connections_password");
+    type_very_safely($password);
+    assert_and_click("connections_authenticate_button");
+    wait_still_screen(5);
+    # Make connection full screen to comply with installation needles.
+    assert_and_click("connections_fullscreen_toggle");
+}
 
 1;

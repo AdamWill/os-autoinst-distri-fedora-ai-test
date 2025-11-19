@@ -2234,8 +2234,8 @@
             }
         },
         "remote_desktop_server": {
-            "profiles": {
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 35
+            "profile_groups": {
+                "workstation-all": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2250,8 +2250,8 @@
             }
         },
         "remote_desktop_client": {
-            "profiles": {
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+            "profile_groups": {
+                "workstation-all": 30
             },
             "settings": {
                 "BOOTFROM": "c",
