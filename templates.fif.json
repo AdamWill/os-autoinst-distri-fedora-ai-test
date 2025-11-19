@@ -2696,12 +2696,13 @@
         },
         "upgrade_2_kde": {
             "profiles": {
-                "fedora-universal-x86_64-*-64bit": 40
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-aarch64-*-aarch64": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "kde",
-                "HDD_1": "disk_f%UP2REL%_kde_5_x86_64.qcow2",
+                "HDD_1": "disk_f%UP2REL%_kde_5_%ARCH%.qcow2",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -2859,10 +2860,11 @@
         },
         "upgrade_kde": {
             "profiles": {
-                "fedora-universal-x86_64-*-64bit": 30
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-aarch64-*-aarch64": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP1REL%_kde_5_x86_64.qcow2",
+                "+HDD_1": "disk_f%UP1REL%_kde_5_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "DESKTOP": "kde",
                 "ROOT_PASSWORD": "weakpassword",
@@ -2874,10 +2876,11 @@
         },
         "upgrade_kde_graphical": {
             "profiles": {
-                "fedora-universal-x86_64-*-64bit": 30
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-aarch64-*-aarch64": 30
             },
             "settings": {
-                "+HDD_1": "disk_f%UP1REL%_kde_5_x86_64.qcow2",
+                "+HDD_1": "disk_f%UP1REL%_kde_5_%ARCH%.qcow2",
                 "BOOTFROM": "c",
                 "DESKTOP": "kde",
                 "ROOT_PASSWORD": "weakpassword",
