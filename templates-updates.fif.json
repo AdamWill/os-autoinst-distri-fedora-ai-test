@@ -328,12 +328,9 @@
             "fedora-updates-container-ppc64le-*-ppc64le": 0,
             "fedora-updates-container-x86_64-*-64bit": 0
         },
-        "updates-server-2arch": {
-            "fedora-updates-server-ppc64le-*-ppc64le": 0,
-            "fedora-updates-server-x86_64-*-64bit": 0
-        },
         "updates-server-3arch": {
-            "updates-server-2arch": 0,
+            "fedora-updates-server-ppc64le-*-ppc64le": 0,
+            "fedora-updates-server-x86_64-*-64bit": 0,
             "fedora-updates-server-aarch64-*-aarch64": 0
         },
         "updates-desktops": {
@@ -558,22 +555,22 @@
         },
         "realmd_join_cockpit": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "realmd_join_cockpit_ad": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "realmd_join_sssd": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "realmd_join_sssd_ad": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "rmdepcheck": {
@@ -600,22 +597,22 @@
         },
         "server_cockpit_basic": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "server_cockpit_default": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "server_cockpit_updates": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "server_database_client": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "server_firewall_default": {
@@ -624,43 +621,43 @@
             }
         },
         "server_freeipa_replication_client": {
-            "profiles": {
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-3arch": 5
             }
         },
         "server_freeipa_replication_master": {
-            "profiles": {
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-3arch": 5
             }
         },
         "server_freeipa_replication_replica": {
-            "profiles": {
-                "fedora-updates-server-x86_64-*-64bit": 5
+            "profile_groups": {
+                "updates-server-3arch": 5
             }
         },
         "server_remote_logging_client": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "server_remote_logging_server": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "server_role_deploy_database_server": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "server_role_deploy_domain_controller": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "server_samba_domain_controller": {
             "profile_groups": {
-                "updates-server-2arch": 5
+                "updates-server-3arch": 5
             }
         },
         "support_server": {
