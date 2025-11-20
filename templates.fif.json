@@ -344,6 +344,10 @@
             "flavor": "Silverblue-dvd_ostree-iso",
             "group_name": "Fedora PowerPC"
         },
+        "fedora-Silverblue-dvd_ostree-iso-aarch64-*": {
+            "arch": "aarch64",
+            "flavor": "Silverblue-dvd_ostree-iso"
+        },
         "fedora-Silverblue-dvd_ostree-iso-x86_64-*": {
             "arch": "x86_64",
             "flavor": "Silverblue-dvd_ostree-iso"
@@ -509,6 +513,10 @@
             "machine": "aarch64",
             "product": "fedora-Server-raw_xz-raw.xz-aarch64-*"
         },
+        "fedora-Silverblue-dvd_ostree-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-Silverblue-dvd_ostree-iso-aarch64-*"
+        },
         "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": {
             "machine": "ppc64le",
             "product": "fedora-Silverblue-dvd_ostree-iso-ppc64le-*"
@@ -617,6 +625,7 @@
             "fedora-Server-dvd-iso-x86_64-*-bios": 0
         },
         "silverblue-all": {
+            "fedora-Silverblue-dvd_ostree-iso-aarch64-*-aarch64": 0,
             "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 0,
             "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 0
         },
@@ -2614,13 +2623,13 @@
         },
         "toolbox": {
             "profile_groups": {
-                "kde-all": 40
+                "kde-all": 40,
+                "silverblue-all": 40
             },
             "profiles": {
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 40,
-                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
-                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 40
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
