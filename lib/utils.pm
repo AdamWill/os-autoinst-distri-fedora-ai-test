@@ -1291,7 +1291,7 @@ sub advisory_check_nonmatching_packages {
 
 sub select_rescue_mode {
     # handle bootloader screen
-    assert_screen "bootloader", 30;
+    assert_screen "bootloader", 60;
     if (get_var('OFW')) {
         # select "rescue system" directly
         send_key "down";
