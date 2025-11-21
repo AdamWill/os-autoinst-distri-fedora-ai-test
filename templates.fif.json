@@ -1492,6 +1492,7 @@
                 "fedora-Server-boot-iso-ppc64le-*-ppc64le": 10,
                 "fedora-Server-boot-iso-x86_64-*-bios": 10,
                 "fedora-Server-boot-iso-x86_64-*-64bit": 11,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 11,
                 "fedora-Server-dvd-iso-x86_64-*-bios": 11,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 11,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-bios": 51,
