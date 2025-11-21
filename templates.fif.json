@@ -1028,8 +1028,8 @@
             }
         },
         "flatpak": {
-            "profile_groups": {
-                "silverblue-all": 50
+            "profiles": {
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50
             },
             "settings": {
                 "BOOTFROM": "c",
