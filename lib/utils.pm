@@ -431,7 +431,7 @@ sub boot_decrypt {
     # decrypt storage during boot; arg is timeout (in seconds)
     my $timeout = shift || 60;
     assert_screen "boot_enter_passphrase", $timeout;
-    type_very_safely get_var("ENCRYPT_PASSWORD");
+    type_safely get_var("ENCRYPT_PASSWORD");
     send_key "ret";
 }
 
