@@ -500,7 +500,7 @@ sub get_workarounds {
         "41" => [],
         "42" => [],
         "43" => [],
-        "44" => [],
+        "44" => ["FEDORA-2025-9b243d4b32"],
         "eln" => [],
     );
     my $advortasks = $workarounds{$version};
