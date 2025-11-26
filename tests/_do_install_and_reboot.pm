@@ -222,6 +222,8 @@ sub run {
             die "setting root password failed five time!" unless ($count);
             $count -= 1;
         }
+        # fix SELinux context on /etc/shadow to avoid denials later
+        script_run "chroot $mount restorecon -v /etc/shadow";
     }
     if (grep { $_ eq 'noplymouth' } @actions) {
         assert_script_run "chroot $mount dnf -y remove plymouth";
