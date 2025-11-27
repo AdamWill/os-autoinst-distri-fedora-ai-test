@@ -417,6 +417,11 @@
                 "updates-desktops": 5
             }
         },
+        "desktop_graphics_validation": {
+            "profile_groups": {
+                "updates-desktops": 5
+            }
+        },
         "desktop_keyring": {
             "profile_groups": {
                 "updates-desktops": 5
