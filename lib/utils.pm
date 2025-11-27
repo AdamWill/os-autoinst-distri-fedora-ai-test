@@ -781,7 +781,15 @@ sub _repo_setup_updates {
         # where the updated packages should have been installed
         # already and we want to fail if they weren't, or CANNED
         # tests, there's no point updating the toolbox
-        script_retry "dnf -y --best update", 1200 unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
+        my $error = "dnf -y --best update failed after 5 attempts. ";
+        $error .= "openQA was installing updates, including the packages to be tested."
+        $error .= "A failure here is usually caused by an infra issue or a dependency issue. "
+        $error .= "The dependency issue may be in the packages under test, or it may be some "
+        $error .= "kind of pre-existing issue which was missed in earlier testing. "
+        $error .= "For debugging, the dnf output should be visible two or three frames before this one, ";
+        $error .= "or in serial_terminal.txt on the Logs & Assets tab. ";
+        $error .= "Please contact the Quality team if you need help determining the cause."
+        script_retry "dnf -y --best update", 1200, 5, $error unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
         # on liveinst tests, we'll remove the packages we installed
         # above (and their deps, which dnf will include automatically),
         # just in case they're in the update under test; otherwise we
