@@ -782,10 +782,10 @@ sub _repo_setup_updates {
         # already and we want to fail if they weren't, or CANNED
         # tests, there's no point updating the toolbox
         my $error = "dnf -y --best update failed after 5 attempts. ";
-        $error .= "openQA was installing updates, including the packages to be tested."
-        $error .= "A failure here is usually caused by an infra issue or a dependency issue. "
-        $error .= "The dependency issue may be in the packages under test, or it may be some "
-        $error .= "kind of pre-existing issue which was missed in earlier testing. "
+        $error .= "openQA was installing updates, including the packages to be tested.";
+        $error .= "A failure here is usually caused by an infra issue or a dependency issue. ";
+        $error .= "The dependency issue may be in the packages under test, or it may be some ";
+        $error .= "kind of pre-existing issue which was missed in earlier testing. ";
         $error .= "For debugging, the dnf output should be visible two or three frames before this one, ";
         $error .= "or in serial_terminal.txt on the Logs & Assets tab. ";
         $error .= "Please contact the Quality team if you need help determining the cause.";
