@@ -10,6 +10,12 @@ sub run {
 
     my $self = shift;
     $self->root_console(tty => 3);
+    # To downgrade the application, we need to know the number of the commit.
+    # There are different commits for different architectures.
+    my $commit = '8ab3ee91f3467a0cc15449e5bf218bc8c02b803d7fe0cd2afbe0b6d7e52f61d7';
+    if (get_var('ARCH') eq 'aarch64') {
+        $commit = '2e1b4e7f4e7ce0b08a0d053e287d39ed0ded48e1ee83c04b4edd465897be60ad';
+    }
     # We will need Flathub to pull dependencies.
     # Flathub is not set as a Flatpak remote by default, only when Third Party Repos
     # are enabled. To make sure, we have it enabled, we will use the following command to
@@ -27,7 +33,7 @@ sub run {
     validate_script_output("flatpak run org.flatpak.Dummy", sub { m/Dummy flatpak: version 2/ });
 
     # Now, we will attempt to downgrade the application to force the previous commit
-    assert_script_run("flatpak update -y --commit=37be70fa26aa652379f968a7aaf7b63fa515483b9381756cd371c8174ae68626 org.flatpak.Dummy");
+    assert_script_run("flatpak update -y --commit=$commit org.flatpak.Dummy");
 
     # If that was successful, the output of the application will show version 1.
     validate_script_output("flatpak run org.flatpak.Dummy", sub { m/Dummy flatpak: version 1/ });
