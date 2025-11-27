@@ -1173,6 +1173,18 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
+        "desktop_graphics_validation": {
+            "profile_groups": {
+                "kde-all": 32,
+                "workstation-all": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_graphics_validation",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
         "desktop_keyring": {
             "profile_groups": {
                 "kde-all": 42,
