@@ -788,7 +788,7 @@ sub _repo_setup_updates {
         $error .= "kind of pre-existing issue which was missed in earlier testing. "
         $error .= "For debugging, the dnf output should be visible two or three frames before this one, ";
         $error .= "or in serial_terminal.txt on the Logs & Assets tab. ";
-        $error .= "Please contact the Quality team if you need help determining the cause."
+        $error .= "Please contact the Quality team if you need help determining the cause.";
         script_retry "dnf -y --best update", 1200, 5, $error unless (get_var("UPGRADE") || get_var("INSTALL") || get_var("CANNED"));
         # on liveinst tests, we'll remove the packages we installed
         # above (and their deps, which dnf will include automatically),
