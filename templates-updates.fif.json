@@ -78,7 +78,7 @@
                 "LIVE": "1",
                 "NUMDISKS": "2",
                 "PACKAGE_SET": "default",
-                "RETRY": "1",
+                "RETRY": "3",
                 "SUBVARIANT": "KDE"
             }
         },
