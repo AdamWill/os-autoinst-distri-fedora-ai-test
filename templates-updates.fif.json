@@ -29,6 +29,7 @@
             "settings": {
                 "+HDD_1": "disk_f%VERSION%_kde_5_%ARCH%.qcow2",
                 "DESKTOP": "kde",
+                "DUG_RETRY": "3",
                 "NUMDISKS": "2",
                 "RETRY": "1"
             }
@@ -92,6 +93,7 @@
         "updates-workstation": {
             "settings": {
                 "DESKTOP": "gnome",
+                "DUG_RETRY": "1",
                 "+HDD_1": "disk_f%VERSION%_desktop_5_%ARCH%.qcow2",
                 "NUMDISKS": "2",
                 "RETRY": "1"

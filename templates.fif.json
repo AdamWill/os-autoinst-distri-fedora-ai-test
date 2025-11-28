@@ -140,6 +140,7 @@
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "DESKTOP": "kde",
+                "DUG_RETRY": "3",
                 "HDDSIZEGB": "15",
                 "INSTALL_RETRY": "1",
                 "LIVE": "1",
@@ -151,6 +152,7 @@
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_arm_image_deployment_upload",
                 "DESKTOP": "kde",
+                "DUG_RETRY": "3",
                 "TEST_TARGET": "HDD_2"
             }
         },
@@ -206,6 +208,7 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
+                "DUG_RETRY": "",
                 "HDDSIZEGB": "20",
                 "INSTALL_RETRY": "1",
                 "LIVE": "1",
@@ -217,6 +220,7 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "DEPLOY_UPLOAD_TEST": "upgrade_desktop",
+                "DUG_RETRY": "",
                 "HDDSIZEGB": "20",
                 "TEST_TARGET": "COMPOSE"
             }
@@ -225,6 +229,7 @@
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_arm_image_deployment_upload",
                 "DESKTOP": "gnome",
+                "DUG_RETRY": "",
                 "TEST_TARGET": "HDD_2"
             }
         },
@@ -1197,6 +1202,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "desktop_update_graphical",
+                "RETRY": "%DUG_RETRY%",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
