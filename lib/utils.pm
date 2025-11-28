@@ -1645,9 +1645,9 @@ sub desktop_launch_terminal {
         send_key "ctrl-alt-t";
     }
     else {
-        my $string = 'terminal';
-        $string = 'ter;inql' if (get_var("LANGUAGE") eq 'french');
-        menu_launch_type($string, checkstart => 0);
+        # as of 2025-11 this is more reliable than menu_launch_type
+        # as we often seem to type 'terminal' wrong for some reason
+        start_with_launcher('apps_menu_terminal');
         assert_screen("apps_run_terminal");
     }
 }
