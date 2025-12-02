@@ -173,7 +173,7 @@ sub custom_blivet_add_partition {
         type_safely $args{mountpoint} . "\n";
     }
     # seems we can get a lost click here if we click too soon
-    wait_still_screen 3;
+    wait_still_screen 5;
     assert_and_click "anaconda_blivet_btn_ok";
     # select "free space" in blivet-gui if it exists, so we could run this function again to add another partition
     if (check_screen("anaconda_blivet_free_space", 15)) {
