@@ -142,7 +142,7 @@
                 "DESKTOP": "kde",
                 "DUG_RETRY": "3",
                 "HDDSIZEGB": "15",
-                "INSTALL_RETRY": "1",
+                "INSTALL_RETRY": "3",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
@@ -160,7 +160,7 @@
             "settings": {
                 "DESKTOP": "i3",
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
-                "INSTALL_RETRY": "1",
+                "INSTALL_RETRY": "3",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO",
@@ -2674,7 +2674,8 @@
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
-                "ENTRYPOINT": "_boot_to_anaconda _uefi_no_fallback"
+                "ENTRYPOINT": "_boot_to_anaconda _uefi_no_fallback",
+                "RETRY": "%INSTALL_RETRY%"
             }
         },
         "unwanted_packages": {
