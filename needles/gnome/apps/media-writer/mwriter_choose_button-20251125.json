@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 650,
+      "ypos": 317,
+      "width": 67,
+      "height": 19,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mwriter_choose_button"
+  ]
+}

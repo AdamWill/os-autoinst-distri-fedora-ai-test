@@ -1098,6 +1098,21 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
+        "media_writer": {
+            "profile_groups": {
+                "workstation-sb-all": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "HDDSIZEGB": "20",
+                "POSTINSTALL_PATH": "tests/applications/media-writer",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "MEDIA": "official",
+                "EDITION": "workstation",
+                "QEMU_APPEND": "-device qemu-xhci,id=usb -drive id=usb_disk,file=/var/lib/openqa/factory/hdd/fixed/disk_usb.img,format=raw,discard=unmap,if=none -device usb-storage,drive=usb_disk,bus=usb.0,port=4"
+            }
+        },
         "nautilus": {
             "profile_groups": {
                 "workstation-sb-all": 40
