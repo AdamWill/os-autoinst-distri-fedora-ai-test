@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type prepare_update_mount setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start reboot_system connections_connect/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type prepare_update_mount setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup plasma_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start reboot_system connections_connect/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -84,6 +84,7 @@ sub get_release_number {
 sub boot_to_login_screen {
     my %args = @_;
     $args{timeout} //= 300;
+    $args{waitearly} //= 1;
     if (testapi::is_serial_terminal) {
         # For serial console, just wait for the login prompt
         unless (wait_serial "login:", timeout => $args{timeout}) {
@@ -95,10 +96,12 @@ sub boot_to_login_screen {
         # wait till we don't (e.g. when rebooting at end of live install,
         # we match text_console_login until the console disappears).
         # The following is true for non-serial console.
-        my $count = 5;
-        while (check_screen("login_screen", 3) && $count > 0) {
-            sleep 5;
-            $count -= 1;
+        if ($args{waitearly}) {
+            my $count = 5;
+            while (check_screen("login_screen", 3) && $count > 0) {
+                sleep 5;
+                $count -= 1;
+            }
         }
         assert_screen "login_screen", $args{timeout};
         if (match_has_tag "graphical_login") {
@@ -1059,6 +1062,65 @@ sub gnome_initial_setup {
     else {
         handle_welcome_screen;
     }
+    # don't do it again on second load
+    set_var("_SETUP_DONE", 1);
+}
+
+sub plasma_setup {
+    # handle Plasma's initial setup thingy, which is much like
+    # GNOME initial setup
+    my %args = (
+        userexists => 0,
+        timeout => 120,
+        @_
+    );
+    # let's handle it similarly, by recording the pages we *may*
+    # encounter and looping through
+    my @nexts = ('language', 'keyboard', 'appearance', 'user', 'tz');
+    # if a user account already exists, user page is skipped
+    @nexts = grep { $_ ne 'user' } @nexts if ($args{userexists});
+    # Let's get started
+    assert_and_click 'ps_begin_setup', timeout => $args{timeout};
+    foreach my $next (@nexts) {
+        record_info("Setup $next", "I think we should be at $next...");
+        wait_still_screen 2;
+        if ($next eq 'language') {
+            my $lang = get_var('LANGUAGE') // 'english';
+            if ($lang ne 'english') {
+                assert_and_click 'ps_lang_search_field';
+                type_very_safely $lang;
+                assert_and_click "ps_lang_${lang}_select";
+            }
+        }
+        elsif ($next eq 'keyboard') {
+            my $layout = get_var('LAYOUT') // 'us';
+            if ($layout ne 'us') {
+                assert_and_click 'ps_layout_search_field';
+                type_very_safely $layout;
+                assert_and_click "ps_layout_${layout}_select";
+            }
+        }
+        elsif ($next eq 'user') {
+            my $user_login = get_var('USER_LOGIN') || 'test';
+            my $user_password = get_var('USER_PASSWORD') || 'weakpassword';
+            assert_and_click 'ps_name_entry_field';
+            type_very_safely "${user_login}";
+            # two tabs to reach the password box
+            type_string "\t\t";
+            if (get_var('LANGUAGE')) {
+                # check we typed the user name as expected (hence keyboard
+                # layout is the intended one)
+                assert_screen 'ps_user_created';
+            }
+            type_very_safely $user_password;
+            # two tabs to get to the confirm
+            type_string "\t\t";
+            type_very_safely $user_password;
+        }
+        record_info("Click $next", "Clicking next on $next...");
+        wait_screen_change { assert_and_click 'next_button'; };
+    }
+    assert_and_click 'finish_button';
     # don't do it again on second load
     set_var("_SETUP_DONE", 1);
 }

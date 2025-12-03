@@ -159,17 +159,6 @@ sub load_install_tests() {
     # if this is a kickstart or RDP install, that's all folks
     return if (get_var("KICKSTART") || get_var("RDP_SERVER"));
 
-    # Root password and user creation spokes are suppressed on
-    # Workstation live install and Silverblue DVD install, so we do
-    # not want to try and use them. Setting this in the templates is
-    # tricky as it gets set for post-install tests too that way, and
-    # we don't want that
-    if ((get_var('LIVE') || get_var('CANNED')) && get_var('DESKTOP') eq 'gnome') {
-        set_var('INSTALLER_NO_ROOT', '1');
-        # this is effectively a forced install_no_user
-        set_var('INSTALL_NO_USER', '1');
-    }
-
     if (get_var('ANACONDA_TEXT')) {
         # since it differs much, handle text installation separately
         autotest::loadtest "tests/install_text.pm";

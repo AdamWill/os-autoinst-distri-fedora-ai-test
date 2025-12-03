@@ -53,7 +53,21 @@ sub _set_root_password_webui {
 }
 
 sub _do_root_and_user {
-    my $nouser = (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER"));
+    # check whether user and root password creation are suppressed,
+    # as they may be. if the 'begin installation' button is present
+    # and active, they must be suppressed. we use assert_screen not
+    # check_screen just to make it faster
+    assert_screen [
+        'anaconda_install_user_creation',
+        'anaconda_webui_no_local_account',
+        'anaconda_webui_begin_installation',
+        'anaconda_main_hub_begin_installation'
+    ];
+    if (match_has_tag('anaconda_webui_begin_installation') || match_has_tag('anaconda_main_hub_begin_installation')) {
+        set_var('INSTALLER_NO_ROOT', '1');
+        set_var('INSTALL_NO_USER', '1');
+    }
+    my $nouser = (get_var("USER_LOGIN", '') eq 'false' || get_var("INSTALL_NO_USER"));
     my $noroot = get_var("INSTALLER_NO_ROOT");
     return if ($nouser && $noroot);
     if (get_var("_ANACONDA_WEBUI")) {

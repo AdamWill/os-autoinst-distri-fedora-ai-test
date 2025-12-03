@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 79,
+      "height": 23,
+      "xpos": 482,
+      "ypos": 411
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "LANGUAGE-english",
+    "ps_begin_setup"
+  ]
+}

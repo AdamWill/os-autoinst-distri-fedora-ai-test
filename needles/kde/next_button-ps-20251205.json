@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 34,
+      "type": "match",
+      "ypos": 608,
+      "xpos": 631,
+      "height": 20
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "LANGUAGE-english",
+    "next_button"
+  ]
+}

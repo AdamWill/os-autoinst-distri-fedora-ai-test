@@ -26,6 +26,7 @@ sub run {
     my $password = get_var("USER_PASSWORD", "weakpassword");
     my $version = get_var("VERSION");
     my $desktop = get_var("DESKTOP");
+    my $relnum = get_release_number;
     # If KICKSTART is set, then the wait_time needs to consider the
     # install time. if UPGRADE, we have to wait for the entire upgrade
     # unless ENCRYPT_PASSWORD is set (in which case the postinstall
@@ -41,9 +42,14 @@ sub run {
     }
 
     # Handle pre-login initial setup if we're doing INSTALL_NO_USER
+    # or we're on KDE and we didn't see the user creation screen in
+    # the installer
     if (get_var("INSTALL_NO_USER") && !get_var("_SETUP_DONE")) {
         if ($desktop eq 'gnome') {
             gnome_initial_setup(prelogin => 1, timeout => $wait_time);
+        }
+        elsif ($desktop eq 'kde') {
+            plasma_setup(userexists => 0, timeout => $wait_time);
         }
         else {
             anaconda_create_user(timeout => $wait_time);
@@ -54,11 +60,19 @@ sub run {
         }
         $wait_time = 300;
     }
+
+    # As of 2025-12 KDE may show plasma-setup even if we created
+    # a user and set root password in the installer
+    if ($desktop eq 'kde' && $relnum > 43 && !get_var("_SETUP_DONE")) {
+        assert_screen(['login_screen', 'ps_begin_setup'], timeout => $wait_time);
+        $wait_time = 90;
+        plasma_setup(userexists => 1, timeout => 10) if (match_has_tag 'ps_begin_setup');
+    }
     # Wait for the login screen, unless we're doing a GNOME no user
     # install, which transitions straight from g-i-s to logged-in
     # desktop
     unless ($desktop eq 'gnome' && get_var("INSTALL_NO_USER")) {
-        boot_to_login_screen(timeout => $wait_time);
+        boot_to_login_screen(timeout => $wait_time, waitearly => 0);
         # if USER_LOGIN is set to string 'false', we're done here
         return if (get_var("USER_LOGIN") eq "false");
 
