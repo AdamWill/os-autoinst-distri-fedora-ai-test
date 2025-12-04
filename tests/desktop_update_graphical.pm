@@ -102,7 +102,7 @@ sub run {
             # if we have a download button, we want to hit it, even if
             # we also have a restart button. then continue waiting for
             # apply (only)
-            if (grep { $_ eq 'desktop_package_tool_update_download' } @$tags && check_screen 'desktop_package_tool_update_download') {
+            if ((grep { $_ eq 'desktop_package_tool_update_download' } @$tags) && check_screen 'desktop_package_tool_update_download') {
                 wait_screen_change { click_lastmatch; };
                 $n -= 1 if ($n > 1);
                 if (get_var("TAG") || get_var("COPR")) {
