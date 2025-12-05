@@ -12,7 +12,7 @@ sub run {
 
     if (get_var("UEFI")) {
         # if we're running on UEFI, we need esp
-        custom_blivet_add_partition(size => 512, mountpoint => '/boot/efi', filesystem => 'efi_filesystem');
+        custom_blivet_add_partition(size => 2048, mountpoint => '/boot/efi', filesystem => 'efi_filesystem');
     }
     elsif (get_var("OFW")) {
         custom_blivet_add_partition(size => 4, filesystem => 'ppc_prep_boot');
@@ -22,7 +22,7 @@ sub run {
         # installs, so we need a biosboot partition
         custom_blivet_add_partition(size => 1, filesystem => 'biosboot');
     }
-    custom_blivet_add_partition(size => 512, mountpoint => '/boot');
+    custom_blivet_add_partition(size => 1024, mountpoint => '/boot');
 
     # selecting "btrfs" as filesystem creates new BTRFS drive in blivet-gui
     custom_blivet_add_partition(filesystem => 'btrfs');

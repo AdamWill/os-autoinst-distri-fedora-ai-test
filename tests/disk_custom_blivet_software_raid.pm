@@ -12,7 +12,7 @@ sub run {
 
     if (get_var("UEFI")) {
         # if we're running on UEFI, we need esp
-        custom_blivet_add_partition(raid1 => 1, size => 1024, mountpoint => '/boot/efi', filesystem => 'efi_filesystem');
+        custom_blivet_add_partition(raid1 => 1, size => 2049, mountpoint => '/boot/efi', filesystem => 'efi_filesystem');
     }
     elsif (get_var("OFW")) {
         custom_blivet_add_partition(size => 4, filesystem => 'ppc_prep_boot');
@@ -32,7 +32,7 @@ sub run {
         wait_still_screen 3;
         assert_and_click "anaconda_blivet_free_space";
     }
-    custom_blivet_add_partition(raid1 => 1, size => 1024, mountpoint => '/boot');
+    custom_blivet_add_partition(raid1 => 1, size => 1025, mountpoint => '/boot');
     custom_blivet_add_partition(raid1 => 1, mountpoint => '/');
 
     assert_and_click "anaconda_spoke_done";
