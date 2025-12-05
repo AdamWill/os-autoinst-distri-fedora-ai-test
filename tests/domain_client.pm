@@ -21,6 +21,8 @@ sub run {
         # we don't have sssd debugging enabled yet
         assert_script_run 'dnf -y install sssd-tools', 240;
         assert_script_run 'sss_debuglevel 9';
+        # magic wait for AD test to avoid getent passwd check fails
+        sleep 15 if ($domain =~ m/samdom/);
     }
     # check domain is listed in 'realm list'
     validate_script_output 'realm list', sub { $_ =~ m/domain-name: $qdomain.*configured: kerberos-member/s };
