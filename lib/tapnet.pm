@@ -45,9 +45,15 @@ sub setup_tap_static {
     my @dns = get_host_dns();
     my $dnstext = 'ipv4.dns "' . join(", ", @dns) . '"';
     # bring up network
-    # this gets us the name of the first connection in the list,
-    # which should be what we want
-    my $connection = script_output "nmcli --fields NAME con show | head -2 | tail -1";
+    # this gets us the name of the first ethernet-type connection
+    # in the list, which should be what we want
+    my $connection = script_output 'nmcli -t --fields NAME,TYPE con show | grep ethernet$ | head -1 | cut -d":" -f1';
+    unless ($connection) {
+        # oh noes, something went hideously wrong! let's do this to
+        # help figure out what
+        script_run "nmcli --fields NAME,TYPE con show";
+        die "nmcli connection discovery failed!";
+    }
     assert_script_run "nmcli con mod '$connection' ipv4.method manual ipv4.addr $ip/24 ipv4.gateway 172.16.2.2 $dnstext";
     assert_script_run "nmcli con down '$connection'";
     assert_script_run "nmcli con up '$connection'";
