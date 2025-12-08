@@ -65,8 +65,8 @@
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
                 "CONSOLE_EXTRA_ARGS": "",
-                "INSECURE_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.fd",
-                "INSECURE_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.fd",
+                "INSECURE_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE_4M.qcow2",
+                "INSECURE_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS_4M.qcow2",
                 "MINCPU": "Nehalem",
                 "PART_TABLE_TYPE": "gpt",
                 "QEMUCPU": "host",
@@ -80,8 +80,8 @@
                 "QEMU_MAX_MIGRATION_TIME": "720",
                 "QEMU_VIRTIO_RNG": "1",
                 "UEFI": "1",
-                "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.secboot.fd",
-                "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.secboot.fd",
+                "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE_4M.secboot.qcow2",
+                "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS_4M.secboot.qcow2",
                 "UEFI_SECURE": "1",
                 "WORKER_CLASS": "qemu_x86_64"
             }
