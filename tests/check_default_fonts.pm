@@ -45,7 +45,11 @@ sub run {
     my %codes = ("japanese" => "ja", "arabic" => "ar");
     my $code = $codes{$language};
     my $release = lc(get_var("VERSION"));
-    assert_script_run("fontquery-diff -l ${code} ${release}", 300);
+    # FIXME we can drop this conditional bit when F42 is EOL
+    my $relnum = get_release_number;
+    my $loosearg = "";
+    $loosearg = " --loose-comparison" if ($relnum > 42);
+    assert_script_run("fontquery-diff${loosearg} -l ${code} ${release}", 300);
 }
 
 sub test_flags {
