@@ -108,10 +108,16 @@ sub run {
     # Begin installation
     # Sometimes, the 'slide in from the top' animation messes with
     # this - by the time we click the button isn't where it was any
-    # more. So wait for screen to stop moving before we click.
+    # more. So we'll retry a few times until the button goes away
     assert_screen ["anaconda_main_hub_begin_installation", "anaconda_webui_begin_installation"], 90;
-    wait_still_screen 5;
-    assert_and_click ["anaconda_main_hub_begin_installation", "anaconda_webui_begin_installation"];
+    wait_still_screen 3;
+    my $tries = 5;
+    while ($tries) {
+        $tries--;
+        wait_screen_change { assert_and_click ["anaconda_main_hub_begin_installation", "anaconda_webui_begin_installation"]; };
+        wait_still_screen 2;
+        last unless (check_screen ["anaconda_main_hub_begin_installation", "anaconda_webui_begin_installation"]);
+    }
     if ($webui) {
         click_lastmatch if (check_screen "anaconda_webui_confirm_installation", 10);
     }
