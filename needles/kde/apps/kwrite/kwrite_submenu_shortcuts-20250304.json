@@ -1,15 +1,15 @@
 {
-  "area": [
-    {
-      "xpos": 482,
-      "ypos": 644,
-      "width": 219,
-      "height": 22,
-      "type": "match"
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "kwrite_submenu_shortcuts"
-  ]
+    "area": [
+        {
+            "height": 22,
+            "type": "match",
+            "width": 134,
+            "xpos": 572,
+            "ypos": 644
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "kwrite_submenu_shortcuts"
+    ]
 }

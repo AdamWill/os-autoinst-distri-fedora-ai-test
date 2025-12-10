@@ -1,15 +1,15 @@
 {
-  "area": [
-    {
-      "xpos": 537,
-      "ypos": 536,
-      "width": 127,
-      "height": 17,
-      "type": "match"
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "gwen_submenu_about"
-  ]
+    "area": [
+        {
+            "height": 17,
+            "type": "match",
+            "width": 107,
+            "xpos": 557,
+            "ypos": 536
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "gwen_submenu_about"
+    ]
 }
