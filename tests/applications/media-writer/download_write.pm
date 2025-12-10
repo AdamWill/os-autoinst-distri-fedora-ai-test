@@ -55,7 +55,7 @@ sub run {
     # movements to prevent the SUT from going to sleep.
     my $count = 0;
     my $limit = 80;
-    until (check_screen("mwriter_download_finished")) {
+    until (check_screen("mwriter_finish_button")) {
         last if ($count >= $limit);
         sleep(30);    # Wait some time before checking again.
         $count++;

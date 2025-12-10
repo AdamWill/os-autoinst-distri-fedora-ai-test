@@ -21,7 +21,7 @@ sub run {
     assert_and_click("mwriter_choose_button");
 
     # Navigate to Downloaded files.
-    assert_and_click("mwriter_shortcut_downloaded");
+    assert_and_click("nautilus_directory_downloads");
 
     # Select the ISO you want to reuse.
     assert_and_click('mwriter_select_isofile');
