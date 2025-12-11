@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 174,
+      "xpos": 268,
+      "height": 21,
+      "width": 141,
+      "click_point": {
+        "xpos": 10.5,
+        "ypos": 10.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-french",
+    "anaconda_webui_no_local_account"
+  ]
+}
