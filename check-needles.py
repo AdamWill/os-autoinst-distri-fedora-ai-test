@@ -71,6 +71,8 @@ for testpath in testpaths:
             "check_screen",
             "start_with_launcher",
             "send_key_until_needlematch",
+            # utility func in tests/applications/papers/change_zoom.pm
+            "repeat_click",
             "# testtag"
         )
         for matchfunc in matchfuncs:
@@ -268,8 +270,6 @@ runapps = ("seahorse", "kwrite", "tuxracer", "akregator", "ark", "discover", "do
            "kolourpaint", "korganizer", "characters", "tux_racer")
 for app in runapps:
     testtags.append(f"apps_run_{app}")
-for zoom in ('papers_zoom_add', 'papers_zoom_subtract'):
-    testtags.append(zoom)
 
 # retcode tracker
 ret = 0
