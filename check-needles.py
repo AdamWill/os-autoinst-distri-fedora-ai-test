@@ -302,6 +302,10 @@ tagnoneedle = realtesttags - needletags
 # https://gitlab.gnome.org/GNOME/gnome-font-viewer/-/issues/64 is
 # fixed we can create this needle and drop this entry
 tagnoneedle.discard("fonts_c059_installed")
+# these are needles we know we need (for non-English KDE installs that
+# hit plasma-setup) but can't get them yet as there's a bug in plasma-setup
+tagnoneedle.discard("ps_layout_search_field")
+tagnoneedle.discard("ps_user_created")
 
 # reverse check, for images without a needle file
 imgpaths = glob.glob(f"{NEEDLEPATH}/**/*.png", recursive=True)
