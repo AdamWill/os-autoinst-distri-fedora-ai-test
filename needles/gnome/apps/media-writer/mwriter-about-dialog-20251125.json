@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 337,
+      "ypos": 333,
+      "width": 252,
+      "height": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mwriter-about-dialog"
+  ]
+}
