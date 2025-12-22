@@ -93,12 +93,9 @@ sub run {
         assert_screen ["desktop_package_tool_restart_automatically", "desktop_package_tool_action_select"];
         click_lastmatch if (match_has_tag "desktop_package_tool_action_select");
         assert_and_click("desktop_package_tool_restart_automatically");
-        # When we see auth_required, it means the restart has been triggered
-        # and we need to authorize it
-        while (!check_screen("auth_required")) {
-            sleep 15;
-        }
-        type_very_safely("$pword\n");
+        # we may or may not get auth_required, it seems
+        assert_screen(["auth_required", "bootloader"], timeout => 180);
+        type_very_safely("$pword\n") if (match_has_tag("auth_required"));
     }
 }
 
