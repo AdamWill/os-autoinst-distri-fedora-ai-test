@@ -90,7 +90,7 @@ sub run {
         # unset the 'last time notification was shown' setting in case
         # it got shown during install_default_upload:
         # https://bugzilla.redhat.com/show_bug.cgi?id=2178311
-        script_run 'kwriteconfig5 --file PlasmaDiscoverUpdates --group Global --key LastNotificationTime --delete', 0;
+        script_run 'kwriteconfig6 --file PlasmaDiscoverUpdates --group Global --key LastNotificationTime --delete', 0;
         wait_still_screen 5;
         script_run 'exit', 0;
         console_login(user => 'root', password => get_var('ROOT_PASSWORD', 'weakpassword'));

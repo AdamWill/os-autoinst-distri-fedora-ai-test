@@ -94,9 +94,9 @@ sub run {
         # Switch to the regular user
         enter_cmd("su -l $user");
         # Wipe last update notification time
-        assert_script_run("kwriteconfig5 --file PlasmaDiscoverUpdates --group Global --key LastNotificationTime --delete");
+        assert_script_run("kwriteconfig6 --file PlasmaDiscoverUpdates --group Global --key LastNotificationTime --delete");
         # Disable the screen locker
-        assert_script_run("kwriteconfig5 --file kscreenlockerrc --group Daemon --key Autolock false qdbus org.freedesktop.ScreenSaver /ScreenSaver configure");
+        assert_script_run("kwriteconfig6 --file kscreenlockerrc --group Daemon --key Autolock false qdbus org.freedesktop.ScreenSaver /ScreenSaver configure");
         # Exit regular user
         enter_cmd("exit");
     }
