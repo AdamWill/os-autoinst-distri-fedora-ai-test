@@ -73,14 +73,17 @@ sub run {
         # Downloading the upgrade packages may take a long time
         # so let's check until we find it.
         assert_and_click("desktop_package_tool_restart_upgrade", timeout => 1200);
-        assert_screen("auth_required");
+        assert_screen(["auth_required", "gnome_reboot_confirm"]);
 
-        # Type the password to confirm.
-        type_very_safely("$pword\n");
+        if (match_has_tag("auth_required")) {
+            # Type the password to confirm.
+            type_very_safely("$pword\n");
+            assert_screen("gnome_reboot_confirm");
+        }
 
         # Click on the 'restart and install' button
         # to restart into the upgrade session.
-        assert_and_click("gnome_reboot_confirm");
+        click_lastmatch;
     }
     elsif ($desktop eq "kde") {
         # Click on Update all
