@@ -7,15 +7,8 @@ use utils;
 # line navigation, line highlighting and show side and bottom panels.
 
 sub open_settings_or_preferences {
-    # the 'settings menu' was removed in 48 and merged into preferences
-    # but the flatpak is still 47 for now so we need to handle both
-    if (check_screen("gte_settings_button", 3)) {
-        click_lastmatch;
-    }
-    else {
-        assert_and_click("gnome_burger_menu");
-        assert_and_click("gte_preferences_submenu");
-    }
+    assert_and_click("gnome_burger_menu");
+    assert_and_click("gte_preferences_submenu");
 }
 
 sub run {
@@ -25,7 +18,7 @@ sub run {
     open_settings_or_preferences;
     wait_still_screen(3);
     assert_and_click("gte_display_line_numbers");
-    # for the preferences case
+    # close preferences
     send_key("esc");
     assert_screen("gte_lines_numbered");
 
@@ -47,7 +40,7 @@ sub run {
     open_settings_or_preferences;
     send_key_until_needlematch("gte_display_margin", "tab", 20);
     assert_and_click("gte_display_margin");
-    # for the preferences case
+    # close preferences
     send_key("esc");
     assert_screen("gte_margin_displayed");
 
@@ -58,17 +51,6 @@ sub run {
     assert_and_click("gte_toggle_side_panel");
     send_key("esc");
     assert_screen("gte_side_panel_on");
-
-    # Display the grid
-    # this was removed in 48, use presence of settings button as proxy
-    if (check_screen("gte_settings_button", 3)) {
-        assert_and_click("gnome_burger_menu");
-        assert_and_click("gte_preferences_submenu");
-        send_key_until_needlematch("gte_toggle_grid", "tab", 20);
-        assert_and_click("gte_toggle_grid");
-        send_key("esc");
-        assert_screen("gte_grid_on");
-    }
 }
 
 
