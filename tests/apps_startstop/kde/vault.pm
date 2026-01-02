@@ -34,11 +34,6 @@ sub run {
     # Click the Next button
     assert_and_click "kde_next";
 
-    # If the security notice appears, click next it away.
-    if (check_screen "vault_security_notice") {
-        assert_and_click "kde_next";
-    }
-
     # Enter a password and validate it.
     assert_and_click "vault_enter_password";
     type_very_safely "SecretVaultCode";
