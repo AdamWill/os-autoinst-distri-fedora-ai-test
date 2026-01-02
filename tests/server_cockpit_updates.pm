@@ -31,22 +31,9 @@ sub run {
     assert_and_click 'cockpit_updates_all_install';
     my $run = 0;
     while ($run < 40) {
-        # When Cockpit packages are also included in the updates
-        # the user is forced to reconnect, i.e. to restart the Web Application
-        # and relog for further interaction. We will check if reconnection is
-        # needed and if so, we will restart Firefox and login again. We do
-        # *not* need to gain admin privs again, trying to do so will fail.
-        #
         last if (check_screen("cockpit_updates_updated"));
-        if (check_screen("cockpit_updates_reconnect", 1)) {
-            quit_firefox;
-            start_cockpit(login => 1, admin => 0);
-            select_cockpit_update();
-            last;
-
-        }
         # Ignore rebooting the system because we want to finish the test instead.
-        elsif (check_screen('cockpit_updates_restart_ignore', 1)) {
+        if (check_screen('cockpit_updates_restart_ignore', 1)) {
             assert_and_click 'cockpit_updates_restart_ignore';
             last;
         }
