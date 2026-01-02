@@ -52,6 +52,9 @@ keeplist = (
     # this needle shows the details when Software has a problem
     # which does not happen very often
     "software_button_details",
+    # this is for the 'g-i-s before anaconda' flow for ws live, which
+    # is currently not implemented but expected to return later
+    "install_lang_search_field",
 )
 
 changed = False

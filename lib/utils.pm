@@ -1002,7 +1002,8 @@ sub gnome_initial_setup {
             }
             else {
                 # we're at the language version and the language we want isn't
-                # selected
+                # selected; this is intended for the pre-anaconda flow which
+                # is not active as of 2026-01, but expected to return in future
                 assert_and_click("install_lang_search_field");
                 type_very_safely($lang);
                 assert_and_click("gis_lang_${lang}_select");
