@@ -118,9 +118,6 @@ sub run {
         wait_still_screen 2;
         last unless (check_screen ["anaconda_main_hub_begin_installation", "anaconda_webui_begin_installation"]);
     }
-    if ($webui) {
-        click_lastmatch if (check_screen "anaconda_webui_confirm_installation", 10);
-    }
 
     # If we want to test identification we will do it
     # on several places in this procedure, such as
