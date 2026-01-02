@@ -40,6 +40,7 @@ lines = lines[2:]
 keeplist = (
     # 'system crashes to emergency mode / dracut' cases
     "emergency_rescue_nopassword",
+    "emergency_rescue",
     "root_logged_in-dracut",
     # text install just doesn't fail this way very often
     "anaconda_main_hub_text_unfinished",
