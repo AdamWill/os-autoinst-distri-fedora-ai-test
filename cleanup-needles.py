@@ -56,6 +56,8 @@ keeplist = (
     # this is for the 'g-i-s before anaconda' flow for ws live, which
     # is currently not implemented but expected to return later
     "install_lang_search_field",
+    # only sometimes hit when testing side tags / COPR
+    "desktop_package_tool_update_download_unsigned",
 )
 
 changed = False
