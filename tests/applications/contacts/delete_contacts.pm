@@ -12,14 +12,8 @@ sub remove_contact {
     my $identity = hashed_string($name);
     assert_and_click("contacts_contact_listed_$identity");
     wait_still_screen(2);
-    # in older versions there's just a delete button on the right
-    # side of the screen, in newer versions there's a burger menu
-    # with a "Delete contact" entry, so we need to open the menu
-    # then click the entry. The other path is selecting multiple
-    # contacts; when we do that we get a red "Remove" button at
-    # bottom left
-    assert_and_click(["gnome_button_delete", "contacts_contact_remove", "contacts_right_menu"]);
-    assert_and_click("contacts_contact_delete") if (match_has_tag "contacts_right_menu");
+    assert_and_click "contacts_right_menu";
+    assert_and_click "contacts_contact_delete";
     wait_still_screen(2);
 }
 
