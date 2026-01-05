@@ -3,8 +3,7 @@ use strict;
 use testapi;
 use utils;
 
-# This test tests if Terminal starts (which will be gnome-terminal
-# in Fedora < 41, ptyxis in Fedora >= 41)
+# This test tests if the terminal app (ptyxis, since F41) starts
 
 sub run {
     my $self = shift;
