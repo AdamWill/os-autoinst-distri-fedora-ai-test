@@ -33,21 +33,11 @@ sub run {
     # After another minute or so, the alarm should ring again.
     # This time we will use the stop button to stop it.
     assert_and_click("clocks_button_alarm_stop", timeout => 120);
-    # Up to 46.0, the alarm would stay active after being stopped; from
-    # 46.0 onwards it goes inactive. FIXME this can be simplified to
-    # assume it starts at 'inactive' once we are no longer testing
-    # < 46.0 anywhere
-    assert_screen(["clocks_alarm_active", "clocks_alarm_inactive"]);
-    my $wasactive = match_has_tag("clocks_alarm_active");
-    # Now toggle the switch to change its state
+    # The alarm should switch off and become inactive
+    assert_screen("clocks_alarm_inactive");
+    # Now toggle the switch to activate it
     assert_and_click("gnome_button_toggle");
-    # whichever state it was in, check it's now in the other
-    if ($wasactive) {
-        assert_screen("clocks_alarm_inactive");
-    }
-    else {
-        assert_screen("clocks_alarm_active");
-    }
+    assert_screen("clocks_alarm_active");
     # Delete alarm using the delete button.
     assert_and_click("gnome_button_cross_remove");
     sleep 2;
