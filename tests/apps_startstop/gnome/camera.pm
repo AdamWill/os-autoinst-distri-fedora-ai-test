@@ -7,9 +7,6 @@ use utils;
 
 sub run {
     my $self = shift;
-    # FIXME after F39 is stable, drop the old 'cheese' needles
-    # and always expect the access dialog
-
     # Start the application
     start_with_launcher('apps_menu_camera');
     # Click the camera access dialog
