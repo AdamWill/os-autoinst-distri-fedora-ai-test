@@ -15,8 +15,6 @@ sub run {
     # View password
     assert_screen "auth_required", timeout => 60;
     wait_still_screen 3;
-    # FIXME when https://github.com/firewalld/firewalld/issues/1328
-    # is fixed, switch (back) to type_very_safely here
     type_safely $password;
     send_key 'ret';
     wait_still_screen 3;
