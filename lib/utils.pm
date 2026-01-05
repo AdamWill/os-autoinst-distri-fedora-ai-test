@@ -503,7 +503,7 @@ sub get_workarounds {
         "41" => [],
         "42" => [],
         "43" => [],
-        "44" => [],
+        "44" => ["FEDORA-2026-e90d82b501"],
         "eln" => [],
     );
     my $advortasks = $workarounds{$version};
@@ -1076,7 +1076,7 @@ sub plasma_setup {
     );
     # let's handle it similarly, by recording the pages we *may*
     # encounter and looping through
-    my @nexts = ('language', 'keyboard', 'appearance', 'user', 'tz');
+    my @nexts = ('language', 'keyboard', 'appearance', 'user', 'hostname', 'tz');
     # if a user account already exists, user page is skipped
     @nexts = grep { $_ ne 'user' } @nexts if ($args{userexists});
     # Let's get started
