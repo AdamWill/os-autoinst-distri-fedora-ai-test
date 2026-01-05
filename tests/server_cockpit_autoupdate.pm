@@ -29,14 +29,11 @@ sub run {
     # Quit Cockpit
     quit_firefox;
 
-    # this is a dnf4 vs. dnf5 thing
-    my $relnum = get_release_number;
-    my $service = $relnum > 40 ? "dnf5-automatic" : "dnf-automatic-install";
     # Check that the service has started
-    assert_script_run "systemctl is-active ${service}.timer";
+    assert_script_run "systemctl is-active dnf5-automatic.timer";
 
     # Check that it is scheduled correctly
-    validate_script_output "systemctl show ${service}.timer | grep TimersCalendar", sub { $_ =~ "06:00:00" };
+    validate_script_output "systemctl show dnf5-automatic.timer | grep TimersCalendar", sub { $_ =~ "06:00:00" };
 }
 
 sub test_flags {
