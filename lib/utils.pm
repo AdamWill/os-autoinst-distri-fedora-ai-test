@@ -944,16 +944,6 @@ sub gnome_initial_setup {
         @nexts = ('language', 'keyboard');
     }
     if ($args{prelogin}) {
-        # On releases that use anaconda gtkui on live images, we
-        # configure g-i-s to skip 'language', 'keyboard' and 'timezone'
-        # using a custom vendor.conf:
-        # https://fedoraproject.org//wiki/Changes/ReduceInitialSetupRedundancy
-        # https://bugzilla.redhat.com/show_bug.cgi?id=1474787 ,
-        # but 'language' is never *really* skipped (see above)
-        if ($relnum < 42) {
-            @nexts = grep { $_ ne 'keyboard' } @nexts;
-            @nexts = grep { $_ ne 'timezone' } @nexts;
-        }
         # https://pagure.io/workstation-ostree-config/pull-request/682
         # third party repo page ('software') skipped on Silverblue
         if ($relnum > 42 && get_var('SUBVARIANT') eq 'Silverblue') {
