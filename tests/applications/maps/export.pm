@@ -14,37 +14,15 @@ sub run {
     assert_and_click("maps_menu_export");
 
     my $relnum = get_release_number;
-    # the export flow was changed in gnome-maps 47. Releases earlier
-    # than Rawhide and, for now, the flatpak build are still 46, so
-    # we use the older flow there
-    # FIXME!
-    # Update on 10/15/2024:
-    # Flatpakked app now uses the new flow, so the only need is for
-    # older releases.
-    if ($relnum < 41) {
-        # old flow
-        # wait for the export screen to appear and settle
-        assert_screen('maps_button_export');
-        wait_still_screen(2);
-        # Rename the file and export it.
-        # The name entry field should have focus already, so we are
-        # just going to rename the proposed file name.
-        send_key('ctrl-a');
-        type_very_safely('exported-map.png');
-        assert_and_click('maps_button_export');
-    }
-    else {
-        # new flow
-        # wait for the export screen to appear and settle
-        assert_and_click("maps_button_export");
-        wait_still_screen(2);
-        # Rename the file and export it
-        assert_and_click("nautilus_save_filename");
-        wait_still_screen(2);
-        send_key('ctrl-a');
-        type_very_safely("exported-map.png");
-        assert_and_click("gnome_button_save");
-    }
+    # wait for the export screen to appear and settle
+    assert_and_click("maps_button_export");
+    wait_still_screen(2);
+    # Rename the file and export it
+    assert_and_click("nautilus_save_filename");
+    wait_still_screen(2);
+    send_key('ctrl-a');
+    type_very_safely("exported-map.png");
+    assert_and_click("gnome_button_save");
 
     # After the map has been exported, we will open
     # it in an image viewer to see that it is correct.
