@@ -12,7 +12,14 @@ sub run {
     # ensure we boot from hard disk on next boot, wipe the entry for
     # the optical drive
     assert_script_run('efibootmgr -b $(efibootmgr | grep CD-ROM | head -1 | cut -f1 | sed -e "s,[^0-9],,g") -B') if (get_var("UEFI"));
-    type_string "reboot\n";
+    # for USB install, disconnect the USB stick and reboot via ACPI
+    if (get_var('USBBOOT')) {
+        disconnect_usb;
+        power 'reset';
+    }
+    else {
+        type_string "reboot\n";
+    }
 }
 
 sub test_flags {
