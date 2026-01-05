@@ -73,9 +73,7 @@ sub run {
     # disables updating the ref with the new commit, and we *do* want
     # to do that. pungi updates the ref itself, I don't want to copy
     # all that work in here
-    my $yaml = "$lcsubv-ostree.yaml";
-    $yaml = "fedora-$lcsubv.yaml" if ($version < 41);
-    assert_script_run "rpm-ostree compose tree --unified-core --repo=/var/tmp/ostree/repo/ --add-metadata-string=version=${advortask} --force-nocache /workstation-ostree-config/$yaml |& ts '" . '[%Y-%m-%d %H:%M:%S]' . "' | tee /tmp/ostree.log", 4500;
+    assert_script_run "rpm-ostree compose tree --unified-core --repo=/var/tmp/ostree/repo/ --add-metadata-string=version=${advortask} --force-nocache /workstation-ostree-config/${lcsubv}-ostree.yaml |& ts '" . '[%Y-%m-%d %H:%M:%S]' . "' | tee /tmp/ostree.log", 4500;
     assert_script_run "set +o pipefail";
     upload_logs "/tmp/ostree.log";
     # check out the ostree installer lorax templates
