@@ -8,9 +8,6 @@
         name: ['os-autoinst', 'perl-Test-Strict', 'perl-Test-Harness', 'perl-JSON', 'perl-REST-Client', 'perl-Code-TidyAll']
         state: present
       become: yes
-    - name: Update os-autoinst (dumb hack for CI running on F41)
-      command: dnf -y update https://fedorapeople.org/groups/qa/openqa-repos/os-autoinst-5%5e20250707gitd55ec72-7.fc41.x86_64.rpm
-      become: yes
     - name: Run perl tests
       command: prove t/
       args:
