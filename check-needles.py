@@ -267,7 +267,6 @@ for app in ("focuswriter", "gvim"):
 runapps = ("seahorse", "kwrite", "tuxracer", "akregator", "ark", "discover", "dolphin",
            "gwenview", "kaddressbook", "kcalc", "kcharselect", "kfind", "krdc", "ktnef",
            "kwallet", "kwalletmanager", "neochat", "spectacle", "docviewer", "patience",
-           "kolourpaint", "korganizer", "characters", "tux_racer", "krfb")
            "kolourpaint", "korganizer", "characters", "tux_racer", "krfb", "media-writer")
 for app in runapps:
     testtags.append(f"apps_run_{app}")

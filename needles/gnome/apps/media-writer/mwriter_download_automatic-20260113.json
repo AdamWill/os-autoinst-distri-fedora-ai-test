@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 307,
+      "ypos": 492,
+      "width": 196,
+      "height": 23,
+      "type": "match"
+    },
+    {
+      "xpos": 470,
+      "ypos": 484,
+      "width": 10,
+      "height": 15,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mwriter_download_automatic"
+  ]
+}

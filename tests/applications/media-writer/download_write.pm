@@ -50,6 +50,13 @@ sub run {
     # When auth dialog appears, deal with it.
     authenticate();
 
+    # Sometimes, downloading does not start immediately
+    # and a Write button is shown. If that is the case,
+    # try clicking on the button to start.
+    if (check_screen("mwriter_ready_button_write", timeout => 15)) {
+        click_lastmatch();
+    }
+
     # Wait for the download to finish. Because downloads could take
     # longer, let's perform a check every 30 second accompanied by mouse
     # movements to prevent the SUT from going to sleep.
@@ -73,9 +80,8 @@ sub run {
 
     # Go to console, perform tests, and come back
     $self->root_console(tty => 3);
-    # Create a mountpoint
-    assert_script_run("mkdir -p /mnt/usbdisk");
-    confirm_disk_modification("write");
+    # Do the checksum and compare tests
+    check_written_content();
     desktop_vt();
     # Shutdown the application
     send_key("alt-f4");

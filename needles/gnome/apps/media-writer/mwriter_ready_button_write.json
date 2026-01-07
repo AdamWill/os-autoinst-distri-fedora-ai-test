@@ -1,0 +1,26 @@
+{
+  "area": [
+    {
+      "xpos": 458,
+      "ypos": 458,
+      "width": 108,
+      "height": 21,
+      "type": "match"
+    },
+    {
+      "xpos": 733,
+      "ypos": 598,
+      "width": 49,
+      "height": 20,
+      "type": "match",
+      "click_point": {
+        "xpos": 24.5,
+        "ypos": 10
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mwriter_ready_button_write"
+  ]
+}

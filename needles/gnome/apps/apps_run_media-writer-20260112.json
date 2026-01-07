@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "ypos": 484,
+      "height": 24,
+      "type": "match",
+      "width": 174,
+      "xpos": 326
+    },
+    {
+      "xpos": 418,
+      "width": 55,
+      "height": 53,
+      "type": "match",
+      "ypos": 240
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_media-writer"
+  ]
+}

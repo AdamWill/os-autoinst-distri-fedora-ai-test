@@ -40,6 +40,13 @@ sub run {
     wait_still_screen(5);
     authenticate();
 
+    # Sometimes, downloading does not start immediately
+    # and a Write button is shown. If that is the case,
+    # try clicking on the button to start.
+    if (check_screen("mwriter_ready_button_write", timeout => 15)) {
+        click_lastmatch();
+    }
+
     # Wait up to 300 sec and try to click on Finish button.
     assert_and_click("mwriter_finish_button", timeout => 300);
 
@@ -48,10 +55,7 @@ sub run {
 
     # Go to console, perform tests, and come back
     $self->root_console(tty => 3);
-    # Try creating the mountpoint (just in case), do not mind
-    # if it fails for its existence.
-    script_run("mkdir -p /mnt/usbdisk");
-    confirm_disk_modification("write");
+    check_written_content();
     desktop_vt();
     # Stop the application
     send_key("alt-f4");

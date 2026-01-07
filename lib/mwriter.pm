@@ -8,9 +8,11 @@ use lockapi;
 use testapi;
 use utils;
 
-our @EXPORT = qw(select_edition select_version select_arch confirm_disk_modification);
+our @EXPORT = qw(select_edition select_version select_arch confirm_disk_modification check_written_content);
 
 
+# Selects a Fedora edition in Media Writer by opening the dropdown,
+# clicking the given edition, and asserting the selected state.
 sub select_edition {
     my $edition = shift;
     assert_and_click("mwriter_dropdown_arrow");
@@ -18,79 +20,43 @@ sub select_edition {
     assert_screen("mwriter_selected_$edition");
 }
 
+# Selects a Fedora version in Media Writer by opening the version dropdown
+# and clicking the specified version entry.
 sub select_version {
     my $version = shift;
     assert_and_click("mwriter_dropdown_version");
     assert_and_click("mwriter_select_$version");
 }
 
+# Selects a target architecture in Media Writer by opening the architecture
+# dropdown and clicking the specified architecture entry.
 sub select_arch {
     my $arch = shift;
     assert_and_click("mwriter_dropdown_arch");
     assert_and_click("mwriter_select_$arch");
 }
 
-sub confirm_disk_modification {
-    my ($mod) = @_;
+# Validates that the USB media was written correctly.
+# Verifies the embedded checksum on the device and compares its contents
+# byte-for-byte with the originally downloaded ISO image.
+# Assumes the target device is /dev/sda which is correct as the normal
+# disk is /dev/vda and the CD mechanics is /dev/sr0
+sub check_written_content {
+    my $iso = script_output("ls /home/test/Downloads/*.iso");
+    my $variant = get_var("SUBVARIANT");
+    my $checkiso = "checkisomd5 -v /dev/sda";
+    my $compare = "cmp /dev/sda $iso 2>&1 | tee /dev/stderr | grep -q 'EOF on .*\.iso'";
 
-    my $disk = '/dev/sda';
-    my $part1 = "${disk}1";
-    my $part2 = "${disk}2";
-
-    # Basic disk and partitioning sanity
-    assert_script_run("lsblk | grep -w sda");
-    assert_script_run("lsblk | grep -w sda1");
-    assert_script_run("lsblk | grep -w sda2") if $mod eq 'write';
-
-    # Mountpoints are created in the main code, here we only mount and unmount
-    assert_script_run("mount ${part1} /mnt/usbdisk");
-
-    if ($mod eq 'write') {
-        # These structures must exist when we check for "write".
-        my @must_exist = (
-            '/mnt/usbdisk/boot/grub2/grub.cfg',
-            '/mnt/usbdisk/EFI/BOOT',
-            '/mnt/usbdisk/EFI/fedora',
-            '/mnt/usbdisk/LiveOS/squashfs.img',
-            '/mnt/usbdisk/mach_kernel',
-            '/mnt/usbdisk/System/Library/CoreServices/SystemVersion.plist',
-        );
-
-        for my $path (@must_exist) {
-            # test -e → 0 = OK (exists) or die
-            assert_script_run("test -e $path && echo OK");
-        }
-    }
-    elsif ($mod eq 'restore') {
-        # These structures must not exist when "restore"
-        my @must_be_gone = (
-            '/mnt/usbdisk/boot',
-            '/mnt/usbdisk/EFI',
-            '/mnt/usbdisk/LiveOS',
-            '/mnt/usbdisk/mach_kernel',
-            '/mnt/usbdisk/System',
-        );
-
-        my $error = 0;
-
-        for my $path (@must_be_gone) {
-            # test -e → 0 = exists (error), else OK
-            if (script_run("test -e $path") == 0) {
-                $error++;
-            }
-        }
-
-        if ($error > 0) {
-            assert_script_run("ls -l /mnt/usbdisk");
-            wait_still_screen(5);
-            die("$error of the tested data structures on the USB disk have not been deleted.");
-        }
+    # Check the checksum of the written media and compare the ISO and the media.
+    if ($variant eq "Silverblue") {
+        toolbox("run", "$checkiso");
     }
     else {
-        die("Unknown mode '$mod' in confirm_disk_modification");
+        assert_script_run("$checkiso", timeout => 300);
     }
-
-    assert_script_run("umount /mnt/usbdisk");
+    assert_script_run("$compare", timeout => 300);
 }
+
+
 
 1;

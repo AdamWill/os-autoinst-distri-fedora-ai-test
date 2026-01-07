@@ -1105,12 +1105,13 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NUMDISKS": "1",
+                "QEMU_APPEND": "-drive if=none,id=disk_usb,file=/var/lib/openqa/factory/hdd/fixed/disk_usb.qcow2,format=qcow2,snapshot=on -device qemu-xhci,id=xhci -device usb-storage,bus=xhci.0,drive=disk_usb,removable=on",
                 "HDDSIZEGB": "20",
                 "POSTINSTALL_PATH": "tests/applications/media-writer",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "MEDIA": "official",
-                "EDITION": "workstation",
-                "QEMU_APPEND": "-device qemu-xhci,id=usb -drive id=usb_disk,file=/var/lib/openqa/factory/hdd/fixed/disk_usb.img,format=raw,discard=unmap,if=none -device usb-storage,drive=usb_disk,bus=usb.0,port=4"
+                "EDITION": "workstation"
             }
         },
         "nautilus": {
