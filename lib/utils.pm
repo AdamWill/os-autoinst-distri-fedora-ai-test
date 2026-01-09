@@ -502,7 +502,7 @@ sub get_workarounds {
     my %workarounds = (
         "41" => [],
         "42" => ["FEDORA-2026-3c4cf60c3f"],
-        "43" => ["FEDORA-2026-339716978c"],
+        "43" => [],
         "44" => [],
         "eln" => [],
     );
