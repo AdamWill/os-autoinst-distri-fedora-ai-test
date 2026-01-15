@@ -24,7 +24,7 @@
 
 WORK_DIR=$(mktemp -d)
 pushd ${WORK_DIR}
-git clone https://pagure.io/fedora-qa/openqa_testdata.git
+git clone https://forge.fedoraproject.org/quality/openqa-testdata.git
 tar --exclude='.git' -czvf testdata.tar.gz openqa_testdata
 popd
 here=$(dirname ${0})
