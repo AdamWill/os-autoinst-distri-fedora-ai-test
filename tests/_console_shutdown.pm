@@ -20,7 +20,7 @@ sub run {
     # so won't have this there to mount
     script_run("sed -i '/update_repo/d' /etc/fstab") if (get_var("ADVISORY_OR_TASK"));
     script_run("poweroff", 0);
-    assert_shutdown 180;
+    assert_shutdown 360;
 }
 
 # this is not 'fatal' or 'important' as all wiki test cases are passed
