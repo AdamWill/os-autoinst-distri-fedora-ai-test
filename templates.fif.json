@@ -2139,6 +2139,7 @@
                 "NICTYPE": "tap",
                 "POSTINSTALL": "podman",
                 "POST_STATIC": "172.16.2.114 podman001.test.openqa.fedoraproject.org",
+                "RETRY": "5",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
