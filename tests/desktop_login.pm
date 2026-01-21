@@ -314,13 +314,8 @@ sub run {
 
         # We will also test another alternative - switching the user from
         # a locked screen.
-        # FIXME As of 2025-07 on F43+ we cannot because of
-        # https://gitlab.gnome.org/GNOME/mutter/-/issues/4243 , so let's just
-        # do it 'normally' again
-        unless ($desktop eq "gnome" && $relnum > 42) {
-            lock_screen();
-            send_key "ret";
-        }
+        lock_screen();
+        send_key "ret";
         switch_user();
         login_user(user => "jack", password => $jackpass);
         # we should be back in the previous 'jack' session so the terminal
