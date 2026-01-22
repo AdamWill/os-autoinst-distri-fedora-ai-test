@@ -5,9 +5,9 @@ use testapi;
 sub run {
     assert_screen "root_console";
     # this is basically asserting that if we list all swaps and grep
-    # out any zram ones, we still have one at prio -2, which should
+    # out any zram ones, we still have one at prio -2 or -1, which should
     # be the disk-based one
-    assert_script_run 'swapon --show | grep -v zram | grep "\-2"';
+    assert_script_run 'swapon --show | grep -v zram | egrep "(-1|-2)"';
 }
 
 sub test_flags {
