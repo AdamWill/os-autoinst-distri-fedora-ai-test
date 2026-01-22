@@ -24,9 +24,10 @@ sub run {
     # it is, so let's use haveged
     assert_script_run "dnf -y install haveged", 300;
     assert_script_run 'systemctl start haveged.service';
-    assert_script_run "rm -f /etc/samba/smb.conf";
     # First install the necessary packages
     assert_script_run "dnf -y install samba-dc samba-tools krb5-workstation adcli", 600;
+    # this has to be wiped or the provisioning will fail
+    assert_script_run "rm -f /etc/samba/smb.conf";
     # configure the firewall
     assert_script_run "firewall-cmd --permanent --add-service samba-dc";
     assert_script_run "systemctl restart firewalld.service";
