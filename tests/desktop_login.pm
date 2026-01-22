@@ -201,6 +201,7 @@ sub run {
     my $self = shift;
     my $jackpass = "kozapanijezibaby";
     my $jimpass = "babajagakozaroza";
+    my $relnum = get_release_number;
     our $desktop = get_var("DESKTOP");
     # replace the wallpaper with a black image, this should work for
     # all desktops. Takes effect after a logout / login cycle
@@ -217,10 +218,18 @@ sub run {
         }
     }
     if ($desktop eq "kde") {
-        # use solid blue background for SDDM
-        # theme.conf.user was dropped in 5.90.0-2.fc40, doing
-        # theme.conf* should work before and after
-        assert_script_run "sed -i -e 's,image,solid,g' /usr/share/sddm/themes/01-breeze-fedora/theme.conf*";
+        # FIXME drop when F43 is EOL
+        if ($relnum < 44) {
+            # use solid blue background for SDDM
+            # theme.conf.user was dropped in 5.90.0-2.fc40, doing
+            # theme.conf* should work before and after
+            assert_script_run "sed -i -e 's,image,solid,g' /usr/share/sddm/themes/01-breeze-fedora/theme.conf*";
+        }
+        else {
+            # use solid background for plasma-login
+            # should give the same blue as sddm but gives black ATM
+            assert_script_run 'printf "[Greeter]\nWallpaperPlugin=org.kde.color" > /etc/plasmalogin.conf';
+        }
     }
     adduser(name => "Jack Sparrow", login => "jack", password => $jackpass);
     if ($desktop eq "gnome") {
@@ -268,7 +277,6 @@ sub run {
 
     # Try to log in with either account, intentionally entering the wrong password.
     login_user(user => "jack", password => "wrongpassword", checklogin => 0);
-    my $relnum = get_release_number;
     if ($desktop eq 'i3') {
         # In LightDM (used by i3), a message is shown about an
         # unsuccessful login and it can be asserted, so let's do it.
