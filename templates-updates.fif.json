@@ -41,6 +41,13 @@
                 "RETRY": "1"
             }
         },
+        "updates-server-boot-iso": {
+            "settings": {
+                "NUMDISKS": "2",
+                "RETRY": "1",
+                "SUBVARIANT": "Server"
+            }
+        },
         "updates-server-upgrade": {
             "settings": {
                 "NUMDISKS": "2",
@@ -134,6 +141,14 @@
         "fedora-updates-everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
             "flavor": "updates-everything-boot-iso"
+        },
+        "fedora-updates-server-boot-iso-aarch64-*": {
+            "arch": "aarch64",
+            "flavor": "updates-server-boot-iso"
+        },
+        "fedora-updates-server-boot-iso-x86_64-*": {
+            "arch": "x86_64",
+            "flavor": "updates-server-boot-iso"
         },
         "fedora-updates-kde-aarch64-*": {
             "arch": "aarch64",
@@ -242,6 +257,18 @@
         "fedora-updates-everything-boot-iso-x86_64-*-bios": {
             "machine": "bios",
             "product": "fedora-updates-everything-boot-iso-x86_64-*"
+        },
+        "fedora-updates-server-boot-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-updates-server-boot-iso-aarch64-*"
+        },
+        "fedora-updates-server-boot-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-updates-server-boot-iso-x86_64-*"
+        },
+        "fedora-updates-server-boot-iso-x86_64-*-bios": {
+            "machine": "bios",
+            "product": "fedora-updates-server-boot-iso-x86_64-*"
         },
         "fedora-updates-kde-aarch64-*-aarch64": {
             "machine": "aarch64",
@@ -471,7 +498,10 @@
             "profiles": {
                 "fedora-updates-everything-boot-iso-aarch64-*-aarch64": 5,
                 "fedora-updates-everything-boot-iso-x86_64-*-bios": 5,
-                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
+                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5,
+                "fedora-updates-server-boot-iso-aarch64-*-aarch64": 5,
+                "fedora-updates-server-boot-iso-x86_64-*-bios": 5,
+                "fedora-updates-server-boot-iso-x86_64-*-64bit": 5
             },
             "settings": {
                 "+START_AFTER_TEST": "installer_build@%ARCH_BASE_MACHINE%",
@@ -512,7 +542,9 @@
         "installer_build": {
             "profiles": {
                 "fedora-updates-everything-boot-iso-aarch64-*-aarch64": 5,
-                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
+                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5,
+                "fedora-updates-server-boot-iso-aarch64-*-aarch64": 5,
+                "fedora-updates-server-boot-iso-x86_64-*-64bit": 5
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -682,7 +714,9 @@
         "support_server": {
             "profiles": {
                 "fedora-updates-everything-boot-iso-aarch64-*-aarch64": 5,
-                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5
+                "fedora-updates-everything-boot-iso-x86_64-*-64bit": 5,
+                "fedora-updates-server-boot-iso-aarch64-*-aarch64": 5,
+                "fedora-updates-server-boot-iso-x86_64-*-64bit": 5
             }
         },
         "toolbox": {

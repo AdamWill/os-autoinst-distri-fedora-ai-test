@@ -6,6 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     my $version = get_var("VERSION");
+    my $flavor = get_var("FLAVOR");
     my $currrel = get_var("CURRREL");
     my $rawrel = get_var("RAWREL");
     my $brrepo = get_var("BUILDROOT_REPO");
@@ -31,6 +32,9 @@ sub run {
     }
     if (lc($version) eq "eln") {
         $cmd .= " --variant=BaseOS --nomacboot --volid=Fedora-eln-BaseOS-${arch}";
+    }
+    elsif ($flavor =~ m/server/) {
+        $cmd .= " --variant=Server --volid=Fedora-S-dvd-${arch}";
     }
     else {
         $cmd .= " --variant=Everything --volid=Fedora-E-dvd-${arch}";
