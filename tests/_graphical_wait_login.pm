@@ -64,7 +64,7 @@ sub run {
     # As of 2025-12 KDE may show plasma-setup even if we created
     # a user and set root password in the installer
     if ($desktop eq 'kde' && $relnum > 43 && !get_var("_SETUP_DONE")) {
-        assert_screen(['login_screen', 'ps_begin_setup'], timeout => $wait_time);
+        assert_screen(['graphical_login', 'ps_begin_setup'], timeout => $wait_time);
         $wait_time = 90;
         plasma_setup(userexists => 1, timeout => 10) if (match_has_tag 'ps_begin_setup');
     }
@@ -72,7 +72,7 @@ sub run {
     # install, which transitions straight from g-i-s to logged-in
     # desktop
     unless ($desktop eq 'gnome' && get_var("INSTALL_NO_USER")) {
-        boot_to_login_screen(timeout => $wait_time, waitearly => 0);
+        boot_to_login_screen(timeout => $wait_time, waitearly => 0, graphical => 1);
         # if USER_LOGIN is set to string 'false', we're done here
         return if (get_var("USER_LOGIN") eq "false");
 

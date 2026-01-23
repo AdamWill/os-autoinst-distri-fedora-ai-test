@@ -85,6 +85,7 @@ sub boot_to_login_screen {
     my %args = @_;
     $args{timeout} //= 300;
     $args{waitearly} //= 1;
+    $args{graphical} //= 0;
     if (testapi::is_serial_terminal) {
         # For serial console, just wait for the login prompt
         unless (wait_serial "login:", timeout => $args{timeout}) {
@@ -92,21 +93,22 @@ sub boot_to_login_screen {
         }
     }
     else {
+        my $tag = $args{graphical} ? 'graphical_login' : 'login_screen';
         # we may start at a screen that matches one of the needles; if so,
         # wait till we don't (e.g. when rebooting at end of live install,
         # we match text_console_login until the console disappears).
         # The following is true for non-serial console.
         if ($args{waitearly}) {
             my $count = 5;
-            while (check_screen("login_screen", 3) && $count > 0) {
+            while (check_screen($tag, 3) && $count > 0) {
                 sleep 5;
                 $count -= 1;
             }
         }
-        assert_screen "login_screen", $args{timeout};
+        assert_screen $tag, $args{timeout};
         if (match_has_tag "graphical_login") {
             wait_still_screen(timeout => 30, stilltime => 10, similarity_level => 38);
-            assert_screen "login_screen";
+            assert_screen $tag;
         }
     }
 }
