@@ -1,0 +1,26 @@
+name: AI Code Review
+on:
+  pull_request_target:
+    types: [labeled]
+
+jobs:
+  ai-review:
+    if: forgejo.event.label.name == 'ai-review-please'
+    runs-on: fedora
+    container:
+      image: registry.gitlab.com/redhat/edge/ci-cd/ai-code-review:v2.3.0
+    steps:
+      - name: Run AI Review
+        env:
+          AI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: ai-code-review --platform forgejo --pr-number ${{ forgejo.event.pull_request.number }} --post
+
+  # this has to be a separate job because ai-code-review container does not have nodejs in it
+  # also note this does not work for PRs from forks because of a forgejo bug
+  # https://codeberg.org/forgejo/forgejo/issues/10733
+  remove-label:
+    runs-on: fedora
+    steps:
+      - uses: https://github.com/actions-ecosystem/action-remove-labels@2ce5d41b4b6aa8503e285553f75ed56e0a40bae0 # v1.3.0
+        with:
+          labels: ai-review-please

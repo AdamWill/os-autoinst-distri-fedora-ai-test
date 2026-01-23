@@ -1,0 +1,32 @@
+name: CI via Tox and perl
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  tox:
+    runs-on: fedora
+    container:
+      image: quay.io/fedora/fedora:latest
+    steps:
+      - name: Install required packages
+        run: dnf -y install nodejs tox git
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        with:
+          fetch-depth: 0
+      - name: Install Python interpreters
+        run: for py in 3.10 3.11 3.12 3.13 3.14; do dnf -y install python$py; done
+      - name: Test with tox
+        run: tox
+  perl:
+    runs-on: fedora
+    container:
+      image: quay.io/fedora/fedora:latest
+    steps:
+      - name: Install required packages
+        run: dnf -y install nodejs git os-autoinst perl-Test-Strict perl-Test-Harness perl-JSON perl-REST-Client perl-Code-TidyAll
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        with:
+          fetch-depth: 0
+      - name: Run perl tests
+        run: prove t/
