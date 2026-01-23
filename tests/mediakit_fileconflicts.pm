@@ -9,7 +9,7 @@ sub run {
     # mount the ISO there
     assert_script_run "mount /dev/cdrom /mnt/iso";
     # download the check script
-    assert_script_run "curl --retry-delay 10 --max-time 30 --retry 5 -o /usr/local/bin/potential_conflict.py https://pagure.io/fedora-qa/qa-misc/raw/master/f/potential_conflict.py", timeout => 180;
+    assert_script_run "curl --retry-delay 10 --max-time 30 --retry 5 -o /usr/local/bin/potential_conflict.py https://forge.fedoraproject.org/quality/misc-scripts/raw/branch/master/potential_conflict.py", timeout => 180;
     # install the dependency
     assert_script_run "dnf -y install python3-dnf", timeout => 180;
     # run the check

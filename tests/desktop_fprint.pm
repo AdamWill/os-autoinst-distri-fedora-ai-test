@@ -12,7 +12,7 @@ sub run {
     script_run 'dnf -y install socat', 180;
     assert_script_run 'mkdir -p /etc/systemd/system/fprintd.service.d';
     # configure fprintd dummy reader, see
-    # https://pagure.io/fedora-qa/os-autoinst-distri-fedora/issue/223#comment-732426
+    # https://forge.fedoraproject.org/quality/os-autoinst-distri-fedora/issues/223#issuecomment-344740
     assert_script_run 'printf \'[Service]\nEnvironment=G_MESSAGES_DEBUG=all\nEnvironment=FP_VIRTUAL_DEVICE=%%t/fprintd-virt\nReadWritePaths=%%t\nDeviceAllow=\' > /etc/systemd/system/fprintd.service.d/dummy.conf';
     # dummy reader needs SELinux permissive
     assert_script_run 'printf "SELINUX=permissive\nSELINUXTYPE=targeted" > /etc/selinux/config';

@@ -1,10 +1,10 @@
 # openQA tests for the Fedora distribution
 
-This repository contains tests and images for testing [Fedora](https://getfedora.org/) with [openQA](http://os-autoinst.github.io/openQA/). The [fedora_openqa library and CLI](https://pagure.io/fedora-qa/fedora_openqa) are used for scheduling tests, and [createhdds](https://pagure.io/fedora-qa/createhdds) is used for creating base disk images for the test. For openQA installation instructions, see [the Fedora openQA wiki page](https://fedoraproject.org/wiki/OpenQA).
+This repository contains tests and images for testing [Fedora](https://getfedora.org/) with [openQA](http://os-autoinst.github.io/openQA/). The [fedora_openqa library and CLI](https://forge.fedoraproject.org/quality/fedora_openqa) are used for scheduling tests, and [createhdds](https://forge.fedoraproject.org/quality/createhdds) is used for creating base disk images for the test. For openQA installation instructions, see [the Fedora openQA wiki page](https://fedoraproject.org/wiki/OpenQA).
 
 ## Issues
 
-[Issues](https://pagure.io/fedora-qa/os-autoinst-distri-fedora/issues) and [pull requests](https://pagure.io/fedora-qa/os-autoinst-distri-fedora/pull-requests) are tracked in [os-autoinst-distri-fedora Pagure](https://pagure.io/fedora-qa/os-autoinst-distri-fedora). Pagure uses a Github-like pull request workflow, so if you're familiar with that, you can easily submit Pagure pull requests. If not, you can read up in the [Pagure documentation](https://docs.pagure.org/pagure/usage/index.html).
+[Issues](https://forge.fedoraproject.org/quality/os-autoinst-distri-fedora/issues) and [pull requests](https://forge.fedoraproject.org/quality/os-autoinst-distri-fedora/pulls) are tracked in [Fedora Forge](https://forge.fedoraproject.org/quality/os-autoinst-distri-fedora). Forge uses a Github-like pull request workflow, so if you're familiar with that, you can easily submit Forge pull requests. If not, you can read up in the [Forgejo documentation](https://forgejo.org/docs/latest/user/pull-requests-and-git-flow/).
 
 ## Requirements
 
@@ -79,13 +79,13 @@ There are also several modules that export utility functions, currently `utils`,
 and `test_flags()` method, inheriting from one of the classes mentioned above.
 2. Set correct variables (so that all test parts you have made are executed) in [WebUI -> Test suites](https://localhost:8080/admin/test_suites).
 3. Link your newly created Test suite to medium type in [WebUI -> Job groups](https://localhost:8080/admin/groups).
-4. Run test (see [fedora_openqa repository](https://pagure.io/fedora-qa/fedora_openqa)).
+4. Run test (see [fedora_openqa repository](https://forge.fedoraproject.org/quality/fedora_openqa)).
 5. Create needles (images) by using interactive mode and needles editor in WebUI.
 6. Add new test suite and profiles into `templates.fif.json` file (and/or `templates-updates.fif.json`, if the test is applicable to the update testing workflow)
-7. Add new Test suite and Test case into [`conf_test_suites.py`](https://pagure.io/fedora-qa/fedora_openqa/blob/master/f/src/fedora_openqa/conf_test_suites.py) file in fedora_openqa repository.
+7. Add new Test suite and Test case into [`conf_test_suites.py`](https://forge.fedoraproject.org/quality/fedora_openqa/src/branch/main/src/fedora_openqa/conf_test_suites.py) file in fedora_openqa repository.
 8. Run `tox`. This will check the templates are valid.
-9. Open pull request for the os-autoinst-distri-fedora changes in [Pagure](https://pagure.io/fedora-qa/os-autoinst-distri-fedora). Pagure uses a Github-style workflow (summary: fork the project via the web interface, push your changes to a branch on your fork, then use the web interface to submit a pull request). See the [Pagure documentation](https://docs.pagure.org/pagure/usage/index.html) for more details.
-10. Open a pull request in [fedora_openqa Pagure](https://pagure.io/fedora-qa/fedora_openqa) for any necessary fedora_openqa changes.
+9. Open pull request for the os-autoinst-distri-fedora changes in [the repository](https://forge.fedoraproject.org/quality/os-autoinst-distri-fedora). Forgejo uses a Github-style workflow.
+10. Open a pull request in [fedora_openqa](https://forge.fedoraproject.org/quality/fedora_openqa) for any necessary fedora_openqa changes.
 
 ### Language handling
 
