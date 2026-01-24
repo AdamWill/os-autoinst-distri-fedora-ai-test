@@ -500,10 +500,9 @@ sub get_setup_repos_script {
 sub get_workarounds {
     my $version = shift || get_var("VERSION");
     my %workarounds = (
-        "41" => [],
-        "42" => ["FEDORA-2026-3c4cf60c3f"],
+        "42" => [],
         "43" => [],
-        "44" => ["FEDORA-2026-5066c533e8"],
+        "44" => [],
         "eln" => [],
     );
     my $advortasks = $workarounds{$version};
