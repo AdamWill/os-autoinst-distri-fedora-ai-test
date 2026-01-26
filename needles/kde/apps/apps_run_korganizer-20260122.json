@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 73,
+      "xpos": 513,
+      "ypos": 115,
+      "height": 17
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_korganizer"
+  ]
+}
