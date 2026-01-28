@@ -8,6 +8,7 @@ use mwriter;
 
 sub run {
     my $self = shift;
+    my $password = get_var("USER_PASSWORD", "weakpassword");
     # Start the application
     menu_launch_type("media-writer", checkstart => 1);
 
@@ -38,7 +39,7 @@ sub run {
     # Confirm writing to usb.
     assert_and_click('mwriter_confirm_button');
     wait_still_screen(5);
-    authenticate();
+    authenticate($password, timeout => 15, stillscreen => 3);
 
     # Sometimes, downloading does not start immediately
     # and a Write button is shown. If that is the case,

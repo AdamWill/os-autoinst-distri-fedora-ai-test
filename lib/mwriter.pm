@@ -8,33 +8,8 @@ use lockapi;
 use testapi;
 use utils;
 
-our @EXPORT = qw(select_edition select_version select_arch confirm_disk_modification check_written_content);
+our @EXPORT = qw(check_written_content);
 
-
-# Selects a Fedora edition in Media Writer by opening the dropdown,
-# clicking the given edition, and asserting the selected state.
-sub select_edition {
-    my $edition = shift;
-    assert_and_click("mwriter_dropdown_arrow");
-    assert_and_click("mwriter_select_$edition");
-    assert_screen("mwriter_selected_$edition");
-}
-
-# Selects a Fedora version in Media Writer by opening the version dropdown
-# and clicking the specified version entry.
-sub select_version {
-    my $version = shift;
-    assert_and_click("mwriter_dropdown_version");
-    assert_and_click("mwriter_select_$version");
-}
-
-# Selects a target architecture in Media Writer by opening the architecture
-# dropdown and clicking the specified architecture entry.
-sub select_arch {
-    my $arch = shift;
-    assert_and_click("mwriter_dropdown_arch");
-    assert_and_click("mwriter_select_$arch");
-}
 
 # Validates that the USB media was written correctly.
 # Verifies the embedded checksum on the device and compares its contents
