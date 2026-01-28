@@ -86,6 +86,7 @@ sub boot_to_login_screen {
     $args{timeout} //= 300;
     $args{waitearly} //= 1;
     $args{graphical} //= 0;
+    my $desktop = get_var('DESKTOP');
     if (testapi::is_serial_terminal) {
         # For serial console, just wait for the login prompt
         unless (wait_serial "login:", timeout => $args{timeout}) {
@@ -108,7 +109,15 @@ sub boot_to_login_screen {
         assert_screen $tag, $args{timeout};
         if (match_has_tag "graphical_login") {
             wait_still_screen(timeout => 30, stilltime => 10, similarity_level => 38);
-            assert_screen $tag;
+            unless (check_screen $tag) {
+                # very short idle timeout on Plasma 6.6+
+                # https://invent.kde.org/plasma/plasma-login-manager/-/merge_requests/86
+                # pressing Esc on plasma-login-manager turns the screen off!
+                # Enter clears the screen on both SDDM and PLM
+                my $key = $desktop eq 'kde' ? 'ret' : 'esc';
+                send_key $key;
+                assert_screen $tag;
+            }
         }
     }
 }
