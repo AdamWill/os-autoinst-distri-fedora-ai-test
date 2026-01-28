@@ -18,7 +18,6 @@ sub run {
         assert_script_run("dnf install -y isomd5sum", timeout => 120);
     }
     else {
-        toolbox("create");
         toolbox("install", "isomd5sum");
     }
 

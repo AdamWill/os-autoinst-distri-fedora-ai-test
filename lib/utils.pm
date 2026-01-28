@@ -2010,23 +2010,15 @@ sub connections_connect {
 # Unknown actions are reported as a soft failure.
 sub toolbox {
     my ($action, $params) = @_;
-    if ($action eq "create") {
-        assert_script_run("toolbox --verbose create -y", timeout => 600);
-    }
-    elsif ($action eq "install") {
-        enter_cmd("toolbox enter");
-        wait_still_screen(5);    # Wait until we have entered the toolbox
-        enter_cmd("sudo dnf -y install $params");
-        wait_still_screen(5);    # Wait until we have installed the application
+    if ($action eq "install") {
+        type_string("toolbox -y enter\n");
+        assert_script_run("true", timeout => 600);    # Wait until we have entered the toolbox
+        assert_script_run("sudo dnf -y install $params");
         enter_cmd("exit");
         wait_still_screen(2);
     }
     elsif ($action eq "run") {
-        enter_cmd("toolbox enter");
-        wait_still_screen(5);    # Wait until we have entered the toolbox
-        assert_script_run("$params", timeout => 120);
-        enter_cmd("exit");
-        wait_still_screen(2);
+        assert_script_run("toolbox run $params", timeout => 120);
     }
     else {
         record_soft_failure("The toolbox subroutine was used to perform an unknown command.");
