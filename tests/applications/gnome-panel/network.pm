@@ -19,6 +19,7 @@ sub switch_network {
 
 sub run {
     my $self = shift;
+    my $password = get_var("USER_PASSWORD", "weakpassword");
     # Toggle network
     switch_network();
 
@@ -35,11 +36,7 @@ sub run {
     # Sometimes, we can see an authentication dialogue which
     # prevents the test from continuing. Authenticate,
     # if that is the case.
-    my $pass = get_var("USER_PASSWORD", "weakpassword");
-    if (check_screen("auth_required", timeout => 30)) {
-        type_very_safely("$pass\n");
-    }
-    sleep(3);
+    authenticate($password);
 
     # Toggle network
     switch_network();

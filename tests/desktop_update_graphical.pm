@@ -119,7 +119,7 @@ sub run {
                     while (check_screen 'desktop_package_tool_import_key', 30 && $limit) {
                         click_lastmatch;
                         my $pass = get_var("USER_PASSWORD", "weakpassword");
-                        type_very_safely("$pass\n") if (check_screen("auth_required", 10));
+                        authenticate($pass, timeout => 10);
                         $limit--;
                     }
                 }

@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 use lockapi;
 use testapi qw(is_serial_terminal :DEFAULT);
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type prepare_update_mount setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup plasma_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start reboot_system connections_connect toolbox/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely script_retry desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type prepare_update_mount setup_repos repo_setup get_workarounds disable_updates_repos cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup plasma_setup check_desktop quit_firefox advisory_get_installed_packages acnp_handle_output advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log repos_mirrorlist register_application get_registered_applications desktop_launch_terminal solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login check_software_start reboot_system connections_connect toolbox authenticate/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -2030,6 +2030,28 @@ sub toolbox {
     }
     else {
         record_soft_failure("The toolbox subroutine was used to perform an unknown command.");
+    }
+}
+
+# This routine handles the authentication dialogue when it
+# pops out. It provides the admin user (not root) password
+# so that system change could be performed on regular
+# Workstation. The routine always needs a $password (first argument).
+# Optionally, you can use $timeout and $stillscreen as named args
+# to specify how long to wait for the auth dialogue and how long
+# to wait after we have authenticated.
+
+sub authenticate {
+    # Use default values.
+    my %defaults = (timeout => 15, stillscreen => 5);
+    my ($password, %kwargs) = @_;
+    my %args = (%defaults, %kwargs);
+
+
+    if (check_screen("auth_required", timeout => $args{timeout})) {
+        type_very_safely($password);
+        send_key("ret");
+        wait_still_screen($args{stillscreen});
     }
 }
 

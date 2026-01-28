@@ -8,19 +8,7 @@ use lockapi;
 use testapi;
 use utils;
 
-our @EXPORT = qw(add_partitions delete_partition create_partition format_partition edit_partition edit_filesystem authenticate mount_partition resize_partition wipe_disk);
-
-# This routine handles the authentication dialogue when it
-# pops out. It provides the admin user (not root) password
-# so that system change could be performed on regular
-# Workstation.
-sub authenticate {
-    if (check_screen("auth_required", 2)) {
-        my $password = get_var("USER_PASSWORD") // "weakpassword";
-        type_very_safely($password);
-        send_key("ret");
-    }
-}
+our @EXPORT = qw(add_partitions delete_partition create_partition format_partition edit_partition edit_filesystem mount_partition resize_partition wipe_disk);
 
 # This routine adds two partitions. This layout is used in
 # several testing scripts.
