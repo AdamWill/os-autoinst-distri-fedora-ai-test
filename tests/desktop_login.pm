@@ -70,11 +70,12 @@ sub login_user {
     my $user = $args{user};
     my $password = $args{password};
     my $method = $args{method};
-    if (($method ne 'unlock' && !check_screen "login_$user") || $desktop eq "i3") {
-        # Sometimes, especially in SDDM, we do not get the user list
+    if ($desktop ne 'i3' && $method ne 'unlock' && !check_screen "login_$user") {
+        # Sometimes, especially in KDE, we do not get the user list
         # but rather a "screensaver" screen for the DM.
-        # We send the Esc key to come back to the login screen.
-        send_key('esc');
+        # We send the Enter key to come back to the login screen
+        # (as on plasma-login-manager, Esc turns it off)
+        send_key('ret');
         wait_still_screen(stilltime => 5, similarity_level => 45);
     }
     if ($method ne "unlock") {
