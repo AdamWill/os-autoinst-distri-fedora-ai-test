@@ -37,10 +37,9 @@ sub run {
 
     # Go to console, perform tests, and come back
     $self->root_console(tty => 3);
-    script_run("mkdir -p /mnt/usbdisk");
-    script_run("mount /dev/sda1 /mnt/usbdisk");
+    assert_script_run("mount /dev/sda1 /mnt/usbdisk");
     # The usb should be mountable but empty.
-    assert_script_run('[ "$(ls -A /mnt/usbdisk)" ] && echo 1 || echo 0');
+    assert_script_run('test -z "$(ls -A /mnt/usbdisk)"');
     desktop_vt();
     # Stop the application
     send_key("alt-f4");
