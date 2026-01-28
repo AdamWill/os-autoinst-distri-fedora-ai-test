@@ -8,6 +8,7 @@ use mwriter;
 
 sub run {
     my $self = shift;
+    my $password = get_var("USER_PASSWORD", "weakpassword");
     # Start the application
     menu_launch_type("media-writer", checkstart => 1);
 
@@ -22,7 +23,7 @@ sub run {
 
     # Confirm renovation.
     wait_still_screen(5);
-    authenticate();
+    authenticate($password, timeout => 15, stillscreen => 3);
 
     # Wait up to 300 sec and wait for confirmation.
     # As this operation should be quicker, we do not have to
