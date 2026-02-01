@@ -70,28 +70,22 @@ sub login_user {
     my $user = $args{user};
     my $password = $args{password};
     my $method = $args{method};
-    if ($desktop ne 'i3' && $method ne 'unlock' && !check_screen "login_$user") {
-        # Sometimes, especially in KDE, we do not get the user list
-        # but rather a "screensaver" screen for the DM.
-        # We send the Enter key to come back to the login screen
-        # (as on plasma-login-manager, Esc turns it off)
-        send_key('ret');
-        wait_still_screen(stilltime => 5, similarity_level => 45);
-    }
     if ($method ne "unlock") {
         # on lightdm we have to open the drop down menu to get to the user selection
         if ($desktop eq "i3") {
             assert_and_click('lightdm_user_selection');
         }
         # When we do not just want to unlock the screen, we need to select a user.
-        if (check_screen "login_$user", 30) {
+        if (check_screen "login_$user", 10) {
             click_lastmatch;
         }
         else {
-            record_soft_failure "logout seems to be taking too long";
+            # are we idled?
+            my $key = $desktop eq 'kde' ? 'ret' : 'esc';
+            send_key $key;
             assert_and_click "login_$user";
         }
-        wait_still_screen(stilltime => 5, similarity_level => 45);
+        assert_screen 'graphical_login_input';
     }
     if ($method eq "create") {
         # With users that do not have passwords, we need to make an extra round
@@ -151,8 +145,7 @@ sub logout_user {
         assert_and_click "leave_button";
         assert_and_click "log_out_entry";
         assert_and_click "log_out_confirm";
-        wait_still_screen 5;
-        sleep 10;
+        assert_screen "graphical_login";
     }
 }
 
@@ -161,6 +154,7 @@ sub switch_user {
     # log in another user simultaneously.
     if (check_screen "locked_screen_switch_user", 5) {
         assert_and_click "locked_screen_switch_user";
+        assert_screen "graphical_login";
     }
     elsif (check_screen "system_menu_button") {
         # The system_menu_button indicates that we are in an active
@@ -169,9 +163,7 @@ sub switch_user {
         assert_and_click "system_menu_button";
         assert_and_click "leave_button";
         assert_and_click "switch_user_entry";
-        wait_still_screen 5;
-        # Add sleep to slow down the process a bit
-        sleep 10;
+        assert_screen "graphical_login";
     }
 }
 
@@ -283,7 +275,13 @@ sub run {
         # unsuccessful login and it can be asserted, so let's do it.
         assert_screen "login_wrong_password";
     }
-    send_key 'esc' unless (check_screen "login_jim");
+    wait_still_screen 3;
+    # GDM doesn't go back to the user selection screen, need 2x esc
+    if (check_screen 'graphical_login_input') {
+        send_key 'esc';
+        sleep 1;
+        send_key 'esc';
+    }
 
     # Now, log into the system again using the correct password. This will
     # only work if we were correctly denied login with the wrong password,
