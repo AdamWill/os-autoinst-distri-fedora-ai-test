@@ -35,6 +35,10 @@ sub run {
     # optional as it's not really part of the test
     script_run "dnf -y install sssd-tools", 220;
     script_run "sss_debuglevel 9";
+    # remove sssd-tools again to workaround
+    # https://github.com/PackageKit/PackageKit/issues/940 and ensure
+    # it's properly installed as part of enrolment
+    script_run 'dnf -y remove sssd-tools', 120;
     # trigger a systemctl daemon reload now to try and avoid it being
     # sometimes triggered during realm package install and causing
     # cockpit to restart and breaking the test
