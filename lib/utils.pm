@@ -2046,7 +2046,7 @@ sub toolbox {
 
 sub authenticate {
     my %args = (
-        password => get_var('USER_PASSWORD');
+        password => get_var('USER_PASSWORD'),
         timeout => 15,
         stillscreen => 5,
         @_
