@@ -1,16 +1,16 @@
 {
   "area": [
     {
-      "xpos": 351,
-      "ypos": 239,
-      "width": 73,
-      "height": 14,
+      "xpos": 554,
+      "ypos": 448,
+      "width": 60,
+      "height": 33,
       "type": "match"
     }
   ],
   "properties": [],
   "tags": [
     "LANGUAGE-french",
-    "ps_lang_search_field"
+    "ps_layout_french_selected"
   ]
 }

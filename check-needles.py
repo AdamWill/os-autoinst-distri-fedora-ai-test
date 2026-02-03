@@ -233,6 +233,7 @@ testtags.append("anaconda_part_device_sda")
 for lang in ("english", "russian", "chinese", "arabic", "japanese", "turkish", "french"):
     testtags.append(f"gis_lang_{lang}_select")
     testtags.append(f"gis_lang_{lang}_selected")
+    testtags.append(f"ps_lang_{lang}_selected")
 # keyboard layout needles (only one for now, but maybe more later)
 for layout in ("french",):
     testtags.append(f"anaconda_select_install_layout_{layout}_filtered")
@@ -240,6 +241,9 @@ for layout in ("french",):
     testtags.append(f"anaconda_webui_layout_{layout}_selected")
     testtags.append(f"desktop_input_source_{layout}")
     testtags.append(f"desktop_input_source_group_{layout}")
+    testtags.append(f"ps_layout_{layout}_selected")
+    testtags.append(f"ps_layout_{layout}_select_group")
+    testtags.append(f"ps_layout_{layout}_select_layout")
 # input method needles (ditto)
 for (lang, im) in (("japanese", "anthy"),):
     testtags.append(f"desktop_input_source_{lang}")

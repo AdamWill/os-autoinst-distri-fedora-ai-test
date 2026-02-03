@@ -1087,17 +1087,42 @@ sub plasma_setup {
         if ($next eq 'language') {
             my $lang = get_var('LANGUAGE') // 'english';
             if ($lang ne 'english') {
-                assert_and_click 'ps_lang_search_field';
-                type_very_safely $lang;
-                assert_and_click "ps_lang_${lang}_select";
+                unless (check_screen "ps_lang_${lang}_selected", 5) {
+                    assert_and_click 'ps_lang_search_field';
+                    # typing the whole string may not show the entry:
+                    # https://invent.kde.org/plasma/plasma-setup/-/issues/51
+                    # going one character at a time *should* be good enough
+                    # revisit if that bug is ever fixed
+                    for my $c (split //, $lang) {
+                        send_key $c;
+                        if (check_screen "ps_lang_${lang}_select", 5) {
+                            click_lastmatch;
+                            last;
+                        }
+                    }
+                    assert_screen "ps_lang_${lang}_selected";
+                }
             }
         }
         elsif ($next eq 'keyboard') {
             my $layout = get_var('LAYOUT') // 'us';
             if ($layout ne 'us') {
-                assert_and_click 'ps_layout_search_field';
-                type_very_safely $layout;
-                assert_and_click "ps_layout_${layout}_select";
+                unless (check_screen "ps_layout_${layout}_selected", 5) {
+                    assert_and_click 'ps_layout_search_field';
+                    # typing the whole string may not show the entry:
+                    # https://invent.kde.org/plasma/plasma-setup/-/issues/51
+                    # going one character at a time *should* be good enough
+                    # revisit if that bug is ever fixed
+                    for my $c (split //, $layout) {
+                        send_key $c;
+                        if (check_screen "ps_layout_${layout}_select_group", 5) {
+                            click_lastmatch;
+                            assert_and_click "ps_layout_${layout}_select_layout";
+                            last;
+                        }
+                    }
+                    assert_screen "ps_layout_${layout}_selected";
+                }
             }
         }
         elsif ($next eq 'user') {
