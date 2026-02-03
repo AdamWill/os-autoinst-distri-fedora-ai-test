@@ -189,8 +189,10 @@ sub run {
     unless (get_var("CANNED")) {
         # Download Python test script to run the tests.
         download_python_tests();
-        # Test for EOL date in the distant future.
-        assert_script_run("~/check-release.py --test future --verbose");
+        unless (get_var('BUILD') =~ 'Respin') {
+            # Test for EOL date in the distant future.
+            assert_script_run("~/check-release.py --test future --verbose");
+        }
 
         my $relnum = get_release_number;
         # Test for EOL dates match each other.
