@@ -544,6 +544,8 @@ sub _repo_setup_compose {
     # paths must work with default mirror config...
     my $subvariant = get_var("SUBVARIANT");
     return if ($subvariant eq "IoT" || $subvariant eq "CoreOS");
+    # ditto respin composes (LOCATION doesn't have a repo in it)
+    return if (get_var('BUILD') =~ 'Respin');
     # Appropriate repo setup steps for testing a compose
     # disable updates-testing and updates and use the compose location
     # as the target for fedora and rawhide rather than mirrorlist, so
