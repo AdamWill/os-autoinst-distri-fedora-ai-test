@@ -99,7 +99,18 @@ sub check_stored {
         menu_launch_type("kwallet", checkstart => 1, maximize => 1);
         # Navigate to the stored entry and check
         # that the credentials are stored there.
-        assert_and_dclick("keyring_wallet_passwords_unfold");
+        # seems like any of the following can be possible:
+        # 1. need open then unfold
+        # 2. need open
+        # 3. need unfold
+        my $count = 2;
+        while ($count && assert_screen(['keyring_wallet_passwords_unfold', 'kde_button_open', 'keyring_wallet_password_stored'])) {
+            last if (match_has_tag('keyring_wallet_password_stored'));
+            my $dclick = match_has_tag('keyring_wallet_passwords_unfold') ? 1 : 0;
+            click_lastmatch(dclick => $dclick);
+            $count--;
+            wait_still_screen 2;
+        }
         assert_and_dclick("keyring_wallet_password_stored");
         assert_and_click("keyring_wallet_password_details");
         assert_and_click("keyring_wallet_password_reveal");

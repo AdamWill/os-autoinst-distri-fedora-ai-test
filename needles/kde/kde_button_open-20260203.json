@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 810,
+      "ypos": 111,
+      "width": 48,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kde_button_open"
+  ]
+}
