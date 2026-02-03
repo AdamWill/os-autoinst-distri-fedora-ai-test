@@ -48,7 +48,7 @@ sub run {
         if ($desktop eq 'gnome') {
             gnome_initial_setup(prelogin => 1, timeout => $wait_time);
         }
-        elsif ($desktop eq 'kde') {
+        elsif ($desktop eq 'kde' && $relnum > 43) {
             plasma_setup(userexists => 0, timeout => $wait_time);
         }
         else {
