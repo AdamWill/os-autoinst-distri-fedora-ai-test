@@ -39,7 +39,7 @@ sub run {
     # Confirm writing to usb.
     assert_and_click('mwriter_confirm_button');
     wait_still_screen(5);
-    authenticate($password, timeout => 15, stillscreen => 3);
+    authenticate(password => $password, timeout => 15, stillscreen => 3);
 
     # Sometimes, downloading does not start immediately
     # and a Write button is shown. If that is the case,

@@ -2043,14 +2043,14 @@ sub toolbox {
 # to wait after we have authenticated.
 
 sub authenticate {
-    # Use default values.
-    my %defaults = (timeout => 15, stillscreen => 5);
-    my ($password, %kwargs) = @_;
-    my %args = (%defaults, %kwargs);
-
-
+    my %args = (
+        password => get_var('USER_PASSWORD');
+        timeout => 15,
+        stillscreen => 5,
+        @_
+    );
     if (check_screen("auth_required", timeout => $args{timeout})) {
-        type_very_safely($password);
+        type_very_safely($args{password});
         send_key("ret");
         wait_still_screen($args{stillscreen});
     }

@@ -36,7 +36,7 @@ sub run {
     # Sometimes, we can see an authentication dialogue which
     # prevents the test from continuing. Authenticate,
     # if that is the case.
-    authenticate($password);
+    authenticate(password => $password);
 
     # Toggle network
     switch_network();

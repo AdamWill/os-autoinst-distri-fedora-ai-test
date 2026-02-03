@@ -13,7 +13,7 @@ sub run {
     menu_launch_type 'firewall';
     # Firewall requires password to be entered and confirmed to start.
     # View password
-    authenticate($password, timeout => 60, stillscreen => 3);
+    authenticate(password => $password, timeout => 60, stillscreen => 3);
 
     # Check that it is started
     assert_screen 'apps_run_firewall';

@@ -23,7 +23,7 @@ sub run {
 
     # Confirm renovation.
     wait_still_screen(5);
-    authenticate($password, timeout => 15, stillscreen => 3);
+    authenticate(password => $password, timeout => 15, stillscreen => 3);
 
     # Wait up to 300 sec and wait for confirmation.
     # As this operation should be quicker, we do not have to

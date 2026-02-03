@@ -73,7 +73,7 @@ sub run {
     wait_still_screen(5);
 
     # When auth dialog appears, deal with it.
-    authenticate($password, timeout => 15, stillscreen => 3);
+    authenticate(password => $password, timeout => 15, stillscreen => 3);
 
     # Sometimes, downloading does not start immediately
     # and a Write button is shown. If that is the case,
