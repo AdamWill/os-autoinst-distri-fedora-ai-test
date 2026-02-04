@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 441,
+      "ypos": 379,
+      "width": 51,
+      "height": 45,
+      "type": "match",
+      "click_point": {
+        "xpos": 25.5,
+        "ypos": 32.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-french",
+    "ps_name_entry_field"
+  ]
+}
