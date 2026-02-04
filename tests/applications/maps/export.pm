@@ -31,8 +31,19 @@ sub run {
     menu_launch_type("loupe", checkstart => 1, maximize => 1);
     # Read the file into the application.
     send_key("ctrl-o");
-    assert_and_click("gnome_dirs_pictures");
-    assert_and_click("maps_select_file");
+    # FIXME when https://bugzilla.redhat.com/show_bug.cgi?id=2435752
+    # happens the file is in the home dir not the Pictures dir
+    # drop this when that bug is fixed
+    assert_screen(["maps_select_file", "gnome_dirs_pictures"]);
+    # the screen may match *both* needles, so recheck
+    if (check_screen("maps_select_file")) {
+        record_soft_failure('Picture exported to wrong directory? - https://bugzilla.redhat.com/show_bug.cgi?id=2435752');
+        click_lastmatch;
+    }
+    else {
+        assert_and_click("gnome_dirs_pictures");
+        assert_and_click("maps_select_file");
+    }
     assert_and_click("gnome_button_open");
     wait_still_screen(2);
 

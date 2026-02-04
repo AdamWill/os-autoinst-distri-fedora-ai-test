@@ -15,9 +15,13 @@ sub run {
     assert_and_click("papers_menu_saveas", button => "left", timeout => 30);
     wait_still_screen(2);
 
-    # if we hit the nautilus save-as screen, we have to click to edit
-    # the filename
-    click_lastmatch if (check_screen "nautilus_save_filename");
+    # we should be in the Documents dir, but may not be due to
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2435752
+    unless (check_screen("nautilus_documents_active", 30)) {
+        record_soft_failure("Opened in wrong directory - https://bugzilla.redhat.com/show_bug.cgi?id=2435752");
+        assert_and_click("papers_documents");
+        assert_and_click("papers_select_file");
+    }
 
     # Type a new name.
     type_very_safely("alternative");
@@ -29,14 +33,10 @@ sub run {
     # terminal console to check that it has been created.
     $self->root_console(tty => 3);
     my $filename = "alternative.pdf";
-    if (script_run("ls /home/test/Documents/${filename}")) {
-        $filename = "alternativeevince.pdf";
-        assert_script_run("ls /home/test/Documents/${filename}");
-        record_soft_failure("File name was not pre-selected in Save As dialog: https://gitlab.gnome.org/GNOME/gtk/-/issues/4768");
-    }
+    assert_script_run("ls /home/test/Documents/alternative.pdf");
 
     # Now, check that the new file does not differ from the original one.
-    assert_script_run("diff /home/test/Documents/evince.pdf /home/test/Documents/${filename}");
+    assert_script_run("diff /home/test/Documents/evince.pdf /home/test/Documents/alternative.pdf");
 }
 
 sub test_flags {

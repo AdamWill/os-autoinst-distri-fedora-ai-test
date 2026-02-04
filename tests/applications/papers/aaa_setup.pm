@@ -28,7 +28,8 @@ sub run {
     # Click on Open button to open the File Open Dialog
     assert_and_click("papers_open_file_dialog", button => "left", timeout => 30);
 
-    if (get_var("CANNED")) {
+    if (get_var("CANNED") || !check_screen('papers_file_select_pdf', 30)) {
+        record_soft_failure('Opened in wrong folder - https://bugzilla.redhat.com/show_bug.cgi?id=2435752') unless get_var("CANNED");
         # open the Documents folder.
         assert_and_click("papers_documents", button => "left", timeout => 30);
     }
