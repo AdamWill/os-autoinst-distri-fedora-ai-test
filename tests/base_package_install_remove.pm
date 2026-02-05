@@ -39,11 +39,11 @@ sub run {
     # Uninstall the packages.
     assert_script_run("dnf remove -y autofs mc");
     # Reports by the DNF
-    assert_script_run("!dnf list autofs");
-    assert_script_run("!dnf list mc");
+    assert_script_run("! dnf list autofs --disablerepo=\\*");
+    assert_script_run("! dnf list mc --disablerepo=\\*");
     # Reports by the RPM
-    assert_script_run("!rpm -q autofs");
-    assert_script_run("!rpm -q mc");
+    assert_script_run("! rpm -q autofs");
+    assert_script_run("! rpm -q mc");
 
 }
 
