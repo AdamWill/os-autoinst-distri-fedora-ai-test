@@ -15,21 +15,13 @@ sub run {
     # will download the 'current' image for the same release and use
     # that; we want to check that works even if we will go on to test
     # an image from the compose below)
-    my $relnum = get_release_number;
-    # FIXME: 2026-02-06 we don't have toolbox:45 on the registries yet
-    # (probably fedfind caching, sigh, I may have to rethink that)
-    # drop this once it's there
-    my $verarg = '';
-    if ($relnum eq '45') {
-        $verarg = ' --release 44';
-        $relnum = '44';
-    }
-    assert_script_run "toolbox create ${verarg} container1 -y", 300;
+    assert_script_run "toolbox create container1 -y", 300;
     my $image = get_var("TOOLBOX_IMAGE");
     if ($image) {
         # we have a toolbox image to test in the item under test
         # (probably a compose), so let's recreate container1 using
         # that instead
+        my $relnum = get_release_number;
         assert_script_run 'toolbox rm container1';
         assert_script_run "toolbox rmi containers-storage:registry.fedoraproject.org/fedora-toolbox:$relnum";
         assert_script_run "curl -o /var/tmp/toolbox.tar.gz $image", 300;
@@ -41,7 +33,7 @@ sub run {
         # download, if toolbox wants to do one, something has gone
         # wrong. unfortunately there is no -n so we just have to let
         # it time out in that case
-        assert_script_run "toolbox create ${verarg} container1", 60;
+        assert_script_run "toolbox create container1", 60;
     }
     # check to see if toolbox can list container
     assert_script_run "toolbox list | grep container1";
