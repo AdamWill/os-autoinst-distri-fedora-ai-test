@@ -12,7 +12,7 @@ sub run {
     my $version = get_var('VERSION');
     my $desktop = get_var('DESKTOP');
     my $rawrel = get_var('RAWREL');
-    return unless ($version ne "Rawhide" && $version ne $rawrel);
+    return unless ($version ne "Rawhide" && $version ne $rawrel && $version ne '44');
     # KDE shows a different version of the welcome center on major upgrades,
     # which breaks this test
     click_lastmatch if (get_var("DESKTOP") eq "kde" && get_var("ADVISORY_OR_TASK") && check_screen "kde_ok", 5);
