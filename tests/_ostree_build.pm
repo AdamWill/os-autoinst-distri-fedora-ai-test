@@ -81,7 +81,7 @@ sub run {
     assert_script_run 'git clone https://pagure.io/fedora-lorax-templates.git';
     # also check out pungi-fedora and use our script to build part of
     # the lorax command
-    assert_script_run 'git clone https://pagure.io/pungi-fedora.git';
+    assert_script_run 'git clone https://forge.fedoraproject.org/releng/pungi-fedora.git';
     assert_script_run 'cd pungi-fedora/';
     assert_script_run "git checkout ${branch}";
     assert_script_run 'curl --retry-delay 10 --max-time 30 --retry 5 -o ostree-parse-pungi.py ' . autoinst_url . '/data/ostree-parse-pungi.py', timeout => 180;
