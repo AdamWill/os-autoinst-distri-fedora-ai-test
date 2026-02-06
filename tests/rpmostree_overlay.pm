@@ -19,6 +19,8 @@ sub run {
     $self->root_console(tty => 3);
     # disable graphical boot on graphical images
     assert_script_run "systemctl set-default multi-user.target";
+    # FIXME wipe openh264 repo on Rawhide, it's causing issues 2026-02
+    assert_script_run 'rm -f /etc/yum.repos.d/fedora-cisco-openh264.repo' if (get_var('VERSION') eq '45');
 
     # Try and cancel any running rpm-ostree operations (GNOME Software
     # may be trying to refresh or something). This often needs to be
