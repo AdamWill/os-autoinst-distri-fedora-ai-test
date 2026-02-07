@@ -18,11 +18,21 @@ sub run {
     return if $ret == 0;
     # if only hcn-init failed, that's a soft fail, see:
     # https://bugzilla.redhat.com/show_bug.cgi?id=1894654
+    # if only tuned-ppd failed, ditto:
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2437484
+    # lm_sensors on aarch64:
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1899896
     $ret = script_run "grep '1 loaded units' /tmp/failed.txt";
     if ($ret != 0) {
         die "More than one services failed to start";
     }
     else {
+        if (get_var('VERSION') eq '44') {
+            unless (script_run 'systemctl is-failed tuned-ppd.service') {
+                record_soft_failure 'tuned-ppd failed - https://bugzilla.redhat.com/show_bug.cgi?id=2437484';
+                return;
+            }
+        }
         my $arch = get_var("ARCH");
         if ($arch eq "ppc64le") {
             # fail if it's something other than hcn-init
