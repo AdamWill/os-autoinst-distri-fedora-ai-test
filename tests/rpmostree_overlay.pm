@@ -19,9 +19,6 @@ sub run {
     $self->root_console(tty => 3);
     # disable graphical boot on graphical images
     assert_script_run "systemctl set-default multi-user.target";
-    # FIXME wipe updates-archive repo on F44, it's causing issues 2026-02
-    # https://forge.fedoraproject.org/infra/tickets/issues/13125
-    assert_script_run 'rm -f /etc/yum.repos.d/fedora-updates-archive.repo' if (get_var('VERSION') eq '44');
 
     # Try and cancel any running rpm-ostree operations (GNOME Software
     # may be trying to refresh or something). This often needs to be
