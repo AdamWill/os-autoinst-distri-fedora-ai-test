@@ -40,6 +40,7 @@
                 "UEFI": "1",
                 "UEFI_PFLASH_CODE": "/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw",
                 "UEFI_PFLASH_VARS": "/usr/share/edk2/aarch64/vars-template-pflash.raw",
+                "UW_RETRY": "5",
                 "WORKER_CLASS": "qemu_aarch64"
             }
         },
@@ -57,6 +58,7 @@
                 "QEMU_VIDEO_DEVICE": "VGA",
                 "QEMU_MAX_MIGRATION_TIME": "720",
                 "QEMU_VIRTIO_RNG": "1",
+                "UW_RETRY": "1",
                 "WORKER_CLASS": "qemu_ppc64le"
             }
         },
@@ -83,6 +85,7 @@
                 "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE_4M.secboot.qcow2",
                 "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS_4M.secboot.qcow2",
                 "UEFI_SECURE": "1",
+                "UW_RETRY": "1",
                 "WORKER_CLASS": "qemu_x86_64"
             }
         }
