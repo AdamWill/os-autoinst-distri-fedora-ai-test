@@ -1246,6 +1246,18 @@ sub start_with_launcher {
 
         # Click on the menu icon to come into the menus
         assert_and_click 'overview_app_grid';
+        # Since GNOME 50 this is very unreliable on aarch64 for some
+        # reason
+        my $relnum = get_release_number;
+        if ($relnum > 43 && get_var('ARCH') eq 'aarch64') {
+            my $count = 5;
+            while ($count) {
+                $count--;
+                wait_still_screen 2;
+                last if (check_screen 'overview_app_grid_active', 3);
+                assert_and_click 'overview_app_grid';
+            }
+        }
         wait_still_screen 5;
 
         # Find the application launcher in the current menu page.

@@ -41,14 +41,17 @@ sub run {
         wait_still_screen(stilltime => 6, similarity_level => 45);
         assert_and_click 'browser_launcher';
     }
-    unless (check_screen 'browser', 45) {
-        if (check_screen 'browser', 45) {
-            record_soft_failure "Browser start up is very slow - probably https://bugzilla.redhat.com/show_bug.cgi?id=2312900";
-        }
-        else {
-            die "Browser never reached!";
+    my $relnum = get_release_number;
+    if ($relnum > 43 && get_var('DESKTOP') eq 'gnome' && get_var('ARCH') eq 'aarch64') {
+        # overview clicks seem very unreliable in GNOME 50 on aarch64
+        my $count = 5;
+        while ($count) {
+            $count--;
+            last if (check_screen 'browser', timeout => 45);
+            assert_and_click 'browser_launcher';
         }
     }
+    assert_screen 'browser', timeout => 45;
     # firefox is quite grindy on startup, let it settle
     wait_still_screen(stilltime => 5, similarity_level => 45);
     # open a new tab so we don't race with the default page load
