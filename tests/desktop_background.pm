@@ -12,8 +12,7 @@ sub run {
     my $version = get_var('VERSION');
     my $desktop = get_var('DESKTOP');
     my $rawrel = get_var('RAWREL');
-    # FIXME: drop 44 when we get f44-backgrounds
-    return unless ($version ne "Rawhide" && $version ne $rawrel && $version ne '44');
+    return unless ($version ne "Rawhide" && $version ne $rawrel);
     # KDE shows a different version of the welcome center on major upgrades,
     # which breaks this test
     click_lastmatch if (get_var("DESKTOP") eq "kde" && get_var("ADVISORY_OR_TASK") && check_screen "kde_ok", 5);
