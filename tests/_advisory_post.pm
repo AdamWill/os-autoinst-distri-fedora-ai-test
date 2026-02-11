@@ -9,7 +9,6 @@ sub run {
     if ($test eq 'realmd_join_cockpit_ad' || $test eq 'realmd_join_sssd_ad') {
         # FIXME: switching VT at this point often fails, so let's stick
         # with the one we're on. why? no idea
-        type_string "exit\n";
         wait_still_screen 5;
         console_login;
     }
