@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 245,
+      "xpos": 21,
+      "type": "match",
+      "height": 21,
+      "width": 66
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "nautilus_select_wastebin"
+  ]
+}
