@@ -513,8 +513,8 @@ sub get_workarounds {
     my %workarounds = (
         "42" => [],
         "43" => [],
-        "44" => ['142129269'],
-        "45" => ['141992272'],
+        "44" => [],
+        "45" => [],
         "eln" => [],
     );
     my $advortasks = $workarounds{$version};
