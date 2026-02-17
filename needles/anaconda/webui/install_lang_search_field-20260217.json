@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 217,
+      "xpos": 231,
+      "type": "match",
+      "height": 23,
+      "width": 70
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "install_lang_search_field"
+  ]
+}
