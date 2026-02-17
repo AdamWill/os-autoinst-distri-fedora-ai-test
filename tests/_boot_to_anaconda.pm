@@ -197,12 +197,19 @@ sub run {
                 }
             }
             # wait for anaconda to appear
-            unless (check_screen "anaconda_select_install_lang", 300) {
+            unless (check_screen ["anaconda_select_install_lang", "anaconda_webui_wrong_font"], 300) {
                 # may be hitting https://bugzilla.redhat.com/show_bug.cgi?id=2325780,
                 # try pressing a key
                 send_key "spc";
-                assert_screen "anaconda_select_install_lang", 300;
+                assert_screen ["anaconda_select_install_lang", "anaconda_webui_wrong_font"], 300;
                 record_soft_failure "boot hung until key pressed - #2325780";
+            }
+            if (match_has_tag 'anaconda_webui_wrong_font') {
+                # https://bugzilla.redhat.com/show_bug.cgi?id=2402533
+                # see if a refresh gives us the right font
+                record_soft_failure 'webui loaded with incorrect font - #2402533';
+                send_key 'ctrl-r';
+                assert_screen 'anaconda_select_install_lang';
             }
             # on webUI path set a var so later tests know
             if (match_has_tag "_ANACONDA_WEBUI") {

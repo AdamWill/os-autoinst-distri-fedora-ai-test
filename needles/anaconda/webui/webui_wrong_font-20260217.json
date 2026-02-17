@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 273,
+      "ypos": 173,
+      "width": 64,
+      "height": 21,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "_ANACONDA_WEBUI",
+    "anaconda_webui_wrong_font"
+  ]
+}
