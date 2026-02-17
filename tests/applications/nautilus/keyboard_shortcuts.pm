@@ -14,12 +14,14 @@ sub run {
     assert_and_click("nautilus_menu_shortcuts");
     wait_still_screen(2);
 
-    assert_screen("nautilus_shortcuts_first");
+    # for nautilus 50+, where alt-2 doesn't work
+    assert_and_click("nautilus_shortcuts_first");
 
+    # for nautilus < 50, drop when gone
     send_key("alt-2");
     wait_still_screen(2);
 
-    assert_screen("nautilus_shortcuts_second");
+    assert_and_click("nautilus_shortcuts_second");
 
     send_key("alt-3");
     wait_still_screen(2);

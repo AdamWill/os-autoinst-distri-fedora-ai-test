@@ -4,15 +4,19 @@
       "height": 19,
       "type": "match",
       "width": 80,
+      "ypos": 119,
       "xpos": 545,
-      "ypos": 119
+      "click_point": {
+        "xpos": 40,
+        "ypos": 9.5
+      }
     },
     {
-      "ypos": 315,
       "xpos": 687,
+      "ypos": 315,
       "type": "match",
-      "width": 65,
-      "height": 20
+      "height": 20,
+      "width": 65
     }
   ],
   "properties": [],
