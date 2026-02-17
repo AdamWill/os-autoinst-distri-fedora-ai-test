@@ -32,7 +32,7 @@ sub run {
     }
     assert_script_run 'cd /var/tmp';
     assert_script_run "dnf -y install zstd curl git", 300;
-    assert_script_run "git clone https://codeberg.org/AdamWill/rmdepcheck.git";
+    assert_script_run "git clone https://forge.fedoraproject.org/quality/rmdepcheck.git";
     assert_script_run "cd rmdepcheck";
     my $cmd = "./rmdepcheck.py";
     $cmd .= " --nmbaserepos ${nmbaserepo}" if ($nmbaserepo);
