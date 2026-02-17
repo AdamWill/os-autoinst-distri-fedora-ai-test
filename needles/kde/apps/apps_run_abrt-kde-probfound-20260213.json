@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 122,
+      "type": "match",
+      "height": 15,
+      "xpos": 453,
+      "ypos": 20
+    },
+    {
+      "xpos": 363,
+      "ypos": 280,
+      "type": "match",
+      "width": 93,
+      "height": 15
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_abrt"
+  ]
+}
