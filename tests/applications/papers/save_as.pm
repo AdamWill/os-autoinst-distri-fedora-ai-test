@@ -33,10 +33,14 @@ sub run {
     # terminal console to check that it has been created.
     $self->root_console(tty => 3);
     my $filename = "alternative.pdf";
-    assert_script_run("ls /home/test/Documents/alternative.pdf");
+    if (script_run("ls /home/test/Documents/${filename}")) {
+        $filename = "alternativeevince.pdf";
+        assert_script_run("ls /home/test/Documents/${filename}");
+        record_soft_failure("File name was not pre-selected in Save As dialog: https://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome/-/issues/75");
+    }
 
     # Now, check that the new file does not differ from the original one.
-    assert_script_run("diff /home/test/Documents/evince.pdf /home/test/Documents/alternative.pdf");
+    assert_script_run("diff /home/test/Documents/evince.pdf /home/test/Documents/${filename}");
 }
 
 sub test_flags {
