@@ -26,7 +26,7 @@ sub run {
 
     use_function("cos", "trigonometry", "45");
     use_function("re", "complex", "20");
-    use_function("ones", "programming", "5");
+    use_function("twos", "programming", "5");
     use_function("round", "rounding", "5.55");
     use_function("median", "statistics", "1;2;4;5");
     use_function("sqrt", "sundry", "5");
