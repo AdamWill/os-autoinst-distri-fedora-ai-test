@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 74,
+      "height": 88,
+      "ypos": 230,
+      "xpos": 457
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "clocks_stopwatch_laps_deltas"
+  ]
+}
