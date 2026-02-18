@@ -88,7 +88,7 @@ sub run {
         assert_script_run("sed -i 's,rawhide,$rawrel,g' /usr/share/metainfo/org.fedoraproject.fedora.metainfo.xml") if ($release eq $rawrel);
         # Now mark the release we want to upgrade to as stable and
         # ensure it doesn't have a date in the future
-        assert_script_run("sed -i 's,version=\"$release\" type=\".*\" date=\".*\",version=\"$release\" type=\"stable\" date=\"2025-01-01\",g' /usr/share/metainfo/org.fedoraproject.fedora.metainfo.xml");
+        assert_script_run("sed -i 's,version=\"$release\" type=\".*\" date=\".*\",version=\"$release\" type=\"stable\" date=\"2026-01-01\",g' /usr/share/metainfo/org.fedoraproject.fedora.metainfo.xml");
         # Upload the modified file for debugging
         upload_logs("/usr/share/metainfo/org.fedoraproject.fedora.metainfo.xml", failok => 1);
         # Switch to the regular user
