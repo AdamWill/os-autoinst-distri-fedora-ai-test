@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 17,
+      "width": 20,
+      "ypos": 428,
+      "xpos": 85
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_dirs_pictures"
+  ]
+}
