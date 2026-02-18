@@ -15,7 +15,11 @@ sub run {
         boot_decrypt(60);
     }
 
-    boot_to_login_screen;
+    assert_screen ['login_screen', 'ps_begin_setup'], timeout => 300;
+    if (match_has_tag 'ps_begin_setup') {
+        plasma_setup(userexists => 1);
+        assert_screen 'login_screen';
+    }
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty => 3);
     # disable screen blanking (update can take a long time)
