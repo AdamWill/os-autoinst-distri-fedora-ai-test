@@ -36,7 +36,7 @@ sub run {
     # drop this when that bug is fixed
     assert_screen(["maps_select_file", "gnome_dirs_pictures"]);
     # the screen may match *both* needles, so recheck
-    if (check_screen("maps_select_file")) {
+    if (check_screen("maps_select_file", timeout => 5)) {
         record_soft_failure('Picture exported to wrong directory? - https://bugzilla.redhat.com/show_bug.cgi?id=2435752');
         click_lastmatch;
     }
