@@ -47,13 +47,13 @@ jobs:
       - name: Check out fedora_openqa
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
-          fetch-depth: 0
           repository: quality/fedora_openqa
           ref: main
 
       - name: Check out os-autoinst-distri-fedora
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
+          fetch-depth: 0
           path: os-autoinst-distri-fedora
 
       - name: Check out matching branch (if it exists)
