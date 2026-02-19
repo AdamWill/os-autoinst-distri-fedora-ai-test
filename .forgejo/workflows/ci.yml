@@ -30,3 +30,35 @@ jobs:
           fetch-depth: 0
       - name: Run perl tests
         run: prove t/
+  checkwiki:
+    runs-on: fedora
+    container:
+      image: quay.io/fedora/fedora:latest
+    steps:
+      - name: Install required packages
+        run: dnf -y install nodejs git python3-openqa_client python3-resultsdb_api python3-resultsdb_conventions-fedora python3-jsonschema
+
+      - name: Install required packages (updates-testing)
+        run: dnf -y --enablerepo=updates-testing install python3-wikitcms
+
+      # we checkout fedora_openqa to the top dir and o-a-d-f to a subdir
+      # even though this is in o-a-d-f repo, just because it works out
+      # easier that way
+      - name: Check out fedora_openqa
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        with:
+          fetch-depth: 0
+          repository: quality/fedora_openqa
+          ref: main
+
+      - name: Check out os-autoinst-distri-fedora
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        with:
+          path: os-autoinst-distri-fedora
+
+      - name: Check out matching branch (if it exists)
+        run: git switch "$FORGEJO_HEAD_REF"
+        continue-on-error: true
+
+      - name: Run checkwiki
+        run: PYTHONPATH=src/ ./checkwiki os-autoinst-distri-fedora/
