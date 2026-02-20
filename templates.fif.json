@@ -241,6 +241,33 @@
                 "TEST_TARGET": "COMPOSE"
             }
         },
+        "elnkde-live-iso": {
+            "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
+                "DESKTOP": "kde",
+                "DUG_RETRY": "3",
+                "HDDSIZEGB": "15",
+                "INSTALL_RETRY": "3",
+                "LIVE": "1",
+                "PACKAGE_SET": "default",
+                "+QEMURAM": "6144",
+                "TEST_TARGET": "ISO"
+            }
+        },
+        "gnome-live-iso": {
+            "settings": {
+                "DESKTOP": "gnome",
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
+                "DUG_RETRY": "",
+                "HDDSIZEGB": "20",
+                "INSTALL_RETRY": "1",
+                "LIVE": "1",
+                "PACKAGE_SET": "default",
+                "REMOTE_DESKTOP_USE_XFREERDP": "1",
+                "+QEMURAM": "6144",
+                "TEST_TARGET": "ISO"
+            }
+        },
         "seasonal": {
             "settings": {
                 "TEST_TARGET": "ISO"
@@ -266,6 +293,24 @@
             "settings": {
                 "+MINCPU": "Haswell"
             }
+        },
+        "fedora-elnkde-live-iso-x86_64-*": {
+            "arch": "x86_64",
+            "flavor": "elnkde-live-iso",
+            "settings": {
+                "+MINCPU": "Haswell"
+            }
+        },
+        "fedora-gnome-live-iso-x86_64-*": {
+            "arch": "x86_64",
+            "flavor": "gnome-live-iso",
+            "settings": {
+                "+MINCPU": "Haswell"
+            }
+        },
+        "fedora-gnome-live-iso-aarch64-*": {
+            "arch": "aarch64",
+            "flavor": "gnome-live-iso"
         },
         "fedora-Cloud_Base-qcow2-qcow2-aarch64-*": {
             "arch": "aarch64",
@@ -416,6 +461,18 @@
         "fedora-BaseOS-dvd-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-BaseOS-dvd-iso-x86_64-*"
+        },
+        "fedora-elnkde-live-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-elnkde-live-iso-x86_64-*"
+        },
+        "fedora-gnome-live-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-gnome-live-iso-x86_64-*"
+        },
+        "fedora-gnome-live-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-gnome-live-iso-aarch64-*"
         },
         "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": {
             "machine": "aarch64",
@@ -620,6 +677,7 @@
             "silverblue-all": 30
         },
         "kde-all": {
+            "fedora-elnkde-live-iso-x86_64-*-64bit": 0,
             "fedora-KDE-live-iso-x86_64-*-64bit": 0,
             "fedora-KDE-raw_xz-raw.xz-aarch64-*-aarch64": 0
         },
@@ -646,6 +704,10 @@
             "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 0,
             "fedora-Workstation-live-iso-x86_64-*-64bit": 0
         },
+        "eln-gnome-lives": {
+            "fedora-gnome-live-iso-x86_64-*-64bit": 0,
+            "fedora-gnome-live-iso-aarch64-*-aarch64": 0
+        },
         "workstation-upgrade-raw": {
             "fedora-Workstation-upgrade-x86_64-*-64bit": 0,
             "fedora-Workstation-upgrade-aarch64-*-aarch64": 0,
@@ -664,7 +726,8 @@
         "apps_startstop": {
             "profile_groups": {
                 "kde-all": 40,
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -819,7 +882,8 @@
         "desktop_background": {
             "profile_groups": {
                 "kde-all": 22,
-                "workstation-sb-all": 20
+                "workstation-sb-all": 20,
+                "eln-gnome-lives": 20
             },
             "profiles": {
                 "fedora-i3-live-x86_64-*-64bit": 70
@@ -834,7 +898,8 @@
         "desktop_login": {
             "profile_groups": {
                 "kde-all": 32,
-                "workstation-all": 30
+                "workstation-all": 30,
+                "eln-gnome-lives": 30
             },
             "profiles": {
                 "fedora-i3-live-x86_64-*-64bit": 70
@@ -853,6 +918,7 @@
                 "workstation-lives": 50
             },
             "profiles": {
+                "fedora-gnome-live-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-upgrade-x86_64-*-64bit": 40
             },
             "settings": {
@@ -865,7 +931,8 @@
         "desktop_browser": {
             "profile_groups": {
                 "kde-all": 22,
-                "workstation-sb-all": 20
+                "workstation-sb-all": 20,
+                "eln-gnome-lives": 20
             },
             "profiles": {
                 "fedora-i3-live-x86_64-*-64bit": 70
@@ -879,10 +946,12 @@
         },
         "desktop_notifications_live": {
             "profile_groups": {
-                "workstation-lives": 30
+                "workstation-lives": 30,
+                "eln-gnome-lives": 30
             },
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 32,
+                "fedora-elnkde-live-iso-x86_64-*-64bit": 32,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
@@ -892,7 +961,8 @@
         "desktop_notifications_postinstall": {
             "profile_groups": {
                 "kde-all": 32,
-                "workstation-all": 30
+                "workstation-all": 30,
+                "eln-gnome-lives": 30
             },
             "profiles": {
                 "fedora-i3-live-x86_64-*-64bit": 70
@@ -920,7 +990,8 @@
         "desktop_printing_builtin": {
             "profile_groups": {
                 "kde-all": 32,
-                "workstation-all": 30
+                "workstation-all": 30,
+                "eln-gnome-lives": 30
             },
             "profiles": {
                 "fedora-i3-live-x86_64-*-64bit": 70
@@ -935,7 +1006,8 @@
         "desktop_terminal": {
             "profile_groups": {
                 "kde-all": 22,
-                "workstation-sb-all": 20
+                "workstation-sb-all": 20,
+                "eln-gnome-lives": 20
             },
             "profiles": {
                 "fedora-i3-live-x86_64-*-64bit": 70
@@ -949,7 +1021,8 @@
         },
         "papers": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -960,7 +1033,8 @@
         },
         "calculator": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -971,7 +1045,8 @@
         },
         "clocks": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -982,7 +1057,8 @@
         },
         "archiver": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1004,7 +1080,8 @@
         },
         "characters": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1015,7 +1092,8 @@
         },
         "disks": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1026,7 +1104,8 @@
         },
         "fonts": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1048,7 +1127,8 @@
         },
         "gnome-panel": {
             "profile_groups": {
-                "workstation-sb-all": 30
+                "workstation-sb-all": 30,
+                "eln-gnome-lives": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1121,7 +1201,8 @@
         },
         "nautilus": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1132,7 +1213,8 @@
         },
         "navigation": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1143,7 +1225,8 @@
         },
         "gnome_text_editor": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1154,7 +1237,8 @@
         },
         "sysmon": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1165,7 +1249,8 @@
         },
         "tour": {
             "profile_groups": {
-                "workstation-sb-all": 40
+                "workstation-sb-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1190,6 +1275,7 @@
                 "workstation-lives": 40
             },
             "profiles": {
+                "fedora-gnome-live-iso-x86_64-*-64bit": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
             },
             "settings": {
@@ -1202,7 +1288,8 @@
         "desktop_graphics_validation": {
             "profile_groups": {
                 "kde-all": 32,
-                "workstation-all": 30
+                "workstation-all": 30,
+                "eln-gnome-lives": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1214,7 +1301,8 @@
         "desktop_keyring": {
             "profile_groups": {
                 "kde-all": 42,
-                "workstation-lives": 40
+                "workstation-lives": 40,
+                "eln-gnome-lives": 40
             },
             "profiles": {
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
@@ -1229,7 +1317,8 @@
         "desktop_update_graphical": {
             "profile_groups": {
                 "kde-all": 32,
-                "workstation-all": 30
+                "workstation-all": 30,
+                "eln-gnome-lives": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1321,7 +1410,8 @@
         },
         "install_asian_language_webui": {
             "profile_groups": {
-                "workstation-lives": 40
+                "workstation-lives": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -1480,7 +1570,8 @@
         },
         "install_cyrillic_language_webui": {
             "profile_groups": {
-                "workstation-lives": 40
+                "workstation-lives": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -1537,6 +1628,9 @@
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-bios": 51,
                 "fedora-Workstation-live-iso-x86_64-*-bios": 11,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 11,
+                "fedora-elnkde-live-iso-x86_64-*-64bit": 16,
+                "fedora-gnome-live-iso-x86_64-*-64bit": 16,
+                "fedora-gnome-live-iso-aarch64-*-aarch64": 16,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
@@ -1550,11 +1644,13 @@
             "profile_groups": {
                 "server-dvd-3arch": 10,
                 "coreos-iot-silverblue": 20,
-                "workstation-lives": 10
+                "workstation-lives": 10,
+                "eln-gnome-lives": 10
             },
             "profiles": {
                 "fedora-BaseOS-dvd-iso-x86_64-*-64bit": 50,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 15,
+                "fedora-elnkde-live-iso-x86_64-*-64bit": 15,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
@@ -1605,10 +1701,12 @@
         },
         "install_european_language_webui": {
             "profile_groups": {
-                "workstation-lives": 40
+                "workstation-lives": 40,
+                "eln-gnome-lives": 40
             },
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 40
+                "fedora-KDE-live-iso-x86_64-*-64bit": 40,
+                "fedora-elnkde-live-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "ENCRYPT_PASSWORD": "weakpassword",
@@ -1770,7 +1868,8 @@
         },
         "install_no_user": {
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 21
+                "fedora-KDE-live-iso-x86_64-*-64bit": 21,
+                "fedora-elnkde-live-iso-x86_64-*-64bit": 21
             },
             "settings": {
                 "INSTALL_NO_USER": "1",
@@ -2045,7 +2144,9 @@
         "install_webui_ext4": {
             "profiles": {
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
-                "fedora-Workstation-live-iso-x86_64-*-bios": 11
+                "fedora-Workstation-live-iso-x86_64-*-bios": 11,
+                "fedora-gnome-live-iso-x86_64-*-64bit": 10,
+                "fedora-gnome-live-iso-aarch64-*-aarch64": 10
             },
             "settings": {
                 "PARTITIONING": "webui_ext4",
@@ -2057,7 +2158,9 @@
         "install_webui_xfs": {
             "profiles": {
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
-                "fedora-Workstation-live-iso-x86_64-*-bios": 11
+                "fedora-Workstation-live-iso-x86_64-*-bios": 11,
+                "fedora-gnome-live-iso-x86_64-*-64bit": 10,
+                "fedora-gnome-live-iso-aarch64-*-aarch64": 10
             },
             "settings": {
                 "PARTITIONING": "webui_xfs",
@@ -2268,7 +2371,8 @@
                 "server-dvd-3arch": 40,
                 "coreos-iot-silverblue": 40,
                 "kde-all": 42,
-                "workstation-all": 40
+                "workstation-all": 40,
+                "eln-gnome-lives": 30
             },
             "profiles": {
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
@@ -2285,7 +2389,8 @@
         },
         "remote_desktop_server": {
             "profile_groups": {
-                "workstation-all": 30
+                "workstation-all": 30,
+                "eln-gnome-lives": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2301,7 +2406,8 @@
         },
         "remote_desktop_client": {
             "profile_groups": {
-                "workstation-all": 30
+                "workstation-all": 30,
+                "eln-gnome-lives": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2348,7 +2454,9 @@
                 "fedora-KDE-live-iso-x86_64-*-64bit": 30,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 30
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
+                "fedora-elnkde-live-iso-x86_64-*-64bit": 30,
+                "fedora-gnome-live-iso-x86_64-*-64bit": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2670,7 +2778,9 @@
             "profiles": {
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 40,
-                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
+                "fedora-gnome-live-iso-x86_64-*-64bit": 40,
+                "fedora-gnome-live-iso-aarch64-*-aarch64": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -2693,6 +2803,9 @@
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 10,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
+                "fedora-elnkde-live-iso-x86_64-*-64bit": 40,
+                "fedora-gnome-live-iso-x86_64-*-64bit": 10,
+                "fedora-gnome-live-iso-aarch64-*-aarch64": 10,
                 "fedora-i3-live-x86_64-*-64bit": 70
             },
             "settings": {
@@ -2703,7 +2816,8 @@
         "unwanted_packages": {
             "profile_groups": {
                 "kde-all": 40,
-                "workstation-all": 40
+                "workstation-all": 40,
+                "eln-gnome-lives": 40
             },
             "settings": {
                 "BOOTFROM": "c",

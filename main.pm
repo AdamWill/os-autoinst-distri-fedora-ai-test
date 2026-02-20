@@ -244,7 +244,9 @@ sub _load_early_postinstall_tests {
     }
 
     if (get_var("LANGUAGE", "") eq "japanese" || get_var("LANGUAGE", "") eq "arabic") {
-        _load_instance("tests/check_default_fonts", $instance);
+        unless (get_var('VERSION') eq 'eln') {
+            _load_instance("tests/check_default_fonts", $instance);
+        }
     }
 
 
@@ -420,12 +422,28 @@ if (get_var("STARTSTOP")) {
 
     # Find all tests from a directory defined by the DESKTOP variable
     my @apptests = glob "${casedir}/tests/apps_startstop/${desktop}/*.pm";
+    my @filter;
+    # Filter out tests for apps not in ELN
+    if (get_var('VERSION') eq 'eln') {
+        if (get_var('DESKTOP') eq 'kde') {
+            @filter = qw(abrt akregator cpteditor cteditor fmw kaddressbook kimport kleopatra kmail kmail_header kontakt korganizer ktnef lcalc limpress lwriter patience pimexporter);
+        }
+        elsif (get_var('DESKTOP') eq 'gnome') {
+            @filter = qw(boxes calendar connections contacts fmw help lcalc limpress logs lwriter maps scan videos weather);
+        }
+        if (get_var('ARCH') eq 'aarch64') {
+            # these are missing on aarch64 for...dumb reasons, ask
+            # tpopela
+            push(@filter, ('camera', 'imageviewer'));
+        }
+    }
     # Now load them
     foreach my $filepath (@apptests) {
         my $file = basename($filepath);
+        next if (grep { "$_.pm" eq $file } @filter);
         autotest::loadtest "tests/apps_startstop/${desktop}/${file}";
     }
-    if ($desktop eq 'gnome') {
+    if ($desktop eq 'gnome' && get_var('VERSION') ne 'eln') {
         # Run this test to check if required application have registered.
         autotest::loadtest "tests/workstation_core_applications.pm";
     }

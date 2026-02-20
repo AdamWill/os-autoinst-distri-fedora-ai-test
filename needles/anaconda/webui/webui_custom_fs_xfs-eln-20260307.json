@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 472,
+      "type": "match",
+      "height": 18,
+      "width": 28,
+      "xpos": 76
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_webui_custom_fs_xfs"
+  ]
+}

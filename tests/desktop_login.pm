@@ -202,10 +202,9 @@ sub run {
     # replace the wallpaper with a black image, this should work for
     # all desktops. Takes effect after a logout / login cycle
     $self->root_console(tty => 3);
-    assert_script_run "dnf -y install GraphicsMagick", 300;
-    assert_script_run "gm convert -size 1024x768 xc:black /usr/share/backgrounds/black.png";
-    assert_script_run "gm convert -size 1024x768 xc:black /usr/share/backgrounds/black.webp";
-    assert_script_run "gm convert -size 1024x768 xc:black /usr/share/backgrounds/black.jxl";
+    assert_script_run "curl -f --retry-delay 10 --max-time 30 --retry 5 -o /usr/share/backgrounds/black.png https://fedorapeople.org/groups/qa/openqa-data/black.png";
+    assert_script_run "curl -f --retry-delay 10 --max-time 30 --retry 5 -o /usr/share/backgrounds/black.webp https://fedorapeople.org/groups/qa/openqa-data/black.webp";
+    assert_script_run "curl -f --retry-delay 10 --max-time 30 --retry 5 -o /usr/share/backgrounds/black.jxl https://fedorapeople.org/groups/qa/openqa-data/black.jxl";
     if (script_run 'for i in /usr/share/backgrounds/f*/default/*.png; do ln -sf /usr/share/backgrounds/black.png $i; done') {
         # if that failed, they're probably in webp format...
         if (script_run 'for i in /usr/share/backgrounds/f*/default/*.webp; do ln -sf /usr/share/backgrounds/black.webp $i; done') {

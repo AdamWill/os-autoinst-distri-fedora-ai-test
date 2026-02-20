@@ -70,10 +70,12 @@ sub script_retry {
 sub get_release_number {
     # return the release number; so usually VERSION, but for Rawhide,
     # we return RAWREL. This allows us to avoid constantly doing stuff
-    # like `if ($version eq "Rawhide" || $version > 30)`.
+    # like `if ($version eq "Rawhide" || $version > 30)`. We do the
+    # same for ELN because it behaves most like Rawhide, out of the
+    # choices.
     my $version = get_var("VERSION");
     my $rawrel = get_var("RAWREL", "Rawhide");
-    return $rawrel if ($version eq "Rawhide");
+    return $rawrel if ($version eq "Rawhide" || $version eq "eln");
     return $version;
 }
 
@@ -541,10 +543,10 @@ sub disable_updates_repos {
 }
 
 sub _repo_setup_compose {
-    # doesn't work for IoT or CoreOS, anything that hits this on those
-    # paths must work with default mirror config...
+    # doesn't work for IoT, CoreOS, or ELN anything that hits this on
+    # those paths must work with default mirror config...
     my $subvariant = get_var("SUBVARIANT");
-    return if ($subvariant eq "IoT" || $subvariant eq "CoreOS");
+    return if ($subvariant eq "IoT" || $subvariant eq "CoreOS" || get_var("VERSION") eq "eln");
     # ditto respin composes (LOCATION doesn't have a repo in it)
     return if (get_var('BUILD') =~ 'Respin');
     # Appropriate repo setup steps for testing a compose

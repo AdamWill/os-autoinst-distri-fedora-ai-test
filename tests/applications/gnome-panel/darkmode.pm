@@ -17,18 +17,23 @@ use utils;
 # if we can still find at least one plausible to
 # see if Darkmode can be toggled.
 sub inspect_background {
-    my $version = get_release_number();
-    my $older = $version - 1;
-    my $oldest = $version - 2;
+    my $version = get_var('VERSION');
+    my $older;
+    my $oldest;
+    unless ($version eq 'eln') {
+        $version = get_release_number();
+        $older = $version - 1;
+        $oldest = $version - 2;
+    }
     # If the background matches the version, return it.
     if (check_screen("${version}_background")) {
         return $version;
     }
     # If we are here, check for the older background.
-    elsif (check_screen("${older}_background")) {
+    elsif ($older && check_screen("${older}_background")) {
         return $older;
     }
-    elsif (check_screen("${oldest}_background")) {
+    elsif ($oldest && check_screen("${oldest}_background")) {
         record_soft_failure("The background version seems to be two versions old.");
         return $oldest;
     }

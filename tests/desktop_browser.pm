@@ -39,6 +39,8 @@ sub run {
         send_key 'super';
         # wait out animations
         wait_still_screen(stilltime => 6, similarity_level => 45);
+        # it's not in the favorite panel on ELN
+        assert_and_click 'overview_app_grid' if (get_var('DESKTOP') eq 'gnome' && get_var('VERSION') eq 'eln');
         assert_and_click 'browser_launcher';
     }
     my $relnum = get_release_number;

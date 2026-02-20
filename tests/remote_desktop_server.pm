@@ -19,7 +19,10 @@ sub run {
     if (script_run('firewall-cmd --query-port 3389/tcp') != 0 && script_run('firewall-cmd --query-service rdp') != 0) {
         # If not, let's open the port manually and softfail the test
         # (we expect the port to be open by default)
-        assert_script_run("firewall-cmd --add-port=3389/tcp");
+        # we don't need to apply this immediately because we reboot
+        # before creating the mutex, below
+        assert_script_run("firewall-cmd --permanent --add-port 3389/tcp");
+        assert_script_run("firewall-cmd --permanent --add-port 3389/udp");
         record_soft_failure("The RDP port was not opened, we had to open it manually.");
     }
 

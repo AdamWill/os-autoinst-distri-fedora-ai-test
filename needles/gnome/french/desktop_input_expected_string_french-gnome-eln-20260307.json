@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 188,
+      "type": "match",
+      "height": 16,
+      "width": 53,
+      "xpos": 331
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-french",
+    "desktop_input_expected_string"
+  ]
+}

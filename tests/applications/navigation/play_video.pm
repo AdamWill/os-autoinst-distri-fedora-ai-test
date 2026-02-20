@@ -7,6 +7,10 @@ use utils;
 # - a video can be played both full screen or normal
 
 sub run {
+    if (get_var('VERSION') eq 'eln') {
+        diag('No video player on ELN, skipping the test.');
+        return;
+    }
     my $self = shift;
     # Start the Video player
     menu_launch_type("video", checkstart => 1);

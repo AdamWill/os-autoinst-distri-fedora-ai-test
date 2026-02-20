@@ -29,6 +29,10 @@ sub go_tux {
 
 sub run {
     my $self = shift;
+    if (get_var('VERSION') eq 'eln') {
+        diag('extremetuxracer not packaged on ELN, skipping the test.');
+        return;
+    }
 
     # Open the game
     menu_launch_type("tux_racer", checkstart => 1);

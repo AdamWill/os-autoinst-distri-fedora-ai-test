@@ -11,7 +11,9 @@ sub run {
     assert_screen "root_console";
     # for aarch64 non-english tests
     console_loadkeys_us;
-    die("Unsigned package(s) found!") unless (script_run 'rpm -qa --queryformat "%{NAME} %{RSAHEADER:pgpsig}\n" | grep -v gpg-pubkey | grep "(none)"');
+    my $excludes = 'gpg-pubkey';
+    $excludes = '(gpg-pubkey|adwaita-mono-fonts|adwaita-sans-fonts)' if (get_var('VERSION') eq 'eln');
+    die("Unsigned package(s) found!") unless (script_run 'rpm -qa --queryformat "%{NAME} %{RSAHEADER:pgpsig}\n" | grep -E -v "' . $excludes . '" | grep "(none)"');
 }
 
 sub test_flags {

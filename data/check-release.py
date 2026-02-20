@@ -145,7 +145,7 @@ def compare_eol_dates(release: int, eol: date) -> bool:
     )
     bodhi = bodhi_response.json()
     # Only convert the date if it is present, otherwise record 0.
-    if bodhi["eol"]:
+    if bodhi.get("eol"):
         bodhi_eol = isodate(bodhi["eol"])
     else:
         bodhi_eol = epochdate(0)

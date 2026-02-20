@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 18,
+      "ypos": 410,
+      "width": 109,
+      "xpos": 456
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_input_source_group_french"
+  ]
+}

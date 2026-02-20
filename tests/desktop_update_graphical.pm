@@ -10,7 +10,7 @@ sub run {
     my $relnum = get_release_number;
     # use a tty console for repo config and package prep
     $self->root_console(tty => 3);
-    disable_updates_repos;
+    disable_updates_repos unless (get_var("VERSION") eq "eln");
     # for update tests, disable buildroot repo at this point, otherwise
     # gnome-software will complain about things being unsigned even
     # though the repo has gpgcheck=0

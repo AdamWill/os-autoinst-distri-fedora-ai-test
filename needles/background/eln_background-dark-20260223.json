@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 546,
+      "ypos": 350,
+      "width": 82,
+      "height": 110,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "eln_background",
+    "eln_background_dark"
+  ]
+}

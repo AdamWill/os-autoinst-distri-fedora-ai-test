@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 117,
+      "xpos": 9,
+      "height": 20,
+      "type": "match",
+      "ypos": 125
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "calc_help_main_view"
+  ]
+}

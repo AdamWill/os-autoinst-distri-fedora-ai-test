@@ -15,23 +15,27 @@ sub run {
     sleep(5);
     # Set the update notification timestamp
     set_update_notification_timestamp();
-    # Change to root console, install a game package,
-    # download testdata, and return to the desktop environment.
-    $self->root_console(tty => 3);
-    if ($canned) {
-        assert_script_run('flatpak install -y net.sourceforge.extremetuxracer', timeout => 300);
-        # On Silverblue, Showtime is not installed by default. Install it.
-        assert_script_run('flatpak install -y org.gnome.Showtime', timeout => 300);
+    unless (get_var('VERSION') eq 'eln') {
+        # Change to root console, install a game package,
+        # download testdata, and return to the desktop environment.
+        # don't do this on ELN as the game isn't in the repos and
+        # there's no video player, so we skip those tests.
+        $self->root_console(tty => 3);
+        if ($canned) {
+            assert_script_run('flatpak install -y net.sourceforge.extremetuxracer', timeout => 300);
+            # On Silverblue, Showtime is not installed by default. Install it.
+            assert_script_run('flatpak install -y org.gnome.Showtime', timeout => 300);
+        }
+        else {
+            assert_script_run("dnf install -y extremetuxracer", timeout => 180);
+            # make sure totem doesn't beat showtime on upgrades
+            script_run("dnf -y remove totem", timeout => 180);
+        }
+        assert_script_run("curl -O " . autoinst_url . "/data/video.ogv", timeout => 120);
+        # Put the downloaded video in the Videos folder
+        assert_script_run("mv video.ogv /home/$user/Videos/");
+        desktop_vt();
     }
-    else {
-        assert_script_run("dnf install -y extremetuxracer", timeout => 180);
-        # make sure totem doesn't beat showtime on upgrades
-        script_run("dnf -y remove totem", timeout => 180);
-    }
-    assert_script_run("curl -O " . autoinst_url . "/data/video.ogv", timeout => 120);
-    # Put the downloaded video in the Videos folder
-    assert_script_run("mv video.ogv /home/$user/Videos/");
-    desktop_vt();
 }
 
 sub test_flags {

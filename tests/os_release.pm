@@ -81,7 +81,9 @@ sub run {
     my $varstr = spell_version_number($version_id);
     # 42 is speshul
     $varstr = "Adams" if ($version_id eq "42");
-    my $target = lc($version_id);
+    my $bzver = lc($version_id);
+    # ELN identifies as rawhide for Bugzilla purposes
+    $bzver = 'rawhide' if ($bzver eq 'eln');
     $version_id = $rawrel if ($version_id eq "Rawhide");
 
     # the 'generic' os-release in fedora-release has no VARIANT or
@@ -139,6 +141,8 @@ sub run {
             $pretty = "Fedora CoreOS $cannedtag";
         }
     }
+    # ELN is speshul
+    $pretty = 'Fedora ELN' if ($version_id eq 'eln');
 
     #Now. we can start testing the real values from the installed system.
     my @fails = ();
@@ -164,14 +168,14 @@ sub run {
     rec_log "REDHAT_BUGZILLA_PRODUCT should be $name and is $strip", $strip eq $name, $failref;
 
     # Test for RH Bugzilla Product Version
-    rec_log "REDHAT_BUGZILLA_PRODUCT_VERSION should be $target and is $content{'REDHAT_BUGZILLA_PRODUCT_VERSION'}", $content{'REDHAT_BUGZILLA_PRODUCT_VERSION'} eq $target, $failref;
+    rec_log "REDHAT_BUGZILLA_PRODUCT_VERSION should be $bzver and is $content{'REDHAT_BUGZILLA_PRODUCT_VERSION'}", $content{'REDHAT_BUGZILLA_PRODUCT_VERSION'} eq $bzver, $failref;
 
     # Test for RH Support Product
     $strip = strip_marks($content{'REDHAT_SUPPORT_PRODUCT'});
     rec_log "REDHAT_SUPPORT_PRODUCT should be $name and is $strip", $strip eq $name, $failref;
 
     # Test for RH Support Product Version
-    rec_log "REDHAT_SUPPORT_PRODUCT_VERSION should be $target and is $content{'REDHAT_SUPPORT_PRODUCT_VERSION'}", $content{'REDHAT_SUPPORT_PRODUCT_VERSION'} eq $target, $failref;
+    rec_log "REDHAT_SUPPORT_PRODUCT_VERSION should be $bzver and is $content{'REDHAT_SUPPORT_PRODUCT_VERSION'}", $content{'REDHAT_SUPPORT_PRODUCT_VERSION'} eq $bzver, $failref;
 
     # Test for Variant but only in case of Server or Workstation
     if ($variant ne "generic") {

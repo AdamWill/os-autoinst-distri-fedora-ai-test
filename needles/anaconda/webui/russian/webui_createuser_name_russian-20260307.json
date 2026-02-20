@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 295,
+      "ypos": 261,
+      "width": 259,
+      "height": 41,
+      "type": "match",
+      "click_point": {
+        "xpos": 208.5,
+        "ypos": 19.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_webui_createuser_name"
+  ]
+}

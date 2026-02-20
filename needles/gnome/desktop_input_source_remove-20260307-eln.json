@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 21,
+      "type": "match",
+      "ypos": 353,
+      "width": 61,
+      "xpos": 814
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_input_source_remove"
+  ]
+}

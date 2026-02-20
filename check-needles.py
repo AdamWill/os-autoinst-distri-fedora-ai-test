@@ -119,6 +119,8 @@ for rel in range(30, 100):
     testtags.append(f"{rel}_background")
     testtags.append(f"{rel}_background_dark")
     testtags.append(f"version_{rel}_ident")
+testtags.append("eln_background")
+testtags.append("eln_background_dark")
 # anaconda id needles, using tell_source
 for source in ("workstation", "generic", "server"):
     testtags.append(f"leftbar_{source}")

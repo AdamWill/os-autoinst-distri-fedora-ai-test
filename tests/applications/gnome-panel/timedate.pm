@@ -16,7 +16,8 @@ sub run {
     # Check that when we click on Today,
     # Gnome Calendar will be opened - but not on Silverblue:
     # https://github.com/fedora-silverblue/issue-tracker/issues/448
-    unless (get_var("CANNED")) {
+    # or ELN (no gnome-calendar in ELN)
+    unless (get_var("CANNED") || get_var('VERSION') eq 'eln') {
         assert_and_click("panel_area_today");
         assert_screen("apps_run_calendar");
         send_key("alt-f4");
@@ -40,20 +41,23 @@ sub run {
     wait_still_screen(2);
     #
     # Check that if we click on Select weather location
-    # the Weather app will start.
-    assert_and_click("panel_datetime");
-    assert_and_click("panel_select_weather_location");
-    assert_screen(["apps_run_weather", "grant_access"]);
-    # sometimes we match apps_run_weather for a split second before
-    # grant_access appears, so handle that
-    wait_still_screen 3;
-    assert_screen(["apps_run_weather", "grant_access"]);
-    click_lastmatch;
-    if (match_has_tag("grant_access")) {
-        assert_and_click("apps_run_weather");
+    # the Weather app will start, except on ELN where
+    # weather is not installed
+    unless (get_var('VERSION') eq 'eln') {
+        assert_and_click("panel_datetime");
+        assert_and_click("panel_select_weather_location");
+        assert_screen(["apps_run_weather", "grant_access"]);
+        # sometimes we match apps_run_weather for a split second before
+        # grant_access appears, so handle that
+        wait_still_screen 3;
+        assert_screen(["apps_run_weather", "grant_access"]);
+        click_lastmatch;
+        if (match_has_tag("grant_access")) {
+            assert_and_click("apps_run_weather");
+        }
+        send_key("alt-f4");
+        wait_still_screen(2);
     }
-    send_key("alt-f4");
-    wait_still_screen(2);
     # Check that if we click on Do not disturb,
     # the slider moves and a silent regime indicator
     # appears on the top panel.

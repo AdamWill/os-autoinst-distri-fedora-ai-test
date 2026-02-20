@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 295,
+      "ypos": 247,
+      "width": 73,
+      "height": 19,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "anaconda_webui_createuser_name"
+  ]
+}

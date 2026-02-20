@@ -26,8 +26,20 @@ sub run {
         type_very_safely("$password\n");
     }
 
-    # Open the Connections and start the connection.
-    connections_connect($ip, $rdpuser, $rdppass);
+    if (get_var('REMOTE_DESKTOP_USE_XFREERDP')) {
+        # run xfreerdp from a console and log output
+        $self->root_console(tty => 3);
+        assert_script_run('dnf -y install freerdp', timeout => 300);
+        desktop_vt;
+        desktop_launch_terminal;
+        type_safely("xfreerdp +f /u:$rdpuser /p:$rdppass /v:$ip\n");
+        assert_screen('xfreerdp_certificate_confirm');
+        type_string("y\n");
+    }
+    else {
+        # Open the Connections and start the connection.
+        connections_connect($ip, $rdpuser, $rdppass);
+    }
     # we should arrive at the login screen, so login
     assert_screen("login_screen");
     wait_still_screen 3;

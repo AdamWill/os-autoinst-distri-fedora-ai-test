@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 88,
+      "xpos": 568,
+      "ypos": 226,
+      "type": "match",
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "sysmon_help_swap"
+  ]
+}

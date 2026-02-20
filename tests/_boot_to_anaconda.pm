@@ -205,7 +205,7 @@ sub run {
                 # see if a refresh gives us the right font
                 record_soft_failure 'webui loaded with incorrect font - #2402533';
                 send_key 'ctrl-r';
-                assert_screen 'anaconda_select_install_lang';
+                assert_screen 'anaconda_select_install_lang', timeout => 90;
             }
             # on webUI path set a var so later tests know
             if (match_has_tag "_ANACONDA_WEBUI") {
@@ -231,7 +231,9 @@ sub run {
             my $layout = get_var('LAYOUT');
             if (get_var('_ANACONDA_WEBUI') && $layout) {
                 assert_screen ["anaconda_webui_layout_${layout}_selected", "anaconda_webui_layout_system", "anaconda_select_install_layout_input"];
-                unless (match_has_tag "anaconda_webui_layout_${layout}_selected") {
+                # we re-check because we may match *both* layout_system and layout_selected;
+                # we want to skip this block in that case
+                unless (check_screen "anaconda_webui_layout_${layout}_selected") {
                     wait_screen_change { click_lastmatch; };
                     if (match_has_tag "anaconda_webui_layout_system") {
                         # GNOME input settings: add the layout we want, remove the default
