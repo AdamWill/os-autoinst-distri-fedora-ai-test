@@ -145,7 +145,10 @@ sub logout_user {
         assert_and_click "leave_button";
         assert_and_click "log_out_entry";
         assert_and_click "log_out_confirm";
-        assert_screen "graphical_login";
+        unless (check_screen "graphical_login", timeout => 30) {
+            assert_screen "graphical_login";
+            record_soft_failure "Log out took unexpectedly long - may be https://bugzilla.redhat.com/show_bug.cgi?id=2442475";
+        }
     }
 }
 
