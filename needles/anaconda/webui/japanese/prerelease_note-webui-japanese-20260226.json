@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 799,
+      "ypos": 58,
+      "width": 75,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "prerelease_note"
+  ]
+}
