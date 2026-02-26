@@ -13,7 +13,7 @@ sub run {
     wait_still_screen 2;
 
     # Select the Help item in the menu.
-    assert_and_click("papers_menu_help", button => "left", timeout => 30);
+    assert_and_click("gnome_menu_help", button => "left", timeout => 30);
     wait_still_screen 2;
 
     # Check that Help has been shown.

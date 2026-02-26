@@ -10,7 +10,7 @@ sub run {
 
     # Click on the burger menu and display Help.
     assert_and_click("gnome_burger_menu");
-    assert_and_click("clocks_menu_help");
+    assert_and_click("gnome_menu_help");
     assert_screen("clocks_help_shown");
 }
 

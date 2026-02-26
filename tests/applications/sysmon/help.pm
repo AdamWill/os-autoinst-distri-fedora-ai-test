@@ -7,7 +7,7 @@ sub run {
 
     # Open the Menu and click on Help entry.
     assert_and_click("gnome_burger_menu");
-    assert_and_click("sysmon_menu_help");
+    assert_and_click("gnome_menu_help");
 
     # Check that Shortcuts dialogue is shown.
     assert_screen("sysmon_help_shown");
