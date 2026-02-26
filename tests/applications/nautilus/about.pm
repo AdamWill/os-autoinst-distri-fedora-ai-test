@@ -13,7 +13,7 @@ sub run {
     wait_still_screen 2;
 
     # In the menu, click on the About item.
-    assert_and_click("nautilus_menu_about", button => "left", timeout => 30);
+    assert_and_click("gnome_menu_about", button => "left", timeout => 30);
 
     # Check that the About section has been displayed.
     assert_screen("nautilus_about_show");

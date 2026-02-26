@@ -11,7 +11,7 @@ sub run {
 
     # Go to menu and click on About.
     assert_and_click("gnome_burger_menu");
-    assert_and_click("maps_menu_about");
+    assert_and_click("gnome_menu_about");
     wait_still_screen(2);
 
     # Check that the About dialog is shown.

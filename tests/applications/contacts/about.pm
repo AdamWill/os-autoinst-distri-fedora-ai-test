@@ -13,7 +13,7 @@ sub run {
     sleep(5);
     # Open the menu and click on item.
     assert_and_click("gnome_burger_menu");
-    assert_and_click("contacts_menu_about");
+    assert_and_click("gnome_menu_about");
     # Check that the About window has appeared.
     assert_screen("contacts_about_shown");
     # Click on Credits to move to credits and check we

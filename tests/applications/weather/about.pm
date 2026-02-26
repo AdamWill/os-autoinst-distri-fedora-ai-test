@@ -11,7 +11,7 @@ sub run {
 
     # Open the Menu
     assert_and_click("gnome_burger_menu");
-    assert_and_click("weather_menu_about");
+    assert_and_click("gnome_menu_about");
     assert_screen("weather_about_shown");
     # Change to Credits
     assert_and_click("gnome_selector_credits");

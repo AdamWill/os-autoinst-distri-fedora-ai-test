@@ -13,7 +13,7 @@ sub run {
     # Open the menu and click on the About item.
     assert_and_click("gnome_burger_menu");
     wait_still_screen(2);
-    assert_and_click("calc_menu_about");
+    assert_and_click("gnome_menu_about");
     # Check that it is shown.
     assert_screen("calc_about_shown");
     # Click on the Credits button and check that it shows.

@@ -11,7 +11,7 @@ sub run {
     # Open the menu
     send_key("f10");
     # Click on the About item
-    assert_and_click("loupe_menu_about");
+    assert_and_click("gnome_menu_about");
     assert_screen("loupe_about_shown");
     # Click on Credits
     assert_and_click("gnome_selector_credits");

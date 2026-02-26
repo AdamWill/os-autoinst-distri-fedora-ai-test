@@ -7,7 +7,7 @@ sub run {
 
     # Open the Menu and click on the About entry.
     assert_and_click("gnome_burger_menu");
-    assert_and_click("sysmon_menu_about");
+    assert_and_click("gnome_menu_about");
 
     # Check that About dialogue has started.
     assert_screen("sysmon_about_shown");
