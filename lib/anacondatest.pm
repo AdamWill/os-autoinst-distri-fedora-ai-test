@@ -116,6 +116,11 @@ sub post_fail_hook {
         upload_logs "/tmp/var_log.tar.gz";
     }
 
+    # Also upload a text dump of the journal, for convenience
+    unless (script_run "journalctl > /var/tmp/journal.txt") {
+        upload_logs "/var/tmp/journal.txt";
+    }
+
     # Upload anaconda core dump, if there is one
     unless (script_run "ls /tmp/anaconda.core.* && tar czf /tmp/anaconda.core.tar.gz /tmp/anaconda.core.*") {
         upload_logs "/tmp/anaconda.core.tar.gz";
