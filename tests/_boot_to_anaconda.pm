@@ -154,46 +154,42 @@ sub run {
         else {
             if (get_var('LIVE')) {
                 # on lives, we have to explicitly launch anaconda
-                my $launched = 0;
-                my $count = 5;
                 # i3 got no real desktop, so we need to launch liveinst via the launcher
                 if (get_var('DESKTOP') eq 'i3') {
                     if (check_screen("getting_started", timeout => 300)) {
                         send_key("esc");
                     }
                     x11_start_program("liveinst");
-                    # We have launched Anaconda, so we set $launched to skip
-                    # starting it again later in the general part of the code.
-                    $launched = 1;
                 }
                 else {
-                    while ($count > 0) {
-                        $count -= 1;
-                        assert_screen ["live_start_anaconda_icon", "apps_menu_button_active", "next_button"], 300;
-                        if (match_has_tag "next_button") {
-                            # we're on the Workstation live early g-i-s flow
-                            # completing g-i-s launches the installer
-                            gnome_initial_setup(live => 1);
-                            $launched = 1;
-                        }
-                        if (match_has_tag "apps_menu_button_active") {
+                    assert_screen ["live_start_anaconda_icon", "apps_menu_button_active", "next_button"], 300;
+                    if (match_has_tag "next_button") {
+                        # we're on the Workstation live early g-i-s flow
+                        # completing g-i-s launches the installer
+                        gnome_initial_setup(live => 1);
+                    }
+                    elsif (match_has_tag "apps_menu_button_active") {
+                        my $count = 5;
+                        while ($count) {
+                            $count -= 1;
                             # give GNOME some time to be sure it's done starting up
                             # and ready for input
                             wait_still_screen 5;
                             send_key "super";
                             wait_still_screen 5;
+                            last if (check_screen "apps_menu_button_inactive");
                         }
-                        else {
-                            # this means we saw the launcher, which is what we want
-                            last;
+                        unless (check_screen 'live_start_anaconda_icon', timeout => 30) {
+                            assert_screen 'live_start_anaconda_icon', timeout => 60;
+                            record_soft_failure 'Welcome screen took longer than expected, probably https://bugzilla.redhat.com/show_bug.cgi?id=2440238';
                         }
+                        click_lastmatch;
                     }
-                }
-                # if we hit the g-i-s flow we already launched
-                unless ($launched) {
-                    # let it settle a bit
-                    wait_still_screen 5;
-                    assert_and_click("live_start_anaconda_icon");
+                    else {
+                        # this means we saw the launcher, which is what we want
+                        wait_still_screen 5;
+                        assert_and_click("live_start_anaconda_icon");
+                    }
                 }
             }
             # wait for anaconda to appear
