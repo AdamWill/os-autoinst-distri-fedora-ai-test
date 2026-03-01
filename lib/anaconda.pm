@@ -130,7 +130,10 @@ sub custom_blivet_add_partition {
     );
     $args{devicetype} = "raid" if $args{raid1};
 
-    assert_and_click "anaconda_add";
+    wait_screen_change { assert_and_click "anaconda_add"; };
+    # sometimes first click doesn't work, mainly on aarch64
+    wait_still_screen 5;
+    click_lastmatch if (check_screen "anaconda_add");
     mouse_set(10, 10);
     if ($args{devicetype}) {
         assert_and_click "anaconda_blivet_part_devicetype";

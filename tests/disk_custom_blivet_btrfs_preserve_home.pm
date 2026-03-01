@@ -87,7 +87,10 @@ sub run {
     }
 
     # Add new root partition
-    assert_and_click "anaconda_add";
+    wait_screen_change { assert_and_click "anaconda_add"; };
+    # sometimes first click doesn't work, mainly on aarch64
+    wait_still_screen 5;
+    click_lastmatch if (check_screen "anaconda_add");
     # Select the name textfield
     send_key_until_needlematch("anaconda_blivet_part_name_selected", "tab", 3, 5);
     # type the new name
