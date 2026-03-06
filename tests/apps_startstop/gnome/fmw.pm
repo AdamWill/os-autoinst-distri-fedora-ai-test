@@ -10,7 +10,7 @@ sub run {
     # Start the application
     start_with_launcher('apps_menu_fmw');
     # Check that is started
-    assert_screen 'apps_run_fmw';
+    assert_screen 'apps_run_mediawriter';
     # Register application
     register_application('fedora-media-writer');
     # Close the application
